@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8EA12E2127D493530087E242 /* MuslimCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2027D493530087E242 /* MuslimCalendarApp.swift */; };
+		8EA12E2327D493530087E242 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2227D493530087E242 /* ContentView.swift */; };
+		8EA12E2527D493540087E242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA12E2427D493540087E242 /* Assets.xcassets */; };
+		8EA12E2827D493540087E242 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA12E2727D493540087E242 /* Preview Assets.xcassets */; };
+		8EA12E3227D493550087E242 /* MuslimCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3127D493550087E242 /* MuslimCalendarTests.swift */; };
+		8EA12E3C27D493550087E242 /* MuslimCalendarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3B27D493550087E242 /* MuslimCalendarUITests.swift */; };
+		8EA12E3E27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3D27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8EA12E2E27D493550087E242 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EA12E1527D493530087E242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8EA12E1C27D493530087E242;
+			remoteInfo = MuslimCalendar;
+		};
+		8EA12E3827D493550087E242 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EA12E1527D493530087E242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8EA12E1C27D493530087E242;
+			remoteInfo = MuslimCalendar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8EA12E1D27D493530087E242 /* MuslimCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EA12E2027D493530087E242 /* MuslimCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarApp.swift; sourceTree = "<group>"; };
+		8EA12E2227D493530087E242 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8EA12E2427D493540087E242 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8EA12E2727D493540087E242 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8EA12E2D27D493550087E242 /* MuslimCalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuslimCalendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EA12E3127D493550087E242 /* MuslimCalendarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarTests.swift; sourceTree = "<group>"; };
+		8EA12E3727D493550087E242 /* MuslimCalendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuslimCalendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EA12E3B27D493550087E242 /* MuslimCalendarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarUITests.swift; sourceTree = "<group>"; };
+		8EA12E3D27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8EA12E1A27D493530087E242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EA12E2A27D493550087E242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EA12E3427D493550087E242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8EA12E1427D493530087E242 = {
+			isa = PBXGroup;
+			children = (
+				8EA12E1F27D493530087E242 /* MuslimCalendar */,
+				8EA12E3027D493550087E242 /* MuslimCalendarTests */,
+				8EA12E3A27D493550087E242 /* MuslimCalendarUITests */,
+				8EA12E1E27D493530087E242 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8EA12E1E27D493530087E242 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E1D27D493530087E242 /* MuslimCalendar.app */,
+				8EA12E2D27D493550087E242 /* MuslimCalendarTests.xctest */,
+				8EA12E3727D493550087E242 /* MuslimCalendarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8EA12E1F27D493530087E242 /* MuslimCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E2027D493530087E242 /* MuslimCalendarApp.swift */,
+				8EA12E2227D493530087E242 /* ContentView.swift */,
+				8EA12E2427D493540087E242 /* Assets.xcassets */,
+				8EA12E2627D493540087E242 /* Preview Content */,
+			);
+			path = MuslimCalendar;
+			sourceTree = "<group>";
+		};
+		8EA12E2627D493540087E242 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E2727D493540087E242 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8EA12E3027D493550087E242 /* MuslimCalendarTests */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E3127D493550087E242 /* MuslimCalendarTests.swift */,
+			);
+			path = MuslimCalendarTests;
+			sourceTree = "<group>";
+		};
+		8EA12E3A27D493550087E242 /* MuslimCalendarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8EA12E3B27D493550087E242 /* MuslimCalendarUITests.swift */,
+				8EA12E3D27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift */,
+			);
+			path = MuslimCalendarUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8EA12E1C27D493530087E242 /* MuslimCalendar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EA12E4127D493550087E242 /* Build configuration list for PBXNativeTarget "MuslimCalendar" */;
+			buildPhases = (
+				8EA12E1927D493530087E242 /* Sources */,
+				8EA12E1A27D493530087E242 /* Frameworks */,
+				8EA12E1B27D493530087E242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MuslimCalendar;
+			productName = MuslimCalendar;
+			productReference = 8EA12E1D27D493530087E242 /* MuslimCalendar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8EA12E2C27D493550087E242 /* MuslimCalendarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EA12E4427D493550087E242 /* Build configuration list for PBXNativeTarget "MuslimCalendarTests" */;
+			buildPhases = (
+				8EA12E2927D493550087E242 /* Sources */,
+				8EA12E2A27D493550087E242 /* Frameworks */,
+				8EA12E2B27D493550087E242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8EA12E2F27D493550087E242 /* PBXTargetDependency */,
+			);
+			name = MuslimCalendarTests;
+			productName = MuslimCalendarTests;
+			productReference = 8EA12E2D27D493550087E242 /* MuslimCalendarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8EA12E3627D493550087E242 /* MuslimCalendarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EA12E4727D493550087E242 /* Build configuration list for PBXNativeTarget "MuslimCalendarUITests" */;
+			buildPhases = (
+				8EA12E3327D493550087E242 /* Sources */,
+				8EA12E3427D493550087E242 /* Frameworks */,
+				8EA12E3527D493550087E242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8EA12E3927D493550087E242 /* PBXTargetDependency */,
+			);
+			name = MuslimCalendarUITests;
+			productName = MuslimCalendarUITests;
+			productReference = 8EA12E3727D493550087E242 /* MuslimCalendarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8EA12E1527D493530087E242 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					8EA12E1C27D493530087E242 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					8EA12E2C27D493550087E242 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 8EA12E1C27D493530087E242;
+					};
+					8EA12E3627D493550087E242 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 8EA12E1C27D493530087E242;
+					};
+				};
+			};
+			buildConfigurationList = 8EA12E1827D493530087E242 /* Build configuration list for PBXProject "MuslimCalendar" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8EA12E1427D493530087E242;
+			productRefGroup = 8EA12E1E27D493530087E242 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8EA12E1C27D493530087E242 /* MuslimCalendar */,
+				8EA12E2C27D493550087E242 /* MuslimCalendarTests */,
+				8EA12E3627D493550087E242 /* MuslimCalendarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8EA12E1B27D493530087E242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EA12E2827D493540087E242 /* Preview Assets.xcassets in Resources */,
+				8EA12E2527D493540087E242 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EA12E2B27D493550087E242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EA12E3527D493550087E242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8EA12E1927D493530087E242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EA12E2327D493530087E242 /* ContentView.swift in Sources */,
+				8EA12E2127D493530087E242 /* MuslimCalendarApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EA12E2927D493550087E242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EA12E3227D493550087E242 /* MuslimCalendarTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EA12E3327D493550087E242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EA12E3C27D493550087E242 /* MuslimCalendarUITests.swift in Sources */,
+				8EA12E3E27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8EA12E2F27D493550087E242 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8EA12E1C27D493530087E242 /* MuslimCalendar */;
+			targetProxy = 8EA12E2E27D493550087E242 /* PBXContainerItemProxy */;
+		};
+		8EA12E3927D493550087E242 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8EA12E1C27D493530087E242 /* MuslimCalendar */;
+			targetProxy = 8EA12E3827D493550087E242 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8EA12E3F27D493550087E242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8EA12E4027D493550087E242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8EA12E4227D493550087E242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MuslimCalendar/Preview Content\"";
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8EA12E4327D493550087E242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MuslimCalendar/Preview Content\"";
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8EA12E4527D493550087E242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MuslimCalendar.app/MuslimCalendar";
+			};
+			name = Debug;
+		};
+		8EA12E4627D493550087E242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MuslimCalendar.app/MuslimCalendar";
+			};
+			name = Release;
+		};
+		8EA12E4827D493550087E242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MuslimCalendar;
+			};
+			name = Debug;
+		};
+		8EA12E4927D493550087E242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MuslimCalendar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8EA12E1827D493530087E242 /* Build configuration list for PBXProject "MuslimCalendar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EA12E3F27D493550087E242 /* Debug */,
+				8EA12E4027D493550087E242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8EA12E4127D493550087E242 /* Build configuration list for PBXNativeTarget "MuslimCalendar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EA12E4227D493550087E242 /* Debug */,
+				8EA12E4327D493550087E242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8EA12E4427D493550087E242 /* Build configuration list for PBXNativeTarget "MuslimCalendarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EA12E4527D493550087E242 /* Debug */,
+				8EA12E4627D493550087E242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8EA12E4727D493550087E242 /* Build configuration list for PBXNativeTarget "MuslimCalendarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EA12E4827D493550087E242 /* Debug */,
+				8EA12E4927D493550087E242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8EA12E1527D493530087E242 /* Project object */;
+}
