@@ -14,6 +14,8 @@
 		8EA12E3227D493550087E242 /* MuslimCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3127D493550087E242 /* MuslimCalendarTests.swift */; };
 		8EA12E3C27D493550087E242 /* MuslimCalendarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3B27D493550087E242 /* MuslimCalendarUITests.swift */; };
 		8EA12E3E27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3D27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift */; };
+		8EA12E4C27D4959F0087E242 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA12E4B27D4959F0087E242 /* Adhan */; };
+		8EC7887427DDD789008739F4 /* KVKCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7887327DDD789008739F4 /* KVKCalendar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA12E4C27D4959F0087E242 /* Adhan in Frameworks */,
+				8EC7887427DDD789008739F4 /* KVKCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +147,10 @@
 			dependencies = (
 			);
 			name = MuslimCalendar;
+			packageProductDependencies = (
+				8EA12E4B27D4959F0087E242 /* Adhan */,
+				8EC7887327DDD789008739F4 /* KVKCalendar */,
+			);
 			productName = MuslimCalendar;
 			productReference = 8EA12E1D27D493530087E242 /* MuslimCalendar.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +223,10 @@
 				Base,
 			);
 			mainGroup = 8EA12E1427D493530087E242;
+			packageReferences = (
+				8EA12E4A27D4959F0087E242 /* XCRemoteSwiftPackageReference "adhan-swift" */,
+				8EC7887227DDD789008739F4 /* XCRemoteSwiftPackageReference "KVKCalendar" */,
+			);
 			productRefGroup = 8EA12E1E27D493530087E242 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -585,6 +597,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8EA12E4A27D4959F0087E242 /* XCRemoteSwiftPackageReference "adhan-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/batoulapps/adhan-swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8EC7887227DDD789008739F4 /* XCRemoteSwiftPackageReference "KVKCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kvyatkovskys/KVKCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8EA12E4B27D4959F0087E242 /* Adhan */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EA12E4A27D4959F0087E242 /* XCRemoteSwiftPackageReference "adhan-swift" */;
+			productName = Adhan;
+		};
+		8EC7887327DDD789008739F4 /* KVKCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC7887227DDD789008739F4 /* XCRemoteSwiftPackageReference "KVKCalendar" */;
+			productName = KVKCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8EA12E1527D493530087E242 /* Project object */;
 }

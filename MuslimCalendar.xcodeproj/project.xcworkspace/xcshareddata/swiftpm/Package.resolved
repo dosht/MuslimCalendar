@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Adhan",
+        "repositoryURL": "https://github.com/batoulapps/adhan-swift",
+        "state": {
+          "branch": "main",
+          "revision": "e8c6812db0c88e39a3a00105e0c97b9f1f836306",
+          "version": null
+        }
+      },
+      {
+        "package": "KVKCalendar",
+        "repositoryURL": "https://github.com/kvyatkovskys/KVKCalendar.git",
+        "state": {
+          "branch": null,
+          "revision": "c4728c93df4a52a4921b8825944128a2c8e08bd9",
+          "version": "0.5.8"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
