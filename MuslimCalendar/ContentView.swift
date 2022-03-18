@@ -12,44 +12,66 @@ import EventKit
 
 
 struct ContentView: View {
-    @State var events: [Event] = []
+    @State var events: [Event] = Test.test()
     
     var body: some View {
-        HStack {
+        VStack {
             GeometryReader { geo in
                 CalendarDisplayView(geo: geo, events: $events)
             }
+            AddEventViiew()
         }
-        
-//        VStack {
-//            ScrollView {
-//                LazyVGrid(columns: [GridItem(.flexible())]) {
-//                    ForEach(1..<24, content: {i in
-//                        HourView(hour: i)
-//                    })
-//                }
-//            }
-//        }
     }
 }
 
-struct HourView: View {
-    let hour: Int
+enum Durations: String, CaseIterable, Identifiable {
+    case quarter
+    case half
+    case hour
+    var id: Self { self }
+}
+
+struct AddEventViiew: View {
+    @State var eventTitle: String = ""
+    @State var isAfter: Bool = true
+    @State  var suggestedDuration: Durations = .half
+    
     var body: some View {
-        HStack {
-//            let shape = RoundedRectangle(cornerRadius: 0)
-            let shape = Rectangle()
-            Text("\(hour)").padding(.bottom).padding(.bottom).padding(.leading)
-            VStack {
-                shape
-                    .padding(.trailing)
-                shape
-                    .stroke(lineWidth: 1)
-                    .foregroundColor(.gray)
-                    .padding(.trailing)
+        Section {
+            Form {
+                Label("Add Event", systemImage: "bolt.fill").font(.largeTitle)
+                VStack {
+                    TextField("Title", text: $eventTitle)
+                    Picker("Duration", selection: $suggestedDuration) {
+                        ForEach(Durations.allCases) { duration in
+                            Text(duration.rawValue.capitalized)
+                                .tag(duration)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    Toggle(isOn: $isAfter) {
+                        Text("Before / After")
+                    }
+                    Divider()
+                    HStack {
+                        Button(action: cancel) {
+                            Label("Cancel", systemImage: "square.and.arrow.down.fill")
+                        }
+                        .buttonStyle(.bordered)
+                        .foregroundColor(.red)
+                        Spacer()
+                        Button(action: save) {
+                            Label("Save", systemImage: "clear")
+                        }
+                        .buttonStyle(.bordered)
+                        .foregroundColor(.blue)
+                    }
+                }
             }
         }
     }
+    func save() { }
+    func cancel() { }
 }
 
 struct CalendarDisplayView: UIViewRepresentable {
@@ -123,7 +145,9 @@ struct CalendarDisplayView: UIViewRepresentable {
 //}
 
 struct Test {
-    static func test() -> String {
+    static func test() -> [Event] {
+        var prayerEvents: [PrayerEvent] = []
+        
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         let date = cal.dateComponents([.year, .month, .day], from: Date())
         // 40,71910° N, 29,78066° E
@@ -144,8 +168,47 @@ struct Test {
             print("asr \(formatter.string(from: prayers.asr))")
             print("maghrib \(formatter.string(from: prayers.maghrib))")
             print("isha \(formatter.string(from: prayers.isha))")
+            
+            prayerEvents.append(PrayerEvent(name: "Fajr", duration: 60*30, startDate: prayers.fajr))
+            prayerEvents.append(PrayerEvent(name: "Sunrise ☀️", duration: 60*30, startDate: prayers.sunrise))
+            prayerEvents.append(PrayerEvent(name: "Dhur", duration: 60*30, startDate: prayers.dhuhr))
+            prayerEvents.append(PrayerEvent(name: "Asr", duration: 60*30, startDate: prayers.asr))
+            prayerEvents.append(PrayerEvent(name: "Maghrib ", duration: 60*30, startDate: prayers.maghrib))
+            prayerEvents.append(PrayerEvent(name: "Isha", duration: 60*30, startDate: prayers.isha))
         }
-        return "OK"
+        
+        return prayerEvents.map { p in p.event }
+    }
+}
+
+//TODO: Change this into a protocol
+struct PrayerEvent {
+    let name: String
+    let duration: TimeInterval
+    let startDate: Date
+    var endDate: Date {
+        get { Date(timeInterval: duration, since: startDate) }
+    }
+    
+    var event: Event {
+        var event = Event(ID: name)
+        event.text = name
+        event.start = startDate
+        event.end = endDate
+        event.isAllDay = false
+        event.isContainsFile = false
+        event.recurringType = .none
+        return event
+    }
+    
+    func eventAfter(_ name: String, for duration: TimeInterval) -> PrayerEvent {
+        let event = PrayerEvent(name: name, duration: duration, startDate: startDate)
+        return event
+    }
+    
+    func eventBefore(_ name: String, for duration: TimeInterval) -> PrayerEvent {
+        let event = PrayerEvent(name: name, duration: duration, startDate: startDate)
+        return event
     }
 }
 
