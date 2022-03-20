@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MuslimCalendarApp: App {
+    private let viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
         }
     }
 }
