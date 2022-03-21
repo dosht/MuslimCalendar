@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E2A655827E895D40088855C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E9C643227E5A29E002E8FF1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8E9C643427E5A2C0002E8FF1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8EA12E1D27D493530087E242 /* MuslimCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +103,7 @@
 		8EA12E1F27D493530087E242 /* MuslimCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				8E2A655827E895D40088855C /* Info.plist */,
 				8EA12E2027D493530087E242 /* MuslimCalendarApp.swift */,
 				8EA12E2227D493530087E242 /* ContentView.swift */,
 				8E9C643227E5A29E002E8FF1 /* Model.swift */,
@@ -442,6 +444,7 @@
 				DEVELOPMENT_TEAM = QQ583WNZSB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuslimCalendar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -471,6 +474,7 @@
 				DEVELOPMENT_TEAM = QQ583WNZSB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuslimCalendar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
