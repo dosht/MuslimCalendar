@@ -16,7 +16,7 @@ class ViewModel: ObservableObject {
     
     private static func createModel() -> Model {
         var model = Model()
-        model.init_prayer_times()
+        model.initPrayerTimes()
         return model
     }
     
@@ -44,7 +44,7 @@ class ViewModel: ObservableObject {
             }
         }
         if let event = event {
-            events.append(event)
+            model.addEvent(event)
         }
     }
 }
