@@ -17,6 +17,8 @@ class ViewModel: ObservableObject {
     private static func createModel() -> Model {
         var model = Model()
         model.initPrayerTimes()
+        model.loadPlan()
+        model.applyPlan()
         return model
     }
     
@@ -42,9 +44,11 @@ class ViewModel: ObservableObject {
             } else {
                 event = chosenEvent.eventBefore(name, for: duration)
             }
-        }
-        if let event = event {
-            model.addEvent(event)
+            if let event = event {
+                model.addEvent(event)
+                model.connect(event, with: chosenEvent, isAfter: after, duration: duration)
+                model.savePlan()
+            }
         }
     }
 }

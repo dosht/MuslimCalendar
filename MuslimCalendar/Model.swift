@@ -48,12 +48,13 @@ struct Model {
     }
 
     mutating func addEvent(_ event: Event) {
+        if eventsOf(day: Date()).contains(where: { e in e.text == event.text }) {
+            return
+        }
         let ekEvent = event.transform(eventStore: eventStore)
         ekEvent.calendar = muslimCalender
         try! eventStore.save(ekEvent, span: .thisEvent)
         events.append(event)
-        print(event.ID)
-        print(events.map { e in e.ID })
     }
     
     mutating func applyPlan() {
@@ -131,6 +132,18 @@ struct Model {
             } else {
                 plan = nil
             }
+        }
+    }
+    
+    mutating func connect(_ event: Event, with connectedEvent: Event, isAfter: Bool, duration: TimeInterval) {
+        if plan == nil {
+            plan = Plan()
+        }
+        if let previousConnection = plan?.rules[connectedEvent.text] {
+            plan?.rules[connectedEvent.text] = ConnectedEvent(title: event.text, isAfter: isAfter, duration: duration)
+            plan?.rules[event.text] = ConnectedEvent(title: previousConnection.title, isAfter: isAfter, duration: duration)
+        } else {
+            plan?.rules[connectedEvent.text] = ConnectedEvent(title: event.text, isAfter: isAfter, duration: duration)
         }
     }
     

@@ -80,5 +80,38 @@ class MuslimCalendarTests: XCTestCase {
         model.initPrayerTimes()
         model.applyPlan()
         XCTAssertEqual(model.events.count, 6+6)
+        model.applyPlan()
+        XCTAssertEqual(model.events.count, 6+6)
+    }
+    
+    func testConnectEvents() {
+        var model = Model()
+        model.initPrayerTimes()
+        let fajr = model.events.first!
+        let event = fajr.eventAfter("test", for: 15*60)
+        model.connect(event, with: fajr, isAfter: true, duration: 15*60)
+        let expectedPlan = Model.Plan(x: nil, rules: [fajr.text: Model.ConnectedEvent(title: event.text, isAfter: true, duration: 15*60)])
+        XCTAssertEqual(model.plan, expectedPlan)
+    }
+    
+    func testConnectEventsIfAlreadyConnected() {
+        var model = Model()
+        model.initPrayerTimes()
+        let fajr = model.events.first!
+        
+        // Connect the first event
+        let event = fajr.eventAfter("test", for: 15*60)
+        model.connect(event, with: fajr, isAfter: true, duration: 15*60)
+        
+        // Connect a second event
+        let event2 = fajr.eventAfter("test 2", for: 15*60)
+        model.connect(event2, with: fajr, isAfter: true, duration: 15*60)
+        
+        // Test
+        let expectedPlan = Model.Plan(x: nil, rules: [
+            fajr.text: Model.ConnectedEvent(title: event2.text, isAfter: true, duration: 15*60),
+            event2.text: Model.ConnectedEvent(title: event.text, isAfter: true, duration: 15*60)
+        ])
+        XCTAssertEqual(model.plan, expectedPlan)
     }
 }
