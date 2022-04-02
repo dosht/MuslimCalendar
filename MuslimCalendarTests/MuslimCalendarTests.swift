@@ -28,8 +28,7 @@ class MuslimCalendarTests: XCTestCase {
     }
     
     func populateTestEvents() {
-        var model = Model()
-        model.addEvent(Event.create(ID: "1", text: "test 1", duration: 60, start: Date()))
+        let model = Model()
         testEvents = model.events
         
         plan = Model.Plan(
@@ -62,9 +61,9 @@ class MuslimCalendarTests: XCTestCase {
     func testModel() {
         var model = Model()
         model.initPrayerTimes()
-        XCTAssertEqual(model.events.count, 7, "Row count was not zero.")
+        XCTAssertEqual(model.events.count, 6, "Row count was not zero.")
         model.initPrayerTimes()
-        XCTAssertEqual(model.events.count, 7, "Row count was not zero.")
+        XCTAssertEqual(model.events.count, 6, "Row count was not zero.")
     }
     
     func testSaveLoadPlan() {
@@ -80,6 +79,6 @@ class MuslimCalendarTests: XCTestCase {
         model.plan = plan
         model.initPrayerTimes()
         model.applyPlan()
-        XCTAssertEqual(model.events.count, 7+6)
+        XCTAssertEqual(model.events.count, 6+6)
     }
 }
