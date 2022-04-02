@@ -18,6 +18,7 @@
 		8EA12E3C27D493550087E242 /* MuslimCalendarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3B27D493550087E242 /* MuslimCalendarUITests.swift */; };
 		8EA12E3E27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E3D27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift */; };
 		8EA12E4C27D4959F0087E242 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA12E4B27D4959F0087E242 /* Adhan */; };
+		8EB5029327F7577200DD43C0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EB5029127F7577200DD43C0 /* Model.xcdatamodeld */; };
 		8EC7887427DDD789008739F4 /* KVKCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7887327DDD789008739F4 /* KVKCalendar */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		8EA12E3727D493550087E242 /* MuslimCalendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuslimCalendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA12E3B27D493550087E242 /* MuslimCalendarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarUITests.swift; sourceTree = "<group>"; };
 		8EA12E3D27D493550087E242 /* MuslimCalendarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8EB5029227F7577200DD43C0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		8EA12E1427D493530087E242 = {
 			isa = PBXGroup;
 			children = (
+				8EB5029127F7577200DD43C0 /* Model.xcdatamodeld */,
 				8EA12E1F27D493530087E242 /* MuslimCalendar */,
 				8EA12E3027D493550087E242 /* MuslimCalendarTests */,
 				8EA12E3A27D493550087E242 /* MuslimCalendarUITests */,
@@ -285,6 +288,7 @@
 				8EA12E2327D493530087E242 /* ContentView.swift in Sources */,
 				8E9C643527E5A2C0002E8FF1 /* ViewModel.swift in Sources */,
 				8EA12E2127D493530087E242 /* MuslimCalendarApp.swift in Sources */,
+				8EB5029327F7577200DD43C0 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +649,20 @@
 			productName = KVKCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		8EB5029127F7577200DD43C0 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8EB5029227F7577200DD43C0 /* Model.xcdatamodel */,
+			);
+			currentVersion = 8EB5029227F7577200DD43C0 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = MuslimCalendar/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8EA12E1527D493530087E242 /* Project object */;
 }

@@ -9,10 +9,13 @@ import Foundation
 import EventKit
 import Adhan
 import KVKCalendar
+import CoreData
 
 struct Model {
     var events: [Event] = []
     var eventStore: EKEventStore = EventStore.requestPermissionAndCreateEventStore()
+    var plan: Plan?
+    private var nsManagedPlan: NSManagedObject?
     
     mutating func initPrayerTimes() {
         let events = eventsOf(day: Date())
@@ -39,7 +42,7 @@ struct Model {
             addEvent(Event.create(ID: "\(Times.sunrise)", text: "Sunrise ☀️", duration: 60*30, start: prayers.sunrise))
             addEvent(Event.create(ID: "\(Times.dhur)", text: "Dhur", duration: 60*30, start: prayers.dhuhr))
             addEvent(Event.create(ID: "\(Times.asr)", text: "Asr", duration: 60*30, start: prayers.asr))
-            addEvent(Event.create(ID: "\(Times.maghrib)", text: "Maghrib ", duration: 60*30, start: prayers.maghrib))
+            addEvent(Event.create(ID: "\(Times.maghrib)", text: "Maghrib", duration: 60*30, start: prayers.maghrib))
             addEvent(Event.create(ID: "\(Times.isha)", text: "Isha", duration: 60*30, start: prayers.isha))
         }
     }
@@ -49,6 +52,22 @@ struct Model {
         ekEvent.calendar = muslimCalender
         try! eventStore.save(ekEvent, span: .thisEvent)
         events.append(event)
+        print(event.ID)
+        print(events.map { e in e.ID })
+    }
+    
+    mutating func applyPlan() {
+        var queue = events.map { $0.text }
+        while let node = queue.popLast() {
+            if let e = plan?.rules[node] {
+                queue.append(e.title)
+                print(node)
+                if let event = events.first(where: { e in e.text == node }) {
+                    let newEvent = e.isAfter ? event.eventAfter(e.title, for: e.duration) : event.eventBefore(e.title, for: e.duration)
+                    addEvent(newEvent)
+                }
+            }
+        }
     }
     
     var muslimCalender: EKCalendar {
@@ -69,10 +88,73 @@ struct Model {
         let predicate = eventStore.predicateForEvents(withStart: day.startOfDay, end: day.endOfDay, calendars: [muslimCalender])
         return eventStore.events(matching: predicate).map { $0.transform() }
     }
-}
+    
+    func getPersistentContainer() -> NSPersistentContainer {
+        let container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                fatalError("Unable to load persistent stores: \(error)")
+            }
+        }
+        return container
+    }
+    
+    lazy var persistentContainer: NSPersistentContainer = getPersistentContainer()
+    
+    // TODO: Make sure it always keeps one object
+    mutating func savePlan() {
+        let context = persistentContainer.viewContext
+        let object = nsManagedPlan ?? {
+            let entity = NSEntityDescription.entity(forEntityName: "EventRules", in: context)
+            return NSManagedObject(entity: entity!, insertInto: context)
+        }()
+        do {
+            let jsonEncoder = JSONEncoder()
+            let planData = try jsonEncoder.encode(plan!)
+            let planString = String(data: planData, encoding: .utf8)!
+            print("PLAN STRING: \(planString)")
+            object.setValue(planString, forKey: "plan")
+            try context.save()
+        } catch {
+            print(error)
+        }
+    }
+    
+    mutating func loadPlan() {
+        let context = persistentContainer.viewContext
+        if let results = try? context.fetch(NSFetchRequest(entityName: "EventRules")) as? [NSManagedObject] {
+            if let result = results.last {
+                nsManagedPlan = result
+                let planString = result.value(forKey: "plan") as! String
+                let jsonData = Data(planString.utf8)
+                plan = try? JSONDecoder().decode(Plan.self, from: jsonData)
+            } else {
+                plan = nil
+            }
+        }
+    }
+    
+    struct Plan: Equatable, Codable {
+        var x: String?
+        var rules: [String: ConnectedEvent] = [:]
+    }
+    
+    struct ConnectedEvent: Equatable, Codable {
+        let title: String
+        let isAfter: Bool
+        let duration: TimeInterval
+    }
+    
+    enum Times: String, CaseIterable {
+        case fajr = "Fajr",
+             sunrise = "Sunrise ☀️",
+             dhur = "Dhur",
+             asr = "Asr",
+             maghrib = "Maghrib",
+             isha = "Isha"
+    }
 
-enum Times {
-    case fajr, sunrise, dhur, asr, maghrib, isha
+
 }
 
 extension Event: Equatable {
