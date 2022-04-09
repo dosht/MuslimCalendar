@@ -44,6 +44,9 @@ enum Durations: String, CaseIterable, Identifiable {
 struct AddEventViiew: View {
     @ObservedObject var viewModel: ViewModel
     
+    var chosenEventTitle:  String?  {
+        viewModel.chosenEvent?.text
+    }
     @State var eventTitle: String = ""
     @State var isAfter: Bool = true
     @State  var suggestedDuration: Durations = .half
@@ -52,6 +55,9 @@ struct AddEventViiew: View {
         Section {
             Form {
                 Label("Add Event", systemImage: "bolt.fill").font(.largeTitle)
+                if let chosenEventTitle = chosenEventTitle {
+                    Label("Connected with \(chosenEventTitle)", systemImage: "highlighter")
+                }
                 VStack {
                     TextField("Title", text: $eventTitle)
                     Picker("Duration", selection: $suggestedDuration) {
