@@ -73,13 +73,13 @@ struct AddEventViiew: View {
                     Divider()
                     HStack {
                         Button(action: cancel) {
-                            Label("Cancel", systemImage: "square.and.arrow.down.fill")
+                            Label("Cancel", systemImage: "clear")
                         }
                         .buttonStyle(.bordered)
                         .foregroundColor(.red)
                         Spacer()
                         Button(action: save) {
-                            Label("Save", systemImage: "clear")
+                            Label("Save", systemImage: "square.and.arrow.down.fill")
                         }
                         .buttonStyle(.bordered)
                         .foregroundColor(.blue)
