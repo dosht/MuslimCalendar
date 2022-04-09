@@ -53,6 +53,8 @@ struct Model {
         }
         let ekEvent = event.transform(eventStore: eventStore)
         ekEvent.calendar = muslimCalender
+        let alarm = EKAlarm(relativeOffset: -10*60)
+        ekEvent.addAlarm(alarm)
         try! eventStore.save(ekEvent, span: .thisEvent)
         events.append(event)
     }
