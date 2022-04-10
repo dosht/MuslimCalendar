@@ -19,6 +19,9 @@ class ViewModel: ObservableObject {
         model.initPrayerTimes()
         model.loadPlan()
         model.applyPlan()
+        // TODO: Move BGT schedule to a better place
+        registerUpdateCalendarBGT()
+        scheduleUpdateCalendarBGT()
         return model
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E2A655A27E901AA0088855C /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A655927E901AA0088855C /* EventStore.swift */; };
+		8E945CD428031FA2003FA075 /* BackGroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E945CD328031FA2003FA075 /* BackGroundTask.swift */; };
 		8E9C643327E5A29E002E8FF1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C643227E5A29E002E8FF1 /* Model.swift */; };
 		8E9C643527E5A2C0002E8FF1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C643427E5A2C0002E8FF1 /* ViewModel.swift */; };
 		8EA12E2127D493530087E242 /* MuslimCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA12E2027D493530087E242 /* MuslimCalendarApp.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		8E2A655827E895D40088855C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E2A655927E901AA0088855C /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
+		8E945CD328031FA2003FA075 /* BackGroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundTask.swift; sourceTree = "<group>"; };
 		8E9C643227E5A29E002E8FF1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8E9C643427E5A2C0002E8FF1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8EA12E1D27D493530087E242 /* MuslimCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 		8EA12E1F27D493530087E242 /* MuslimCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				8E945CD328031FA2003FA075 /* BackGroundTask.swift */,
 				8E2A655827E895D40088855C /* Info.plist */,
 				8EA12E2027D493530087E242 /* MuslimCalendarApp.swift */,
 				8EA12E2227D493530087E242 /* ContentView.swift */,
@@ -283,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E945CD428031FA2003FA075 /* BackGroundTask.swift in Sources */,
 				8E2A655A27E901AA0088855C /* EventStore.swift in Sources */,
 				8E9C643327E5A29E002E8FF1 /* Model.swift in Sources */,
 				8EA12E2327D493530087E242 /* ContentView.swift in Sources */,
@@ -453,6 +457,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MuslimCalendar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "";
+				INFOPLIST_KEY_NSContactsUsageDescription = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -483,6 +493,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MuslimCalendar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "";
+				INFOPLIST_KEY_NSContactsUsageDescription = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

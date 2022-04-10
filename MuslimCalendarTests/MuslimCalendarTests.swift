@@ -114,4 +114,10 @@ class MuslimCalendarTests: XCTestCase {
         ])
         XCTAssertEqual(model.plan, expectedPlan)
     }
+    
+    func testTomorrow() {
+        let today = Date()
+        let tomorrow = today.tomorrow
+        XCTAssertEqual(today.day+1, tomorrow.day)
+    }
 }

@@ -212,5 +212,7 @@ extension Date {
     var endOfDay: Date {
         return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
     }
-
+    var tomorrow: Date {
+        return Date(timeInterval: 1, since: endOfDay)
+    }
 }
