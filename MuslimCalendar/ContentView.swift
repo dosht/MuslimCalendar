@@ -55,11 +55,11 @@ struct AddEventViiew: View {
         Section {
             Form {
                 Label("Add Event", systemImage: "bolt.fill").font(.largeTitle)
-                if let chosenEventTitle = chosenEventTitle {
-                    Label("Connected with \(chosenEventTitle)", systemImage: "highlighter")
-                }
                 VStack {
                     TextField("Title", text: $eventTitle)
+                    if let chosenEventTitle = chosenEventTitle {
+                        Label("Connected with \(chosenEventTitle)", systemImage: "highlighter")
+                    }
                     Picker("Duration", selection: $suggestedDuration) {
                         ForEach(Durations.allCases) { duration in
                             Text(duration.rawValue.capitalized)
@@ -84,6 +84,14 @@ struct AddEventViiew: View {
                         .buttonStyle(.bordered)
                         .foregroundColor(.blue)
                     }
+                    Divider()
+                    HStack {
+                        Button(action: delete) {
+                            Label("delete this event", systemImage: "trash")
+                        }
+                        .buttonStyle(.bordered)
+                        .foregroundColor(.red)
+                    }
                 }
             }
         }
@@ -93,6 +101,10 @@ struct AddEventViiew: View {
         viewModel.chosenEvent = nil
     }
     func cancel() { viewModel.chosenEvent = nil }
+    func delete() {
+        viewModel.deleteChoosenEvent()
+        viewModel.chosenEvent = nil
+    }
 }
 
 struct CalendarDisplayView: UIViewRepresentable {

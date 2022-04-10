@@ -39,6 +39,14 @@ class ViewModel: ObservableObject {
         chosenEvent = event
     }
     
+    func deleteChoosenEvent() {
+        if let event = chosenEvent {
+            model.disconnect(event)
+            model.deleteEvent(event)
+            model.savePlan()
+        }
+    }
+    
     func addEvent(_ name: String, _ duration: TimeInterval, after: Bool) {
         var event: Event?
         if let chosenEvent = chosenEvent {

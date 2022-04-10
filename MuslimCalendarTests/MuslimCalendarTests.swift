@@ -84,6 +84,26 @@ class MuslimCalendarTests: XCTestCase {
         XCTAssertEqual(model.events.count, 6+6)
     }
     
+    func testDeleteEvent() {
+        var model = Model()
+        model.initPrayerTimes()
+        let expectedEvents = model.events
+        
+        // Add test model to delete
+        let fajr = model.events.first!
+        let event = fajr.eventAfter("test", for: 15*60)
+        model.addEvent(event)
+        
+        // Delete the model
+        model.deleteEvent(event)
+        
+        // Assertions
+        XCTAssertEqual(model.events.count, expectedEvents.count)
+        XCTAssertNil(model.events.first(where: {e in e.text == event.text}))
+        XCTAssertEqual(model.eventsOf(day: Date()).count, expectedEvents.count)
+        XCTAssertNil(model.eventsOf(day: Date()).first(where: {e in e.text == event.text}))
+    }
+    
     func testConnectEvents() {
         var model = Model()
         model.initPrayerTimes()
@@ -113,6 +133,44 @@ class MuslimCalendarTests: XCTestCase {
             event2.text: Model.ConnectedEvent(title: event.text, isAfter: true, duration: 15*60)
         ])
         XCTAssertEqual(model.plan, expectedPlan)
+    }
+    
+    func testDisconnect() {
+        var model = Model()
+        model.initPrayerTimes()
+        let expectedPlan = Model.Plan(x: nil, rules: [:])
+        
+        // Add test model to delete
+        let fajr = model.events.first!
+        let event = fajr.eventAfter("test", for: 15*60)
+        model.connect(event, with: fajr, isAfter: true, duration: 15*60)
+        model.disconnect(event)
+        
+        XCTAssertEqual(model.plan, expectedPlan)
+    }
+    
+    func testDisconnectIfConnectedToAnotherEvent() {
+        var model = Model()
+        model.initPrayerTimes()
+        
+        // Add test model to delete
+        let fajr = model.events.first!
+        let event1 = fajr.eventAfter("test", for: 15*60)
+        model.connect(event1, with: fajr, isAfter: true, duration: 15*60)
+        
+        // Connect a second event
+        let event2 = fajr.eventAfter("test 2", for: 15*60)
+        model.connect(event2, with: event1, isAfter: true, duration: 15*60)
+        
+        model.disconnect(event1)
+        
+        let expectedPlan = Model.Plan(x: nil, rules: [fajr.text: Model.ConnectedEvent(title: event2.text, isAfter: true, duration: 15*60)])
+        
+        XCTAssertEqual(model.plan, expectedPlan)
+    }
+    
+    func testDisconnectIfConnectedToAnotherEventButOneAfterAndOneBefore() {
+        //TODO: Do we need this case?
     }
     
     func testTomorrow() {

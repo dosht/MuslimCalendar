@@ -59,6 +59,13 @@ struct Model {
         events.append(event)
     }
     
+    mutating func deleteEvent(_ event: Event) {
+        events.removeAll(where: { (e) in event.text == e.text })
+        if let ekEvent = ekEventsOf(day: Date()).first(where: { e in e.title == event.text }) {
+            try? eventStore.remove(ekEvent, span: .thisEvent)
+        }
+    }
+    
     mutating func applyPlan() {
         var queue = events.map { $0.text }
         while let node = queue.popLast() {
@@ -87,9 +94,13 @@ struct Model {
         }
     }
     
-    func eventsOf(day: Date) -> [Event] {
+    func ekEventsOf(day: Date) -> [EKEvent] {
         let predicate = eventStore.predicateForEvents(withStart: day.startOfDay, end: day.endOfDay, calendars: [muslimCalender])
-        return eventStore.events(matching: predicate).map { $0.transform() }
+        return eventStore.events(matching: predicate)
+    }
+    
+    func eventsOf(day: Date) -> [Event] {
+        return ekEventsOf(day: day).map { $0.transform() }
     }
     
     func getPersistentContainer() -> NSPersistentContainer {
@@ -146,6 +157,20 @@ struct Model {
             plan?.rules[event.text] = ConnectedEvent(title: previousConnection.title, isAfter: isAfter, duration: duration)
         } else {
             plan?.rules[connectedEvent.text] = ConnectedEvent(title: event.text, isAfter: isAfter, duration: duration)
+        }
+    }
+    
+    mutating func disconnect(_ event: Event) {
+        if let plan = plan {
+            if let rule = plan.rules.first(where: {(key, value) in value.title == event.text}) {
+                if let rule2 = plan.rules.first(where: {(key, value) in
+                    key == rule.value.title && value.isAfter == rule.value.isAfter }) {
+                    self.plan?.rules.removeValue(forKey: rule2.key)
+                    self.plan?.rules[rule.key] = rule2.value
+                } else {
+                    self.plan?.rules.removeValue(forKey: rule.key)
+                }
+            }
         }
     }
     
