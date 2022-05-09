@@ -32,13 +32,15 @@ class MuslimCalendarTests: XCTestCase {
         testEvents = model.events
         
         plan = Model.Plan(
-            x: nil, rules: [
-                Model.Times.fajr.rawValue: Model.ConnectedEvent(title: "Zikr", isAfter: true, duration: 15*60),
-                "Zikr": Model.ConnectedEvent(title: "Quran", isAfter: true, duration: 30*60),
-                Model.Times.asr.rawValue: Model.ConnectedEvent(title: "Zikr Eveneing", isAfter: true, duration: 15*60),
-                Model.Times.maghrib.rawValue: Model.ConnectedEvent(title: "dua", isAfter: false, duration: 15*60),
-                "dua": Model.ConnectedEvent(title: "Workout", isAfter: false, duration: 30*60),
-                Model.Times.isha.rawValue: Model.ConnectedEvent(title: "Tarawih", isAfter: true, duration: 60*60)
+            preRules: [
+                Model.Times.maghrib.rawValue: Model.ConnectedEvent(title: "dua", duration: 15*60),
+                "dua": Model.ConnectedEvent(title: "Workout", duration: 30*60),
+            ],
+            postRules: [
+                Model.Times.fajr.rawValue: Model.ConnectedEvent(title: "Zikr", duration: 15*60),
+                "Zikr": Model.ConnectedEvent(title: "Quran", duration: 30*60),
+                Model.Times.asr.rawValue: Model.ConnectedEvent(title: "Zikr Eveneing", duration: 15*60),
+                Model.Times.isha.rawValue: Model.ConnectedEvent(title: "Tarawih", duration: 60*60)
             ]
         )
     }
@@ -110,7 +112,7 @@ class MuslimCalendarTests: XCTestCase {
         let fajr = model.events.first!
         let event = fajr.eventAfter("test", for: 15*60)
         model.connect(event, with: fajr, isAfter: true, duration: 15*60)
-        let expectedPlan = Model.Plan(x: nil, rules: [fajr.text: Model.ConnectedEvent(title: event.text, isAfter: true, duration: 15*60)])
+        let expectedPlan = Model.Plan(postRules: [fajr.text: Model.ConnectedEvent(title: event.text, duration: 15*60)])
         XCTAssertEqual(model.plan, expectedPlan)
     }
     
@@ -128,9 +130,9 @@ class MuslimCalendarTests: XCTestCase {
         model.connect(event2, with: fajr, isAfter: true, duration: 15*60)
         
         // Test
-        let expectedPlan = Model.Plan(x: nil, rules: [
-            fajr.text: Model.ConnectedEvent(title: event2.text, isAfter: true, duration: 15*60),
-            event2.text: Model.ConnectedEvent(title: event.text, isAfter: true, duration: 15*60)
+        let expectedPlan = Model.Plan(postRules: [
+            fajr.text: Model.ConnectedEvent(title: event2.text, duration: 15*60),
+            event2.text: Model.ConnectedEvent(title: event.text, duration: 15*60)
         ])
         XCTAssertEqual(model.plan, expectedPlan)
     }
@@ -138,7 +140,7 @@ class MuslimCalendarTests: XCTestCase {
     func testDisconnect() {
         var model = Model()
         model.initPrayerTimes()
-        let expectedPlan = Model.Plan(x: nil, rules: [:])
+        let expectedPlan = Model.Plan()
         
         // Add test model to delete
         let fajr = model.events.first!
@@ -164,7 +166,7 @@ class MuslimCalendarTests: XCTestCase {
         
         model.disconnect(event1)
         
-        let expectedPlan = Model.Plan(x: nil, rules: [fajr.text: Model.ConnectedEvent(title: event2.text, isAfter: true, duration: 15*60)])
+        let expectedPlan = Model.Plan(postRules: [fajr.text: Model.ConnectedEvent(title: event2.text, duration: 15*60)])
         
         XCTAssertEqual(model.plan, expectedPlan)
     }

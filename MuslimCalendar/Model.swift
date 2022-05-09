@@ -67,16 +67,21 @@ struct Model {
     }
     
     mutating func applyPlan() {
-        var queue = events.map { $0.text }
-        while let node = queue.popLast() {
-            if let e = plan?.rules[node] {
-                queue.append(e.title)
-                print(node)
-                if let event = events.first(where: { e in e.text == node }) {
-                    let newEvent = e.isAfter ? event.eventAfter(e.title, for: e.duration) : event.eventBefore(e.title, for: e.duration)
-                    addEvent(newEvent)
+        func traverse(rules: [String: ConnectedEvent], isAfter: Bool) {
+            var queue = events.map { $0.text }
+            while let node = queue.popLast() {
+                if let e = rules[node] {
+                    queue.append(e.title)
+                    if let event = events.first(where: { e in e.text == node }) {
+                        let newEvent = isAfter ? event.eventAfter(e.title, for: e.duration) : event.eventBefore(e.title, for: e.duration)
+                        addEvent(newEvent)
+                    }
                 }
             }
+        }
+        if let plan = plan {
+            traverse(rules: plan.preRules, isAfter: false)
+            traverse(rules: plan.postRules, isAfter: true)
         }
     }
     
@@ -152,36 +157,51 @@ struct Model {
         if plan == nil {
             plan = Plan()
         }
-        if let previousConnection = plan?.rules[connectedEvent.text] {
-            plan?.rules[connectedEvent.text] = ConnectedEvent(title: event.text, isAfter: isAfter, duration: duration)
-            plan?.rules[event.text] = ConnectedEvent(title: previousConnection.title, isAfter: isAfter, duration: duration)
+        if isAfter == false {
+            if let previousConnection = plan?.preRules[connectedEvent.text] {
+                plan?.preRules[connectedEvent.text] = ConnectedEvent(title: event.text, duration: duration)
+                plan?.preRules[event.text] = ConnectedEvent(title: previousConnection.title, duration: duration)
+            } else {
+                plan?.preRules[connectedEvent.text] = ConnectedEvent(title: event.text, duration: duration)
+            }
         } else {
-            plan?.rules[connectedEvent.text] = ConnectedEvent(title: event.text, isAfter: isAfter, duration: duration)
+            if let previousConnection = plan?.postRules[connectedEvent.text] {
+                plan?.postRules[connectedEvent.text] = ConnectedEvent(title: event.text, duration: duration)
+                plan?.postRules[event.text] = ConnectedEvent(title: previousConnection.title, duration: duration)
+            } else {
+                plan?.postRules[connectedEvent.text] = ConnectedEvent(title: event.text, duration: duration)
+            }
         }
     }
     
     mutating func disconnect(_ event: Event) {
         if let plan = plan {
-            if let rule = plan.rules.first(where: {(key, value) in value.title == event.text}) {
-                if let rule2 = plan.rules.first(where: {(key, value) in
-                    key == rule.value.title && value.isAfter == rule.value.isAfter }) {
-                    self.plan?.rules.removeValue(forKey: rule2.key)
-                    self.plan?.rules[rule.key] = rule2.value
+            if let rule = plan.preRules.first(where: {(key, value) in value.title == event.text}) {
+                if let rule2 = plan.preRules.first(where: {(key, value) in key == rule.value.title }) {
+                    self.plan?.preRules.removeValue(forKey: rule2.key)
+                    self.plan?.preRules[rule.key] = rule2.value
                 } else {
-                    self.plan?.rules.removeValue(forKey: rule.key)
+                    self.plan?.preRules.removeValue(forKey: rule.key)
+                }
+            }
+            if let rule = plan.postRules.first(where: {(key, value) in value.title == event.text}) {
+                if let rule2 = plan.postRules.first(where: {(key, value) in key == rule.value.title }) {
+                    self.plan?.postRules.removeValue(forKey: rule2.key)
+                    self.plan?.postRules[rule.key] = rule2.value
+                } else {
+                    self.plan?.postRules.removeValue(forKey: rule.key)
                 }
             }
         }
     }
     
     struct Plan: Equatable, Codable {
-        var x: String?
-        var rules: [String: ConnectedEvent] = [:]
+        var preRules: [String: ConnectedEvent] = [:]
+        var postRules: [String: ConnectedEvent] = [:]
     }
     
     struct ConnectedEvent: Equatable, Codable {
         let title: String
-        let isAfter: Bool
         let duration: TimeInterval
     }
     
