@@ -14,6 +14,7 @@ import CoreData
 struct Model {
     var events: [Event] = []
     var eventStore: EKEventStore = EventStore.requestPermissionAndCreateEventStore()
+    var location: CLLocationCoordinate2D = LocationManager().requestPermissionAndGetCurrentLocation()
     var plan: Plan?
     private var nsManagedPlan: NSManagedObject?
     
@@ -26,8 +27,7 @@ struct Model {
         
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         let date = cal.dateComponents([.year, .month, .day], from: Date())
-        // 40,71910° N, 29,78066° E
-        let coordinates = Coordinates(latitude: 40.71910, longitude: 29.78066)
+        let coordinates = Coordinates(latitude: location.latitude, longitude: location.longitude)
         var params = CalculationMethod.turkey.params
         params.madhab = .shafi
         params.method = .turkey
