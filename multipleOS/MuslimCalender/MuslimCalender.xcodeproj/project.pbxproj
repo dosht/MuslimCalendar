@@ -7,79 +7,79 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E02FB8B2839161500A84B55 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB8A2839161500A84B55 /* Tests_iOS.swift */; };
-		8E02FB8D2839161500A84B55 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB8C2839161500A84B55 /* Tests_iOSLaunchTests.swift */; };
-		8E02FB972839161500A84B55 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB962839161500A84B55 /* Tests_macOS.swift */; };
-		8E02FB992839161500A84B55 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB982839161500A84B55 /* Tests_macOSLaunchTests.swift */; };
-		8E02FB9A2839161500A84B55 /* MuslimCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB6F2839161300A84B55 /* MuslimCalendar.xcdatamodeld */; };
-		8E02FB9B2839161500A84B55 /* MuslimCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB6F2839161300A84B55 /* MuslimCalendar.xcdatamodeld */; };
-		8E02FB9C2839161500A84B55 /* MuslimCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB712839161300A84B55 /* MuslimCalendarApp.swift */; };
-		8E02FB9D2839161500A84B55 /* MuslimCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB712839161300A84B55 /* MuslimCalendarApp.swift */; };
-		8E02FB9E2839161500A84B55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB722839161300A84B55 /* ContentView.swift */; };
-		8E02FB9F2839161500A84B55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB722839161300A84B55 /* ContentView.swift */; };
-		8E02FBA02839161500A84B55 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB732839161300A84B55 /* Persistence.swift */; };
-		8E02FBA12839161500A84B55 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02FB732839161300A84B55 /* Persistence.swift */; };
-		8E02FBA22839161500A84B55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E02FB742839161500A84B55 /* Assets.xcassets */; };
-		8E02FBA32839161500A84B55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E02FB742839161500A84B55 /* Assets.xcassets */; };
+		8E881822283926F8004AA721 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881821283926F8004AA721 /* Tests_iOS.swift */; };
+		8E881824283926F8004AA721 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881823283926F8004AA721 /* Tests_iOSLaunchTests.swift */; };
+		8E88182E283926F8004AA721 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88182D283926F8004AA721 /* Tests_macOS.swift */; };
+		8E881830283926F8004AA721 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88182F283926F8004AA721 /* Tests_macOSLaunchTests.swift */; };
+		8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */; };
+		8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */; };
+		8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881808283926F8004AA721 /* MuslimCalenderApp.swift */; };
+		8E881834283926F8004AA721 /* MuslimCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881808283926F8004AA721 /* MuslimCalenderApp.swift */; };
+		8E881835283926F8004AA721 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881809283926F8004AA721 /* ContentView.swift */; };
+		8E881836283926F8004AA721 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881809283926F8004AA721 /* ContentView.swift */; };
+		8E881837283926F8004AA721 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88180A283926F8004AA721 /* Persistence.swift */; };
+		8E881838283926F8004AA721 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88180A283926F8004AA721 /* Persistence.swift */; };
+		8E881839283926F8004AA721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E88180B283926F8004AA721 /* Assets.xcassets */; };
+		8E88183A283926F8004AA721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E88180B283926F8004AA721 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E02FB872839161500A84B55 /* PBXContainerItemProxy */ = {
+		8E88181E283926F8004AA721 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8E02FB6A2839161300A84B55 /* Project object */;
+			containerPortal = 8E881801283926F7004AA721 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8E02FB782839161500A84B55;
-			remoteInfo = "MuslimCalendar (iOS)";
+			remoteGlobalIDString = 8E88180F283926F8004AA721;
+			remoteInfo = "MuslimCalender (iOS)";
 		};
-		8E02FB932839161500A84B55 /* PBXContainerItemProxy */ = {
+		8E88182A283926F8004AA721 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8E02FB6A2839161300A84B55 /* Project object */;
+			containerPortal = 8E881801283926F7004AA721 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8E02FB7E2839161500A84B55;
-			remoteInfo = "MuslimCalendar (macOS)";
+			remoteGlobalIDString = 8E881815283926F8004AA721;
+			remoteInfo = "MuslimCalender (macOS)";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8E02FB702839161300A84B55 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
-		8E02FB712839161300A84B55 /* MuslimCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendarApp.swift; sourceTree = "<group>"; };
-		8E02FB722839161300A84B55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		8E02FB732839161300A84B55 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		8E02FB742839161500A84B55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8E02FB792839161500A84B55 /* MuslimCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E02FB7F2839161500A84B55 /* MuslimCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E02FB812839161500A84B55 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		8E02FB862839161500A84B55 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E02FB8A2839161500A84B55 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
-		8E02FB8C2839161500A84B55 /* Tests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOSLaunchTests.swift; sourceTree = "<group>"; };
-		8E02FB922839161500A84B55 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E02FB962839161500A84B55 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
-		8E02FB982839161500A84B55 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		8E881807283926F8004AA721 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
+		8E881808283926F8004AA721 /* MuslimCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalenderApp.swift; sourceTree = "<group>"; };
+		8E881809283926F8004AA721 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8E88180A283926F8004AA721 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8E88180B283926F8004AA721 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E881810283926F8004AA721 /* MuslimCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E881816283926F8004AA721 /* MuslimCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E881818283926F8004AA721 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		8E88181D283926F8004AA721 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E881821283926F8004AA721 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		8E881823283926F8004AA721 /* Tests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOSLaunchTests.swift; sourceTree = "<group>"; };
+		8E881829283926F8004AA721 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E88182D283926F8004AA721 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		8E88182F283926F8004AA721 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8E02FB762839161500A84B55 /* Frameworks */ = {
+		8E88180D283926F8004AA721 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB7C2839161500A84B55 /* Frameworks */ = {
+		8E881813283926F8004AA721 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB832839161500A84B55 /* Frameworks */ = {
+		8E88181A283926F8004AA721 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB8F2839161500A84B55 /* Frameworks */ = {
+		8E881826283926F8004AA721 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -89,62 +89,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E02FB692839161300A84B55 = {
+		8E881800283926F7004AA721 = {
 			isa = PBXGroup;
 			children = (
-				8E02FB6E2839161300A84B55 /* Shared */,
-				8E02FB802839161500A84B55 /* macOS */,
-				8E02FB892839161500A84B55 /* Tests iOS */,
-				8E02FB952839161500A84B55 /* Tests macOS */,
-				8E02FB7A2839161500A84B55 /* Products */,
+				8E881805283926F8004AA721 /* Shared */,
+				8E881817283926F8004AA721 /* macOS */,
+				8E881820283926F8004AA721 /* Tests iOS */,
+				8E88182C283926F8004AA721 /* Tests macOS */,
+				8E881811283926F8004AA721 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		8E02FB6E2839161300A84B55 /* Shared */ = {
+		8E881805283926F8004AA721 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				8E02FB712839161300A84B55 /* MuslimCalendarApp.swift */,
-				8E02FB722839161300A84B55 /* ContentView.swift */,
-				8E02FB732839161300A84B55 /* Persistence.swift */,
-				8E02FB742839161500A84B55 /* Assets.xcassets */,
-				8E02FB6F2839161300A84B55 /* MuslimCalendar.xcdatamodeld */,
+				8E881808283926F8004AA721 /* MuslimCalenderApp.swift */,
+				8E881809283926F8004AA721 /* ContentView.swift */,
+				8E88180A283926F8004AA721 /* Persistence.swift */,
+				8E88180B283926F8004AA721 /* Assets.xcassets */,
+				8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		8E02FB7A2839161500A84B55 /* Products */ = {
+		8E881811283926F8004AA721 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E02FB792839161500A84B55 /* MuslimCalendar.app */,
-				8E02FB7F2839161500A84B55 /* MuslimCalendar.app */,
-				8E02FB862839161500A84B55 /* Tests iOS.xctest */,
-				8E02FB922839161500A84B55 /* Tests macOS.xctest */,
+				8E881810283926F8004AA721 /* MuslimCalender.app */,
+				8E881816283926F8004AA721 /* MuslimCalender.app */,
+				8E88181D283926F8004AA721 /* Tests iOS.xctest */,
+				8E881829283926F8004AA721 /* Tests macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8E02FB802839161500A84B55 /* macOS */ = {
+		8E881817283926F8004AA721 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				8E02FB812839161500A84B55 /* macOS.entitlements */,
+				8E881818283926F8004AA721 /* macOS.entitlements */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		8E02FB892839161500A84B55 /* Tests iOS */ = {
+		8E881820283926F8004AA721 /* Tests iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8E02FB8A2839161500A84B55 /* Tests_iOS.swift */,
-				8E02FB8C2839161500A84B55 /* Tests_iOSLaunchTests.swift */,
+				8E881821283926F8004AA721 /* Tests_iOS.swift */,
+				8E881823283926F8004AA721 /* Tests_iOSLaunchTests.swift */,
 			);
 			path = "Tests iOS";
 			sourceTree = "<group>";
 		};
-		8E02FB952839161500A84B55 /* Tests macOS */ = {
+		8E88182C283926F8004AA721 /* Tests macOS */ = {
 			isa = PBXGroup;
 			children = (
-				8E02FB962839161500A84B55 /* Tests_macOS.swift */,
-				8E02FB982839161500A84B55 /* Tests_macOSLaunchTests.swift */,
+				8E88182D283926F8004AA721 /* Tests_macOS.swift */,
+				8E88182F283926F8004AA721 /* Tests_macOSLaunchTests.swift */,
 			);
 			path = "Tests macOS";
 			sourceTree = "<group>";
@@ -152,103 +152,103 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8E02FB782839161500A84B55 /* MuslimCalendar (iOS) */ = {
+		8E88180F283926F8004AA721 /* MuslimCalender (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E02FBA62839161500A84B55 /* Build configuration list for PBXNativeTarget "MuslimCalendar (iOS)" */;
+			buildConfigurationList = 8E88183D283926F8004AA721 /* Build configuration list for PBXNativeTarget "MuslimCalender (iOS)" */;
 			buildPhases = (
-				8E02FB752839161500A84B55 /* Sources */,
-				8E02FB762839161500A84B55 /* Frameworks */,
-				8E02FB772839161500A84B55 /* Resources */,
+				8E88180C283926F8004AA721 /* Sources */,
+				8E88180D283926F8004AA721 /* Frameworks */,
+				8E88180E283926F8004AA721 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "MuslimCalendar (iOS)";
-			productName = "MuslimCalendar (iOS)";
-			productReference = 8E02FB792839161500A84B55 /* MuslimCalendar.app */;
+			name = "MuslimCalender (iOS)";
+			productName = "MuslimCalender (iOS)";
+			productReference = 8E881810283926F8004AA721 /* MuslimCalender.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E02FB7E2839161500A84B55 /* MuslimCalendar (macOS) */ = {
+		8E881815283926F8004AA721 /* MuslimCalender (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E02FBA92839161500A84B55 /* Build configuration list for PBXNativeTarget "MuslimCalendar (macOS)" */;
+			buildConfigurationList = 8E881840283926F8004AA721 /* Build configuration list for PBXNativeTarget "MuslimCalender (macOS)" */;
 			buildPhases = (
-				8E02FB7B2839161500A84B55 /* Sources */,
-				8E02FB7C2839161500A84B55 /* Frameworks */,
-				8E02FB7D2839161500A84B55 /* Resources */,
+				8E881812283926F8004AA721 /* Sources */,
+				8E881813283926F8004AA721 /* Frameworks */,
+				8E881814283926F8004AA721 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "MuslimCalendar (macOS)";
-			productName = "MuslimCalendar (macOS)";
-			productReference = 8E02FB7F2839161500A84B55 /* MuslimCalendar.app */;
+			name = "MuslimCalender (macOS)";
+			productName = "MuslimCalender (macOS)";
+			productReference = 8E881816283926F8004AA721 /* MuslimCalender.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E02FB852839161500A84B55 /* Tests iOS */ = {
+		8E88181C283926F8004AA721 /* Tests iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E02FBAC2839161500A84B55 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildConfigurationList = 8E881843283926F8004AA721 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
 			buildPhases = (
-				8E02FB822839161500A84B55 /* Sources */,
-				8E02FB832839161500A84B55 /* Frameworks */,
-				8E02FB842839161500A84B55 /* Resources */,
+				8E881819283926F8004AA721 /* Sources */,
+				8E88181A283926F8004AA721 /* Frameworks */,
+				8E88181B283926F8004AA721 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8E02FB882839161500A84B55 /* PBXTargetDependency */,
+				8E88181F283926F8004AA721 /* PBXTargetDependency */,
 			);
 			name = "Tests iOS";
 			productName = "Tests iOS";
-			productReference = 8E02FB862839161500A84B55 /* Tests iOS.xctest */;
+			productReference = 8E88181D283926F8004AA721 /* Tests iOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		8E02FB912839161500A84B55 /* Tests macOS */ = {
+		8E881828283926F8004AA721 /* Tests macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E02FBAF2839161500A84B55 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildConfigurationList = 8E881846283926F8004AA721 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
 			buildPhases = (
-				8E02FB8E2839161500A84B55 /* Sources */,
-				8E02FB8F2839161500A84B55 /* Frameworks */,
-				8E02FB902839161500A84B55 /* Resources */,
+				8E881825283926F8004AA721 /* Sources */,
+				8E881826283926F8004AA721 /* Frameworks */,
+				8E881827283926F8004AA721 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8E02FB942839161500A84B55 /* PBXTargetDependency */,
+				8E88182B283926F8004AA721 /* PBXTargetDependency */,
 			);
 			name = "Tests macOS";
 			productName = "Tests macOS";
-			productReference = 8E02FB922839161500A84B55 /* Tests macOS.xctest */;
+			productReference = 8E881829283926F8004AA721 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8E02FB6A2839161300A84B55 /* Project object */ = {
+		8E881801283926F7004AA721 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
-					8E02FB782839161500A84B55 = {
+					8E88180F283926F8004AA721 = {
 						CreatedOnToolsVersion = 13.4;
 					};
-					8E02FB7E2839161500A84B55 = {
+					8E881815283926F8004AA721 = {
 						CreatedOnToolsVersion = 13.4;
 					};
-					8E02FB852839161500A84B55 = {
+					8E88181C283926F8004AA721 = {
 						CreatedOnToolsVersion = 13.4;
-						TestTargetID = 8E02FB782839161500A84B55;
+						TestTargetID = 8E88180F283926F8004AA721;
 					};
-					8E02FB912839161500A84B55 = {
+					8E881828283926F8004AA721 = {
 						CreatedOnToolsVersion = 13.4;
-						TestTargetID = 8E02FB7E2839161500A84B55;
+						TestTargetID = 8E881815283926F8004AA721;
 					};
 				};
 			};
-			buildConfigurationList = 8E02FB6D2839161300A84B55 /* Build configuration list for PBXProject "MuslimCalendar" */;
+			buildConfigurationList = 8E881804283926F7004AA721 /* Build configuration list for PBXProject "MuslimCalender" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -256,44 +256,44 @@
 				en,
 				Base,
 			);
-			mainGroup = 8E02FB692839161300A84B55;
-			productRefGroup = 8E02FB7A2839161500A84B55 /* Products */;
+			mainGroup = 8E881800283926F7004AA721;
+			productRefGroup = 8E881811283926F8004AA721 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8E02FB782839161500A84B55 /* MuslimCalendar (iOS) */,
-				8E02FB7E2839161500A84B55 /* MuslimCalendar (macOS) */,
-				8E02FB852839161500A84B55 /* Tests iOS */,
-				8E02FB912839161500A84B55 /* Tests macOS */,
+				8E88180F283926F8004AA721 /* MuslimCalender (iOS) */,
+				8E881815283926F8004AA721 /* MuslimCalender (macOS) */,
+				8E88181C283926F8004AA721 /* Tests iOS */,
+				8E881828283926F8004AA721 /* Tests macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8E02FB772839161500A84B55 /* Resources */ = {
+		8E88180E283926F8004AA721 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02FBA22839161500A84B55 /* Assets.xcassets in Resources */,
+				8E881839283926F8004AA721 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB7D2839161500A84B55 /* Resources */ = {
+		8E881814283926F8004AA721 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02FBA32839161500A84B55 /* Assets.xcassets in Resources */,
+				8E88183A283926F8004AA721 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB842839161500A84B55 /* Resources */ = {
+		8E88181B283926F8004AA721 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB902839161500A84B55 /* Resources */ = {
+		8E881827283926F8004AA721 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -303,63 +303,63 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8E02FB752839161500A84B55 /* Sources */ = {
+		8E88180C283926F8004AA721 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02FB9C2839161500A84B55 /* MuslimCalendarApp.swift in Sources */,
-				8E02FBA02839161500A84B55 /* Persistence.swift in Sources */,
-				8E02FB9A2839161500A84B55 /* MuslimCalendar.xcdatamodeld in Sources */,
-				8E02FB9E2839161500A84B55 /* ContentView.swift in Sources */,
+				8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
+				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
+				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
+				8E881835283926F8004AA721 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB7B2839161500A84B55 /* Sources */ = {
+		8E881812283926F8004AA721 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02FB9D2839161500A84B55 /* MuslimCalendarApp.swift in Sources */,
-				8E02FBA12839161500A84B55 /* Persistence.swift in Sources */,
-				8E02FB9B2839161500A84B55 /* MuslimCalendar.xcdatamodeld in Sources */,
-				8E02FB9F2839161500A84B55 /* ContentView.swift in Sources */,
+				8E881834283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
+				8E881838283926F8004AA721 /* Persistence.swift in Sources */,
+				8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
+				8E881836283926F8004AA721 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB822839161500A84B55 /* Sources */ = {
+		8E881819283926F8004AA721 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02FB8D2839161500A84B55 /* Tests_iOSLaunchTests.swift in Sources */,
-				8E02FB8B2839161500A84B55 /* Tests_iOS.swift in Sources */,
+				8E881824283926F8004AA721 /* Tests_iOSLaunchTests.swift in Sources */,
+				8E881822283926F8004AA721 /* Tests_iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E02FB8E2839161500A84B55 /* Sources */ = {
+		8E881825283926F8004AA721 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02FB992839161500A84B55 /* Tests_macOSLaunchTests.swift in Sources */,
-				8E02FB972839161500A84B55 /* Tests_macOS.swift in Sources */,
+				8E881830283926F8004AA721 /* Tests_macOSLaunchTests.swift in Sources */,
+				8E88182E283926F8004AA721 /* Tests_macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8E02FB882839161500A84B55 /* PBXTargetDependency */ = {
+		8E88181F283926F8004AA721 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8E02FB782839161500A84B55 /* MuslimCalendar (iOS) */;
-			targetProxy = 8E02FB872839161500A84B55 /* PBXContainerItemProxy */;
+			target = 8E88180F283926F8004AA721 /* MuslimCalender (iOS) */;
+			targetProxy = 8E88181E283926F8004AA721 /* PBXContainerItemProxy */;
 		};
-		8E02FB942839161500A84B55 /* PBXTargetDependency */ = {
+		8E88182B283926F8004AA721 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8E02FB7E2839161500A84B55 /* MuslimCalendar (macOS) */;
-			targetProxy = 8E02FB932839161500A84B55 /* PBXContainerItemProxy */;
+			target = 8E881815283926F8004AA721 /* MuslimCalender (macOS) */;
+			targetProxy = 8E88182A283926F8004AA721 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		8E02FBA42839161500A84B55 /* Debug */ = {
+		8E88183B283926F8004AA721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -417,7 +417,7 @@
 			};
 			name = Debug;
 		};
-		8E02FBA52839161500A84B55 /* Release */ = {
+		8E88183C283926F8004AA721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -468,7 +468,7 @@
 			};
 			name = Release;
 		};
-		8E02FBA72839161500A84B55 /* Debug */ = {
+		8E88183E283926F8004AA721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -489,8 +489,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
-				PRODUCT_NAME = MuslimCalendar;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalender;
+				PRODUCT_NAME = MuslimCalender;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -498,7 +498,7 @@
 			};
 			name = Debug;
 		};
-		8E02FBA82839161500A84B55 /* Release */ = {
+		8E88183F283926F8004AA721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -519,8 +519,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
-				PRODUCT_NAME = MuslimCalendar;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalender;
+				PRODUCT_NAME = MuslimCalender;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -529,7 +529,7 @@
 			};
 			name = Release;
 		};
-		8E02FBAA2839161500A84B55 /* Debug */ = {
+		8E881841283926F8004AA721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -549,15 +549,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
-				PRODUCT_NAME = MuslimCalendar;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalender;
+				PRODUCT_NAME = MuslimCalender;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		8E02FBAB2839161500A84B55 /* Release */ = {
+		8E881842283926F8004AA721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -577,15 +577,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
-				PRODUCT_NAME = MuslimCalendar;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalender;
+				PRODUCT_NAME = MuslimCalender;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		8E02FBAD2839161500A84B55 /* Debug */ = {
+		8E881844283926F8004AA721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -601,11 +601,11 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "MuslimCalendar (iOS)";
+				TEST_TARGET_NAME = "MuslimCalender (iOS)";
 			};
 			name = Debug;
 		};
-		8E02FBAE2839161500A84B55 /* Release */ = {
+		8E881845283926F8004AA721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -621,12 +621,12 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "MuslimCalendar (iOS)";
+				TEST_TARGET_NAME = "MuslimCalender (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		8E02FBB02839161500A84B55 /* Debug */ = {
+		8E881847283926F8004AA721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -641,11 +641,11 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "MuslimCalendar (macOS)";
+				TEST_TARGET_NAME = "MuslimCalender (macOS)";
 			};
 			name = Debug;
 		};
-		8E02FBB12839161500A84B55 /* Release */ = {
+		8E881848283926F8004AA721 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -660,54 +660,54 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "MuslimCalendar (macOS)";
+				TEST_TARGET_NAME = "MuslimCalender (macOS)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8E02FB6D2839161300A84B55 /* Build configuration list for PBXProject "MuslimCalendar" */ = {
+		8E881804283926F7004AA721 /* Build configuration list for PBXProject "MuslimCalender" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8E02FBA42839161500A84B55 /* Debug */,
-				8E02FBA52839161500A84B55 /* Release */,
+				8E88183B283926F8004AA721 /* Debug */,
+				8E88183C283926F8004AA721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E02FBA62839161500A84B55 /* Build configuration list for PBXNativeTarget "MuslimCalendar (iOS)" */ = {
+		8E88183D283926F8004AA721 /* Build configuration list for PBXNativeTarget "MuslimCalender (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8E02FBA72839161500A84B55 /* Debug */,
-				8E02FBA82839161500A84B55 /* Release */,
+				8E88183E283926F8004AA721 /* Debug */,
+				8E88183F283926F8004AA721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E02FBA92839161500A84B55 /* Build configuration list for PBXNativeTarget "MuslimCalendar (macOS)" */ = {
+		8E881840283926F8004AA721 /* Build configuration list for PBXNativeTarget "MuslimCalender (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8E02FBAA2839161500A84B55 /* Debug */,
-				8E02FBAB2839161500A84B55 /* Release */,
+				8E881841283926F8004AA721 /* Debug */,
+				8E881842283926F8004AA721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E02FBAC2839161500A84B55 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+		8E881843283926F8004AA721 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8E02FBAD2839161500A84B55 /* Debug */,
-				8E02FBAE2839161500A84B55 /* Release */,
+				8E881844283926F8004AA721 /* Debug */,
+				8E881845283926F8004AA721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E02FBAF2839161500A84B55 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+		8E881846283926F8004AA721 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8E02FBB02839161500A84B55 /* Debug */,
-				8E02FBB12839161500A84B55 /* Release */,
+				8E881847283926F8004AA721 /* Debug */,
+				8E881848283926F8004AA721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -715,17 +715,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8E02FB6F2839161300A84B55 /* MuslimCalendar.xcdatamodeld */ = {
+		8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8E02FB702839161300A84B55 /* Shared.xcdatamodel */,
+				8E881807283926F8004AA721 /* Shared.xcdatamodel */,
 			);
-			currentVersion = 8E02FB702839161300A84B55 /* Shared.xcdatamodel */;
-			path = MuslimCalendar.xcdatamodeld;
+			currentVersion = 8E881807283926F8004AA721 /* Shared.xcdatamodel */;
+			path = MuslimCalender.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = 8E02FB6A2839161300A84B55 /* Project object */;
+	rootObject = 8E881801283926F7004AA721 /* Project object */;
 }
