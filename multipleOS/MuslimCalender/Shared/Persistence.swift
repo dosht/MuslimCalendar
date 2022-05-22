@@ -8,7 +8,25 @@
 import CoreData
 
 struct PersistenceController {
-    static let shared = PersistenceController()
+    static let shared: PersistenceController = {
+        let result = PersistenceController()
+        if let count = try? result.container.viewContext.count(for: NSFetchRequest(entityName: "Rule")) {
+            if count > 0 {
+                return result
+            }
+        }
+        var i: Int64 = 0
+        for p in PrayerName.allCases {
+            let viewContext = result.container.viewContext
+            let rule = Rule(context: viewContext)
+            rule.name = p.rawValue
+            rule.timeInterval = 0
+            rule.duration = 60*30
+            rule.id = i
+            i += 1
+        }
+        return result
+    }()
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
