@@ -19,9 +19,8 @@ struct ContentView: View {
             GeometryReader { geo in
                 CalendarDisplayView(geo: geo, viewModel: viewModel)
             }
-            if viewModel.willAddEvent {
-                AddEventViiew(viewModel: viewModel)
-            }
+        }.sheet(isPresented: $viewModel.willAddEvent) {
+            AddEventViiew(viewModel: viewModel)
         }
     }
 }
@@ -71,19 +70,19 @@ struct AddEventViiew: View {
                         Text("Before / After")
                     }
                     Divider()
-                    HStack {
-                        Button(action: cancel) {
-                            Label("Cancel", systemImage: "clear")
-                        }
-                        .buttonStyle(.bordered)
-                        .foregroundColor(.red)
-                        Spacer()
-                        Button(action: save) {
-                            Label("Save", systemImage: "square.and.arrow.down.fill")
-                        }
-                        .buttonStyle(.bordered)
-                        .foregroundColor(.blue)
-                    }
+//                    HStack {
+//                        Button(action: cancel) {
+//                            Label("Cancel", systemImage: "clear")
+//                        }
+//                        .buttonStyle(.bordered)
+//                        .foregroundColor(.red)
+//                        Spacer()
+//                        Button(action: save) {
+//                            Label("Save", systemImage: "square.and.arrow.down.fill")
+//                        }
+//                        .buttonStyle(.bordered)
+//                        .foregroundColor(.blue)
+//                    }
                     Divider()
                     HStack {
                         Button(action: delete) {
@@ -93,6 +92,14 @@ struct AddEventViiew: View {
                         .foregroundColor(.red)
                     }
                 }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", action: cancel)
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Done", action: save)
             }
         }
     }

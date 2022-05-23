@@ -13,8 +13,8 @@ struct MuslimCalenderApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            RulesView()
+//            PlanView()
+            ScheduleView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

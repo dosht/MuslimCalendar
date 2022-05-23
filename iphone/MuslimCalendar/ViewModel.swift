@@ -31,7 +31,8 @@ class ViewModel: ObservableObject {
     }
     
     var willAddEvent: Bool {
-        chosenEvent != nil
+        get { chosenEvent != nil }
+        set { if newValue == false { chosenEvent = nil } }
     }
     
     // MARK: Intent(s)

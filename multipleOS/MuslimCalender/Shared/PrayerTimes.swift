@@ -20,6 +20,20 @@ enum PrayerName: String, CaseIterable {
          isha = "Isha"
 }
 
+extension PrayerName: Identifiable {
+    var id: RawValue { rawValue }
+    var intValue: Int16 {
+        switch self {
+        case .fajr: return 0
+        case .sunrise: return 1
+        case .dhur: return 2
+        case .asr: return 3
+        case .maghrib: return 4
+        case .isha: return 5
+        }
+    }
+}
+
 struct Prayer {
     var params: CalculationParameters
     let adhanPrayerTimes: PrayerTimes
