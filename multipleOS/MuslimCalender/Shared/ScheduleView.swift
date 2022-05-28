@@ -22,38 +22,36 @@ struct ScheduleView: View {
                         DaysView(day: "Sat", geo: geo)
                     }
                     List {
-        //                Section(header: Text("Fajr events")) {
-        //                    Text("Quran")
-        //                    Text("Fajr Prayer")
-        //                    Text("Zikr")
-        //                }
-        //                Section(header: Text("Sunrise events")) {
-        //                    Text("Sunrise")
-        //                }
-        //
-                        Section(header: Text("Fajr")) {
-//                        PrayerTimeView(prayerName: "Fajr")
-                            //.font(font(from: geo.size))
-                        CardView(title: "Fajr Prayer")
-                        CardView(title: "Quran")
-                            CardView(title: "Zikr")
-                        }
+//                        DisclosureGroup("Fajr") {
+                        CardView(title: "Tahajud")
+//                            Section(header: Text("Fajr")) {
+                            PrayerTimeView(prayerName: "Fajr 4:31 AM")
+                                //.font(font(from: geo.size))
+                            CardView(title: "Fajr Prayer")
+                            CardView(title: "Quran")
+//                            CardView(title: "Zikr")
+//                            }
+//                        }
+                        
                         Section(header: Text("Sunrise ☀️")) {
-//                        PrayerTimeView(prayerName: "Sunrise ☀️")
+
                         CardView(title: "Sport")
                         }
                         AvailableTimeView(availableTime: 5)
                         
                         Section(header: Text("Duhr")) {
+                            AvailableTimeView(availableTime: 4)
+                        }
+                        Section(header: Text("Asr")){
                             AvailableTimeView(availableTime: 3)
                         }
-//                        PrayerTimeView(prayerName: "Dhur")
-//                        PrayerTimeView(prayerName: "Asr")
-//                        PrayerTimeView(prayerName: "Maghrib")
-//                        PrayerTimeView(prayerName: "Isha")
-                        
-//                        }
-                    }.listStyle(.inset)
+                        Section(header: Text("Maghrib")){
+                            AvailableTimeView(availableTime: 1)
+                        }
+                        Section(header: Text("Isha")){
+                            AvailableTimeView(availableTime: 1)
+                        }
+                    }.listStyle(.plain)
                 }.navigationTitle(Text("Title"))
             }
         }
@@ -94,13 +92,13 @@ struct CardView: View {
     
     var body: some View {
         HStack {
-            RoundedRectangle(cornerRadius: 10, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
+            RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.headline)
                 Spacer()
                 HStack(spacing: 4) {
-                    Label("4", systemImage: "person.3").foregroundColor(.primary)
+                    Label("starts 30 min after", systemImage: "person.3").foregroundColor(.primary)
                     Spacer()
                     Label("30", systemImage: "clock")
                         .labelStyle(.trailingIcon)
@@ -109,8 +107,10 @@ struct CardView: View {
                 .font(.caption)
             }
             .padding()
-//            .background(.white)
         }
+//        .background(.mint)
+        .listRowInsets(.init(top: 0, leading: 15, bottom: 0, trailing: 10))
+        .listRowSeparator(.hidden)
     }
 }
 
@@ -131,14 +131,23 @@ struct AvailableTimeView: View {
             Label("", systemImage: "plus.circle.fill")
                 .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
                 .font(.title)
-        }.padding(20).background(.regularMaterial)
+        }.padding(30).background(.regularMaterial)
+            .listRowSeparator(.hidden)
+            .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+
     }
 }
 
 struct PrayerTimeView: View {
     let prayerName: String
     var body: some View {
-        Text(prayerName)
+//        ZStack {
+            
+            Text(prayerName)
+                .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 0))
+                .listRowSeparator(.hidden)
+                .foregroundColor(.gray)
+//        }
     }
 }
 
@@ -152,7 +161,7 @@ struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ScheduleView()
-                .previewInterfaceOrientation(.landscapeLeft)
+                .previewInterfaceOrientation(.portrait)
             ScheduleView()
                 .previewInterfaceOrientation(.portraitUpsideDown).preferredColorScheme(.dark)
         }
