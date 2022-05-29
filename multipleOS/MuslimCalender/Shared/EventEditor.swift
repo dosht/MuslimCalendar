@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EventEditor: View {
     @Binding var isEditing: Bool
+    var isSavedEvent: Bool
 
     @State var eventTitle: String = ""
     @State var duration = Duration(minutes: 30)
@@ -22,12 +23,15 @@ struct EventEditor: View {
         VStack(spacing: 0) {
             // Toolbar with Done button
             ZStack {
-                Text("Edit Event").font(.headline).padding()
+                Text("\(isSavedEvent ? "New" : "Edit") Event").font(.headline).padding()
                 HStack {
+                    Button(action: {
+                        self.isEditing = false
+                    }, label: { Text("Cancel") }).padding()
                     Spacer()
                     Button(action: {
                         self.isEditing = false
-                    }, label: { Text("Done") }).padding()
+                    }, label: { Text(isSavedEvent ? "Done" : "Add") }).padding()
                 }
             }
             Divider()
@@ -85,6 +89,11 @@ struct EventEditor: View {
                         }
                     }
                 }
+            }
+            if isSavedEvent {
+                Button(action: {
+                    self.isEditing = false
+                }, label: { Text("Delete") }).padding().foregroundColor(.red)
             }
         }
     }
@@ -166,6 +175,7 @@ struct EventEditor_Previews: PreviewProvider {
     @State static var isEditing: Bool = false
     
     static var previews: some View {
-        EventEditor(isEditing: $isEditing)
+        EventEditor(isEditing: $isEditing, isSavedEvent: true)
+            .previewInterfaceOrientation(.portrait)
     }
 }

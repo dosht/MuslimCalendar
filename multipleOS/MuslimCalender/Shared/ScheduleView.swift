@@ -130,16 +130,25 @@ struct TrailingIconLabelStyle: LabelStyle {
 
 struct AvailableTimeView: View {
     let availableTime: Int
+    @State var addNew: Bool = false
+    
     var body: some View {
         GeometryReader { geo in
             Text("\(availableTime) Hours").frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            Label("", systemImage: "plus.circle.fill")
-                .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
-                .font(.title)
-        }.padding(30).background(.regularMaterial)
-            .listRowSeparator(.hidden)
-            .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
-
+            Button(action: {
+                addNew = true
+            }, label: {
+                Label("", systemImage: "plus.circle.fill")
+                    .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+                    .font(.title)
+            })
+        }
+        .padding(30).background(.regularMaterial)
+        .listRowSeparator(.hidden)
+        .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+        .sheet(isPresented: $addNew) {
+            EventEditor(isEditing: $addNew, isSavedEvent: false)
+        }
     }
 }
 
@@ -166,7 +175,7 @@ struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ScheduleView()
-                .previewInterfaceOrientation(.portraitUpsideDown)
+                .previewInterfaceOrientation(.portrait)
             ScheduleView()
                 .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
         }

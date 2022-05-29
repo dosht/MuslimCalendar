@@ -35,7 +35,7 @@ struct EventView: View {
             }
         }
         .sheet(isPresented: $isEditing) {
-            EventEditor(isEditing: $isEditing)
+            EventEditor(isEditing: $isEditing, isSavedEvent: true)
             
             
         }
