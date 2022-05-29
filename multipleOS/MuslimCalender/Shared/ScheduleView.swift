@@ -51,9 +51,12 @@ struct ScheduleView: View {
                         Section(header: Text("Isha")){
                             AvailableTimeView(availableTime: 1)
                         }
-                    }.listStyle(.plain)
-                }.navigationTitle(Text("Title"))
+                    }
+                    .listStyle(.plain)
+                }
             }
+            .navigationTitle(Text("Day Schedule"))
+            .navigationViewStyle(.stack)
         }
     }
     private func font(from size: CGSize) -> Font{
@@ -91,26 +94,28 @@ struct CardView: View {
     var title: String
     
     var body: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.headline)
-                Spacer()
-                HStack(spacing: 4) {
-                    Label("starts 30 min after", systemImage: "person.3").foregroundColor(.primary)
+        NavigationLink(destination: EventView(title: title)) {
+            HStack {
+                RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.headline)
                     Spacer()
-                    Label("30", systemImage: "clock")
-                        .labelStyle(.trailingIcon)
-                        
+                    HStack(spacing: 4) {
+                        Label("starts 30 min after", systemImage: "person.3").foregroundColor(.primary)
+                        Spacer()
+                        Label("30", systemImage: "clock")
+                            .labelStyle(.trailingIcon)
+                            
+                    }
+                    .font(.caption)
                 }
-                .font(.caption)
+                .padding()
             }
-            .padding()
         }
 //        .background(.mint)
-        .listRowInsets(.init(top: 0, leading: 15, bottom: 0, trailing: 10))
-        .listRowSeparator(.hidden)
+//        .listRowInsets(.init(top: 0, leading: 15, bottom: 0, trailing: 10))
+//        .listRowSeparator(.hidden)
     }
 }
 
@@ -161,9 +166,9 @@ struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ScheduleView()
-                .previewInterfaceOrientation(.portrait)
+                .previewInterfaceOrientation(.portraitUpsideDown)
             ScheduleView()
-                .previewInterfaceOrientation(.portraitUpsideDown).preferredColorScheme(.dark)
+                .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
         }
     }
 }

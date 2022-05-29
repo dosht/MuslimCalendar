@@ -83,7 +83,7 @@ struct PlanView_Previews: PreviewProvider {
     static var previews: some View {
         PlanView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.portrait)
         EventsView(prayerName: PrayerName.fajr)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
