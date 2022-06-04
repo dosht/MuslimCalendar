@@ -10,7 +10,6 @@ import CoreData
 struct PersistenceController {
     static let shared: PersistenceController = {
         let result = PersistenceController()
-//        initPrayerEvents(result.container.viewContext)
         initEvents(result.container.viewContext)
         return result
     }()
@@ -36,27 +35,9 @@ struct PersistenceController {
         }
     }
     
-    static func initPrayerEvents(_ context: NSManagedObjectContext) {
-        if context.isEmpty(of: "Event") {
-            for p in TimeName.allCases {
-                let event = Event(context: context)
-                event.title = p.rawValue
-                event.reference = p.intValue
-                event.timeInterval = 0
-                event.duration = 30*60
-                do {
-                    try context.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-            }
-        }
-    }
-    
+  
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
-//        initPrayerEvents(result.container.viewContext)
         initEvents(result.container.viewContext)
         return result
     }()
