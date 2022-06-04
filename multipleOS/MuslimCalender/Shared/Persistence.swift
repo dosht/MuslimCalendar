@@ -10,13 +10,31 @@ import CoreData
 struct PersistenceController {
     static let shared: PersistenceController = {
         let result = PersistenceController()
-        initPrayerEvents(result.container.viewContext)
+//        initPrayerEvents(result.container.viewContext)
+        initEvents(result.container.viewContext)
         return result
     }()
 
+    static func initEvents(_ context: NSManagedObjectContext) {
+        if context.isEmpty(of: "RelativeEvent") {
+            RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .midnight).endAt(-30*60, relativeTo: .fajr)
+            RelativeEvent.create(context, "before fajr").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
+            RelativeEvent.create(context, "after fajr").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
+            RelativeEvent.create(context, "between fajr and sunrise").startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
+            RelativeEvent.create(context, "between fajr and after sunrise").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .sunrise)
+            RelativeEvent.create(context).isAllocatable(true).startAt(30*60, relativeTo: .sunrise).endAt(0, relativeTo: .dhur)
+            do {
+                try context.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
     static func initPrayerEvents(_ context: NSManagedObjectContext) {
         if context.isEmpty(of: "Event") {
-            for p in PrayerName.allCases {
+            for p in TimeName.allCases {
                 let event = Event(context: context)
                 event.title = p.rawValue
                 event.reference = p.intValue
@@ -34,7 +52,8 @@ struct PersistenceController {
     
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
-        initPrayerEvents(result.container.viewContext)
+//        initPrayerEvents(result.container.viewContext)
+        initEvents(result.container.viewContext)
         return result
     }()
 

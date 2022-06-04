@@ -6,8 +6,21 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ScheduleView: View {
+//    @ObservedObject var viewModel = RelativeEventsViewModel()
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \RelativeEvent.startRelativeTo, ascending: true),
+            NSSortDescriptor(keyPath: \RelativeEvent.start, ascending: true)
+        ],
+        animation: .default)
+    var relativeEvents: FetchedResults<RelativeEvent>
+    var prayerCalculator: PrayerCalculator? = PrayerCalculator(
+        location: CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066), date: Date())
+    
     var body: some View {
         GeometryReader { geo in
             NavigationView {
@@ -22,35 +35,42 @@ struct ScheduleView: View {
                         DaysView(day: "Sat", geo: geo)
                     }
                     List {
-//                        DisclosureGroup("Fajr") {
-                        CardView(title: "Tahajud")
-//                            Section(header: Text("Fajr")) {
-                            PrayerTimeView(prayerName: "Fajr 4:31 AM")
-                                //.font(font(from: geo.size))
-                            CardView(title: "Fajr Prayer")
-                            CardView(title: "Quran")
-//                            CardView(title: "Zikr")
-//                            }
+                        ForEach(relativeEvents) { event in
+                            if event.isAllocatable {
+                                AvailableTimeView(availableTime: Int(event.duration(time: prayerCalculator!.time)/60/60))
+                            } else {
+                                CardView(title: event.title!)
+                            }
+                        }
+////                        DisclosureGroup("Fajr") {
+//                        CardView(title: "Tahajud")
+////                            Section(header: Text("Fajr")) {
+//                            PrayerTimeView(prayerName: "Fajr 4:31 AM")
+//                                //.font(font(from: geo.size))
+//                            CardView(title: "Fajr Prayer")
+//                            CardView(title: "Quran")
+////                            CardView(title: "Zikr")
+////                            }
+////                        }
+//
+//                        Section(header: Text("Sunrise ☀️")) {
+//
+//                        CardView(title: "Sport")
 //                        }
-                        
-                        Section(header: Text("Sunrise ☀️")) {
-
-                        CardView(title: "Sport")
-                        }
-                        AvailableTimeView(availableTime: 5)
-                        
-                        Section(header: Text("Duhr")) {
-                            AvailableTimeView(availableTime: 4)
-                        }
-                        Section(header: Text("Asr")){
-                            AvailableTimeView(availableTime: 3)
-                        }
-                        Section(header: Text("Maghrib")){
-                            AvailableTimeView(availableTime: 1)
-                        }
-                        Section(header: Text("Isha")){
-                            AvailableTimeView(availableTime: 1)
-                        }
+//                        AvailableTimeView(availableTime: 5)
+//
+//                        Section(header: Text("Duhr")) {
+//                            AvailableTimeView(availableTime: 4)
+//                        }
+//                        Section(header: Text("Asr")){
+//                            AvailableTimeView(availableTime: 3)
+//                        }
+//                        Section(header: Text("Maghrib")){
+//                            AvailableTimeView(availableTime: 1)
+//                        }
+//                        Section(header: Text("Isha")){
+//                            AvailableTimeView(availableTime: 1)
+//                        }
                     }
                     .listStyle(.plain)
                 }
@@ -172,12 +192,15 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 
 
 struct CalendarView_Previews: PreviewProvider {
+    static let viewContext = PersistenceController.preview.container.viewContext
     static var previews: some View {
         Group {
             ScheduleView()
                 .previewInterfaceOrientation(.portrait)
+                .environment(\.managedObjectContext, viewContext)
             ScheduleView()
                 .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
+                .environment(\.managedObjectContext, viewContext)
         }
     }
 }

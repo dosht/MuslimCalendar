@@ -20,6 +20,15 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="RelativeEvent" representedClassName="RelativeEvent" syncable="YES" codeGenerationType="class">
+        <attribute name="ekEventIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="end" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="endRelativeTo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isAllocatable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="start" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="startRelativeTo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Rule" representedClassName="Rule" syncable="YES" codeGenerationType="class">
         <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -32,6 +41,7 @@
         <element name="Item" positionX="-63" positionY="-18" width="128" height="58"/>
         <element name="PrayerParam" positionX="-299.015625" positionY="10.5703125" width="128" height="118"/>
         <element name="PrayerType" positionX="-544.7109375" positionY="-37.00390625" width="143.19140625" height="73"/>
+        <element name="RelativeEvent" positionX="-342" positionY="-54" width="128" height="134"/>
         <element name="Rule" positionX="-266.453125" positionY="-210.80078125" width="128" height="118"/>
     </elements>
 </model>

@@ -12,7 +12,7 @@ struct PlanView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(PrayerName.allCases) { name in
+                ForEach(TimeName.allCases) { name in
                     NavigationLink {
                         EventsView(prayerName: name)
                     } label: {
@@ -27,13 +27,13 @@ struct PlanView: View {
 }
 
 struct EventsView: View {
-    let prayerName: PrayerName
+    let prayerName: TimeName
     @State var showAddEvent: Bool = false
 
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest private var events: FetchedResults<Event>
     
-    init(prayerName: PrayerName) {
+    init(prayerName: TimeName) {
         self.prayerName = prayerName
         let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
         fetchRequest.sortDescriptors = [
@@ -84,7 +84,7 @@ struct PlanView_Previews: PreviewProvider {
         PlanView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .previewInterfaceOrientation(.portrait)
-        EventsView(prayerName: PrayerName.fajr)
+        EventsView(prayerName: TimeName.fajr)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

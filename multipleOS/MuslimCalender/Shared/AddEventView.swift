@@ -12,7 +12,7 @@ struct AddEventView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     
-    let prayerReference: PrayerName
+    let prayerReference: TimeName
     
     @State var title: String = ""
     @State var isAfter: Bool = true

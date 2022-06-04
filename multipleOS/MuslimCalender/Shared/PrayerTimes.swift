@@ -11,8 +11,9 @@ import CoreData
 
 import Adhan
 
-enum PrayerName: String, CaseIterable {
-    case fajr = "Fajr",
+enum TimeName: String, CaseIterable {
+    case midnight = "midnight",
+         fajr = "Fajr",
          sunrise = "Sunrise ☀️",
          dhur = "Dhur",
          asr = "Asr",
@@ -20,21 +21,22 @@ enum PrayerName: String, CaseIterable {
          isha = "Isha"
 }
 
-extension PrayerName: Identifiable {
+extension TimeName: Identifiable {
     var id: RawValue { rawValue }
     var intValue: Int16 {
         switch self {
-        case .fajr: return 0
-        case .sunrise: return 1
-        case .dhur: return 2
-        case .asr: return 3
-        case .maghrib: return 4
-        case .isha: return 5
+        case .midnight: return 0
+        case .fajr: return 1
+        case .sunrise: return 2
+        case .dhur: return 3
+        case .asr: return 4
+        case .maghrib: return 5
+        case .isha: return 6
         }
     }
 }
 
-struct Prayer {
+struct PrayerCalculator {
     var params: CalculationParameters
     let adhanPrayerTimes: PrayerTimes
     let coordinates: Coordinates
@@ -54,9 +56,29 @@ struct Prayer {
         }
     }
     
-    var rules: [(PrayerName, Date)] {
+    func time(of timeName: TimeName) -> Date {
+        switch timeName {
+        case .midnight:
+            return Date().startOfDay
+        case .fajr:
+            return adhanPrayerTimes.fajr
+        case .sunrise:
+            return adhanPrayerTimes.sunrise
+        case .dhur:
+            return adhanPrayerTimes.dhuhr
+        case .asr:
+            return adhanPrayerTimes.asr
+        case .maghrib:
+            return adhanPrayerTimes.maghrib
+        case .isha:
+            return adhanPrayerTimes.isha
+        }
+    }
+    
+    var rules: [(TimeName, Date)] {
         get {
             return [
+                //TODO: Add midnight
                 (.fajr, adhanPrayerTimes.fajr),
                 (.sunrise, adhanPrayerTimes.sunrise),
                 (.dhur, adhanPrayerTimes.dhuhr),
@@ -65,5 +87,17 @@ struct Prayer {
                 (.isha, adhanPrayerTimes.isha)
             ]
         }
+    }
+}
+
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+    }
+    var endOfDay: Date {
+        return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+    var tomorrow: Date {
+        return Date(timeInterval: 1, since: endOfDay)
     }
 }

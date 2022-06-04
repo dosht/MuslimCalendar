@@ -11,10 +11,15 @@
 		8E109A8B283BA5A400F17699 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E109A89283BA5A400F17699 /* ScheduleView.swift */; };
 		8E109A8E283BD1DE00F17699 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E109A8D283BD1DE00F17699 /* Adhan */; };
 		8E109A91283BD1FF00F17699 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E109A90283BD1FF00F17699 /* Adhan */; };
+		8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */; };
 		8E6E98E12842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
 		8E6E98E22842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
 		8E6E98E428433D62004A2331 /* EventEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E328433D62004A2331 /* EventEditor.swift */; };
 		8E6E98E528433D62004A2331 /* EventEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E328433D62004A2331 /* EventEditor.swift */; };
+		8E7CA019284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */; };
+		8E7CA01A284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */; };
+		8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */; };
+		8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */; };
 		8E881822283926F8004AA721 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881821283926F8004AA721 /* Tests_iOS.swift */; };
 		8E881824283926F8004AA721 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881823283926F8004AA721 /* Tests_iOSLaunchTests.swift */; };
 		8E88182E283926F8004AA721 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88182D283926F8004AA721 /* Tests_macOS.swift */; };
@@ -41,6 +46,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8E5ECC5E284B511700E9B369 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E881801283926F7004AA721 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E88180F283926F8004AA721;
+			remoteInfo = "MuslimCalender (iOS)";
+		};
 		8E88181E283926F8004AA721 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8E881801283926F7004AA721 /* Project object */;
@@ -59,8 +71,12 @@
 
 /* Begin PBXFileReference section */
 		8E109A89283BA5A400F17699 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		8E5ECC5A284B511700E9B369 /* Tests Shared.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests Shared.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_RelativeEvent.swift; sourceTree = "<group>"; };
 		8E6E98E02842053D004A2331 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		8E6E98E328433D62004A2331 /* EventEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditor.swift; sourceTree = "<group>"; };
+		8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeEvent+PrayerTimes.swift"; sourceTree = "<group>"; };
+		8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeEvent+ViewModel.swift"; sourceTree = "<group>"; };
 		8E881807283926F8004AA721 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		8E881808283926F8004AA721 /* MuslimCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalenderApp.swift; sourceTree = "<group>"; };
 		8E881809283926F8004AA721 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +98,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8E5ECC57284B511700E9B369 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E88180D283926F8004AA721 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,6 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E5ECC5B284B511700E9B369 /* Tests Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */,
+			);
+			path = "Tests Shared";
+			sourceTree = "<group>";
+		};
 		8E881800283926F7004AA721 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +154,7 @@
 				8E881817283926F8004AA721 /* macOS */,
 				8E881820283926F8004AA721 /* Tests iOS */,
 				8E88182C283926F8004AA721 /* Tests macOS */,
+				8E5ECC5B284B511700E9B369 /* Tests Shared */,
 				8E881811283926F8004AA721 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -142,6 +174,8 @@
 				8E109A89283BA5A400F17699 /* ScheduleView.swift */,
 				8E6E98E02842053D004A2331 /* EventView.swift */,
 				8E6E98E328433D62004A2331 /* EventEditor.swift */,
+				8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */,
+				8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -153,6 +187,7 @@
 				8E881816283926F8004AA721 /* MuslimCalender.app */,
 				8E88181D283926F8004AA721 /* Tests iOS.xctest */,
 				8E881829283926F8004AA721 /* Tests macOS.xctest */,
+				8E5ECC5A284B511700E9B369 /* Tests Shared.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +221,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8E5ECC59284B511700E9B369 /* Tests Shared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E5ECC60284B511700E9B369 /* Build configuration list for PBXNativeTarget "Tests Shared" */;
+			buildPhases = (
+				8E5ECC56284B511700E9B369 /* Sources */,
+				8E5ECC57284B511700E9B369 /* Frameworks */,
+				8E5ECC58284B511700E9B369 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E5ECC5F284B511700E9B369 /* PBXTargetDependency */,
+			);
+			name = "Tests Shared";
+			productName = "Tests Shared";
+			productReference = 8E5ECC5A284B511700E9B369 /* Tests Shared.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8E88180F283926F8004AA721 /* MuslimCalender (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E88183D283926F8004AA721 /* Build configuration list for PBXNativeTarget "MuslimCalender (iOS)" */;
@@ -273,6 +326,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					8E5ECC59284B511700E9B369 = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 8E88180F283926F8004AA721;
+					};
 					8E88180F283926F8004AA721 = {
 						CreatedOnToolsVersion = 13.4;
 					};
@@ -311,11 +368,19 @@
 				8E881815283926F8004AA721 /* MuslimCalender (macOS) */,
 				8E88181C283926F8004AA721 /* Tests iOS */,
 				8E881828283926F8004AA721 /* Tests macOS */,
+				8E5ECC59284B511700E9B369 /* Tests Shared */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8E5ECC58284B511700E9B369 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E88180E283926F8004AA721 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,12 +414,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8E5ECC56284B511700E9B369 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E88180C283926F8004AA721 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
 				8E88184D283955CD004AA721 /* PrayerTimes.swift in Sources */,
+				8E7CA019284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
 				8E88184A28394D5D004AA721 /* RulesView.swift in Sources */,
 				8E881856283A98CE004AA721 /* AddEventView.swift in Sources */,
 				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
@@ -362,6 +436,7 @@
 				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
 				8E881853283A8906004AA721 /* PlanView.swift in Sources */,
 				8E6E98E428433D62004A2331 /* EventEditor.swift in Sources */,
+				8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E881835283926F8004AA721 /* ContentView.swift in Sources */,
 				8E6E98E12842053D004A2331 /* EventView.swift in Sources */,
 			);
@@ -373,6 +448,7 @@
 			files = (
 				8E881834283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
 				8E88184E283955CD004AA721 /* PrayerTimes.swift in Sources */,
+				8E7CA01A284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
 				8E88184B28394D5D004AA721 /* RulesView.swift in Sources */,
 				8E881857283A98CE004AA721 /* AddEventView.swift in Sources */,
 				8E881838283926F8004AA721 /* Persistence.swift in Sources */,
@@ -380,6 +456,7 @@
 				8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
 				8E881854283A8906004AA721 /* PlanView.swift in Sources */,
 				8E6E98E528433D62004A2331 /* EventEditor.swift in Sources */,
+				8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E881836283926F8004AA721 /* ContentView.swift in Sources */,
 				8E6E98E22842053D004A2331 /* EventView.swift in Sources */,
 			);
@@ -406,6 +483,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8E5ECC5F284B511700E9B369 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E88180F283926F8004AA721 /* MuslimCalender (iOS) */;
+			targetProxy = 8E5ECC5E284B511700E9B369 /* PBXContainerItemProxy */;
+		};
 		8E88181F283926F8004AA721 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E88180F283926F8004AA721 /* MuslimCalender (iOS) */;
@@ -419,6 +501,47 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8E5ECC61284B511700E9B369 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "team.aiops.Tests-Shared";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MuslimCalender.app/MuslimCalender";
+			};
+			name = Debug;
+		};
+		8E5ECC62284B511700E9B369 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "team.aiops.Tests-Shared";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MuslimCalender.app/MuslimCalender";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		8E88183B283926F8004AA721 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -727,6 +850,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8E5ECC60284B511700E9B369 /* Build configuration list for PBXNativeTarget "Tests Shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E5ECC61284B511700E9B369 /* Debug */,
+				8E5ECC62284B511700E9B369 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8E881804283926F7004AA721 /* Build configuration list for PBXProject "MuslimCalender" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
