@@ -40,6 +40,10 @@ class RelativeEventsViewModel: ObservableObject {
         }
     }
     
+    func deleteEvent(indexSet: IndexSet) {
+        
+    }
+    
     func duration(event: RelativeEvent) -> Double {
         let prayerCalculator: PrayerCalculator? = PrayerCalculator(location: location, date: Date())
         return event.duration(time: prayerCalculator!.time)
@@ -60,5 +64,37 @@ extension TimeInterval {
             return nil
         }
         return value
+    }
+    
+    var timeIntervalText: String {
+        var result = ""
+        if let hour = hour, let minute = minute {
+            result = "\(abs(hour)) hour, \(abs(minute)) minute"
+        }
+        else if let hour = hour {
+            result = "\(abs(hour)) hour"
+        }
+        else if let minute = minute {
+            result = "\(abs(minute)) minute"
+        }
+        return result
+        
+    }
+    
+}
+
+extension RelativeEvent {
+    var isAfter: Bool {
+        start >= 0
+    }
+    
+    var startText: String {
+        var result = start.timeIntervalText
+        if result.isEmpty {
+            result = "on time of"
+        } else {
+            result += isAfter ? " after" : " before"
+        }
+        return result
     }
 }

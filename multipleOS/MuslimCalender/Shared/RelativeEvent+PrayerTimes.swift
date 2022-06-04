@@ -53,7 +53,4 @@ extension RelativeEvent {
         )
     }
     
-    var isAfter: Bool {
-        start >= 0
-    }
 }

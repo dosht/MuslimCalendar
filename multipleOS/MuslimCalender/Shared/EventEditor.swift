@@ -23,7 +23,7 @@ struct EventEditor: View {
         VStack(spacing: 0) {
             // Toolbar with Done button
             ZStack {
-                Text("\(isSavedEvent ? "New" : "Edit") Event").font(.headline).padding()
+                Text("\(isSavedEvent ? "Edit" : "New") Event").font(.headline).padding()
                 HStack {
                     Button(action: {
                         self.isEditing = false

@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct EventView: View {
-    @State private var isEditing: Bool = false
+    var event: RelativeEvent
+    @ObservedObject var viewModel: RelativeEventsViewModel
     
-    let title: String
+    @State private var isEditing: Bool = false
     
     var body: some View {
         List {
             Section {
-                Text("30 minutes after Fajr")
-                    .padding(.top)
-                Text("Duration: 30 minutes")
+                Text("\(event.startText) \(event.startTimeName.rawValue)").padding(.top)
+                Text("Duration: \(viewModel.duration(event: event).timeIntervalText)")
                 Text("Repeats daily")
             }
             .listRowSeparator(.hidden)
@@ -39,7 +40,7 @@ struct EventView: View {
             
             
         }
-        .navigationTitle(title)
+        .navigationTitle(event.title!)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { isEditing.toggle() }) {
@@ -51,7 +52,12 @@ struct EventView: View {
 }
 
 struct EventView_Previews: PreviewProvider {
+    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+    static let context = PersistenceController.preview.container.viewContext
+    static let viewModel = RelativeEventsViewModel(context: context, location: location)
+    static let event = RelativeEvent.create(context, "Zikr").startAt(10*60, relativeTo: .fajr).endAt(20*60, relativeTo: .fajr)
+    
     static var previews: some View {
-        EventView(title: "test")
+        EventView(event: event, viewModel: viewModel)
     }
 }

@@ -40,12 +40,14 @@ struct ScheduleView: View {
                                 ForEach(viewModel.relativeEvents.filter{ $0.startTimeName == time }) { event in
                                     if event.isAllocatable {
                                         AvailableTimeView(availableTime: viewModel.duration(event: event))
+                                            .deleteDisabled(true)
                                     } else {
                                         CardView(event: event, viewModel: viewModel)
                                     }
                                 }
                             }
                         }
+                        .onDelete(perform: viewModel.deleteEvent)
                     }
                     .listStyle(.plain)
                 }
@@ -93,7 +95,7 @@ struct CardView: View {
     @ObservedObject var viewModel: RelativeEventsViewModel
     
     var body: some View {
-        NavigationLink(destination: EventView(title: event.title!)) {
+        NavigationLink(destination: EventView(event: event, viewModel: viewModel)) {
             HStack {
                 RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
@@ -101,15 +103,9 @@ struct CardView: View {
                         .font(.headline)
                     Spacer()
                     HStack(spacing: 4) {
-                        if let hour = event.start.hour {
-                            Label("starts \(abs(hour)) hour", systemImage: "person.3").foregroundColor(.primary)
-                        }
-                        if let minute = event.start.minute {
-                            Label("starts \(abs(minute)) min", systemImage: "person.3").foregroundColor(.primary)
-                        }
-                        Text(event.isAfter ? "after" : "before")
+                        Label("starts \(event.startText)", systemImage: "person.3").foregroundColor(.primary)
                         Spacer()
-                        Label("\(viewModel.duration(event: event).minute ?? 0)", systemImage: "clock")
+                        Label(viewModel.duration(event: event).timeIntervalText, systemImage: "clock")
                             .labelStyle(.trailingIcon)
                             
                     }
@@ -168,7 +164,6 @@ struct PrayerTimeView: View {
     let prayerName: String
     var body: some View {
 //        ZStack {
-            
             Text(prayerName)
                 .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 0))
                 .listRowSeparator(.hidden)

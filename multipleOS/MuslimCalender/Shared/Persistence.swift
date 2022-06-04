@@ -17,13 +17,13 @@ struct PersistenceController {
 
     static func initEvents(_ context: NSManagedObjectContext) {
         if context.isEmpty(of: "RelativeEvent") {
-            RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .midnight).endAt(-30*60, relativeTo: .fajr)
+            RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .midnight).endAt(0, relativeTo: .fajr)
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-//            RelativeEvent.create(context, "before fajr").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
+            RelativeEvent.create(context, "before fajr").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
 //            RelativeEvent.create(context, "after fajr").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
 //            RelativeEvent.create(context, "between fajr and sunrise").startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
 //            RelativeEvent.create(context, "between fajr and after sunrise").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .sunrise)
-            RelativeEvent.create(context).isAllocatable(true).startAt(30*60, relativeTo: .sunrise).endAt(0, relativeTo: .dhur)
+            RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .sunrise).endAt(0, relativeTo: .dhur)
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .dhur).endAt(0, relativeTo: .asr)
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .asr).endAt(0, relativeTo: .maghrib)
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .maghrib).endAt(0, relativeTo: .isha)
