@@ -28,21 +28,13 @@
 		8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */; };
 		8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881808283926F8004AA721 /* MuslimCalenderApp.swift */; };
 		8E881834283926F8004AA721 /* MuslimCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881808283926F8004AA721 /* MuslimCalenderApp.swift */; };
-		8E881835283926F8004AA721 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881809283926F8004AA721 /* ContentView.swift */; };
-		8E881836283926F8004AA721 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881809283926F8004AA721 /* ContentView.swift */; };
 		8E881837283926F8004AA721 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88180A283926F8004AA721 /* Persistence.swift */; };
 		8E881838283926F8004AA721 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88180A283926F8004AA721 /* Persistence.swift */; };
 		8E881839283926F8004AA721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E88180B283926F8004AA721 /* Assets.xcassets */; };
 		8E88183A283926F8004AA721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E88180B283926F8004AA721 /* Assets.xcassets */; };
-		8E88184A28394D5D004AA721 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184928394D5D004AA721 /* RulesView.swift */; };
-		8E88184B28394D5D004AA721 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184928394D5D004AA721 /* RulesView.swift */; };
 		8E88184D283955CD004AA721 /* PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184C283955CC004AA721 /* PrayerTimes.swift */; };
 		8E88184E283955CD004AA721 /* PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184C283955CC004AA721 /* PrayerTimes.swift */; };
 		8E881851283964E7004AA721 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E881850283964E7004AA721 /* Adhan */; };
-		8E881853283A8906004AA721 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881852283A8905004AA721 /* PlanView.swift */; };
-		8E881854283A8906004AA721 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881852283A8905004AA721 /* PlanView.swift */; };
-		8E881856283A98CE004AA721 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881855283A98CE004AA721 /* AddEventView.swift */; };
-		8E881857283A98CE004AA721 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881855283A98CE004AA721 /* AddEventView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +71,6 @@
 		8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeEvent+ViewModel.swift"; sourceTree = "<group>"; };
 		8E881807283926F8004AA721 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		8E881808283926F8004AA721 /* MuslimCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalenderApp.swift; sourceTree = "<group>"; };
-		8E881809283926F8004AA721 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8E88180A283926F8004AA721 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		8E88180B283926F8004AA721 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E881810283926F8004AA721 /* MuslimCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,10 +82,7 @@
 		8E881829283926F8004AA721 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E88182D283926F8004AA721 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		8E88182F283926F8004AA721 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
-		8E88184928394D5D004AA721 /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		8E88184C283955CC004AA721 /* PrayerTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimes.swift; sourceTree = "<group>"; };
-		8E881852283A8905004AA721 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
-		8E881855283A98CE004AA721 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,14 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				8E881808283926F8004AA721 /* MuslimCalenderApp.swift */,
-				8E881809283926F8004AA721 /* ContentView.swift */,
-				8E88184928394D5D004AA721 /* RulesView.swift */,
 				8E88180A283926F8004AA721 /* Persistence.swift */,
 				8E88180B283926F8004AA721 /* Assets.xcassets */,
 				8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */,
 				8E88184C283955CC004AA721 /* PrayerTimes.swift */,
-				8E881852283A8905004AA721 /* PlanView.swift */,
-				8E881855283A98CE004AA721 /* AddEventView.swift */,
 				8E109A89283BA5A400F17699 /* ScheduleView.swift */,
 				8E6E98E02842053D004A2331 /* EventView.swift */,
 				8E6E98E328433D62004A2331 /* EventEditor.swift */,
@@ -429,15 +413,11 @@
 				8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
 				8E88184D283955CD004AA721 /* PrayerTimes.swift in Sources */,
 				8E7CA019284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
-				8E88184A28394D5D004AA721 /* RulesView.swift in Sources */,
-				8E881856283A98CE004AA721 /* AddEventView.swift in Sources */,
 				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8A283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
-				8E881853283A8906004AA721 /* PlanView.swift in Sources */,
 				8E6E98E428433D62004A2331 /* EventEditor.swift in Sources */,
 				8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
-				8E881835283926F8004AA721 /* ContentView.swift in Sources */,
 				8E6E98E12842053D004A2331 /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,15 +429,11 @@
 				8E881834283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
 				8E88184E283955CD004AA721 /* PrayerTimes.swift in Sources */,
 				8E7CA01A284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
-				8E88184B28394D5D004AA721 /* RulesView.swift in Sources */,
-				8E881857283A98CE004AA721 /* AddEventView.swift in Sources */,
 				8E881838283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8B283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
-				8E881854283A8906004AA721 /* PlanView.swift in Sources */,
 				8E6E98E528433D62004A2331 /* EventEditor.swift in Sources */,
 				8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
-				8E881836283926F8004AA721 /* ContentView.swift in Sources */,
 				8E6E98E22842053D004A2331 /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

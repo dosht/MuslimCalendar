@@ -7,19 +7,19 @@
 
 import SwiftUI
 import CoreLocation
+import CoreData
+import Adhan
 
 struct ScheduleView: View {
-//    @ObservedObject var viewModel = RelativeEventsViewModel()
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \RelativeEvent.startRelativeTo, ascending: true),
-            NSSortDescriptor(keyPath: \RelativeEvent.start, ascending: true)
-        ],
-        animation: .default)
-    var relativeEvents: FetchedResults<RelativeEvent>
     var prayerCalculator: PrayerCalculator? = PrayerCalculator(
         location: CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066), date: Date())
+    
+    @ObservedObject private var viewModel: RelativeEventsViewModel
+    
+    init(context: NSManagedObjectContext, location: CLLocationCoordinate2D) {
+        self.viewModel = RelativeEventsViewModel(context: context, location: location)
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -35,48 +35,26 @@ struct ScheduleView: View {
                         DaysView(day: "Sat", geo: geo)
                     }
                     List {
-                        ForEach(relativeEvents) { event in
-                            if event.isAllocatable {
-                                AvailableTimeView(availableTime: Int(event.duration(time: prayerCalculator!.time)/60/60))
-                            } else {
-                                CardView(title: event.title!)
+                        ForEach(TimeName.allCases) { time in
+                            Section(time.rawValue) {
+                                ForEach(viewModel.relativeEvents.filter{ $0.startTimeName == time }) { event in
+                                    if event.isAllocatable {
+                                        AvailableTimeView(availableTime: viewModel.duration(event: event))
+                                    } else {
+                                        CardView(event: event, viewModel: viewModel)
+                                    }
+                                }
                             }
                         }
-////                        DisclosureGroup("Fajr") {
-//                        CardView(title: "Tahajud")
-////                            Section(header: Text("Fajr")) {
-//                            PrayerTimeView(prayerName: "Fajr 4:31 AM")
-//                                //.font(font(from: geo.size))
-//                            CardView(title: "Fajr Prayer")
-//                            CardView(title: "Quran")
-////                            CardView(title: "Zikr")
-////                            }
-////                        }
-//
-//                        Section(header: Text("Sunrise ☀️")) {
-//
-//                        CardView(title: "Sport")
-//                        }
-//                        AvailableTimeView(availableTime: 5)
-//
-//                        Section(header: Text("Duhr")) {
-//                            AvailableTimeView(availableTime: 4)
-//                        }
-//                        Section(header: Text("Asr")){
-//                            AvailableTimeView(availableTime: 3)
-//                        }
-//                        Section(header: Text("Maghrib")){
-//                            AvailableTimeView(availableTime: 1)
-//                        }
-//                        Section(header: Text("Isha")){
-//                            AvailableTimeView(availableTime: 1)
-//                        }
                     }
                     .listStyle(.plain)
                 }
             }
             .navigationTitle(Text("Day Schedule"))
             .navigationViewStyle(.stack)
+        }
+        .onAppear {
+            viewModel.fetch()
         }
     }
     private func font(from size: CGSize) -> Font{
@@ -111,20 +89,27 @@ struct DaysView: View {
 }
 
 struct CardView: View {
-    var title: String
+    @ObservedObject var event: RelativeEvent
+    @ObservedObject var viewModel: RelativeEventsViewModel
     
     var body: some View {
-        NavigationLink(destination: EventView(title: title)) {
+        NavigationLink(destination: EventView(title: event.title!)) {
             HStack {
                 RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
-                    Text(title)
+                    Text(event.title!)
                         .font(.headline)
                     Spacer()
                     HStack(spacing: 4) {
-                        Label("starts 30 min after", systemImage: "person.3").foregroundColor(.primary)
+                        if let hour = event.start.hour {
+                            Label("starts \(abs(hour)) hour", systemImage: "person.3").foregroundColor(.primary)
+                        }
+                        if let minute = event.start.minute {
+                            Label("starts \(abs(minute)) min", systemImage: "person.3").foregroundColor(.primary)
+                        }
+                        Text(event.isAfter ? "after" : "before")
                         Spacer()
-                        Label("30", systemImage: "clock")
+                        Label("\(viewModel.duration(event: event).minute ?? 0)", systemImage: "clock")
                             .labelStyle(.trailingIcon)
                             
                     }
@@ -149,12 +134,19 @@ struct TrailingIconLabelStyle: LabelStyle {
 }
 
 struct AvailableTimeView: View {
-    let availableTime: Int
+    let availableTime: TimeInterval
     @State var addNew: Bool = false
     
     var body: some View {
         GeometryReader { geo in
-            Text("\(availableTime) Hours").frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            HStack {
+                if let hour = availableTime.hour {
+                    Text("\(hour) Hours")
+                }
+                if let minute = availableTime.minute {
+                    Text("\(minute) Minutes")
+                }
+            }.frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             Button(action: {
                 addNew = true
             }, label: {
@@ -193,12 +185,13 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 
 struct CalendarView_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
+    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
     static var previews: some View {
         Group {
-            ScheduleView()
+            ScheduleView(context: viewContext, location: location)
                 .previewInterfaceOrientation(.portrait)
                 .environment(\.managedObjectContext, viewContext)
-            ScheduleView()
+            ScheduleView(context: viewContext, location: location)
                 .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
                 .environment(\.managedObjectContext, viewContext)
         }

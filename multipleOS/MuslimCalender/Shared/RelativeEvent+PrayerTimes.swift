@@ -52,4 +52,8 @@ extension RelativeEvent {
             end - start + time(endTimeName).timeIntervalSince(time(startTimeName))
         )
     }
+    
+    var isAfter: Bool {
+        start >= 0
+    }
 }
