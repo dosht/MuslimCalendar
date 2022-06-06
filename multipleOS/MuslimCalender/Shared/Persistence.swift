@@ -26,6 +26,11 @@ struct PersistenceController {
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .dhur).endAt(0, relativeTo: .asr)
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .asr).endAt(0, relativeTo: .maghrib)
             RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .maghrib).endAt(0, relativeTo: .isha)
+            RelativeEvent.create(context).isAllocatable(true).startAt(0, relativeTo: .isha).endAt(0, relativeTo: .endOfDay)
+            
+            TimeName.allCases.dropFirst().dropLast().forEach { name in
+                RelativeEvent.create(context, name.rawValue).startAt(0, relativeTo: name).endAt(0, relativeTo: name)
+            }
             do {
                 try context.save()
             } catch {

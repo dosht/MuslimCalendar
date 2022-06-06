@@ -1,4 +1,4 @@
-//
+    //
 //  MuslimCalenderApp.swift
 //  Shared
 //
@@ -10,7 +10,8 @@ import CoreLocation
 
 @main
 struct MuslimCalenderApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
     let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
 
     var body: some Scene {

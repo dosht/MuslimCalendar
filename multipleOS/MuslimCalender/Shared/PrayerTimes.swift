@@ -18,7 +18,8 @@ enum TimeName: String, CaseIterable {
          dhur = "Dhur",
          asr = "Asr",
          maghrib = "Maghrib",
-         isha = "Isha"
+         isha = "Isha",
+         endOfDay = "End of Day"
 }
 
 extension TimeName: Identifiable {
@@ -32,6 +33,7 @@ extension TimeName: Identifiable {
         case .asr: return 4
         case .maghrib: return 5
         case .isha: return 6
+        case .endOfDay: return 7
         }
     }
 }
@@ -72,20 +74,8 @@ struct PrayerCalculator {
             return adhanPrayerTimes.maghrib
         case .isha:
             return adhanPrayerTimes.isha
-        }
-    }
-    
-    var rules: [(TimeName, Date)] {
-        get {
-            return [
-                //TODO: Add midnight
-                (.fajr, adhanPrayerTimes.fajr),
-                (.sunrise, adhanPrayerTimes.sunrise),
-                (.dhur, adhanPrayerTimes.dhuhr),
-                (.asr, adhanPrayerTimes.asr),
-                (.maghrib, adhanPrayerTimes.maghrib),
-                (.isha, adhanPrayerTimes.isha)
-            ]
+        case .endOfDay:
+            return Date().endOfDay
         }
     }
 }

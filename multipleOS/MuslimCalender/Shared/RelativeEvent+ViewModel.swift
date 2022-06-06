@@ -34,6 +34,19 @@ class RelativeEventsViewModel: ObservableObject {
         return event.duration(time: prayerCalculator!.time)
     }
     
+    func adhanTime(_ event: RelativeEvent) -> Date? {
+        let prayerCalculator: PrayerCalculator? = PrayerCalculator(location: location, date: Date())
+        return prayerCalculator?.time(of: event.startTimeName)
+    }
+    
+    func adhanTimeText(_ event: RelativeEvent) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        let datetime = adhanTime(event)!
+        return dateFormatter.string(from: datetime)
+    }
+    
     var isNew: Bool {
         if let editedEvent = editedEvent {
             return editedEvent.isInserted
@@ -70,7 +83,9 @@ class RelativeEventsViewModel: ObservableObject {
         let request = NSFetchRequest<RelativeEvent>(entityName: "RelativeEvent")
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \RelativeEvent.startRelativeTo, ascending: true),
-            NSSortDescriptor(keyPath: \RelativeEvent.start, ascending: true)
+            NSSortDescriptor(keyPath: \RelativeEvent.endRelativeTo, ascending: true),
+            NSSortDescriptor(keyPath: \RelativeEvent.start, ascending: true),
+            NSSortDescriptor(keyPath: \RelativeEvent.end, ascending: true),
         ]
         do {
             relativeEvents = try context.fetch(request)

@@ -35,15 +35,18 @@ struct ScheduleView: View {
                         DaysView(day: "Sat", geo: geo)
                     }
                     List {
+                        
+                        
                         ForEach(TimeName.allCases) { time in
-                            Section(time.rawValue) {
-                                ForEach(viewModel.relativeEvents.filter{ $0.startTimeName == time }) { event in
-                                    if event.isAllocatable {
-                                        AvailableTimeView(viewModel: viewModel, event: event)
-                                            .deleteDisabled(true)
-                                    } else {
-                                        CardView(event: event, viewModel: viewModel)
-                                    }
+                            ForEach(viewModel.relativeEvents.filter{ $0.startTimeName == time }) { event in
+                                if event.isAllocatable {
+                                    AvailableTimeView(viewModel: viewModel, event: event)
+                                        .deleteDisabled(true)
+                                } else if event.isAdhan {
+                                    AdhanView(text: event.title!, adhanTime: viewModel.adhanTimeText(event))
+                                        .deleteDisabled(true)
+                                } else {
+                                    CardView(event: event, viewModel: viewModel)
                                 }
                             }
                         }
@@ -53,7 +56,7 @@ struct ScheduleView: View {
                 }
             }
             .navigationTitle(Text("Day Schedule"))
-            .navigationViewStyle(.stack)
+//            .navigationViewStyle(.stack)
         }
         .onAppear {
             viewModel.fetch()
@@ -87,6 +90,25 @@ struct DaysView: View {
                 }
                 
         }
+    }
+}
+
+struct AdhanView: View {
+    let text: String
+    let adhanTime: String
+    
+    var body: some View {
+        HStack {
+            Text(text)
+            Spacer()
+            Text(adhanTime)
+        }
+        .listStyle(.plain)
+        .listRowSeparator(.hidden)
+        .padding(0)
+        .foregroundColor(.gray)
+        .font(.headline)
+        .frame(alignment: .center)
     }
 }
 

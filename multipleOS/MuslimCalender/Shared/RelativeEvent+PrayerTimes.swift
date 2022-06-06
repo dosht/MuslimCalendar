@@ -36,6 +36,10 @@ extension RelativeEvent {
         return self
     }
     
+    var isAdhan: Bool {
+        TimeName.allCases.map({ $0.rawValue }).contains(title)
+    }
+    
     var startTimeName: TimeName {
         get { TimeName.allCases[Int(self.startRelativeTo)] }
         set { self.startRelativeTo = newValue.intValue }
