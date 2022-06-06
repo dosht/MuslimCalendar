@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct EventEditor: View {
-    @Binding var isEditing: Bool
-    var isSavedEvent: Bool
-
-    @State var eventTitle: String = ""
+    @ObservedObject var viewModel: RelativeEventsViewModel
+    @ObservedObject var event: RelativeEvent
+    
+//    @State var eventTitle: String = ""
     @State var duration = Duration(minutes: 30)
     @State var start = Duration()
     @State var alert = false
@@ -23,15 +24,16 @@ struct EventEditor: View {
         VStack(spacing: 0) {
             // Toolbar with Done button
             ZStack {
-                Text("\(isSavedEvent ? "Edit" : "New") Event").font(.headline).padding()
+                Text("\(viewModel.isNew ? "New" : "Edit") Event").font(.headline).padding()
                 HStack {
                     Button(action: {
-                        self.isEditing = false
+                        viewModel.editingEvent = false
                     }, label: { Text("Cancel") }).padding()
                     Spacer()
+                    // Done button
                     Button(action: {
-                        self.isEditing = false
-                    }, label: { Text(isSavedEvent ? "Done" : "Add") }).padding()
+                        viewModel.save()
+                    }, label: { Text(viewModel.isNew ? "Add" : "Done") }).padding()
                 }
             }
             Divider()
@@ -39,15 +41,23 @@ struct EventEditor: View {
             GeometryReader { geo in
                 Form {
                     Section {
-                        TextField("Event Title", text: $eventTitle)
+                        TextField("Event Title", text: $event.title.toUnwrapped(defaultValue: ""))
                             .padding(4)
                             .font(.title2)
                     }
                     Section {
                         
-                        DurationPicker(text: "Duration", duration: $duration, geo: geo)
+                        if event.start != 0 {
+                            Picker("After/Before", selection: $event.isAfter) {
+                                Text("AFter").tag(true)
+                                Text("Before").tag(false)
+                            }.pickerStyle(.segmented)
+                        }
+//                        DiscreteDurationPicker(text: "Start", duration: $)
                         
-                        DurationPicker(text: "Start", duration: $start, geo: geo, trailingText: "before fajr")
+//                        DurationPicker(text: "Duration", duration: $duration, geo: geo)
+                        
+                        DurationPicker(text: "Start", duration: $event.start.duration, geo: geo, trailingText: " \(event.start == 0 ? "at" : event.isAfter ? "after" : "before") \(event.startTimeName)")
                         
                        
                         
@@ -90,12 +100,19 @@ struct EventEditor: View {
                     }
                 }
             }
-            if isSavedEvent {
+            if !viewModel.isNew {
                 Button(action: {
-                    self.isEditing = false
+                    viewModel.delete()
                 }, label: { Text("Delete") }).padding().foregroundColor(.red)
             }
         }
+    }
+}
+
+extension TimeInterval {
+    var duration: Duration {
+        get { Duration(timeInterval: self) }
+        set { self = newValue.timeInterval }
     }
 }
 
@@ -106,6 +123,15 @@ struct Duration {
     init(minutes: Int = 0, hours: Int = 0) {
         self.minutes = minutes
         self.hours = hours
+    }
+    
+    init(timeInterval: TimeInterval) {
+        self.minutes = Int(timeInterval.minute ?? 0)
+        self.hours = Int(timeInterval.hour ?? 0)
+    }
+    
+    var timeInterval: TimeInterval {
+        Double(hours * 60 * 60 + minutes * 60)
     }
 }
 
@@ -157,12 +183,7 @@ struct DurationPicker: View {
             HStack {
                 Text(text)
                 Spacer()
-                if duration.hours > 0 {
-                    Text("\(duration.hours) Hours").frame(alignment: .leading)
-                }
-                if duration.minutes > 0 {
-                    Text("\(duration.minutes) Minutes").frame(alignment: .leading)
-                }
+                Text(duration.timeInterval.timeIntervalShortText)
                 if let trailingText = trailingText {
                     Text(trailingText)
                 }
@@ -172,10 +193,19 @@ struct DurationPicker: View {
 }
 
 struct EventEditor_Previews: PreviewProvider {
-    @State static var isEditing: Bool = false
+    static let viewContext = PersistenceController.preview.container.viewContext
+    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+    static let viewModel = RelativeEventsViewModel(context: viewContext, location: location)
     
     static var previews: some View {
-        EventEditor(isEditing: $isEditing, isSavedEvent: true)
+        EventEditor(viewModel: viewModel, event: RelativeEvent.create(viewContext, "Test title"))
             .previewInterfaceOrientation(.portrait)
     }
+}
+
+extension Binding {
+     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
+        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
+    }
+    
 }

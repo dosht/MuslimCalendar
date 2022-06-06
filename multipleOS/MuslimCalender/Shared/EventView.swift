@@ -12,8 +12,6 @@ struct EventView: View {
     var event: RelativeEvent
     @ObservedObject var viewModel: RelativeEventsViewModel
     
-    @State private var isEditing: Bool = false
-    
     var body: some View {
         List {
             Section {
@@ -35,15 +33,15 @@ struct EventView: View {
                 }
             }
         }
-        .sheet(isPresented: $isEditing) {
-            EventEditor(isEditing: $isEditing, isSavedEvent: true)
+        .sheet(isPresented: $viewModel.editingEvent) {
+            EventEditor(viewModel: viewModel, event: viewModel.editedEvent!)
             
             
         }
-        .navigationTitle(event.title!)
+        .navigationTitle(event.title ?? "N/A")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { isEditing.toggle() }) {
+                Button(action: { viewModel.edit(event: event) }) {
                     Text( "Edit")
                 }
             }

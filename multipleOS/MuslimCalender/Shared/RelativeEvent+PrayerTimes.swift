@@ -53,4 +53,8 @@ extension RelativeEvent {
         )
     }
     
+    func allocate(newEvent: RelativeEvent) {
+        
+    }
+    
 }

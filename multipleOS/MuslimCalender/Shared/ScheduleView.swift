@@ -39,7 +39,7 @@ struct ScheduleView: View {
                             Section(time.rawValue) {
                                 ForEach(viewModel.relativeEvents.filter{ $0.startTimeName == time }) { event in
                                     if event.isAllocatable {
-                                        AvailableTimeView(availableTime: viewModel.duration(event: event))
+                                        AvailableTimeView(viewModel: viewModel, event: event)
                                             .deleteDisabled(true)
                                     } else {
                                         CardView(event: event, viewModel: viewModel)
@@ -99,7 +99,7 @@ struct CardView: View {
             HStack {
                 RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
-                    Text(event.title!)
+                    Text(event.title ?? "N/A")
                         .font(.headline)
                     Spacer()
                     HStack(spacing: 4) {
@@ -130,21 +130,17 @@ struct TrailingIconLabelStyle: LabelStyle {
 }
 
 struct AvailableTimeView: View {
-    let availableTime: TimeInterval
-    @State var addNew: Bool = false
+    @ObservedObject var viewModel: RelativeEventsViewModel
+    var event: RelativeEvent
     
     var body: some View {
         GeometryReader { geo in
             HStack {
-                if let hour = availableTime.hour {
-                    Text("\(hour) Hours")
-                }
-                if let minute = availableTime.minute {
-                    Text("\(minute) Minutes")
-                }
+                Text(viewModel.duration(event: event).timeIntervalText)
             }.frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            // Add event button
             Button(action: {
-                addNew = true
+                viewModel.chooseAllocatableSlot(allcatableSlot: event)
             }, label: {
                 Label("", systemImage: "plus.circle.fill")
                     .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
@@ -154,8 +150,8 @@ struct AvailableTimeView: View {
         .padding(30).background(.regularMaterial)
         .listRowSeparator(.hidden)
         .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
-        .sheet(isPresented: $addNew) {
-            EventEditor(isEditing: $addNew, isSavedEvent: false)
+        .sheet(isPresented: $viewModel.addingNewEvent) {
+            EventEditor(viewModel: viewModel, event: viewModel.editedEvent!)
         }
     }
 }

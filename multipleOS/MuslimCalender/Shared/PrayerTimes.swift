@@ -12,7 +12,7 @@ import CoreData
 import Adhan
 
 enum TimeName: String, CaseIterable {
-    case midnight = "midnight",
+    case midnight = "Midnight",
          fajr = "Fajr",
          sunrise = "Sunrise ☀️",
          dhur = "Dhur",

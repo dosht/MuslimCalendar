@@ -8,7 +8,7 @@
 import XCTest
 @testable import MuslimCalender
 
-class Tests_Shared: XCTestCase {
+class Tests_RelativeEvent: XCTestCase {
     let context = PersistenceController(inMemory: true).container.viewContext
     func time(_ timeName: TimeName) -> Date {
         switch timeName {
@@ -50,5 +50,10 @@ class Tests_Shared: XCTestCase {
     func testDurationbeBetweenTimes() {
         let event = RelativeEvent.create(context).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         XCTAssertEqual(event.duration(time: time), 60)
+    }
+    
+    func testAllocateEvent() {
+        // allocatable time - event time (15m, 30m, 45m, 1h, 1,5h, 2h, 2,5h, 3h, until next event
+        
     }
 }
