@@ -12,9 +12,6 @@ struct EventEditor: View {
     @ObservedObject var viewModel: RelativeEventsViewModel
     @ObservedObject var event: RelativeEvent
     
-//    @State var eventTitle: String = ""
-    @State var duration = Duration(minutes: 30)
-    @State var start = Duration()
     @State var alert = false
     @State var alertInterval = Duration(minutes: 10)
     @State var alarm = false
@@ -47,17 +44,28 @@ struct EventEditor: View {
                     }
                     Section {
                         
-                        if event.start != 0 {
-                            Picker("After/Before", selection: $event.isAfter) {
-                                Text("AFter").tag(true)
-                                Text("Before").tag(false)
-                            }.pickerStyle(.segmented)
-                        }
+                        Picker("Allocation Type", selection: $viewModel.allocationType) {
+                            ForEach(RelativeEventsViewModel.AllocationType.allCases) { allocationType in
+                                Text(allocationType.rawValue).tag(allocationType)
+                            }
+                        }.pickerStyle(.segmented)
+//
+//                        if event.start != 0 {
+//                            Picker("After/Before", selection: $event.isAfter) {
+//                                Text("AFter").tag(true)
+//                                Text("Before").tag(false)
+//                            }.pickerStyle(.segmented)
+//                        }
 //                        DiscreteDurationPicker(text: "Start", duration: $)
                         
-//                        DurationPicker(text: "Duration", duration: $duration, geo: geo)
+                        if viewModel.allocationType != .full {
+                            DurationPicker(text: "Duration", duration: $viewModel.newEventDuration.duration, geo: geo)
+                        }
+                    }
+                    
+                    Section {
                         
-                        DurationPicker(text: "Start", duration: $event.start.duration, geo: geo, trailingText: " \(event.start == 0 ? "at" : event.isAfter ? "after" : "before") \(event.startTimeName)")
+//                        DurationPicker(text: "Start", duration: $event.start.duration, geo: geo, trailingText: " \(event.start == 0 ? "at" : event.isAfter ? "after" : "before") \(event.startTimeName)")
                         
                        
                         

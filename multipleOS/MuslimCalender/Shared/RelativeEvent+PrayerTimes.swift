@@ -51,14 +51,24 @@ extension RelativeEvent {
     }
     
     func duration(time: (TimeName) -> Date) -> TimeInterval {
-        print("time name: \(startTimeName), start: \(start), end: \(end), diff: \(time(endTimeName).timeIntervalSince(time(startTimeName)))")
         return round(
             end - start + time(endTimeName).timeIntervalSince(time(startTimeName))
         )
     }
     
     func allocate(newEvent: RelativeEvent) {
-        
+        if newEvent.startTimeName == startTimeName && newEvent.endTimeName == endTimeName {
+            start = 0
+            end = 0
+            endTimeName = startTimeName
+            return
+        }
+        if newEvent.startTimeName == startTimeName {
+            start = newEvent.end
+        }
+        if newEvent.endTimeName == endTimeName {
+            end = newEvent.start
+        }
     }
     
 }

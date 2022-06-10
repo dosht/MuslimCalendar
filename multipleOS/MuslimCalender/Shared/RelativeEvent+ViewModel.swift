@@ -108,7 +108,12 @@ class RelativeEventsViewModel: ObservableObject {
     }
     
     func save() {
+        print(newEventDuration)
         chosenAllocatableSlot?.start += duration(event: editedEvent!)
+        chosenAllocatableSlot?.allocate(newEvent: editedEvent!)
+        if let alloc = chosenAllocatableSlot, duration(event: chosenAllocatableSlot!) == 0 {
+            context.delete(alloc)
+        }
         try? context.save()
         editedEvent = nil
         chosenAllocatableSlot = nil
@@ -135,6 +140,50 @@ class RelativeEventsViewModel: ObservableObject {
         }
         fetch()
     }
+    
+    enum AllocationType: String, CaseIterable, Identifiable {
+        var id: Self { self }
+        
+        case begnning = "Begnning",
+             end = "End",
+             full = "All"
+    }
+    
+    var allocationType: AllocationType {
+        get {
+            if let editedEvent = editedEvent, let alloc = chosenAllocatableSlot {
+                if editedEvent.startTimeName == alloc.startTimeName && editedEvent.endTimeName == alloc.endTimeName {
+                    return .full
+                }
+                if editedEvent.startTimeName == alloc.endTimeName {
+                    return .end
+                }
+            }
+            return .begnning
+        }
+        set {
+            switch newValue {
+            case .begnning:
+                editedEvent?.start = chosenAllocatableSlot!.start
+                editedEvent?.end = newEventDuration
+                editedEvent?.startTimeName = chosenAllocatableSlot!.startTimeName
+                editedEvent?.endTimeName = chosenAllocatableSlot!.startTimeName
+            case .end:
+                editedEvent?.start = chosenAllocatableSlot!.end - newEventDuration
+                editedEvent?.end = chosenAllocatableSlot!.end
+                editedEvent?.startTimeName = chosenAllocatableSlot!.endTimeName
+                editedEvent?.endTimeName = chosenAllocatableSlot!.endTimeName
+            case .full:
+                editedEvent?.start = chosenAllocatableSlot!.start
+                editedEvent?.end = chosenAllocatableSlot!.end
+                editedEvent?.startTimeName = chosenAllocatableSlot!.startTimeName
+                editedEvent?.endTimeName = chosenAllocatableSlot!.endTimeName
+            }
+        }
+    }
+    
+    @Published
+    var newEventDuration: TimeInterval = 30 * 60
 }
 
 extension TimeInterval {
