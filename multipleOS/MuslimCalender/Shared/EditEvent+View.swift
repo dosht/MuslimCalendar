@@ -1,16 +1,23 @@
 //
-//  EventEditor.swift
+//  EditEvent+View.swift
 //  MuslimCalender
 //
-//  Created by Mustafa Abdelhamıd on 29.05.2022.
+//  Created by Mustafa Abdelhamıd on 10.06.2022.
 //
 
 import SwiftUI
 import CoreLocation
+import CoreData
+
 
 struct EventEditor: View {
-    @ObservedObject var viewModel: RelativeEventsViewModel
-    @ObservedObject var event: RelativeEvent
+    @Environment(\.managedObjectContext) private var viewContext
+    
+//    @ObservedObject var event: RelativeEvent? = nil
+    
+    @ObservedObject var viewModel: EditEventViewModel
+    @ObservedObject var relativeEventsViewModel: RelativeEventsViewModel
+  
     
     @State var alert = false
     @State var alertInterval = Duration(minutes: 10)
@@ -24,12 +31,14 @@ struct EventEditor: View {
                 Text("\(viewModel.isNew ? "New" : "Edit") Event").font(.headline).padding()
                 HStack {
                     Button(action: {
-                        viewModel.editingEvent = false
+                        viewModel.cancel()
+                        relativeEventsViewModel.cancelEditing()
                     }, label: { Text("Cancel") }).padding()
                     Spacer()
                     // Done button
                     Button(action: {
                         viewModel.save()
+                        relativeEventsViewModel.doneEditing()
                     }, label: { Text(viewModel.isNew ? "Add" : "Done") }).padding()
                 }
             }
@@ -38,14 +47,14 @@ struct EventEditor: View {
             GeometryReader { geo in
                 Form {
                     Section {
-                        TextField("Event Title", text: $event.title.toUnwrapped(defaultValue: ""))
+                        TextField("Event Title", text: $viewModel.event.title.toUnwrapped(defaultValue: ""))
                             .padding(4)
                             .font(.title2)
                     }
                     Section {
                         
                         Picker("Allocation Type", selection: $viewModel.allocationType) {
-                            ForEach(RelativeEventsViewModel.AllocationType.allCases) { allocationType in
+                            ForEach(EditEventViewModel.AllocationType.allCases) { allocationType in
                                 Text(allocationType.rawValue).tag(allocationType)
                             }
                         }.pickerStyle(.segmented)
@@ -57,9 +66,10 @@ struct EventEditor: View {
 //                            }.pickerStyle(.segmented)
 //                        }
 //                        DiscreteDurationPicker(text: "Start", duration: $)
+                        Text("\(viewModel.allocationType.rawValue)")
                         
-                        if viewModel.allocationType != .full {
-                            DurationPicker(text: "Duration", duration: $viewModel.newEventDuration.duration, geo: geo)
+                        if viewModel.showDuration {
+                            DurationPicker(text: "Duration", duration: $viewModel.eventDuration.duration, geo: geo)
                         }
                     }
                     
@@ -110,7 +120,8 @@ struct EventEditor: View {
             }
             if !viewModel.isNew {
                 Button(action: {
-                    viewModel.delete()
+                    relativeEventsViewModel.deleteEvent(event: viewModel.event)
+                    relativeEventsViewModel.doneEditing()
                 }, label: { Text("Delete") }).padding().foregroundColor(.red)
             }
         }
@@ -203,10 +214,12 @@ struct DurationPicker: View {
 struct EventEditor_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-    static let viewModel = RelativeEventsViewModel(context: viewContext, location: location)
+    static let relativeEventsViewModel = RelativeEventsViewModel(context: viewContext, location: location)
+    static let event = RelativeEvent.create(viewContext, "Test title")
+    static let editEventViewModel = EditEventViewModel(event, availableSlot: relativeEventsViewModel.expandAllocatableSlot(event), location: location, context: viewContext)
     
     static var previews: some View {
-        EventEditor(viewModel: viewModel, event: RelativeEvent.create(viewContext, "Test title"))
+        EventEditor(viewModel: editEventViewModel, relativeEventsViewModel: relativeEventsViewModel)
             .previewInterfaceOrientation(.portrait)
     }
 }

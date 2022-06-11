@@ -14,12 +14,14 @@
 		8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */; };
 		8E6E98E12842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
 		8E6E98E22842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
-		8E6E98E428433D62004A2331 /* EventEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E328433D62004A2331 /* EventEditor.swift */; };
-		8E6E98E528433D62004A2331 /* EventEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E328433D62004A2331 /* EventEditor.swift */; };
 		8E7CA019284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */; };
 		8E7CA01A284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */; };
 		8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */; };
 		8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */; };
+		8E84D03428539AE70011EAF3 /* EditEvent+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84D03328539AE70011EAF3 /* EditEvent+ViewModel.swift */; };
+		8E84D03528539AE70011EAF3 /* EditEvent+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84D03328539AE70011EAF3 /* EditEvent+ViewModel.swift */; };
+		8E84D03728539B9E0011EAF3 /* EditEvent+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84D03628539B9E0011EAF3 /* EditEvent+View.swift */; };
+		8E84D03828539B9E0011EAF3 /* EditEvent+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84D03628539B9E0011EAF3 /* EditEvent+View.swift */; };
 		8E881822283926F8004AA721 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881821283926F8004AA721 /* Tests_iOS.swift */; };
 		8E881824283926F8004AA721 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E881823283926F8004AA721 /* Tests_iOSLaunchTests.swift */; };
 		8E88182E283926F8004AA721 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88182D283926F8004AA721 /* Tests_macOS.swift */; };
@@ -66,9 +68,10 @@
 		8E5ECC5A284B511700E9B369 /* Tests Shared.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests Shared.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_RelativeEvent.swift; sourceTree = "<group>"; };
 		8E6E98E02842053D004A2331 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
-		8E6E98E328433D62004A2331 /* EventEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditor.swift; sourceTree = "<group>"; };
 		8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeEvent+PrayerTimes.swift"; sourceTree = "<group>"; };
 		8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeEvent+ViewModel.swift"; sourceTree = "<group>"; };
+		8E84D03328539AE70011EAF3 /* EditEvent+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditEvent+ViewModel.swift"; sourceTree = "<group>"; };
+		8E84D03628539B9E0011EAF3 /* EditEvent+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditEvent+View.swift"; sourceTree = "<group>"; };
 		8E881807283926F8004AA721 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		8E881808283926F8004AA721 /* MuslimCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalenderApp.swift; sourceTree = "<group>"; };
 		8E88180A283926F8004AA721 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -157,9 +160,10 @@
 				8E88184C283955CC004AA721 /* PrayerTimes.swift */,
 				8E109A89283BA5A400F17699 /* ScheduleView.swift */,
 				8E6E98E02842053D004A2331 /* EventView.swift */,
-				8E6E98E328433D62004A2331 /* EventEditor.swift */,
 				8E7CA018284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift */,
 				8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */,
+				8E84D03328539AE70011EAF3 /* EditEvent+ViewModel.swift */,
+				8E84D03628539B9E0011EAF3 /* EditEvent+View.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -411,14 +415,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
+				8E84D03428539AE70011EAF3 /* EditEvent+ViewModel.swift in Sources */,
 				8E88184D283955CD004AA721 /* PrayerTimes.swift in Sources */,
 				8E7CA019284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
 				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8A283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
-				8E6E98E428433D62004A2331 /* EventEditor.swift in Sources */,
 				8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E6E98E12842053D004A2331 /* EventView.swift in Sources */,
+				8E84D03728539B9E0011EAF3 /* EditEvent+View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,14 +432,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E881834283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
+				8E84D03528539AE70011EAF3 /* EditEvent+ViewModel.swift in Sources */,
 				8E88184E283955CD004AA721 /* PrayerTimes.swift in Sources */,
 				8E7CA01A284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
 				8E881838283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8B283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
-				8E6E98E528433D62004A2331 /* EventEditor.swift in Sources */,
 				8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E6E98E22842053D004A2331 /* EventView.swift in Sources */,
+				8E84D03828539B9E0011EAF3 /* EditEvent+View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

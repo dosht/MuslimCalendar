@@ -92,6 +92,33 @@ class Test_AllocateEvent: XCTestCase {
         XCTAssertEqual(alloc.endTimeName, .fajr)
         XCTAssertEqual(alloc.end, 0)
     }
+    
+    func testEventTimeAtBiginning() {
+        let alloc = RelativeEvent.create(context).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise).isAllocatable(true)
+        let event = RelativeEvent.create(context, "event").setDuration(30, allocatableSlot: alloc, allocationType: .begnning)
+        XCTAssertEqual(event.startTimeName, alloc.startTimeName)
+        XCTAssertEqual(event.endTimeName, alloc.startTimeName)
+        XCTAssertEqual(event.start, alloc.start)
+        XCTAssertEqual(event.end, alloc.start + 30)
+    }
+    
+    func testEventTimeAtEnd() {
+        let alloc = RelativeEvent.create(context).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise).isAllocatable(true)
+        let event = RelativeEvent.create(context, "event").setDuration(30, allocatableSlot: alloc, allocationType: .end)
+        XCTAssertEqual(event.startTimeName, alloc.endTimeName)
+        XCTAssertEqual(event.endTimeName, alloc.endTimeName)
+        XCTAssertEqual(event.start, alloc.end - 30)
+        XCTAssertEqual(event.end, alloc.end)
+    }
+    
+    func testEventTimeFull() {
+        let alloc = RelativeEvent.create(context).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise).isAllocatable(true)
+        let event = RelativeEvent.create(context, "event").setDuration(30, allocatableSlot: alloc, allocationType: .full)
+        XCTAssertEqual(event.startTimeName, alloc.startTimeName)
+        XCTAssertEqual(event.endTimeName, alloc.endTimeName)
+        XCTAssertEqual(event.start, alloc.start)
+        XCTAssertEqual(event.end, alloc.end)
+    }
 }
 
 class Tests_RelativeEventViewModel: XCTestCase {
@@ -100,81 +127,61 @@ class Tests_RelativeEventViewModel: XCTestCase {
     
     // Test get
     
-    func test_default_allocationType() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
-        XCTAssertEqual(viewModel.allocationType, .begnning)
-    }
-    
     func test_start_allocationType() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-        viewModel.chosenAllocatableSlot = alloc
-        viewModel.editedEvent = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(30, relativeTo: alloc.startTimeName)
-        
+        let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(30, relativeTo: alloc.startTimeName)
+        let viewModel = EditEventViewModel(event, availableSlot: alloc, location: location, context: context)
         XCTAssertEqual(viewModel.allocationType, .begnning)
     }
     
     func test_end_allocationType() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-        viewModel.chosenAllocatableSlot = alloc
-        viewModel.editedEvent = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.endTimeName).endAt(30, relativeTo: alloc.endTimeName)
-        
+        let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.endTimeName).endAt(30, relativeTo: alloc.endTimeName)
+        let viewModel = EditEventViewModel(event, availableSlot: alloc, location: location, context: context)
         XCTAssertEqual(viewModel.allocationType, .end)
     }
     
     func test_full_allocationType() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-        viewModel.chosenAllocatableSlot = alloc
-        viewModel.editedEvent = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(0, relativeTo: alloc.endTimeName)
-        
+        let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(0, relativeTo: alloc.endTimeName)
+        let viewModel = EditEventViewModel(event, availableSlot: alloc, location: location, context: context)
         XCTAssertEqual(viewModel.allocationType, .full)
     }
    
     // Test set
     
     func test_set_beginning() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-        viewModel.chosenAllocatableSlot = alloc
-        viewModel.editedEvent = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.endTimeName).endAt(-30, relativeTo: alloc.endTimeName)
-        viewModel.newEventDuration = 30
+        let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.endTimeName).endAt(-30, relativeTo: alloc.endTimeName)
+        let viewModel = EditEventViewModel(event, availableSlot: alloc, location: location, context: context)
+        viewModel.eventDuration = 30
         viewModel.allocationType = .begnning
-        let editedEvent = viewModel.editedEvent!
-        
-        XCTAssertEqual(editedEvent.startTimeName, alloc.startTimeName)
-        XCTAssertEqual(editedEvent.endTimeName, alloc.startTimeName)
-        XCTAssertEqual(editedEvent.start, alloc.start)
-        XCTAssertEqual(editedEvent.end, alloc.start + 30)
+        XCTAssertEqual(viewModel.event.startTimeName, alloc.startTimeName)
+        XCTAssertEqual(viewModel.event.endTimeName, alloc.startTimeName)
+        XCTAssertEqual(viewModel.event.start, alloc.start)
+        XCTAssertEqual(viewModel.event.end, alloc.start + 30)
     }
     
     func test_set_end() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-        viewModel.chosenAllocatableSlot = alloc
-        viewModel.editedEvent = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(30, relativeTo: alloc.startTimeName)
-        viewModel.newEventDuration = 30
+        let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(30, relativeTo: alloc.startTimeName)
+        let viewModel = EditEventViewModel(event, availableSlot: alloc, location: location, context: context)
+        viewModel.eventDuration = 30
         viewModel.allocationType = .end
-        let editedEvent = viewModel.editedEvent!
-        
-        XCTAssertEqual(editedEvent.startTimeName, alloc.endTimeName)
-        XCTAssertEqual(editedEvent.endTimeName, alloc.endTimeName)
-        XCTAssertEqual(editedEvent.start, alloc.end - 30)
-        XCTAssertEqual(editedEvent.end, alloc.end)
+        XCTAssertEqual(viewModel.event.startTimeName, alloc.endTimeName)
+        XCTAssertEqual(viewModel.event.endTimeName, alloc.endTimeName)
+        XCTAssertEqual(viewModel.event.start, alloc.end - 30)
+        XCTAssertEqual(viewModel.event.end, alloc.end)
     }
     
     func test_set_full() {
-        let viewModel = RelativeEventsViewModel(context: context, location: location)
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
-        viewModel.chosenAllocatableSlot = alloc
-        viewModel.editedEvent = RelativeEvent.create(context, "event").startAt(300, relativeTo: alloc.endTimeName).endAt(30, relativeTo: alloc.startTimeName)
+        let event = RelativeEvent.create(context, "event").startAt(300, relativeTo: alloc.endTimeName).endAt(30, relativeTo: alloc.startTimeName)
+        let viewModel = EditEventViewModel(event, availableSlot: alloc, location: location, context: context)
         viewModel.allocationType = .full
-        let editedEvent = viewModel.editedEvent!
-        
-        XCTAssertEqual(editedEvent.startTimeName, alloc.startTimeName)
-        XCTAssertEqual(editedEvent.endTimeName, alloc.endTimeName)
-        XCTAssertEqual(editedEvent.start, alloc.start)
-        XCTAssertEqual(editedEvent.end, alloc.end)
+        XCTAssertEqual(viewModel.event.startTimeName, alloc.startTimeName)
+        XCTAssertEqual(viewModel.event.endTimeName, alloc.endTimeName)
+        XCTAssertEqual(viewModel.event.start, alloc.start)
+        XCTAssertEqual(viewModel.event.end, alloc.end)
     }
 }

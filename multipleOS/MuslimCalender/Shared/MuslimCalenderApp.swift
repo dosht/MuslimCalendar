@@ -10,14 +10,15 @@ import CoreLocation
 
 @main
 struct MuslimCalenderApp: App {
-//    let persistenceController = PersistenceController.shared
-    let persistenceController = PersistenceController.preview
-    let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+    private let relativeEventsViewModel = RelativeEventsViewModel(
+//        context: PersistenceController.shared.container.viewContext,
+        context: PersistenceController.preview.container.viewContext,
+        location: CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066))
 
     var body: some Scene {
         WindowGroup {
-            ScheduleView(context: persistenceController.container.viewContext, location: location)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ScheduleView(viewModel: relativeEventsViewModel)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

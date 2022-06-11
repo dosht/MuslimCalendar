@@ -9,7 +9,9 @@ import SwiftUI
 import CoreLocation
 
 struct EventView: View {
-    var event: RelativeEvent
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @ObservedObject var event: RelativeEvent
     @ObservedObject var viewModel: RelativeEventsViewModel
     
     var body: some View {
@@ -34,8 +36,8 @@ struct EventView: View {
             }
         }
         .sheet(isPresented: $viewModel.editingEvent) {
-            EventEditor(viewModel: viewModel, event: viewModel.editedEvent!)
-            
+//            EventEditor(relativeEventsViewModel: viewModel, location: location, context: viewContext, editedEvent: event)
+            EventEditor(viewModel: viewModel.editEventViewModel!, relativeEventsViewModel: viewModel)
             
         }
         .navigationTitle(event.title ?? "N/A")
@@ -47,6 +49,10 @@ struct EventView: View {
             }
         }
     }
+    
+//    func createEditEventViewModel() -> EditEventViewModel {
+//        EditEventViewModel(event, availableSlot: viewModel.expandAllocatableSlot(event), location: viewModel.location, context: viewContext)
+//    }
 }
 
 struct EventView_Previews: PreviewProvider {

@@ -17,10 +17,19 @@ class RelativeEventsViewModel: ObservableObject {
     var relativeEvents: [RelativeEvent] = []
     
     @Published
-    var chosenAllocatableSlot: RelativeEvent? = nil
+    var addingNewEvent: Bool = false
     
     @Published
-    var editedEvent: RelativeEvent? = nil
+    var editingEvent: Bool = false
+    
+    @Published
+    var editEventViewModel: EditEventViewModel? = nil
+//
+//    @Published
+    var chosenAllocatableSlot: RelativeEvent? = nil
+//
+//    @Published
+//    var editedEvent: RelativeEvent? = nil
     
     var location: CLLocationCoordinate2D
     
@@ -47,36 +56,18 @@ class RelativeEventsViewModel: ObservableObject {
         return dateFormatter.string(from: datetime)
     }
     
-    var isNew: Bool {
-        if let editedEvent = editedEvent {
-            return editedEvent.isInserted
-        }
-        return false
-    }
-    
-    
+
     // MARK: Intent(s)
     
-    var addingNewEvent: Bool {
-        get { (chosenAllocatableSlot != nil)  && (editedEvent != nil) }
-        set {
-            if newValue == false {
-                chosenAllocatableSlot = nil
-                editedEvent = nil
-                context.rollback()
-            }
-        }
-    }
-    
-    var editingEvent: Bool {
-        get { editedEvent != nil }
-        set {
-            if newValue == false {
-                editedEvent = nil
-                context.rollback()
-            }
-        }
-    }
+//    var addingNewEvent: Bool {
+//        get { editEventViewModel != nil }
+//        set {
+//            if newValue == false {
+//                editEventViewModel = nil
+//                context.rollback()
+//            }
+//        }
+//    }
 
     @discardableResult
     func fetch() -> [RelativeEvent] {
@@ -97,38 +88,44 @@ class RelativeEventsViewModel: ObservableObject {
     
     func chooseAllocatableSlot(allcatableSlot: RelativeEvent) {
         chosenAllocatableSlot = allcatableSlot
-        editedEvent = RelativeEvent.create(context, "")
+//        editedEvent = RelativeEvent.create(context, "")
         // Connect the event to start prayer time only fo now
-        editedEvent?.startRelativeTo = allcatableSlot.startRelativeTo
-        editedEvent?.endRelativeTo = allcatableSlot.startRelativeTo
+//        editedEvent.startRelativeTo = allcatableSlot.startRelativeTo
+//        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
+        editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, context: context)
+        addingNewEvent = true
     }
     
     func edit(event: RelativeEvent) {
-        editedEvent = event
+        editEventViewModel = EditEventViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, context: context)
+        editingEvent = true
     }
     
-    func save() {
-        print(newEventDuration)
-        chosenAllocatableSlot?.start += duration(event: editedEvent!)
-        chosenAllocatableSlot?.allocate(newEvent: editedEvent!)
-        if let alloc = chosenAllocatableSlot, duration(event: chosenAllocatableSlot!) == 0 {
-            context.delete(alloc)
-        }
-        try? context.save()
-        editedEvent = nil
-        chosenAllocatableSlot = nil
+    func cancelEditing() {
+        editingEvent = false
+        addingNewEvent = false
+        context.rollback()
+        editEventViewModel = nil
         fetch()
     }
     
-    func delete() {
-        context.delete(editedEvent!)
-        try? context.save()
+    func doneEditing() {
+        addingNewEvent = false
+        editingEvent = false
+        editEventViewModel = nil
         fetch()
-        editedEvent = nil
     }
     
     func deleteEvent(indexSet: IndexSet) {
-        
+        indexSet.map { relativeEvents[$0] }.forEach(context.delete)
+        try? context.save()
+        indexSet.forEach { relativeEvents.remove(at: $0) }
+    }
+    
+    func deleteEvent(event: RelativeEvent) {
+        context.delete(event)
+        try? context.save()
+        doneEditing()
     }
     
     func deleteAll() {
@@ -141,49 +138,10 @@ class RelativeEventsViewModel: ObservableObject {
         fetch()
     }
     
-    enum AllocationType: String, CaseIterable, Identifiable {
-        var id: Self { self }
-        
-        case begnning = "Begnning",
-             end = "End",
-             full = "All"
+    func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent {
+        //TODO: implement this
+        RelativeEvent.create(context, "fofo")
     }
-    
-    var allocationType: AllocationType {
-        get {
-            if let editedEvent = editedEvent, let alloc = chosenAllocatableSlot {
-                if editedEvent.startTimeName == alloc.startTimeName && editedEvent.endTimeName == alloc.endTimeName {
-                    return .full
-                }
-                if editedEvent.startTimeName == alloc.endTimeName {
-                    return .end
-                }
-            }
-            return .begnning
-        }
-        set {
-            switch newValue {
-            case .begnning:
-                editedEvent?.start = chosenAllocatableSlot!.start
-                editedEvent?.end = newEventDuration
-                editedEvent?.startTimeName = chosenAllocatableSlot!.startTimeName
-                editedEvent?.endTimeName = chosenAllocatableSlot!.startTimeName
-            case .end:
-                editedEvent?.start = chosenAllocatableSlot!.end - newEventDuration
-                editedEvent?.end = chosenAllocatableSlot!.end
-                editedEvent?.startTimeName = chosenAllocatableSlot!.endTimeName
-                editedEvent?.endTimeName = chosenAllocatableSlot!.endTimeName
-            case .full:
-                editedEvent?.start = chosenAllocatableSlot!.start
-                editedEvent?.end = chosenAllocatableSlot!.end
-                editedEvent?.startTimeName = chosenAllocatableSlot!.startTimeName
-                editedEvent?.endTimeName = chosenAllocatableSlot!.endTimeName
-            }
-        }
-    }
-    
-    @Published
-    var newEventDuration: TimeInterval = 30 * 60
 }
 
 extension TimeInterval {

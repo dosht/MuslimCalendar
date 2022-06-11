@@ -12,14 +12,17 @@ import Adhan
 
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    var prayerCalculator: PrayerCalculator? = PrayerCalculator(
-        location: CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066), date: Date())
+//    var prayerCalculator: PrayerCalculator? = PrayerCalculator(
+//        location: CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066), date: Date())
     
-    @ObservedObject private var viewModel: RelativeEventsViewModel
+    @ObservedObject var viewModel: RelativeEventsViewModel
     
-    init(context: NSManagedObjectContext, location: CLLocationCoordinate2D) {
-        self.viewModel = RelativeEventsViewModel(context: context, location: location)
-    }
+//    let location: CLLocationCoordinate2D
+    
+//    init(context: NSManagedObjectContext, location: CLLocationCoordinate2D) {
+//        self.viewModel = RelativeEventsViewModel(context: context, location: location)
+//        self.location = location
+//    }
     
     var body: some View {
         GeometryReader { geo in
@@ -35,19 +38,15 @@ struct ScheduleView: View {
                         DaysView(day: "Sat", geo: geo)
                     }
                     List {
-                        
-                        
-                        ForEach(TimeName.allCases) { time in
-                            ForEach(viewModel.relativeEvents.filter{ $0.startTimeName == time }) { event in
-                                if event.isAllocatable {
-                                    AvailableTimeView(viewModel: viewModel, event: event)
-                                        .deleteDisabled(true)
-                                } else if event.isAdhan {
-                                    AdhanView(text: event.title!, adhanTime: viewModel.adhanTimeText(event))
-                                        .deleteDisabled(true)
-                                } else {
-                                    CardView(event: event, viewModel: viewModel)
-                                }
+                        ForEach(viewModel.relativeEvents) { event in
+                            if event.isAllocatable {
+                                AvailableTimeView(viewModel: viewModel, availableSlot: event)
+                                    .deleteDisabled(true)
+                            } else if event.isAdhan {
+                                AdhanView(text: event.title!, adhanTime: viewModel.adhanTimeText(event))
+                                    .deleteDisabled(true)
+                            } else {
+                                CardView(event: event, viewModel: viewModel, location: viewModel.location)
                             }
                         }
                         .onDelete(perform: viewModel.deleteEvent)
@@ -115,6 +114,7 @@ struct AdhanView: View {
 struct CardView: View {
     @ObservedObject var event: RelativeEvent
     @ObservedObject var viewModel: RelativeEventsViewModel
+    let location: CLLocationCoordinate2D
     
     var body: some View {
         NavigationLink(destination: EventView(event: event, viewModel: viewModel)) {
@@ -152,17 +152,19 @@ struct TrailingIconLabelStyle: LabelStyle {
 }
 
 struct AvailableTimeView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     @ObservedObject var viewModel: RelativeEventsViewModel
-    var event: RelativeEvent
+    var availableSlot: RelativeEvent
     
     var body: some View {
         GeometryReader { geo in
             HStack {
-                Text(viewModel.duration(event: event).timeIntervalText)
+                Text(viewModel.duration(event: availableSlot).timeIntervalText)
             }.frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             // Add event button
             Button(action: {
-                viewModel.chooseAllocatableSlot(allcatableSlot: event)
+                viewModel.chooseAllocatableSlot(allcatableSlot: availableSlot)
             }, label: {
                 Label("", systemImage: "plus.circle.fill")
                     .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
@@ -173,7 +175,7 @@ struct AvailableTimeView: View {
         .listRowSeparator(.hidden)
         .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
         .sheet(isPresented: $viewModel.addingNewEvent) {
-            EventEditor(viewModel: viewModel, event: viewModel.editedEvent!)
+            EventEditor(viewModel: viewModel.editEventViewModel!, relativeEventsViewModel: viewModel)
         }
     }
 }
@@ -196,17 +198,17 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 
 
 
-struct CalendarView_Previews: PreviewProvider {
-    static let viewContext = PersistenceController.preview.container.viewContext
-    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-    static var previews: some View {
-        Group {
-            ScheduleView(context: viewContext, location: location)
-                .previewInterfaceOrientation(.portrait)
-                .environment(\.managedObjectContext, viewContext)
-            ScheduleView(context: viewContext, location: location)
-                .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
-                .environment(\.managedObjectContext, viewContext)
-        }
-    }
-}
+//struct CalendarView_Previews: PreviewProvider {
+//    static let viewContext = PersistenceController.preview.container.viewContext
+//    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+//    static var previews: some View {
+//        Group {
+//            ScheduleView(context: viewContext, location: location)
+//                .previewInterfaceOrientation(.portrait)
+//                .environment(\.managedObjectContext, viewContext)
+//            ScheduleView(context: viewContext, location: location)
+//                .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
+//                .environment(\.managedObjectContext, viewContext)
+//        }
+//    }
+//}
