@@ -3,6 +3,47 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "EditEventViewModel.cancel():EditEvent+ViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event.isAllocatable">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RelativeEventsViewModel.cancelEditing():RelativeEvent+ViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.editingEvent">
+            </PersistentString>
+            <PersistentString
+               value = "editEventViewModel">
+            </PersistentString>
+            <PersistentString
+               value = "self.addingNewEvent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RelativeEvent.allocate(newEvent:):RelativeEvent+PrayerTimes.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "start">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RelativeEventsViewModel.doneEditing():RelativeEvent+ViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.editingEvent">
+            </PersistentString>
+            <PersistentString
+               value = "self.addingNewEvent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EventView.body.getter:EventView.swift">
          <PersistentStrings>
             <PersistentString

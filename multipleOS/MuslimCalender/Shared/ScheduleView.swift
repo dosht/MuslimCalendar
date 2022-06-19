@@ -158,28 +158,33 @@ struct AvailableTimeView: View {
     var availableSlot: RelativeEvent
     
     var body: some View {
-        GeometryReader { geo in
-            HStack {
-                Text(viewModel.duration(event: availableSlot).timeIntervalText)
-            }.frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            // Add event button
-            Button(action: {
-                viewModel.chooseAllocatableSlot(allcatableSlot: availableSlot)
-            }, label: {
-                Label("", systemImage: "plus.circle.fill")
-                    .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
-                    .font(.title)
-            })
-        }
-        .padding(30).background(.regularMaterial)
-        .listRowSeparator(.hidden)
-        .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
-        .sheet(isPresented: $viewModel.addingNewEvent) {
-            if let vm = viewModel.editEventViewModel {
-                EventEditor(viewModel: vm, relativeEventsViewModel: viewModel)
-            } else {
-                EmptyView()
+        if viewModel.duration(event: availableSlot) > 0 {
+            GeometryReader { geo in
+                HStack {
+                    Text(viewModel.duration(event: availableSlot).timeIntervalText)
+                }.frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                // Add event button
+                Button(action: {
+                    viewModel.chooseAllocatableSlot(allcatableSlot: availableSlot)
+                }, label: {
+                    Label("", systemImage: "plus.circle.fill")
+                        .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+                        .font(.title)
+                })
             }
+            .padding(30).background(.regularMaterial)
+            .listRowSeparator(.hidden)
+            .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+            .sheet(isPresented: $viewModel.addingNewEvent) {
+                if let vm = viewModel.editEventViewModel {
+                    EventEditor(viewModel: vm, relativeEventsViewModel: viewModel)
+                } else {
+                    EmptyView()
+                }
+            }
+        }
+        else {
+            EmptyView()
         }
     }
 }

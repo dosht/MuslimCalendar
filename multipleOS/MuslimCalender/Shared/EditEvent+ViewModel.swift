@@ -22,7 +22,8 @@ class EditEventViewModel: ObservableObject {
     private var prayerCalculator: PrayerCalculator
     
     init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D, context: NSManagedObjectContext) {
-        self.event = event ?? RelativeEvent.create(context, "").startAt(0, relativeTo: alloc.startTimeName).endAt(30*60, relativeTo: alloc.startTimeName)
+        self.event = event ?? RelativeEvent.create(context, "").startAt(
+            alloc.start, relativeTo: alloc.startTimeName).endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
         self.alloc = alloc
         prayerCalculator = PrayerCalculator(location: location, date: Date())!
         self.context = context
@@ -96,10 +97,9 @@ class EditEventViewModel: ObservableObject {
     func save() {
 //        alloc.start += duration(event: event)
         alloc.allocate(newEvent: event)
-        if duration(event: alloc) == 0 {
-            context.delete(alloc)
-        }
-        print(context.insertedObjects)
+//        if duration(event: alloc) == 0 {
+//            context.delete(alloc)
+//        }
         try? context.save()
     }
     
