@@ -105,8 +105,8 @@ class RelativeEventsViewModel: ObservableObject {
         editingEvent = false
         addingNewEvent = false
         context.rollback()
-        editEventViewModel = nil
         fetch()
+        editEventViewModel = nil
     }
     
     func doneEditing() {

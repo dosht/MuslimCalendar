@@ -175,7 +175,11 @@ struct AvailableTimeView: View {
         .listRowSeparator(.hidden)
         .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
         .sheet(isPresented: $viewModel.addingNewEvent) {
-            EventEditor(viewModel: viewModel.editEventViewModel!, relativeEventsViewModel: viewModel)
+            if let vm = viewModel.editEventViewModel {
+                EventEditor(viewModel: vm, relativeEventsViewModel: viewModel)
+            } else {
+                EmptyView()
+            }
         }
     }
 }
