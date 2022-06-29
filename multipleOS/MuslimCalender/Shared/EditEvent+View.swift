@@ -214,7 +214,7 @@ struct DurationPicker: View {
 struct EventEditor_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-    static let relativeEventsViewModel = RelativeEventsViewModel(context: viewContext, location: location)
+    static let relativeEventsViewModel = RelativeEventsViewModel(context: viewContext, location: location, ekEventStore: EventStore.requestPermissionAndCreateEventStore())
     static let event = RelativeEvent.create(viewContext, "Test title")
     static let editEventViewModel = EditEventViewModel(event, availableSlot: relativeEventsViewModel.expandAllocatableSlot(event), location: location, context: viewContext)
     

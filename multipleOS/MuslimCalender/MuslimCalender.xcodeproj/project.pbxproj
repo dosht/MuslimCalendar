@@ -37,6 +37,8 @@
 		8E88184D283955CD004AA721 /* PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184C283955CC004AA721 /* PrayerTimes.swift */; };
 		8E88184E283955CD004AA721 /* PrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184C283955CC004AA721 /* PrayerTimes.swift */; };
 		8E881851283964E7004AA721 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E881850283964E7004AA721 /* Adhan */; };
+		8EA2CB5A285F640A000B5BF7 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CB59285F640A000B5BF7 /* EventStore.swift */; };
+		8EA2CB5B285F640A000B5BF7 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CB59285F640A000B5BF7 /* EventStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		8E88182D283926F8004AA721 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		8E88182F283926F8004AA721 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		8E88184C283955CC004AA721 /* PrayerTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimes.swift; sourceTree = "<group>"; };
+		8EA2CB58285F628C000B5BF7 /* MuslimCalender--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MuslimCalender--iOS--Info.plist"; sourceTree = "<group>"; };
+		8EA2CB59285F640A000B5BF7 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 		8E881800283926F7004AA721 = {
 			isa = PBXGroup;
 			children = (
+				8EA2CB58285F628C000B5BF7 /* MuslimCalender--iOS--Info.plist */,
 				8E881805283926F8004AA721 /* Shared */,
 				8E881817283926F8004AA721 /* macOS */,
 				8E881820283926F8004AA721 /* Tests iOS */,
@@ -164,6 +169,7 @@
 				8E7CA01B284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift */,
 				8E84D03328539AE70011EAF3 /* EditEvent+ViewModel.swift */,
 				8E84D03628539B9E0011EAF3 /* EditEvent+View.swift */,
+				8EA2CB59285F640A000B5BF7 /* EventStore.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -421,6 +427,7 @@
 				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8A283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
+				8EA2CB5A285F640A000B5BF7 /* EventStore.swift in Sources */,
 				8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E6E98E12842053D004A2331 /* EventView.swift in Sources */,
 				8E84D03728539B9E0011EAF3 /* EditEvent+View.swift in Sources */,
@@ -438,6 +445,7 @@
 				8E881838283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8B283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
+				8EA2CB5B285F640A000B5BF7 /* EventStore.swift in Sources */,
 				8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E6E98E22842053D004A2331 /* EventView.swift in Sources */,
 				8E84D03828539B9E0011EAF3 /* EditEvent+View.swift in Sources */,
@@ -643,6 +651,9 @@
 				DEVELOPMENT_TEAM = QQ583WNZSB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MuslimCalender--iOS--Info.plist";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Create calender events";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Create reminders based on events";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -673,6 +684,9 @@
 				DEVELOPMENT_TEAM = QQ583WNZSB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MuslimCalender--iOS--Info.plist";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Create calender events";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Create reminders based on events";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

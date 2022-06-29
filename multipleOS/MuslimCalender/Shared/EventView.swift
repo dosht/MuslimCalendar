@@ -58,7 +58,7 @@ struct EventView: View {
 struct EventView_Previews: PreviewProvider {
     static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
     static let context = PersistenceController.preview.container.viewContext
-    static let viewModel = RelativeEventsViewModel(context: context, location: location)
+    static let viewModel = RelativeEventsViewModel(context: context, location: location, ekEventStore: EventStore.requestPermissionAndCreateEventStore())
     static let event = RelativeEvent.create(context, "Zikr").startAt(10*60, relativeTo: .fajr).endAt(20*60, relativeTo: .fajr)
     
     static var previews: some View {

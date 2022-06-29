@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 import CoreData
 import CoreLocation
+import EventKit
 
 class RelativeEventsViewModel: ObservableObject {
     private let context: NSManagedObjectContext
+    private let ekEventStore: EKEventStore
     
     @Published
     var relativeEvents: [RelativeEvent] = []
@@ -33,9 +35,10 @@ class RelativeEventsViewModel: ObservableObject {
     
     var location: CLLocationCoordinate2D
     
-    init (context: NSManagedObjectContext, location: CLLocationCoordinate2D) {
+    init (context: NSManagedObjectContext, location: CLLocationCoordinate2D, ekEventStore: EKEventStore) {
         self.context = context
         self.location = location
+        self.ekEventStore = ekEventStore
     }
     
     func duration(event: RelativeEvent) -> Double {
