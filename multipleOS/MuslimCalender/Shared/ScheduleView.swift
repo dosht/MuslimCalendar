@@ -12,17 +12,7 @@ import Adhan
 
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
-//    var prayerCalculator: PrayerCalculator? = PrayerCalculator(
-//        location: CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066), date: Date())
-    
     @ObservedObject var viewModel: RelativeEventsViewModel
-    
-//    let location: CLLocationCoordinate2D
-    
-//    init(context: NSManagedObjectContext, location: CLLocationCoordinate2D) {
-//        self.viewModel = RelativeEventsViewModel(context: context, location: location)
-//        self.location = location
-//    }
     
     var body: some View {
         GeometryReader { geo in

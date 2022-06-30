@@ -11,6 +11,9 @@
 		8E109A8B283BA5A400F17699 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E109A89283BA5A400F17699 /* ScheduleView.swift */; };
 		8E109A8E283BD1DE00F17699 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E109A8D283BD1DE00F17699 /* Adhan */; };
 		8E109A91283BD1FF00F17699 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E109A90283BD1FF00F17699 /* Adhan */; };
+		8E28411F286C5002004DF53A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28411E286C5002004DF53A /* LocationManager.swift */; };
+		8E284120286C5002004DF53A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28411E286C5002004DF53A /* LocationManager.swift */; };
+		8E284122286C5122004DF53A /* Tests_LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E284121286C5122004DF53A /* Tests_LocationManager.swift */; };
 		8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */; };
 		8E6E98E12842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
 		8E6E98E22842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
@@ -67,6 +70,8 @@
 
 /* Begin PBXFileReference section */
 		8E109A89283BA5A400F17699 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		8E28411E286C5002004DF53A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8E284121286C5122004DF53A /* Tests_LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_LocationManager.swift; sourceTree = "<group>"; };
 		8E5ECC5A284B511700E9B369 /* Tests Shared.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests Shared.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_RelativeEvent.swift; sourceTree = "<group>"; };
 		8E6E98E02842053D004A2331 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */,
+				8E284121286C5122004DF53A /* Tests_LocationManager.swift */,
 			);
 			path = "Tests Shared";
 			sourceTree = "<group>";
@@ -170,6 +176,7 @@
 				8E84D03328539AE70011EAF3 /* EditEvent+ViewModel.swift */,
 				8E84D03628539B9E0011EAF3 /* EditEvent+View.swift */,
 				8EA2CB59285F640A000B5BF7 /* EventStore.swift */,
+				8E28411E286C5002004DF53A /* LocationManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -412,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E284122286C5122004DF53A /* Tests_LocationManager.swift in Sources */,
 				8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +436,7 @@
 				8E109A8A283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
 				8EA2CB5A285F640A000B5BF7 /* EventStore.swift in Sources */,
+				8E28411F286C5002004DF53A /* LocationManager.swift in Sources */,
 				8E7CA01C284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E6E98E12842053D004A2331 /* EventView.swift in Sources */,
 				8E84D03728539B9E0011EAF3 /* EditEvent+View.swift in Sources */,
@@ -446,6 +455,7 @@
 				8E109A8B283BA5A400F17699 /* ScheduleView.swift in Sources */,
 				8E881832283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
 				8EA2CB5B285F640A000B5BF7 /* EventStore.swift in Sources */,
+				8E284120286C5002004DF53A /* LocationManager.swift in Sources */,
 				8E7CA01D284A8CFB00C98B01 /* RelativeEvent+ViewModel.swift in Sources */,
 				8E6E98E22842053D004A2331 /* EventView.swift in Sources */,
 				8E84D03828539B9E0011EAF3 /* EditEvent+View.swift in Sources */,
@@ -653,6 +663,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MuslimCalender--iOS--Info.plist";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Create calender events";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Create reminders based on events";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -686,6 +697,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MuslimCalender--iOS--Info.plist";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Create calender events";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Create reminders based on events";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

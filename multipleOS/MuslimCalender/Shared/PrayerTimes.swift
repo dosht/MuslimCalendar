@@ -46,9 +46,12 @@ struct PrayerCalculator {
     
     init?(location: CLLocationCoordinate2D, date: Date) {
         self.coordinates = Coordinates(latitude: location.latitude, longitude: location.longitude)
-        params = CalculationMethod.turkey.params
+        
+//        params = CalculationMethod.turkey.params
+//        params.method = .turkey
+        
+        params = CalculationMethod.egyptian.params
         params.madhab = .shafi
-        params.method = .turkey
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         self.date = cal.dateComponents([.year, .month, .day], from: date)
         if let adhanPrayerTimes = PrayerTimes(coordinates: coordinates, date: self.date, calculationParameters: params) {
