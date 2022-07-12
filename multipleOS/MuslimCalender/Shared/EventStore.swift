@@ -28,12 +28,23 @@ struct EventStore {
         }
     }
     
-    func createOrUpdate(_ relativeEvent: RelativeEvent, on day: Date, prayerCalculator: PrayerCalculator) {
-        let ekEvent = relativeEvent.transform(eventStore: ekEventStore, time: prayerCalculator.time)
+    @discardableResult
+    func createOrUpdate(_ relativeEvent: RelativeEvent, on day: Date, prayerCalculator: PrayerCalculator) -> EKEvent {
+        let savedEKEvent = findEKEvent(relativeEvent)
+        let ekEvent = relativeEvent.transform(eventStore: ekEventStore, time: prayerCalculator.time, savedEKEvent: savedEKEvent)
         ekEvent.calendar = muslimCalender
         let alarm = EKAlarm(relativeOffset: -10*60)
         ekEvent.addAlarm(alarm)
         try! ekEventStore.save(ekEvent, span: .thisEvent)
+        return ekEvent
+    }
+    
+    func findEKEvent(_ relativeEvent: RelativeEvent) -> EKEvent? {
+        if let ekEventIdentifier = relativeEvent.ekEventIdentifier {
+            return ekEventStore.event(withIdentifier: ekEventIdentifier)
+        } else {
+            return nil
+        }
     }
     
     static func requestPermissionAndCreateEventStore() -> EKEventStore {
@@ -61,8 +72,8 @@ struct EventStore {
 }
 
 extension RelativeEvent {
-    func transform(eventStore: EKEventStore, time: (TimeName) -> Date) -> EKEvent {
-        let ekEvent = EKEvent(eventStore: eventStore)
+    func transform(eventStore: EKEventStore, time: (TimeName) -> Date, savedEKEvent: EKEvent? = nil) -> EKEvent {
+        let ekEvent = savedEKEvent ?? EKEvent(eventStore: eventStore)
         ekEvent.title = self.title
         ekEvent.startDate = self.startDate(time: time)
         ekEvent.endDate = self.endDate(time: time)
