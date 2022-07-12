@@ -13,7 +13,7 @@ import CoreLocation
 class LocationManager: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
-    func requestPermissionAndGetCurrentLocation() -> CLLocationCoordinate2D? {
+    func requestPermissionAndGetCurrentLocation() -> CLLocationCoordinate2D {
         self.locationManager.requestWhenInUseAuthorization()
 
         if CLLocationManager.locationServicesEnabled() {
@@ -27,7 +27,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return location.coordinate
         } else {
             print("Couldn't get location")
-            return nil
+            return CLLocationCoordinate2D(latitude: 21.4361607, longitude: 39.9164145)
         }
     }
 }

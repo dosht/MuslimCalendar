@@ -13,8 +13,8 @@ struct MuslimCalenderApp: App {
     private let relativeEventsViewModel = RelativeEventsViewModel(
 //        context: PersistenceController.shared.container.viewContext,
         context: PersistenceController.preview.container.viewContext,
-        location: LocationManager().requestPermissionAndGetCurrentLocation()!,
-        ekEventStore: EventStore.requestPermissionAndCreateEventStore()
+        location: LocationManager().requestPermissionAndGetCurrentLocation(),
+        eventStore: EventStore()
     )
 
     var body: some Scene {

@@ -9,11 +9,10 @@ import Foundation
 import SwiftUI
 import CoreData
 import CoreLocation
-import EventKit
 
 class RelativeEventsViewModel: ObservableObject {
     private let context: NSManagedObjectContext
-    private let ekEventStore: EKEventStore
+    private let eventStore: EventStore
     
     @Published
     var relativeEvents: [RelativeEvent] = []
@@ -35,10 +34,10 @@ class RelativeEventsViewModel: ObservableObject {
     
     var location: CLLocationCoordinate2D
     
-    init (context: NSManagedObjectContext, location: CLLocationCoordinate2D, ekEventStore: EKEventStore) {
+    init (context: NSManagedObjectContext, location: CLLocationCoordinate2D, eventStore: EventStore) {
         self.context = context
         self.location = location
-        self.ekEventStore = ekEventStore
+        self.eventStore = eventStore
     }
     
     func duration(event: RelativeEvent) -> Double {
@@ -95,12 +94,12 @@ class RelativeEventsViewModel: ObservableObject {
         // Connect the event to start prayer time only fo now
 //        editedEvent.startRelativeTo = allcatableSlot.startRelativeTo
 //        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
-        editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, context: context)
+        editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, context: context, eventStore: eventStore)
         addingNewEvent = true
     }
     
     func edit(event: RelativeEvent) {
-        editEventViewModel = EditEventViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, context: context)
+        editEventViewModel = EditEventViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, context: context, eventStore: eventStore)
         editingEvent = true
     }
     

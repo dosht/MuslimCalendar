@@ -12,6 +12,7 @@ import CoreData
 
 class EditEventViewModel: ObservableObject {
     private let context: NSManagedObjectContext
+    private let eventStore: EventStore
     
     @Published
     var event: RelativeEvent
@@ -21,12 +22,15 @@ class EditEventViewModel: ObservableObject {
     
     private var prayerCalculator: PrayerCalculator
     
-    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D, context: NSManagedObjectContext) {
+    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D,
+         context: NSManagedObjectContext = PersistenceController.preview.container.viewContext,
+         eventStore: EventStore  = EventStore()) {
         self.event = event ?? RelativeEvent.create(context, "").startAt(
             alloc.start, relativeTo: alloc.startTimeName).endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
         self.alloc = alloc
         prayerCalculator = PrayerCalculator(location: location, date: Date())!
         self.context = context
+        self.eventStore = eventStore
         if let event = event {
             self.eventDuration = event.duration(time: prayerCalculator.time)
         } else {
@@ -101,6 +105,7 @@ class EditEventViewModel: ObservableObject {
 //            context.delete(alloc)
 //        }
         try? context.save()
+        eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator)
     }
     
     func cancel() {
