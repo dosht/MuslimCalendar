@@ -119,12 +119,14 @@ class RelativeEventsViewModel: ObservableObject {
     }
     
     func deleteEvent(indexSet: IndexSet) {
+        indexSet.map { relativeEvents[$0] }.forEach(eventStore.delete)
         indexSet.map { relativeEvents[$0] }.forEach(context.delete)
         try? context.save()
         indexSet.forEach { relativeEvents.remove(at: $0) }
     }
     
     func deleteEvent(event: RelativeEvent) {
+        eventStore.delete(event)
         context.delete(event)
         try? context.save()
         doneEditing()

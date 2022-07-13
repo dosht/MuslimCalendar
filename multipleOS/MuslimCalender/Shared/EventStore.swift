@@ -47,6 +47,12 @@ struct EventStore {
         }
     }
     
+    func delete(_ relativeEvent: RelativeEvent) {
+        if let ekEvent = findEKEvent(relativeEvent) {
+            try? ekEventStore.remove(ekEvent, span: .thisEvent)
+        }
+    }
+    
     static func requestPermissionAndCreateEventStore() -> EKEventStore {
         let eventStore = EKEventStore()
         switch EKEventStore.authorizationStatus(for: .event) {

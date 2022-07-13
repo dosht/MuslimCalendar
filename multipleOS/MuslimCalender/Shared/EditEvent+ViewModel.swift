@@ -105,7 +105,11 @@ class EditEventViewModel: ObservableObject {
 //            context.delete(alloc)
 //        }
         try? context.save()
-        eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator)
+        let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator)
+        if event.ekEventIdentifier == nil {
+            event.ekEventIdentifier = ekEvent.eventIdentifier
+            try? context.save()
+        }
     }
     
     func cancel() {
