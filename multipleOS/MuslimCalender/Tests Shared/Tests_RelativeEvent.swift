@@ -119,6 +119,38 @@ class Test_AllocateEvent: XCTestCase {
         XCTAssertEqual(event.start, alloc.start)
         XCTAssertEqual(event.end, alloc.end)
     }
+    
+    func testExpandAllocatableSlotBeginning() {
+        let alloc = RelativeEvent.create(context).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise).isAllocatable(true)
+        let event = RelativeEvent.create(context, "event").setDuration(30, allocatableSlot: alloc, allocationType: .begnning)
+        alloc.allocate(newEvent: event)
+        try! context.save()
+        
+        let newAlloc = event.expandAllocatableSlot(context: context)
+        
+        XCTAssertEqual(newAlloc.id, alloc.id)
+        XCTAssertEqual(newAlloc.start, 0)
+        XCTAssertEqual(newAlloc.end, 0)
+        XCTAssertEqual(newAlloc.startTimeName, .fajr)
+        XCTAssertEqual(newAlloc.endTimeName, .sunrise)
+    }
+    
+    func testExpandAllocatableSlotEnd() {
+        let alloc = RelativeEvent.create(context).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise).isAllocatable(true)
+        let event = RelativeEvent.create(context, "event").setDuration(30, allocatableSlot: alloc, allocationType: .end)
+        alloc.allocate(newEvent: event)
+        try! context.save()
+        
+        let newAlloc = event.expandAllocatableSlot(context: context)
+        
+        XCTAssertEqual(newAlloc.id, alloc.id)
+        XCTAssertEqual(newAlloc.start, 0)
+        XCTAssertEqual(newAlloc.end, 0)
+        XCTAssertEqual(newAlloc.startTimeName, .fajr)
+        XCTAssertEqual(newAlloc.endTimeName, .sunrise)
+        
+        print(context.all())
+    }
 }
 
 class Tests_RelativeEventViewModel: XCTestCase {

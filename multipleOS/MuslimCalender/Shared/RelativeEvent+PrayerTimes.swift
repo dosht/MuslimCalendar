@@ -71,4 +71,31 @@ extension RelativeEvent {
         }
     }
     
+    func expandAllocatableSlot(context: NSManagedObjectContext) -> RelativeEvent {
+        let request = NSFetchRequest<RelativeEvent>(entityName: "RelativeEvent")
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \RelativeEvent.startRelativeTo, ascending: true),
+            NSSortDescriptor(keyPath: \RelativeEvent.endRelativeTo, ascending: true),
+            NSSortDescriptor(keyPath: \RelativeEvent.start, ascending: true),
+            NSSortDescriptor(keyPath: \RelativeEvent.end, ascending: true),
+        ]
+        let events: [RelativeEvent] = (try? context.fetch(request)) ?? []
+        let thisIndex = events.firstIndex(where: { e in e.id == self.id })
+        var allocAfter: Optional<RelativeEvent> = nil
+        if let thisIndex = thisIndex {
+            if thisIndex < events.count - 1 && events[thisIndex+1].isAllocatable {
+                allocAfter = events[thisIndex+1].startAt(self.start, relativeTo: self.startTimeName)
+            }
+        }
+        var allocBefore: RelativeEvent? = nil
+        if let thisIndex = thisIndex {
+            if thisIndex > 0 && events[thisIndex-1].isAllocatable {
+                allocBefore = events[thisIndex-1].endAt(self.end, relativeTo: self.endTimeName)
+            }
+        }
+        return allocAfter ?? allocBefore ?? RelativeEvent.create(context)
+            .isAllocatable(true)
+            .startAt(self.start, relativeTo: self.startTimeName)
+            .endAt(self.end, relativeTo: self.endTimeName)
+    }
 }

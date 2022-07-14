@@ -142,9 +142,8 @@ class RelativeEventsViewModel: ObservableObject {
         fetch()
     }
     
-    func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent {
-        //TODO: implement this
-        RelativeEvent.create(context, "fofo")
+    func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent { 
+        return event.expandAllocatableSlot(context: context)
     }
 }
 

@@ -17,6 +17,7 @@
 		8E284127287AC2F6004DF53A /* Tests_EventStrore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E284126287AC2F6004DF53A /* Tests_EventStrore.swift */; };
 		8E284129287B21DA004DF53A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E284128287B21DA004DF53A /* Date+.swift */; };
 		8E28412A287B21DA004DF53A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E284128287B21DA004DF53A /* Date+.swift */; };
+		8E28412C287EF568004DF53A /* CoreData+Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28412B287EF568004DF53A /* CoreData+Fixtures.swift */; };
 		8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */; };
 		8E6E98E12842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
 		8E6E98E22842053D004A2331 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E98E02842053D004A2331 /* EventView.swift */; };
@@ -77,6 +78,7 @@
 		8E284121286C5122004DF53A /* Tests_LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_LocationManager.swift; sourceTree = "<group>"; };
 		8E284126287AC2F6004DF53A /* Tests_EventStrore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_EventStrore.swift; sourceTree = "<group>"; };
 		8E284128287B21DA004DF53A /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		8E28412B287EF568004DF53A /* CoreData+Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Fixtures.swift"; sourceTree = "<group>"; };
 		8E5ECC5A284B511700E9B369 /* Tests Shared.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests Shared.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_RelativeEvent.swift; sourceTree = "<group>"; };
 		8E6E98E02842053D004A2331 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				8E5ECC5C284B511700E9B369 /* Tests_RelativeEvent.swift */,
 				8E284121286C5122004DF53A /* Tests_LocationManager.swift */,
 				8E284126287AC2F6004DF53A /* Tests_EventStrore.swift */,
+				8E28412B287EF568004DF53A /* CoreData+Fixtures.swift */,
 			);
 			path = "Tests Shared";
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			files = (
 				8E284122286C5122004DF53A /* Tests_LocationManager.swift in Sources */,
 				8E5ECC5D284B511700E9B369 /* Tests_RelativeEvent.swift in Sources */,
+				8E28412C287EF568004DF53A /* CoreData+Fixtures.swift in Sources */,
 				8E284127287AC2F6004DF53A /* Tests_EventStrore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
