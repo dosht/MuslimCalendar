@@ -148,8 +148,6 @@ class Test_AllocateEvent: XCTestCase {
         XCTAssertEqual(newAlloc.end, 0)
         XCTAssertEqual(newAlloc.startTimeName, .fajr)
         XCTAssertEqual(newAlloc.endTimeName, .sunrise)
-        
-        print(context.all())
     }
 }
 

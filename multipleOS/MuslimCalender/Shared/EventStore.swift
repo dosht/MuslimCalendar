@@ -29,13 +29,23 @@ struct EventStore {
     }
     
     @discardableResult
-    func createOrUpdate(_ relativeEvent: RelativeEvent, on day: Date, prayerCalculator: PrayerCalculator) -> EKEvent {
+    func createOrUpdate(_ relativeEvent: RelativeEvent, on day: Date, prayerCalculator: PrayerCalculator, repeats: Bool = false) -> EKEvent {
         let savedEKEvent = findEKEvent(relativeEvent)
-        let ekEvent = relativeEvent.transform(eventStore: ekEventStore, time: prayerCalculator.time, savedEKEvent: savedEKEvent)
+        let ekEvent = relativeEvent.transform(self, time: prayerCalculator.time, savedEKEvent: savedEKEvent)
         ekEvent.calendar = muslimCalender
+        let endDate = day.nextMonth.endOfMonth
+        if repeats {
+            let end = EKRecurrenceEnd(end: endDate)
+            let rule = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: end)
+            ekEvent.addRecurrenceRule(rule)
+        }
         let alarm = EKAlarm(relativeOffset: -10*60)
         ekEvent.addAlarm(alarm)
-        try! ekEventStore.save(ekEvent, span: .thisEvent)
+        try? ekEventStore.save(ekEvent, span: .futureEvents)
+        relativeEvent.ekEventIdentifier = ekEvent.eventIdentifier
+        if repeats {
+            updateFutureEvents(relativeEvent, startFrom: day, until: endDate, location: prayerCalculator.location)
+        }
         return ekEvent
     }
     
@@ -49,7 +59,28 @@ struct EventStore {
     
     func delete(_ relativeEvent: RelativeEvent) {
         if let ekEvent = findEKEvent(relativeEvent) {
-            try? ekEventStore.remove(ekEvent, span: .thisEvent)
+            //FIXME: Delete all events in clandar
+            try? ekEventStore.remove(ekEvent, span: .futureEvents)
+        }
+    }
+    
+    func updateFutureEvents(_ relativeEvent: RelativeEvent, startFrom startDate: Date, until endDate: Date, location: CLLocationCoordinate2D) {
+        let recurrenceRules = relativeEvent.getRecurrenceRules(self)
+        let events = ekEventStore
+            .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [muslimCalender]))
+            .filter { $0.recurrenceRules?.first == recurrenceRules.first }
+        print("===================== DEBUG")
+        print(recurrenceRules)
+        print(events)
+        print("===================== EMD DEBUG")
+        var today = startDate.tomorrow
+        var prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: today)!
+        for event in events {
+            prayerCalculator = PrayerCalculator(location: location, date: today)!
+            event.startDate = relativeEvent.startDate(time: prayerCalculator.time)
+            event.endDate = relativeEvent.endDate(time: prayerCalculator.time)
+            try? ekEventStore.save(event, span: .thisEvent)
+            today = today.tomorrow
         }
     }
     
@@ -78,13 +109,21 @@ struct EventStore {
 }
 
 extension RelativeEvent {
-    func transform(eventStore: EKEventStore, time: (TimeName) -> Date, savedEKEvent: EKEvent? = nil) -> EKEvent {
-        let ekEvent = savedEKEvent ?? EKEvent(eventStore: eventStore)
+    func transform(_ eventStore: EventStore, time: (TimeName) -> Date, savedEKEvent: EKEvent? = nil) -> EKEvent {
+        let ekEvent = savedEKEvent ?? EKEvent(eventStore: eventStore.ekEventStore)
         ekEvent.title = self.title
         ekEvent.startDate = self.startDate(time: time)
         ekEvent.endDate = self.endDate(time: time)
         ekEvent.isAllDay = false
         return ekEvent
+    }
+    
+    func getRecurrenceRules(_ eventStore: EventStore) -> [EKRecurrenceRule] {
+        if let ekEventIdentifier = self.ekEventIdentifier {
+            return eventStore.ekEventStore.event(withIdentifier: ekEventIdentifier)?.recurrenceRules ?? []
+        } else {
+            return []
+        }
     }
     
     func startDate(time: (TimeName) -> Date) -> Date {
@@ -93,5 +132,18 @@ extension RelativeEvent {
     
     func endDate(time: (TimeName) -> Date) -> Date {
         return time(self.endTimeName).addingTimeInterval(self.end)
+    }
+}
+
+extension Date {
+    var nextMonth: Date {
+        Calendar.current.date(byAdding: .month, value: 1, to: self)!
+    }
+    
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
     }
 }

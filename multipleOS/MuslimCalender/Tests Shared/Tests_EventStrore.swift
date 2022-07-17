@@ -33,6 +33,8 @@ class Tests_EventStrore: XCTestCase {
         let viewContext = PersistenceController.preview.container.viewContext
         let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
         let event = RelativeEvent.create(viewContext, "Test title")
+            .startAt(0, relativeTo: .fajr)
+            .endAt(30, relativeTo: .fajr)
         let eventStore = EventStore()
         let ekEventStore = eventStore.ekEventStore
         let prayerCalculator = PrayerCalculator(location: location, date: Date())!
@@ -72,33 +74,59 @@ class Tests_EventStrore: XCTestCase {
 //        XCTAssertEqual(events.count, 7)
     }
     
-    func test_weekly_create_events_try() {
+    func test_repeating_create_events() {
+        let viewContext = PersistenceController.preview.container.viewContext
+        let event = RelativeEvent.create(viewContext, "Test title")
+            .startAt(0, relativeTo: .fajr)
+            .endAt(30, relativeTo: .fajr)
+        
         let eventStore = EventStore()
         let ekEventStore = eventStore.ekEventStore
         
-        let ekEvent = EKEvent(eventStore: ekEventStore)
-        ekEvent.startDate = Date()
-        ekEvent.endDate = Date().addingTimeInterval(30*60)
-        ekEvent.title = "test event"
-        ekEvent.calendar = eventStore.muslimCalender
-        let rule = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: Date().addingTimeInterval(7*24*60*60)))
-        ekEvent.addRecurrenceRule(rule)
+        let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+        var prayerCalculator = PrayerCalculator(location: location, date: Date())!
         
-        XCTAssertEqual(ekEvent.recurrenceRules?.count, 1)
+        let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
+       
+        let events = ekEventStore.events(matching: ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().nextMonth.endOfMonth, calendars: [eventStore.muslimCalender]))
         
-        try! ekEventStore.save(ekEvent, span: .thisEvent)
+        XCTAssertGreaterThan(events.count, 30)
+        var today = Date()
+        for event in events {
+            prayerCalculator = PrayerCalculator(location: location, date: today)!
+            XCTAssertEqual(event.startDate, prayerCalculator.time(of: .fajr))
+            XCTAssertEqual(event.endDate, prayerCalculator.time(of: .fajr).addingTimeInterval(30))
+            today = today.tomorrow
+        }
+    }
+    
+    func test_endOfNextMonth() {
+        var dateComponents = DateComponents()
+        dateComponents.year = 1999
+        dateComponents.month = 1
+        let date: Date = Calendar(identifier: .gregorian).date(from: dateComponents)!
+        dateComponents.day = 31
+        dateComponents.hour = 23
+        dateComponents.minute = 59
+        dateComponents.second = 59
+        let expectedDate = Calendar(identifier: .gregorian).date(from: dateComponents)!
+        XCTAssertEqual(date.endOfMonth, expectedDate)
+    }
+    
+    func test_nextMonth() {
+        var dateComponents = DateComponents()
+        dateComponents.month = 11
+        var date = Calendar(identifier: .gregorian).date(from: dateComponents)!
+        dateComponents.month = 12
+        var expectedDate = Calendar(identifier: .gregorian).date(from: dateComponents)!
+        XCTAssertEqual(date.nextMonth, expectedDate)
         
-        let eventsToday = ekEventStore.events(matching: ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().endOfDay, calendars: [eventStore.muslimCalender]))
-        let eventsTomorrow = ekEventStore.events(matching: ekEventStore.predicateForEvents(withStart: Date().tomorrow.startOfDay, end: Date().tomorrow.endOfDay, calendars: [eventStore.muslimCalender]))
-        
-        print(eventsToday)
-        print(eventsTomorrow)
-        
-        print("====================================")
-        print(eventsToday.first?.recurrenceRules?.first)
-        print(eventsTomorrow.first?.recurrenceRules?.first)
-        print(eventsTomorrow.first?.recurrenceRules?.first == eventsToday.first?.recurrenceRules?.first)
-        print("====================================")
+        dateComponents.year = 1
+        date = Calendar(identifier: .gregorian).date(from: dateComponents)!
+        dateComponents.year = 2
+        dateComponents.month = 1
+        expectedDate = Calendar(identifier: .gregorian).date(from: dateComponents)!
+        XCTAssertEqual(date.nextMonth, expectedDate)
     }
     
     func test_delete_event() {

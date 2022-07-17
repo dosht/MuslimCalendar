@@ -42,9 +42,11 @@ struct PrayerCalculator {
     var params: CalculationParameters
     let adhanPrayerTimes: PrayerTimes
     let coordinates: Coordinates
+    let location: CLLocationCoordinate2D
     let date: DateComponents
     
     init?(location: CLLocationCoordinate2D, date: Date) {
+        self.location = location
         self.coordinates = Coordinates(latitude: location.latitude, longitude: location.longitude)
         
 //        params = CalculationMethod.turkey.params
