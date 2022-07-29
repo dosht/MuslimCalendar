@@ -94,6 +94,13 @@ class RelativeEventsViewModel: ObservableObject {
         // Connect the event to start prayer time only fo now
 //        editedEvent.startRelativeTo = allcatableSlot.startRelativeTo
 //        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
+//        let event = RelativeEvent.create(context, "3333333").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
+        let p = TestModel(context: context)
+        p.name = "hi"
+        print(">>>======================================================")
+        print(context.insertedObjects)
+        print("<<<======================================================")
+        try! context.save()
         editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, context: context, eventStore: eventStore)
         addingNewEvent = true
     }
@@ -140,6 +147,10 @@ class RelativeEventsViewModel: ObservableObject {
             print("Error fetching: \(error.localizedDescription)")
         }
         fetch()
+    }
+    
+    func deleteCalendar() {
+        try! eventStore.ekEventStore.removeCalendar(eventStore.muslimCalender, commit: true)
     }
     
     func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent { 

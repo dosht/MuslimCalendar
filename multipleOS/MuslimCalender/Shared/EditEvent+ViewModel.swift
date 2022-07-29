@@ -25,8 +25,11 @@ class EditEventViewModel: ObservableObject {
     init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D,
          context: NSManagedObjectContext = PersistenceController.preview.container.viewContext,
          eventStore: EventStore  = EventStore()) {
-        self.event = event ?? RelativeEvent.create(context, "").startAt(
-            alloc.start, relativeTo: alloc.startTimeName).endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
+        context.rollback()
+        self.event = event ?? RelativeEvent.create(context, "")
+            .startAt(0, relativeTo: .fajr)
+            .endAt(0 + 30*60, relativeTo: .fajr)
+        try! context.save()
         self.alloc = alloc
         prayerCalculator = PrayerCalculator(location: location, date: Date())!
         self.context = context
@@ -104,11 +107,11 @@ class EditEventViewModel: ObservableObject {
 //        if duration(event: alloc) == 0 {
 //            context.delete(alloc)
 //        }
-        try? context.save()
+        try! context.save()
         let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
         if event.ekEventIdentifier == nil {
             event.ekEventIdentifier = ekEvent.eventIdentifier
-            try? context.save()
+            try! context.save()
         }
     }
     

@@ -8,6 +8,10 @@
 import CoreData
 
 struct PersistenceController {
+    static func save() {
+        try! shared.container.viewContext.save()
+    }
+    
     static let shared: PersistenceController = {
         let result = PersistenceController()
         initEvents(result.container.viewContext)

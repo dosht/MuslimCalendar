@@ -18,14 +18,23 @@ struct ScheduleView: View {
         GeometryReader { geo in
             NavigationView {
                 VStack(spacing: 1) {
-                    HStack {
-                        DaysView(day: "Sun", geo: geo)
-                        DaysView(day: "Mon", geo: geo)
-                        DaysView(day: "Tue", geo: geo, selected: true)
-                        DaysView(day: "Wed", geo: geo)
-                        DaysView(day: "Thu", geo: geo)
-                        DaysView(day: "Fri", geo: geo)
-                        DaysView(day: "Sat", geo: geo)
+                    VStack {
+                        Button(action: {
+                            viewModel.deleteAll()
+                            viewModel.deleteCalendar()
+                        }, label: {
+                            Label("Reset", systemImage: "tornado")
+                                .foregroundColor(.red)
+                        })
+                        HStack {
+                            DaysView(day: "Sun", geo: geo)
+                            DaysView(day: "Mon", geo: geo)
+                            DaysView(day: "Tue", geo: geo, selected: true)
+                            DaysView(day: "Wed", geo: geo)
+                            DaysView(day: "Thu", geo: geo)
+                            DaysView(day: "Fri", geo: geo)
+                            DaysView(day: "Sat", geo: geo)
+                        }
                     }
                     List {
                         ForEach(viewModel.relativeEvents) { event in

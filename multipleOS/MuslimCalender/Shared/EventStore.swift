@@ -19,7 +19,11 @@ struct EventStore {
         if let calendar = calendars.first(where: { cal in cal.title == "Muslim Calendar" }) {
             return calendar
         } else {
-            let source = ekEventStore.sources.first
+            let source = ekEventStore.sources.filter({ s in s.title == "Default" || s.title == "iCloud" }).first
+            print("====================================")
+            print(ekEventStore.sources.map { s in s.title })
+            print(ekEventStore.sources.count)
+            print("====================================")
             let calendar = EKCalendar(for: .event, eventStore: ekEventStore)
             calendar.source = source
             calendar.title = "Muslim Calendar"
@@ -34,14 +38,14 @@ struct EventStore {
         let ekEvent = relativeEvent.transform(self, time: prayerCalculator.time, savedEKEvent: savedEKEvent)
         ekEvent.calendar = muslimCalender
         let endDate = day.nextMonth.endOfMonth
-        if repeats {
+        if repeats && !ekEvent.hasRecurrenceRules {
             let end = EKRecurrenceEnd(end: endDate)
             let rule = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: end)
             ekEvent.addRecurrenceRule(rule)
         }
         let alarm = EKAlarm(relativeOffset: -10*60)
         ekEvent.addAlarm(alarm)
-        try? ekEventStore.save(ekEvent, span: .futureEvents)
+        try? ekEventStore.save(ekEvent, span: .thisEvent)
         relativeEvent.ekEventIdentifier = ekEvent.eventIdentifier
         if repeats {
             updateFutureEvents(relativeEvent, startFrom: day, until: endDate, location: prayerCalculator.location)
@@ -59,7 +63,6 @@ struct EventStore {
     
     func delete(_ relativeEvent: RelativeEvent) {
         if let ekEvent = findEKEvent(relativeEvent) {
-            //FIXME: Delete all events in clandar
             try? ekEventStore.remove(ekEvent, span: .futureEvents)
         }
     }
@@ -69,10 +72,6 @@ struct EventStore {
         let events = ekEventStore
             .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [muslimCalender]))
             .filter { $0.recurrenceRules?.first == recurrenceRules.first }
-        print("===================== DEBUG")
-        print(recurrenceRules)
-        print(events)
-        print("===================== EMD DEBUG")
         var today = startDate.tomorrow
         var prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: today)!
         for event in events {

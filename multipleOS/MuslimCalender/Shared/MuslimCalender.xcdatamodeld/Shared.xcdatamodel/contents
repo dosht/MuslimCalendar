@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G5037d" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Moed" representedClassName="Moed" syncable="YES" codeGenerationType="class"/>
     <entity name="PrayerParam" representedClassName="PrayerParam" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="locationName" optional="YES" attributeType="String"/>
@@ -18,8 +19,13 @@
         <relationship name="next" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RelativeEvent" inverseName="prev" inverseEntity="RelativeEvent"/>
         <relationship name="prev" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RelativeEvent" inverseName="next" inverseEntity="RelativeEvent"/>
     </entity>
+    <entity name="TestModel" representedClassName="TestModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="PrayerParam" positionX="-299.015625" positionY="10.5703125" width="128" height="118"/>
         <element name="RelativeEvent" positionX="-342" positionY="-54" width="128" height="164"/>
+        <element name="TestModel" positionX="-324" positionY="27" width="128" height="44"/>
+        <element name="Moed" positionX="-306" positionY="45" width="128" height="29"/>
     </elements>
 </model>
