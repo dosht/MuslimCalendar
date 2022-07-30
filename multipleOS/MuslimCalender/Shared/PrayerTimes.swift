@@ -49,13 +49,22 @@ struct PrayerCalculator {
         self.location = location
         self.coordinates = Coordinates(latitude: location.latitude, longitude: location.longitude)
         
-//        params = CalculationMethod.turkey.params
-//        params.method = .turkey
+        params = CalculationMethod.turkey.params
+        params.method = .turkey
         
-        params = CalculationMethod.egyptian.params
-        params.madhab = .shafi
+//        params = CalculationMethod.egyptian.params
+//        params.madhab = .shafi
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         self.date = cal.dateComponents([.year, .month, .day], from: date)
+        
+//        var dateComponents: DateComponents? = nil
+//        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: location.latitude, longitude: location.longitude)) { (placemarks, error) in
+//            if let timeZone = placemarks?.first?.timeZone {
+//                dateComponents = cal.dateComponents(in: timeZone, from: date)
+//            }
+//        }
+//        self.date = dateComponents ?? cal.dateComponents([.year, .month, .day], from: date)
+        
         if let adhanPrayerTimes = PrayerTimes(coordinates: coordinates, date: self.date, calculationParameters: params) {
             self.adhanPrayerTimes = adhanPrayerTimes
         } else {

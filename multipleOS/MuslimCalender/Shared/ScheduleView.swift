@@ -14,14 +14,15 @@ struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: RelativeEventsViewModel
     
+    @State var showResetConfirmation = false
+    
     var body: some View {
         GeometryReader { geo in
             NavigationView {
                 VStack(spacing: 1) {
                     VStack {
                         Button(action: {
-                            viewModel.deleteAll()
-                            viewModel.deleteCalendar()
+                            showResetConfirmation.toggle()
                         }, label: {
                             Label("Reset", systemImage: "tornado")
                                 .foregroundColor(.red)
@@ -54,6 +55,12 @@ struct ScheduleView: View {
                 }
             }
             .navigationTitle(Text("Day Schedule"))
+            .alert("This will delete every thing. Are you sure?", isPresented: $showResetConfirmation) {
+                Button("Delete", role: .destructive) {
+                    viewModel.deleteAll()
+                    viewModel.deleteCalendar()
+                }
+            }
 //            .navigationViewStyle(.stack)
         }
         .onAppear {

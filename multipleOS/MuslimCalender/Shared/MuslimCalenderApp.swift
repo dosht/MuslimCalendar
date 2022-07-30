@@ -20,7 +20,8 @@ struct MuslimCalenderApp: App {
     var body: some Scene {
         WindowGroup {
             ScheduleView(viewModel: relativeEventsViewModel)
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+//                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

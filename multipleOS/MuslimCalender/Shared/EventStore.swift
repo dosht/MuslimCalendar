@@ -20,10 +20,6 @@ struct EventStore {
             return calendar
         } else {
             let source = ekEventStore.sources.filter({ s in s.title == "Default" || s.title == "iCloud" }).first
-            print("====================================")
-            print(ekEventStore.sources.map { s in s.title })
-            print(ekEventStore.sources.count)
-            print("====================================")
             let calendar = EKCalendar(for: .event, eventStore: ekEventStore)
             calendar.source = source
             calendar.title = "Muslim Calendar"
@@ -45,7 +41,7 @@ struct EventStore {
         }
         let alarm = EKAlarm(relativeOffset: -10*60)
         ekEvent.addAlarm(alarm)
-        try? ekEventStore.save(ekEvent, span: .thisEvent)
+        try! ekEventStore.save(ekEvent, span: .thisEvent)
         relativeEvent.ekEventIdentifier = ekEvent.eventIdentifier
         if repeats {
             updateFutureEvents(relativeEvent, startFrom: day, until: endDate, location: prayerCalculator.location)
