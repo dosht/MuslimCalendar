@@ -21,12 +21,21 @@ struct ScheduleView: View {
             NavigationView {
                 VStack(spacing: 1) {
                     VStack {
-                        Button(action: {
-                            showResetConfirmation.toggle()
-                        }, label: {
-                            Label("Reset", systemImage: "tornado")
-                                .foregroundColor(.red)
-                        })
+                        HStack {
+                            Button(action: {
+                                showResetConfirmation.toggle()
+                            }, label: {
+                                Label("Reset", systemImage: "tornado")
+                                    .foregroundColor(.red)
+                            }).padding(.leading)
+                            Spacer()
+                            Button(action: {
+                                viewModel.syncCalendar()
+                            }, label: {
+                                Label("Sync Calendar", systemImage: "arrow.triangle.2.circlepath")
+                                    .foregroundColor(.blue)
+                            }).padding(.trailing)
+                        }
                         HStack {
                             DaysView(day: "Sun", geo: geo)
                             DaysView(day: "Mon", geo: geo)

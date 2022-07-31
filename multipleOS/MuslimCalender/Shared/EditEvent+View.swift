@@ -51,6 +51,7 @@ struct EventEditor: View {
                         TextField("Event Title", text: $viewModel.event.title.toUnwrapped(defaultValue: ""))
                             .padding(4)
                             .font(.title2)
+                        Text("Between \(viewModel.event.startTimeName.rawValue) and \(viewModel.event.endTimeName.rawValue)").foregroundColor(.gray)
                     }
                     Section {
                         
@@ -212,6 +213,13 @@ struct DurationPicker: View {
     }
 }
 
+extension Binding {
+     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
+        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
+    }
+    
+}
+
 struct EventEditor_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = LocationManager().requestPermissionAndGetCurrentLocation()
@@ -224,11 +232,4 @@ struct EventEditor_Previews: PreviewProvider {
         EventEditor(viewModel: editEventViewModel, relativeEventsViewModel: relativeEventsViewModel)
             .previewInterfaceOrientation(.portrait)
     }
-}
-
-extension Binding {
-     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
-        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
-    }
-    
 }

@@ -151,6 +151,14 @@ class RelativeEventsViewModel: ObservableObject {
     func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent { 
         return event.expandAllocatableSlot(context: context)
     }
+    
+    func syncCalendar() {
+        let prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: Date())!
+        relativeEvents.filter({ event in !(event.isAdhan || event.isAllocatable) }).forEach { event in
+            eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
+        }
+        try! context.save()
+    }
 }
 
 extension TimeInterval {

@@ -64,10 +64,7 @@ struct EventStore {
     }
     
     func updateFutureEvents(_ relativeEvent: RelativeEvent, startFrom startDate: Date, until endDate: Date, location: CLLocationCoordinate2D) {
-        let recurrenceRules = relativeEvent.getRecurrenceRules(self)
-        let events = ekEventStore
-            .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [muslimCalender]))
-            .filter { $0.recurrenceRules?.first == recurrenceRules.first }
+        let events = findFutureEvents(relativeEvent, startFrom: startDate, until: endDate)
         var today = startDate.tomorrow
         var prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: today)!
         for event in events {
@@ -77,6 +74,14 @@ struct EventStore {
             try? ekEventStore.save(event, span: .thisEvent)
             today = today.tomorrow
         }
+    }
+    
+    func findFutureEvents(_ relativeEvent: RelativeEvent, startFrom startDate: Date, until endDate: Date) -> [EKEvent] {
+        let recurrenceRules = relativeEvent.getRecurrenceRules(self)
+        let events = ekEventStore
+            .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [muslimCalender]))
+            .filter { $0.recurrenceRules?.first == recurrenceRules.first }
+        return events
     }
     
     static func requestPermissionAndCreateEventStore() -> EKEventStore {

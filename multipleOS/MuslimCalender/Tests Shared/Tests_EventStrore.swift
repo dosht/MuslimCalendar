@@ -100,6 +100,46 @@ class Tests_EventStrore: XCTestCase {
         }
     }
     
+    func test_findFutureEvents() {
+        let viewContext = PersistenceController.preview.container.viewContext
+        let eventStore = EventStore()
+        let ekEventStore = eventStore.ekEventStore
+        
+        let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+        let prayerCalculator = PrayerCalculator(location: location, date: Date())!
+        
+        let date = Date().startOfDay
+        
+        let event1 = RelativeEvent.create(viewContext, "Test1")
+            .startAt(0, relativeTo: .fajr)
+            .endAt(30, relativeTo: .fajr)
+        let ekEvent1 = event1.transform(eventStore, time: prayerCalculator.time)
+        let rule1 = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: date.tomorrow.endOfDay))
+        ekEvent1.addRecurrenceRule(rule1)
+        ekEvent1.calendar = eventStore.muslimCalender
+        try! ekEventStore.save(ekEvent1, span: .thisEvent)
+        event1.ekEventIdentifier = ekEvent1.eventIdentifier
+        
+        let event2 = RelativeEvent.create(viewContext, "Test2")
+            .startAt(30, relativeTo: .fajr)
+            .endAt(60, relativeTo: .fajr)
+        let ekEvent2 = event2.transform(eventStore, time: prayerCalculator.time)
+        let rule2 = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: date.tomorrow.endOfDay))
+        ekEvent2.addRecurrenceRule(rule2)
+        ekEvent2.calendar = eventStore.muslimCalender
+        try! ekEventStore.save(ekEvent2, span: .thisEvent)
+        event2.ekEventIdentifier = ekEvent2.eventIdentifier
+        
+        try! viewContext.save()
+        
+        let events1 = eventStore.findFutureEvents(event1, startFrom: date.startOfDay, until: date.tomorrow.endOfDay)
+        
+        let events2 = eventStore.findFutureEvents(event2, startFrom: date.startOfDay, until: date.tomorrow.endOfDay)
+        
+        XCTAssertEqual(events1.count, 2)
+        XCTAssertEqual(events2.count, 2)
+    }
+    
     func test_endOfNextMonth() {
         var dateComponents = DateComponents()
         dateComponents.year = 1999
