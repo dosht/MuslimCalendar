@@ -80,7 +80,13 @@ struct EventStore {
         let recurrenceRules = relativeEvent.getRecurrenceRules(self)
         let events = ekEventStore
             .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [muslimCalender]))
-            .filter { $0.recurrenceRules?.first == recurrenceRules.first }
+            .filter { $0.recurrenceRules?.first == recurrenceRules.first && $0.title == relativeEvent.title }
+        print("----------------------------------------")
+        print("count of events: \(events.count)")
+        print(events.map({ ekEvent in
+            ekEvent.title
+        }))
+        print("----------------------------------------")
         return events
     }
     

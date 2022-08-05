@@ -26,8 +26,8 @@ class EditEventViewModel: ObservableObject {
          context: NSManagedObjectContext = PersistenceController.preview.container.viewContext,
          eventStore: EventStore  = EventStore()) {
         self.event = event ?? RelativeEvent.create(context, "")
-            .startAt(0, relativeTo: alloc.startTimeName)
-            .endAt(0 + 30*60, relativeTo: alloc.startTimeName)
+            .startAt(alloc.start, relativeTo: alloc.startTimeName)
+            .endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
         self.alloc = alloc
         prayerCalculator = PrayerCalculator(location: location, date: Date())!
         self.context = context
