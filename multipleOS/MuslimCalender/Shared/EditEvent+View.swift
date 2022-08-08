@@ -130,32 +130,6 @@ struct EventEditor: View {
     }
 }
 
-extension TimeInterval {
-    var duration: Duration {
-        get { Duration(timeInterval: self) }
-        set { self = newValue.timeInterval }
-    }
-}
-
-struct Duration {
-    var minutes: Int
-    var hours: Int
-    
-    init(minutes: Int = 0, hours: Int = 0) {
-        self.minutes = minutes
-        self.hours = hours
-    }
-    
-    init(timeInterval: TimeInterval) {
-        self.minutes = Int(timeInterval.minute ?? 0)
-        self.hours = Int(timeInterval.hour ?? 0)
-    }
-    
-    var timeInterval: TimeInterval {
-        Double(hours * 60 * 60 + minutes * 60)
-    }
-}
-
 struct DurationPicker: View {
     var text: String
     var trailingText: String?
@@ -210,6 +184,32 @@ struct DurationPicker: View {
                 }
             }
         }
+    }
+}
+
+extension TimeInterval {
+    var duration: Duration {
+        get { Duration(timeInterval: self) }
+        set { self = newValue.timeInterval }
+    }
+}
+
+struct Duration {
+    var minutes: Int
+    var hours: Int
+    
+    init(minutes: Int = 0, hours: Int = 0) {
+        self.minutes = minutes
+        self.hours = hours
+    }
+    
+    init(timeInterval: TimeInterval) {
+        self.minutes = Int(timeInterval.minute ?? 0)
+        self.hours = Int(timeInterval.hour ?? 0)
+    }
+    
+    var timeInterval: TimeInterval {
+        Double(hours * 60 * 60 + minutes * 60)
     }
 }
 

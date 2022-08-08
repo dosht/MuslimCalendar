@@ -151,9 +151,6 @@ struct CardView: View {
                 .padding()
             }
         }
-//        .background(.mint)
-//        .listRowInsets(.init(top: 0, leading: 15, bottom: 0, trailing: 10))
-//        .listRowSeparator(.hidden)
     }
 }
 
@@ -222,17 +219,23 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 
 
 
-//struct CalendarView_Previews: PreviewProvider {
-//    static let viewContext = PersistenceController.preview.container.viewContext
-//    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-//    static var previews: some View {
-//        Group {
-//            ScheduleView(context: viewContext, location: location)
-//                .previewInterfaceOrientation(.portrait)
-//                .environment(\.managedObjectContext, viewContext)
-//            ScheduleView(context: viewContext, location: location)
-//                .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
-//                .environment(\.managedObjectContext, viewContext)
-//        }
-//    }
-//}
+struct CalendarView_Previews: PreviewProvider {
+    static let viewContext = PersistenceController.preview.container.viewContext
+    static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+    static let event: RelativeEvent = {
+        let event = RelativeEvent.create(viewContext, "Test").startAt(0, relativeTo: .fajr).endAt(60, relativeTo: .fajr)
+        try! viewContext.save()
+        return event
+    }()
+    static let viewModel = RelativeEventsViewModel(context: viewContext, location: location, eventStore: EventStore())
+    static var previews: some View {
+        Group {
+            ScheduleView(viewModel: viewModel)
+                .previewInterfaceOrientation(.portrait)
+                .environment(\.managedObjectContext, viewContext)
+            ScheduleView(viewModel: viewModel)
+                .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
+                .environment(\.managedObjectContext, viewContext)
+        }
+    }
+}

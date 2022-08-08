@@ -41,7 +41,7 @@ struct EventStore {
         }
         let alarm = EKAlarm(relativeOffset: -10*60)
         ekEvent.addAlarm(alarm)
-        try! ekEventStore.save(ekEvent, span: .thisEvent)
+        try! ekEventStore.save(ekEvent, span: .futureEvents)
         relativeEvent.ekEventIdentifier = ekEvent.eventIdentifier
         if repeats {
             updateFutureEvents(relativeEvent, startFrom: day, until: endDate, location: prayerCalculator.location)
@@ -81,12 +81,6 @@ struct EventStore {
         let events = ekEventStore
             .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [muslimCalender]))
             .filter { $0.recurrenceRules?.first == recurrenceRules.first && $0.title == relativeEvent.title }
-        print("----------------------------------------")
-        print("count of events: \(events.count)")
-        print(events.map({ ekEvent in
-            ekEvent.title
-        }))
-        print("----------------------------------------")
         return events
     }
     
