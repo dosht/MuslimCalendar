@@ -126,6 +126,8 @@ struct EventEditor: View {
                     relativeEventsViewModel.doneEditing()
                 }, label: { Text("Delete") }).padding().foregroundColor(.red)
             }
+        }.onDisappear {
+            viewModel.cancel()
         }
     }
 }
