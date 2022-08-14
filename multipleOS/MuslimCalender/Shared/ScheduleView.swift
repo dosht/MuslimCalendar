@@ -112,16 +112,17 @@ struct AdhanView: View {
     let adhanTime: String
     
     var body: some View {
-        HStack {
-            Text(text)
-            Spacer()
-            Text(adhanTime)
+        ZStack {
+            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.white).opacity(0.1)
+            HStack {
+                Text(text)
+                Text(adhanTime)
+                Spacer()
+            }
+            .font(.headline)
+            .padding(7)
         }
-        .listStyle(.plain)
-        .listRowSeparator(.hidden)
-        .padding(0)
-        .foregroundColor(.gray)
-        .font(.headline)
+//        .listRowSeparator(.hidden)
         .frame(alignment: .center)
     }
 }
@@ -134,13 +135,13 @@ struct CardView: View {
     var body: some View {
         NavigationLink(destination: EventView(event: event, viewModel: viewModel)) {
             HStack {
-                RoundedRectangle(cornerRadius: 0, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
+                RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
                     Text(event.title ?? "N/A")
                         .font(.headline)
                     Spacer()
                     HStack(spacing: 4) {
-                        Label("starts \(event.startText)", systemImage: "person.3").foregroundColor(.primary)
+                        Label("starts \(event.startText)", systemImage: "calendar").foregroundColor(.primary)
                         Spacer()
                         Label(viewModel.duration(event: event).timeIntervalText, systemImage: "clock")
                             .labelStyle(.trailingIcon)
@@ -151,6 +152,8 @@ struct CardView: View {
                 .padding()
             }
         }
+        .background(.thinMaterial)
+//        .listRowSeparator(.hidden)
     }
 }
 
@@ -174,18 +177,19 @@ struct AvailableTimeView: View {
             GeometryReader { geo in
                 HStack {
                     Text(viewModel.duration(event: availableSlot).timeIntervalText)
-                }.frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                // Add event button
+                }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+                    .opacity(0.5)
                 Button(action: {
                     viewModel.chooseAllocatableSlot(allcatableSlot: availableSlot)
                 }, label: {
-                    Label("", systemImage: "plus.circle.fill")
-                        .foregroundColor(.secondary).frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+                    Label("", systemImage: "calendar.badge.plus")
+                        .foregroundColor(.blue).frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)
                         .font(.title)
                 })
             }
-            .padding(30).background(.regularMaterial)
-            .listRowSeparator(.hidden)
+            .padding(30)
+//            .background(.regularMaterial)
+//            .listRowSeparator(.hidden)
             .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
             .sheet(isPresented: $viewModel.addingNewEvent) {
                 if let vm = viewModel.editEventViewModel {
@@ -201,33 +205,20 @@ struct AvailableTimeView: View {
     }
 }
 
-struct PrayerTimeView: View {
-    let prayerName: String
-    var body: some View {
-//        ZStack {
-            Text(prayerName)
-                .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 0))
-                .listRowSeparator(.hidden)
-                .foregroundColor(.gray)
-//        }
-    }
-}
-
 extension LabelStyle where Self == TrailingIconLabelStyle {
     static var trailingIcon: Self { Self() }
 }
 
-
-
 struct CalendarView_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-    static let event: RelativeEvent = {
-        let event = RelativeEvent.create(viewContext, "Test").startAt(0, relativeTo: .fajr).endAt(60, relativeTo: .fajr)
-        try! viewContext.save()
-        return event
+    static let viewModel = {
+        let viewModel = RelativeEventsViewModel(context: viewContext, location: location, eventStore: EventStore())
+        let event1 = RelativeEvent.create(viewContext, "Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
+        let event2 = RelativeEvent.create(viewContext, "Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
+        viewModel.relativeEvents = [event1, event2]
+        return viewModel
     }()
-    static let viewModel = RelativeEventsViewModel(context: viewContext, location: location, eventStore: EventStore())
     static var previews: some View {
         Group {
             ScheduleView(viewModel: viewModel)
@@ -239,3 +230,4 @@ struct CalendarView_Previews: PreviewProvider {
         }
     }
 }
+
