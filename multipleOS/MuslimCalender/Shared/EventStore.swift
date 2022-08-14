@@ -42,7 +42,6 @@ struct EventStore {
         let alarm = EKAlarm(relativeOffset: -10*60)
         ekEvent.addAlarm(alarm)
         try! ekEventStore.save(ekEvent, span: .futureEvents)
-        relativeEvent.ekEventIdentifier = ekEvent.eventIdentifier
         if repeats {
             updateFutureEvents(relativeEvent, startFrom: day, until: endDate, location: prayerCalculator.location)
         }
@@ -50,6 +49,7 @@ struct EventStore {
     }
     
     func findEKEvent(_ relativeEvent: RelativeEvent) -> EKEvent? {
+        print(relativeEvent.ekEventIdentifier)
         if let ekEventIdentifier = relativeEvent.ekEventIdentifier {
             return ekEventStore.event(withIdentifier: ekEventIdentifier)
         } else {
@@ -59,6 +59,7 @@ struct EventStore {
     
     func delete(_ relativeEvent: RelativeEvent) {
         if let ekEvent = findEKEvent(relativeEvent) {
+            print(ekEvent)
             try? ekEventStore.remove(ekEvent, span: .futureEvents)
         }
     }
