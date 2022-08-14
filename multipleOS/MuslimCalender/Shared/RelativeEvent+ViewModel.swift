@@ -156,7 +156,7 @@ class RelativeEventsViewModel: ObservableObject {
         let prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: Date())!
         relativeEvents.filter({ event in !(event.isAdhan || event.isAllocatable) }).forEach { event in
             eventStore.delete(event)
-            eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
+            eventStore.createOrUpdate(event, on: Date().startOfDay, prayerCalculator: prayerCalculator, repeats: true)
         }
         try! context.save()
     }

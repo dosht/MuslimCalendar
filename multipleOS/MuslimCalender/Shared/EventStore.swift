@@ -49,7 +49,6 @@ struct EventStore {
     }
     
     func findEKEvent(_ relativeEvent: RelativeEvent) -> EKEvent? {
-        print(relativeEvent.ekEventIdentifier)
         if let ekEventIdentifier = relativeEvent.ekEventIdentifier {
             return ekEventStore.event(withIdentifier: ekEventIdentifier)
         } else {
