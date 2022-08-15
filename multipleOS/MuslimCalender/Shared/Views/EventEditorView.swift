@@ -16,7 +16,7 @@ struct EventEditorView: View {
     
 //    @ObservedObject var event: RelativeEvent? = nil
     
-    @ObservedObject var viewModel: EditEventViewModel
+    @ObservedObject var viewModel: EventEditorViewModel
     @ObservedObject var relativeEventsViewModel: ScheduleViewModel
   
     
@@ -56,7 +56,7 @@ struct EventEditorView: View {
                     Section {
                         
                         Picker("Allocation Type", selection: $viewModel.allocationType) {
-                            ForEach(EditEventViewModel.AllocationType.allCases) { allocationType in
+                            ForEach(EventEditorViewModel.AllocationType.allCases) { allocationType in
                                 Text(allocationType.rawValue).tag(allocationType)
                             }
                         }.pickerStyle(.segmented)

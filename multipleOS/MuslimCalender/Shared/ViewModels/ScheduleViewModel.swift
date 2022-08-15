@@ -28,7 +28,7 @@ class ScheduleViewModel: ObservableObject {
     var editingEvent: Bool = false
     
     @Published
-    var editEventViewModel: EditEventViewModel? = nil
+    var editEventViewModel: EventEditorViewModel? = nil
 //
 //    @Published
     var chosenAllocatableSlot: RelativeEvent? = nil
@@ -90,12 +90,12 @@ class ScheduleViewModel: ObservableObject {
 //        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
 //        let event = RelativeEvent.create(context, "3333333").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
 
-        editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, eventStore: eventStore)
+        editEventViewModel = EventEditorViewModel(nil, availableSlot: allcatableSlot, location: location, eventStore: eventStore)
         addingNewEvent = true
     }
     
     func edit(event: RelativeEvent) {
-        editEventViewModel = EditEventViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, eventStore: eventStore)
+        editEventViewModel = EventEditorViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, eventStore: eventStore)
         editingEvent = true
     }
     

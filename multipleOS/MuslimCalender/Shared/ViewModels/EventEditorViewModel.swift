@@ -11,7 +11,7 @@ import CoreLocation
 import CoreData
 import Resolver
 
-class EditEventViewModel: ObservableObject {
+class EventEditorViewModel: ObservableObject {
     //MARK: - Dependencies
     @Injected private var relativeEventRepository: RelativeEventRepository
     
@@ -127,7 +127,7 @@ class EditEventViewModel: ObservableObject {
 extension RelativeEvent {
     
     @discardableResult
-    func setDuration(_ duration: TimeInterval, allocatableSlot alloc: RelativeEvent, allocationType: EditEventViewModel.AllocationType) -> RelativeEvent {
+    func setDuration(_ duration: TimeInterval, allocatableSlot alloc: RelativeEvent, allocationType: EventEditorViewModel.AllocationType) -> RelativeEvent {
         switch allocationType {
         case .begnning:
             self.startTimeName = alloc.startTimeName
