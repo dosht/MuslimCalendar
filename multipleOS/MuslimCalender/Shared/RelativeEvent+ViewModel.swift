@@ -121,18 +121,20 @@ class RelativeEventsViewModel: ObservableObject {
     }
     
     func deleteEvent(indexSet: IndexSet) {
-        indexSet.map { relativeEvents[$0] }.forEach(eventStore.delete)
-        indexSet.map { relativeEvents[$0] }.forEach(context.delete)
-        try? context.save()
+        let events = indexSet.map { relativeEvents[$0] }
+        print(events)
         indexSet.forEach { relativeEvents.remove(at: $0) }
+        events.forEach(deleteEvent)
     }
     
     func deleteEvent(event: RelativeEvent) {
+        expandAllocatableSlot(event)
         eventStore.delete(event)
         context.delete(event)
         try? context.save()
-        doneEditing()
+        fetch()
     }
+    
     
     func deleteAll() {
         fetch().forEach(context.delete)

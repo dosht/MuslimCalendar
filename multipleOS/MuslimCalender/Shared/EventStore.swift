@@ -58,7 +58,6 @@ struct EventStore {
     
     func delete(_ relativeEvent: RelativeEvent) {
         if let ekEvent = findEKEvent(relativeEvent) {
-            print(ekEvent)
             try? ekEventStore.remove(ekEvent, span: .futureEvents)
         }
     }
