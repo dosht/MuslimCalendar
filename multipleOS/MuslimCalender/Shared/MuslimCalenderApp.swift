@@ -12,19 +12,12 @@ import CoreLocation
 struct MuslimCalenderApp: App {
     
     @StateObject
-    private var relativeEventsViewModel = ScheduleViewModel(
-        context: PersistenceController.shared.container.viewContext,
-//        context: PersistenceController.preview.container.viewContext,
-        location: LocationManager().requestPermissionAndGetCurrentLocation(),
-        eventStore: EventStore()
-    )
+    private var relativeEventsViewModel = ScheduleViewModel(location: LocationManager().requestPermissionAndGetCurrentLocation())
 
     var body: some Scene {
         WindowGroup {
             ScheduleView()
                 .environmentObject(relativeEventsViewModel)
-                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-//                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

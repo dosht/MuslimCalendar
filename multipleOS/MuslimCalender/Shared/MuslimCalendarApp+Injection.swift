@@ -12,5 +12,6 @@ extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         register { PersistenceController.shared }.scope(.application)
         register { RelativeEventRepository() }.scope(.application)
+        register { EventKitRepository() }.scope(.application)
     }
 }

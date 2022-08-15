@@ -7,11 +7,11 @@
 
 import EventKit
 
-struct EventStore {
+struct EventKitRepository {
     let ekEventStore: EKEventStore
     
     init() {
-        self.ekEventStore = EventStore.requestPermissionAndCreateEventStore()
+        self.ekEventStore = EventKitRepository.requestPermissionAndCreateEventStore()
     }
     
     var muslimCalender: EKCalendar {
@@ -108,7 +108,7 @@ struct EventStore {
 }
 
 extension RelativeEvent {
-    func transform(_ eventStore: EventStore, time: (TimeName) -> Date, savedEKEvent: EKEvent? = nil) -> EKEvent {
+    func transform(_ eventStore: EventKitRepository, time: (TimeName) -> Date, savedEKEvent: EKEvent? = nil) -> EKEvent {
         let ekEvent = savedEKEvent ?? EKEvent(eventStore: eventStore.ekEventStore)
         ekEvent.title = self.title
         ekEvent.startDate = self.startDate(time: time)
@@ -117,7 +117,7 @@ extension RelativeEvent {
         return ekEvent
     }
     
-    func getRecurrenceRules(_ eventStore: EventStore) -> [EKRecurrenceRule] {
+    func getRecurrenceRules(_ eventStore: EventKitRepository) -> [EKRecurrenceRule] {
         if let ekEventIdentifier = self.ekEventIdentifier {
             return eventStore.ekEventStore.event(withIdentifier: ekEventIdentifier)?.recurrenceRules ?? []
         } else {

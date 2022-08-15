@@ -21,7 +21,7 @@ class Tests_EventStrore: XCTestCase {
     }
     
     func resetCalendar() throws {
-        let eventStore = EventStore()
+        let eventStore = EventKitRepository()
         let ekEventStore = eventStore.ekEventStore
         let calendars = ekEventStore.calendars(for: .event)
         if let calendar = calendars.first(where: { cal in cal.title == "Muslim Calendar" }) {
@@ -35,7 +35,7 @@ class Tests_EventStrore: XCTestCase {
         let event = RelativeEvent.create(viewContext, "Test title")
             .startAt(0, relativeTo: .fajr)
             .endAt(30, relativeTo: .fajr)
-        let eventStore = EventStore()
+        let eventStore = EventKitRepository()
         let ekEventStore = eventStore.ekEventStore
         let prayerCalculator = PrayerCalculator(location: location, date: Date())!
         
@@ -51,7 +51,7 @@ class Tests_EventStrore: XCTestCase {
         let viewContext = PersistenceController.preview.container.viewContext
         let event = RelativeEvent.create(viewContext, "Test title")
         
-        let eventStore = EventStore()
+        let eventStore = EventKitRepository()
         let ekEventStore = eventStore.ekEventStore
         
         let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
@@ -80,7 +80,7 @@ class Tests_EventStrore: XCTestCase {
             .startAt(0, relativeTo: .fajr)
             .endAt(30, relativeTo: .fajr)
         
-        let eventStore = EventStore()
+        let eventStore = EventKitRepository()
         let ekEventStore = eventStore.ekEventStore
         
         let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
@@ -102,7 +102,7 @@ class Tests_EventStrore: XCTestCase {
     
     func test_findFutureEvents() {
         let viewContext = PersistenceController.preview.container.viewContext
-        let eventStore = EventStore()
+        let eventStore = EventKitRepository()
         let ekEventStore = eventStore.ekEventStore
         
         let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
@@ -173,7 +173,7 @@ class Tests_EventStrore: XCTestCase {
         let viewContext = PersistenceController.preview.container.viewContext
         let event = RelativeEvent.create(viewContext, "Test title")
         
-        let eventStore = EventStore()
+        let eventStore = EventKitRepository()
         let ekEventStore = eventStore.ekEventStore
         
         let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)

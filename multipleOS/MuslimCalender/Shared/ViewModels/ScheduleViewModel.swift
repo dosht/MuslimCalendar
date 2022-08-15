@@ -12,12 +12,11 @@ import CoreLocation
 import Resolver
 
 class ScheduleViewModel: ObservableObject {
-    private let eventStore: EventStore
-
-    //MARK: - Dependencies
+    // MARK: - Dependencies
     @Injected private var relativeEventRepository: RelativeEventRepository
+    @Injected private var eventKitRepository: EventKitRepository
    
-    //MARK: - Publishers
+    // MARK: - Publishers
     @Published
     var relativeEvents: [RelativeEvent] = []
     
@@ -38,9 +37,8 @@ class ScheduleViewModel: ObservableObject {
     
     var location: CLLocationCoordinate2D
     
-    init (context: NSManagedObjectContext, location: CLLocationCoordinate2D, eventStore: EventStore) {
+    init (location: CLLocationCoordinate2D) {
         self.location = location
-        self.eventStore = eventStore
         relativeEventRepository.$relativeEvents.assign(to: &$relativeEvents)
     }
     
@@ -77,9 +75,6 @@ class ScheduleViewModel: ObservableObject {
 
     func fetch() {
         relativeEventRepository.fetch()
-        print("-----------------------------------------")
-        print(relativeEvents.map {$0.title})
-        print("-----------------------------------------")
     }
     
     func chooseAllocatableSlot(allcatableSlot: RelativeEvent) {
@@ -90,12 +85,12 @@ class ScheduleViewModel: ObservableObject {
 //        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
 //        let event = RelativeEvent.create(context, "3333333").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
 
-        editEventViewModel = EventEditorViewModel(nil, availableSlot: allcatableSlot, location: location, eventStore: eventStore)
+        editEventViewModel = EventEditorViewModel(nil, availableSlot: allcatableSlot, location: location)
         addingNewEvent = true
     }
     
     func edit(event: RelativeEvent) {
-        editEventViewModel = EventEditorViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, eventStore: eventStore)
+        editEventViewModel = EventEditorViewModel(event, availableSlot: expandAllocatableSlot(event), location: location)
         editingEvent = true
     }
     
@@ -123,7 +118,7 @@ class ScheduleViewModel: ObservableObject {
     
     func deleteEvent(event: RelativeEvent) {
         expandAllocatableSlot(event)
-        eventStore.delete(event)
+        eventKitRepository.delete(event)
         relativeEventRepository.deleteEvent(event: event)
     }
     
@@ -133,7 +128,7 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func deleteCalendar() {
-        try! eventStore.ekEventStore.removeCalendar(eventStore.muslimCalender, commit: true)
+        try! eventKitRepository.ekEventStore.removeCalendar(eventKitRepository.muslimCalender, commit: true)
     }
     
     func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent {
@@ -144,8 +139,8 @@ class ScheduleViewModel: ObservableObject {
     func syncCalendar() {
         let prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: Date())!
         relativeEvents.filter({ event in !(event.isAdhan || event.isAllocatable) }).forEach { event in
-            eventStore.delete(event)
-            let ekEvent = eventStore.createOrUpdate(event, on: Date().startOfDay, prayerCalculator: prayerCalculator, repeats: true)
+            eventKitRepository.delete(event)
+            let ekEvent = eventKitRepository.createOrUpdate(event, on: Date().startOfDay, prayerCalculator: prayerCalculator, repeats: true)
             event.ekEventIdentifier = ekEvent.eventIdentifier
         }
         relativeEventRepository.save()

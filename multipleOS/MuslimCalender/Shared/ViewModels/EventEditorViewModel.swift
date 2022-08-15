@@ -12,11 +12,11 @@ import CoreData
 import Resolver
 
 class EventEditorViewModel: ObservableObject {
-    //MARK: - Dependencies
+    // MARK: - Dependencies
     @Injected private var relativeEventRepository: RelativeEventRepository
+    @Injected private var eventKitRepository: EventKitRepository
     
-    private let eventStore: EventStore
-    
+    // MARK: - Publishers
     @Published
     var event: RelativeEvent
     
@@ -25,13 +25,12 @@ class EventEditorViewModel: ObservableObject {
     
     private var prayerCalculator: PrayerCalculator
     
-    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D, eventStore: EventStore  = EventStore()) {
+    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D) {
         self.event = event ?? _relativeEventRepository.wrappedValue.newEvent()
             .startAt(alloc.start, relativeTo: alloc.startTimeName)
             .endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
         self.alloc = alloc
         prayerCalculator = PrayerCalculator(location: location, date: Date())!
-        self.eventStore = eventStore
         if let event = event {
             self.eventDuration = event.duration(time: prayerCalculator.time)
         } else {
@@ -106,7 +105,7 @@ class EventEditorViewModel: ObservableObject {
 //            context.delete(alloc)
 //        }
         relativeEventRepository.save()
-        let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
+        let ekEvent = eventKitRepository.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
         if event.ekEventIdentifier == nil {
             event.ekEventIdentifier = ekEvent.eventIdentifier
             relativeEventRepository.save()

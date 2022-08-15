@@ -213,7 +213,7 @@ struct CalendarView_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
     static let viewModel = {
-        let viewModel = ScheduleViewModel(context: viewContext, location: location, eventStore: EventStore())
+        let viewModel = ScheduleViewModel(location: location)
         let event1 = RelativeEvent.create(viewContext, "Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
         let event2 = RelativeEvent.create(viewContext, "Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
         viewModel.relativeEvents = [event1, event2]
@@ -222,12 +222,10 @@ struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ScheduleView()
-                .environment(\.managedObjectContext, viewContext)
                 .environmentObject(viewModel)
                 .previewInterfaceOrientation(.portrait)
             ScheduleView()
                 .environmentObject(viewModel)
-                .environment(\.managedObjectContext, viewContext)
                 .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
         }
     }
