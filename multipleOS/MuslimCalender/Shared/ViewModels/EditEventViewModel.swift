@@ -9,9 +9,12 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import CoreData
+import Resolver
 
 class EditEventViewModel: ObservableObject {
-    private let context: NSManagedObjectContext
+    let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
+    
+//    private let context: NSManagedObjectContext
     private let eventStore: EventStore
     
     @Published
@@ -22,15 +25,12 @@ class EditEventViewModel: ObservableObject {
     
     private var prayerCalculator: PrayerCalculator
     
-    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D,
-         context: NSManagedObjectContext = PersistenceController.preview.container.viewContext,
-         eventStore: EventStore  = EventStore()) {
+    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D, eventStore: EventStore  = EventStore()) {
         self.event = event ?? RelativeEvent.create(context, "")
             .startAt(alloc.start, relativeTo: alloc.startTimeName)
             .endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
         self.alloc = alloc
         prayerCalculator = PrayerCalculator(location: location, date: Date())!
-        self.context = context
         self.eventStore = eventStore
         if let event = event {
             self.eventDuration = event.duration(time: prayerCalculator.time)

@@ -46,6 +46,9 @@
 		8E881851283964E7004AA721 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E881850283964E7004AA721 /* Adhan */; };
 		8EA2CB5A285F640A000B5BF7 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CB59285F640A000B5BF7 /* EventStore.swift */; };
 		8EFDEB9928AA820D0039EF22 /* RelativeEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEB9828AA820D0039EF22 /* RelativeEventRepository.swift */; };
+		8EFDEB9D28AA91F60039EF22 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEB9C28AA91F60039EF22 /* Event.swift */; };
+		8EFDEBA028AA93B60039EF22 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 8EFDEB9F28AA93B60039EF22 /* Resolver */; };
+		8EFDEBA228AA94770039EF22 /* MuslimCalendarApp+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEBA128AA94770039EF22 /* MuslimCalendarApp+Injection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,8 @@
 		8EA2CB58285F628C000B5BF7 /* MuslimCalender--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MuslimCalender--iOS--Info.plist"; sourceTree = "<group>"; };
 		8EA2CB59285F640A000B5BF7 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		8EFDEB9828AA820D0039EF22 /* RelativeEventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeEventRepository.swift; sourceTree = "<group>"; };
+		8EFDEB9C28AA91F60039EF22 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		8EFDEBA128AA94770039EF22 /* MuslimCalendarApp+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuslimCalendarApp+Injection.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EFDEBA028AA93B60039EF22 /* Resolver in Frameworks */,
 				8E881851283964E7004AA721 /* Adhan in Frameworks */,
 				8E109A8E283BD1DE00F17699 /* Adhan in Frameworks */,
 			);
@@ -181,6 +187,7 @@
 				8EFDEB9528AA4CA30039EF22 /* ViewModels */,
 				8EFDEB9428AA4C8B0039EF22 /* Views */,
 				8E881808283926F8004AA721 /* MuslimCalenderApp.swift */,
+				8EFDEBA128AA94770039EF22 /* MuslimCalendarApp+Injection.swift */,
 				8E88180B283926F8004AA721 /* Assets.xcassets */,
 				8E881806283926F8004AA721 /* MuslimCalender.xcdatamodeld */,
 			);
@@ -247,6 +254,7 @@
 		8EFDEB9628AA4CAB0039EF22 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8EFDEB9C28AA91F60039EF22 /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,6 +324,7 @@
 			packageProductDependencies = (
 				8E881850283964E7004AA721 /* Adhan */,
 				8E109A8D283BD1DE00F17699 /* Adhan */,
+				8EFDEB9F28AA93B60039EF22 /* Resolver */,
 			);
 			productName = "MuslimCalender (iOS)";
 			productReference = 8E881810283926F8004AA721 /* MuslimCalender.app */;
@@ -420,6 +429,7 @@
 				8E88184F283964E7004AA721 /* XCRemoteSwiftPackageReference "adhan-swift" */,
 				8E109A8C283BD1DE00F17699 /* XCRemoteSwiftPackageReference "adhan-swift" */,
 				8E109A8F283BD1FF00F17699 /* XCRemoteSwiftPackageReference "adhan-swift" */,
+				8EFDEB9E28AA93B60039EF22 /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = 8E881811283926F8004AA721 /* Products */;
 			projectDirPath = "";
@@ -494,6 +504,8 @@
 				8E84D03428539AE70011EAF3 /* EditEventViewModel.swift in Sources */,
 				8E88184D283955CD004AA721 /* PrayerTimes.swift in Sources */,
 				8E7CA019284A73F600C98B01 /* RelativeEvent+PrayerTimes.swift in Sources */,
+				8EFDEBA228AA94770039EF22 /* MuslimCalendarApp+Injection.swift in Sources */,
+				8EFDEB9D28AA91F60039EF22 /* Event.swift in Sources */,
 				8EFDEB9928AA820D0039EF22 /* RelativeEventRepository.swift in Sources */,
 				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8A283BA5A400F17699 /* ScheduleView.swift in Sources */,
@@ -726,6 +738,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MuslimCalender--iOS--Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Create calender events";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Create reminders based on events";
@@ -760,6 +773,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MuslimCalender--iOS--Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Create calender events";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Create reminders based on events";
@@ -1003,6 +1017,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8EFDEB9E28AA93B60039EF22 /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1020,6 +1042,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E88184F283964E7004AA721 /* XCRemoteSwiftPackageReference "adhan-swift" */;
 			productName = Adhan;
+		};
+		8EFDEB9F28AA93B60039EF22 /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EFDEB9E28AA93B60039EF22 /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
 		};
 /* End XCSwiftPackageProductDependency section */
 

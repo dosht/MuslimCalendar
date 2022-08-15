@@ -9,11 +9,15 @@ import Foundation
 import SwiftUI
 import CoreData
 import CoreLocation
+import Resolver
 
 class ScheduleViewModel: ObservableObject {
-    private let context: NSManagedObjectContext
     private let eventStore: EventStore
-    
+
+    //MARK: - Dependencies
+    @Injected private var relativeEventRepository: RelativeEventRepository
+   
+    //MARK: - Publishers
     @Published
     var relativeEvents: [RelativeEvent] = []
     
@@ -35,9 +39,9 @@ class ScheduleViewModel: ObservableObject {
     var location: CLLocationCoordinate2D
     
     init (context: NSManagedObjectContext, location: CLLocationCoordinate2D, eventStore: EventStore) {
-        self.context = context
         self.location = location
         self.eventStore = eventStore
+        relativeEventRepository.$relativeEvents.assign(to: &$relativeEvents)
     }
     
     func duration(event: RelativeEvent) -> Double {
@@ -59,7 +63,7 @@ class ScheduleViewModel: ObservableObject {
     }
     
 
-    // MARK: Intent(s)
+    // MARK: - Intent(s)
     
 //    var addingNewEvent: Bool {
 //        get { editEventViewModel != nil }
@@ -71,21 +75,11 @@ class ScheduleViewModel: ObservableObject {
 //        }
 //    }
 
-    @discardableResult
-    func fetch() -> [RelativeEvent] {
-        let request = NSFetchRequest<RelativeEvent>(entityName: "RelativeEvent")
-        request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \RelativeEvent.startRelativeTo, ascending: true),
-            NSSortDescriptor(keyPath: \RelativeEvent.endRelativeTo, ascending: true),
-            NSSortDescriptor(keyPath: \RelativeEvent.start, ascending: true),
-            NSSortDescriptor(keyPath: \RelativeEvent.end, ascending: true),
-        ]
-        do {
-            relativeEvents = try context.fetch(request)
-        } catch let error {
-            print("Error fetching: \(error.localizedDescription)")
-        }
-        return relativeEvents
+    func fetch() {
+        relativeEventRepository.fetch()
+        print("-----------------------------------------")
+        print(relativeEvents.map {$0.title})
+        print("-----------------------------------------")
     }
     
     func chooseAllocatableSlot(allcatableSlot: RelativeEvent) {
@@ -96,19 +90,19 @@ class ScheduleViewModel: ObservableObject {
 //        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
 //        let event = RelativeEvent.create(context, "3333333").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
 
-        editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, context: context, eventStore: eventStore)
+        editEventViewModel = EditEventViewModel(nil, availableSlot: allcatableSlot, location: location, eventStore: eventStore)
         addingNewEvent = true
     }
     
     func edit(event: RelativeEvent) {
-        editEventViewModel = EditEventViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, context: context, eventStore: eventStore)
+        editEventViewModel = EditEventViewModel(event, availableSlot: expandAllocatableSlot(event), location: location, eventStore: eventStore)
         editingEvent = true
     }
     
     func cancelEditing() {
         editingEvent = false
         addingNewEvent = false
-        context.rollback()
+        relativeEventRepository.rollback()
         fetch()
         editEventViewModel = nil
     }
@@ -130,37 +124,31 @@ class ScheduleViewModel: ObservableObject {
     func deleteEvent(event: RelativeEvent) {
         expandAllocatableSlot(event)
         eventStore.delete(event)
-        context.delete(event)
-        try? context.save()
-        fetch()
+        relativeEventRepository.deleteEvent(event: event)
     }
     
     
     func deleteAll() {
-        fetch().forEach(context.delete)
-        do {
-            try context.save()
-        } catch let error {
-            print("Error fetching: \(error.localizedDescription)")
-        }
-        fetch()
+        relativeEventRepository.deleteAll()
     }
     
     func deleteCalendar() {
         try! eventStore.ekEventStore.removeCalendar(eventStore.muslimCalender, commit: true)
     }
     
-    func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent { 
-        return event.expandAllocatableSlot(context: context)
+    func expandAllocatableSlot(_ event: RelativeEvent) -> RelativeEvent {
+        //TODO: Remove creating allocatable event
+        return relativeEventRepository.expandAllocatableSlot(event)
     }
     
     func syncCalendar() {
         let prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: Date())!
         relativeEvents.filter({ event in !(event.isAdhan || event.isAllocatable) }).forEach { event in
             eventStore.delete(event)
-            eventStore.createOrUpdate(event, on: Date().startOfDay, prayerCalculator: prayerCalculator, repeats: true)
+            let ekEvent = eventStore.createOrUpdate(event, on: Date().startOfDay, prayerCalculator: prayerCalculator, repeats: true)
+            event.ekEventIdentifier = ekEvent.eventIdentifier
         }
-        try! context.save()
+        relativeEventRepository.save()
     }
 }
 

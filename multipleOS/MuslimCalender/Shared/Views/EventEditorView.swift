@@ -222,16 +222,16 @@ extension Binding {
     
 }
 
-struct EventEditor_Previews: PreviewProvider {
-    static let viewContext = PersistenceController.preview.container.viewContext
-    static let location = LocationManager().requestPermissionAndGetCurrentLocation()
-    static let relativeEventsViewModel = ScheduleViewModel(context: viewContext, location: location, eventStore: EventStore())
-    static let event = RelativeEvent.create(viewContext, "Test title")
-    static let eventStore = EventStore()
-    static let editEventViewModel = EditEventViewModel(event, availableSlot: relativeEventsViewModel.expandAllocatableSlot(event), location: location, context: viewContext, eventStore: eventStore)
-    
-    static var previews: some View {
-        EventEditorView(viewModel: editEventViewModel, relativeEventsViewModel: relativeEventsViewModel)
-            .previewInterfaceOrientation(.portrait)
-    }
-}
+//struct EventEditor_Previews: PreviewProvider {
+//    static let viewContext = PersistenceController.preview.container.viewContext
+//    static let location = LocationManager().requestPermissionAndGetCurrentLocation()
+//    static let relativeEventsViewModel = ScheduleViewModel(context: viewContext, location: location, eventStore: EventStore())
+//    static let event = RelativeEvent.create(viewContext, "Test title")
+//    static let eventStore = EventStore()
+//    static let editEventViewModel = EditEventViewModel(event, availableSlot: relativeEventsViewModel.expandAllocatableSlot(event), location: location, context: viewContext, eventStore: eventStore)
+//    
+//    static var previews: some View {
+//        EventEditorView(viewModel: editEventViewModel, relativeEventsViewModel: relativeEventsViewModel)
+//            .previewInterfaceOrientation(.portrait)
+//    }
+//}
