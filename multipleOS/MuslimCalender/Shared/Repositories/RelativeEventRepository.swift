@@ -69,4 +69,8 @@ class RelativeEventRepository: ObservableObject {
     func rollback() {
         context.rollback()
     }
+    
+    func newEvent() -> RelativeEvent {
+        return RelativeEvent.create(context, "")
+    }
 }
