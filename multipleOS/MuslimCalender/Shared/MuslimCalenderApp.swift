@@ -10,7 +10,9 @@ import CoreLocation
 
 @main
 struct MuslimCalenderApp: App {
-    private let relativeEventsViewModel = RelativeEventsViewModel(
+    
+    @StateObject
+    private var relativeEventsViewModel = ScheduleViewModel(
         context: PersistenceController.shared.container.viewContext,
 //        context: PersistenceController.preview.container.viewContext,
         location: LocationManager().requestPermissionAndGetCurrentLocation(),
@@ -19,7 +21,8 @@ struct MuslimCalenderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ScheduleView(viewModel: relativeEventsViewModel)
+            ScheduleView()
+                .environmentObject(relativeEventsViewModel)
                 .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 //                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }

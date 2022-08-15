@@ -12,7 +12,7 @@ import Adhan
 
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var viewModel: RelativeEventsViewModel
+    @EnvironmentObject var viewModel: ScheduleViewModel
     
     @State var showResetConfirmation = false
     
@@ -129,11 +129,11 @@ struct AdhanView: View {
 
 struct CardView: View {
     @ObservedObject var event: RelativeEvent
-    @ObservedObject var viewModel: RelativeEventsViewModel
+    @ObservedObject var viewModel: ScheduleViewModel
     let location: CLLocationCoordinate2D
     
     var body: some View {
-        NavigationLink(destination: EventView(event: event, viewModel: viewModel)) {
+        NavigationLink(destination: DetailedEventView(event: event, viewModel: viewModel)) {
             HStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
@@ -169,7 +169,7 @@ struct TrailingIconLabelStyle: LabelStyle {
 struct AvailableTimeView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @ObservedObject var viewModel: RelativeEventsViewModel
+    @ObservedObject var viewModel: ScheduleViewModel
     var availableSlot: RelativeEvent
     
     var body: some View {
@@ -193,7 +193,7 @@ struct AvailableTimeView: View {
             .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
             .sheet(isPresented: $viewModel.addingNewEvent) {
                 if let vm = viewModel.editEventViewModel {
-                    EventEditor(viewModel: vm, relativeEventsViewModel: viewModel)
+                    EventEditorView(viewModel: vm, relativeEventsViewModel: viewModel)
                 } else {
                     EmptyView()
                 }
@@ -213,7 +213,7 @@ struct CalendarView_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
     static let viewModel = {
-        let viewModel = RelativeEventsViewModel(context: viewContext, location: location, eventStore: EventStore())
+        let viewModel = ScheduleViewModel(context: viewContext, location: location, eventStore: EventStore())
         let event1 = RelativeEvent.create(viewContext, "Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
         let event2 = RelativeEvent.create(viewContext, "Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
         viewModel.relativeEvents = [event1, event2]
@@ -221,12 +221,14 @@ struct CalendarView_Previews: PreviewProvider {
     }()
     static var previews: some View {
         Group {
-            ScheduleView(viewModel: viewModel)
+            ScheduleView()
+                .environment(\.managedObjectContext, viewContext)
+                .environmentObject(viewModel)
                 .previewInterfaceOrientation(.portrait)
+            ScheduleView()
+                .environmentObject(viewModel)
                 .environment(\.managedObjectContext, viewContext)
-            ScheduleView(viewModel: viewModel)
                 .previewInterfaceOrientation(.portrait).preferredColorScheme(.dark)
-                .environment(\.managedObjectContext, viewContext)
         }
     }
 }

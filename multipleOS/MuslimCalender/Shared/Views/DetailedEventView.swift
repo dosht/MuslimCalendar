@@ -8,11 +8,11 @@
 import SwiftUI
 import CoreLocation
 
-struct EventView: View {
+struct DetailedEventView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @ObservedObject var event: RelativeEvent
-    @ObservedObject var viewModel: RelativeEventsViewModel
+    @ObservedObject var viewModel: ScheduleViewModel
     
     var body: some View {
         List {
@@ -37,7 +37,7 @@ struct EventView: View {
         }
         .sheet(isPresented: $viewModel.editingEvent) {
 //            EventEditor(relativeEventsViewModel: viewModel, location: location, context: viewContext, editedEvent: event)
-            EventEditor(viewModel: viewModel.editEventViewModel!, relativeEventsViewModel: viewModel)
+            EventEditorView(viewModel: viewModel.editEventViewModel!, relativeEventsViewModel: viewModel)
             
         }
         .navigationTitle(event.title ?? "N/A")
@@ -58,10 +58,10 @@ struct EventView: View {
 struct EventView_Previews: PreviewProvider {
     static let location = LocationManager().requestPermissionAndGetCurrentLocation()
     static let context = PersistenceController.preview.container.viewContext
-    static let viewModel = RelativeEventsViewModel(context: context, location: location, eventStore: EventStore())
+    static let viewModel = ScheduleViewModel(context: context, location: location, eventStore: EventStore())
     static let event = RelativeEvent.create(context, "Zikr").startAt(10*60, relativeTo: .fajr).endAt(20*60, relativeTo: .fajr)
     
     static var previews: some View {
-        EventView(event: event, viewModel: viewModel)
+        DetailedEventView(event: event, viewModel: viewModel)
     }
 }

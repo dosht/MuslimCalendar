@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 import CoreLocation
 
-class RelativeEventsViewModel: ObservableObject {
+class ScheduleViewModel: ObservableObject {
     private let context: NSManagedObjectContext
     private let eventStore: EventStore
     

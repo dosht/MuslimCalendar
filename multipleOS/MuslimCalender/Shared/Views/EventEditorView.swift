@@ -11,13 +11,13 @@ import CoreData
 import EventKit
 
 
-struct EventEditor: View {
+struct EventEditorView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
 //    @ObservedObject var event: RelativeEvent? = nil
     
     @ObservedObject var viewModel: EditEventViewModel
-    @ObservedObject var relativeEventsViewModel: RelativeEventsViewModel
+    @ObservedObject var relativeEventsViewModel: ScheduleViewModel
   
     
     @State var alert = false
@@ -225,13 +225,13 @@ extension Binding {
 struct EventEditor_Previews: PreviewProvider {
     static let viewContext = PersistenceController.preview.container.viewContext
     static let location = LocationManager().requestPermissionAndGetCurrentLocation()
-    static let relativeEventsViewModel = RelativeEventsViewModel(context: viewContext, location: location, eventStore: EventStore())
+    static let relativeEventsViewModel = ScheduleViewModel(context: viewContext, location: location, eventStore: EventStore())
     static let event = RelativeEvent.create(viewContext, "Test title")
     static let eventStore = EventStore()
     static let editEventViewModel = EditEventViewModel(event, availableSlot: relativeEventsViewModel.expandAllocatableSlot(event), location: location, context: viewContext, eventStore: eventStore)
     
     static var previews: some View {
-        EventEditor(viewModel: editEventViewModel, relativeEventsViewModel: relativeEventsViewModel)
+        EventEditorView(viewModel: editEventViewModel, relativeEventsViewModel: relativeEventsViewModel)
             .previewInterfaceOrientation(.portrait)
     }
 }
