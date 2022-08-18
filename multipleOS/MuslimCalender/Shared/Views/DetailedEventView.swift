@@ -54,9 +54,8 @@ struct DetailedEventView: View {
 }
 
 struct EventView_Previews: PreviewProvider {
-    static let location = LocationManager().requestPermissionAndGetCurrentLocation()
     static let context = PersistenceController.preview.container.viewContext
-    static let viewModel = ScheduleViewModel(location: location)
+    static let viewModel = ScheduleViewModel()
     static let event = RelativeEvent.create(context, "Zikr").startAt(10*60, relativeTo: .fajr).endAt(20*60, relativeTo: .fajr)
     
     static var previews: some View {

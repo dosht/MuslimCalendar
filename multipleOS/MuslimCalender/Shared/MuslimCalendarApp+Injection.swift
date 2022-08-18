@@ -13,5 +13,6 @@ extension Resolver: ResolverRegistering {
         register { PersistenceController.shared }.scope(.application)
         register { RelativeEventRepository() }.scope(.application)
         register { EventKitRepository() }.scope(.application)
+        register { LocationManager() }.scope(.application)
     }
 }

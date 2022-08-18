@@ -15,6 +15,7 @@ class ScheduleViewModel: ObservableObject {
     // MARK: - Dependencies
     @Injected private var relativeEventRepository: RelativeEventRepository
     @Injected private var eventKitRepository: EventKitRepository
+    @Injected private var locationManager: LocationManager
    
     // MARK: - Publishers
     @Published
@@ -35,10 +36,11 @@ class ScheduleViewModel: ObservableObject {
 //    @Published
 //    var editedEvent: RelativeEvent? = nil
     
-    var location: CLLocationCoordinate2D
+    @Published
+    var location: CLLocationCoordinate2D = LocationManager.defaultCoordinate
     
-    init (location: CLLocationCoordinate2D) {
-        self.location = location
+    init () {
+        locationManager.$lastCoordinate.assign(to: &$location)
         relativeEventRepository.$relativeEvents.assign(to: &$relativeEvents)
     }
     
