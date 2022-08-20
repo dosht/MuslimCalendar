@@ -46,17 +46,16 @@ struct ScheduleView: View {
                             DaysView(day: "Sat", geo: geo)
                         }
                     }
+                    
                     List {
-                        ForEach(viewModel.relativeEvents) { event in
-                            if event.isAllocatable {
-                                AvailableTimeView(viewModel: viewModel, availableSlot: event)
-                                    .deleteDisabled(true)
-                            } else if event.isAdhan {
-                                AdhanView(text: event.title!, adhanTime: viewModel.adhanTimeText(event))
-                                    .deleteDisabled(true)
+                        viewModel.zipEvents.first.map(NewAvailableTimeView.init)
+                        ForEach(viewModel.zipEvents.dropFirst()) { zipEvent in
+                            if zipEvent.event.isAdhan {
+                                AdhanView(text: zipEvent.event.title!, adhanTime: viewModel.adhanTimeText(zipEvent.event))
                             } else {
-                                CardView(event: event, viewModel: viewModel)
+                                CardView(event: zipEvent.event, viewModel: viewModel)
                             }
+                            NewAvailableTimeView(zip2Event: zipEvent)
                         }
                         .onDelete(perform: viewModel.deleteEvent)
                     }
@@ -124,6 +123,7 @@ struct AdhanView: View {
         }
 //        .listRowSeparator(.hidden)
         .frame(alignment: .center)
+        .deleteDisabled(true)
     }
 }
 
@@ -165,6 +165,17 @@ struct TrailingIconLabelStyle: LabelStyle {
     }
 }
 
+struct NewAvailableTimeView: View {
+    let zip2Event: Zip2Event
+    
+    var body: some View {
+        if let availableTime = zip2Event.availableTime {
+            Text("Available Time: \(availableTime.timeIntervalText)")
+                .deleteDisabled(true)
+        }
+    }
+}
+
 struct AvailableTimeView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -193,13 +204,8 @@ struct AvailableTimeView: View {
             .sheet(isPresented: $viewModel.addingNewEvent) {
                 if let vm = viewModel.editEventViewModel {
                     EventEditorView(viewModel: vm, relativeEventsViewModel: viewModel)
-                } else {
-                    EmptyView()
                 }
             }
-        }
-        else {
-            EmptyView()
         }
     }
 }

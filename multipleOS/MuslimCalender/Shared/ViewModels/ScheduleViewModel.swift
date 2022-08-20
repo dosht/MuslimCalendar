@@ -22,6 +22,16 @@ class ScheduleViewModel: ObservableObject {
     @Published
     var relativeEvents: [RelativeEvent] = []
     
+    var zipEvents: [Zip2Event] {
+        if let prayerCalculation = prayerCalculation {
+            return zip(relativeEvents.dropLast(), relativeEvents.dropFirst()).map {
+                Zip2Event(event: $0.0, nextEvent: $0.1, prayerCalculation: prayerCalculation)
+            }
+        } else {
+            return [Zip2Event]()
+        }
+    }
+    
     @Published
     var addingNewEvent: Bool = false
     
@@ -191,6 +201,9 @@ extension TimeInterval {
         }
         else if let minute = minute {
             result = "\(abs(minute)) minute"
+        }
+        if result.isEmpty {
+            return "N/A"
         }
         return result
     }

@@ -44,6 +44,7 @@
 		8E88184E283955CD004AA721 /* PrayerCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88184C283955CC004AA721 /* PrayerCalculatorService.swift */; };
 		8E881851283964E7004AA721 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E881850283964E7004AA721 /* Adhan */; };
 		8EA2CB5A285F640A000B5BF7 /* EventKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CB59285F640A000B5BF7 /* EventKitRepository.swift */; };
+		8EE7D22C28B125920025F55A /* Zip2Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7D22B28B125920025F55A /* Zip2Event.swift */; };
 		8EFDEB9928AA820D0039EF22 /* RelativeEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEB9828AA820D0039EF22 /* RelativeEventRepository.swift */; };
 		8EFDEB9D28AA91F60039EF22 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEB9C28AA91F60039EF22 /* Event.swift */; };
 		8EFDEBA028AA93B60039EF22 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 8EFDEB9F28AA93B60039EF22 /* Resolver */; };
@@ -103,6 +104,7 @@
 		8E88184C283955CC004AA721 /* PrayerCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculatorService.swift; sourceTree = "<group>"; };
 		8EA2CB58285F628C000B5BF7 /* MuslimCalender--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MuslimCalender--iOS--Info.plist"; sourceTree = "<group>"; };
 		8EA2CB59285F640A000B5BF7 /* EventKitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitRepository.swift; sourceTree = "<group>"; };
+		8EE7D22B28B125920025F55A /* Zip2Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zip2Event.swift; sourceTree = "<group>"; };
 		8EFDEB9828AA820D0039EF22 /* RelativeEventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeEventRepository.swift; sourceTree = "<group>"; };
 		8EFDEB9C28AA91F60039EF22 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		8EFDEBA128AA94770039EF22 /* MuslimCalendarApp+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuslimCalendarApp+Injection.swift"; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				8EFDEB9C28AA91F60039EF22 /* Event.swift */,
+				8EE7D22B28B125920025F55A /* Zip2Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				8EFDEB9928AA820D0039EF22 /* RelativeEventRepository.swift in Sources */,
 				8E881837283926F8004AA721 /* Persistence.swift in Sources */,
 				8E109A8A283BA5A400F17699 /* ScheduleView.swift in Sources */,
+				8EE7D22C28B125920025F55A /* Zip2Event.swift in Sources */,
 				8E284129287B21DA004DF53A /* Date+.swift in Sources */,
 				8E881831283926F8004AA721 /* MuslimCalender.xcdatamodeld in Sources */,
 				8EA2CB5A285F640A000B5BF7 /* EventKitRepository.swift in Sources */,
