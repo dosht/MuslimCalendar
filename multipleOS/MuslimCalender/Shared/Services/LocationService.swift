@@ -8,18 +8,19 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     static let defaultCoordinate = CLLocationCoordinate2D(latitude: 21.4361607, longitude: 39.9164145)
 
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
+    @Published var lastLocation: CLLocation?
     @Published var lastCoordinate: CLLocationCoordinate2D = defaultCoordinate
 
     override init() {
         super.init()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
@@ -46,6 +47,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
+        if let lastLocation = lastLocation {
+            if location.distance(from: lastLocation) < 3000 { return }
+        }
+        lastLocation = location
         lastCoordinate = location.coordinate
         print(#function, location)
     }

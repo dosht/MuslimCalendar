@@ -6,8 +6,13 @@
 //
 
 import EventKit
+import Resolver
 
-struct EventKitRepository {
+class EventKitRepository {
+    // MARK: - Dependencies
+    @Injected
+    var prayerCalculatorService: PrayerCalculatorService
+    
     let ekEventStore: EKEventStore
     
     init() {
@@ -29,11 +34,11 @@ struct EventKitRepository {
     }
     
     @discardableResult
-    func createOrUpdate(_ relativeEvent: RelativeEvent, on day: Date, prayerCalculator: PrayerCalculator, repeats: Bool = false) -> EKEvent {
+    func createOrUpdate(_ relativeEvent: RelativeEvent, prayerCalculation: PrayerCalculation, repeats: Bool = false) -> EKEvent {
         let savedEKEvent = findEKEvent(relativeEvent)
-        let ekEvent = relativeEvent.transform(self, time: prayerCalculator.time, savedEKEvent: savedEKEvent)
+        let ekEvent = relativeEvent.transform(self, time: prayerCalculation.time, savedEKEvent: savedEKEvent)
         ekEvent.calendar = muslimCalender
-        let endDate = day.nextMonth.endOfMonth
+        let endDate = prayerCalculation.day.nextMonth.endOfMonth
         if repeats && !ekEvent.hasRecurrenceRules {
             let end = EKRecurrenceEnd(end: endDate)
             let rule = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: end)
@@ -43,7 +48,7 @@ struct EventKitRepository {
         ekEvent.addAlarm(alarm)
         try! ekEventStore.save(ekEvent, span: .futureEvents)
         if repeats {
-            updateFutureEvents(relativeEvent, startFrom: day, until: endDate, location: prayerCalculator.location)
+            updateFutureEvents(relativeEvent, startFrom: prayerCalculation.day.startOfDay, until: endDate, prayerCalculation: prayerCalculation)
         }
         return ekEvent
     }
@@ -62,16 +67,16 @@ struct EventKitRepository {
         }
     }
     
-    func updateFutureEvents(_ relativeEvent: RelativeEvent, startFrom startDate: Date, until endDate: Date, location: CLLocationCoordinate2D) {
+    func updateFutureEvents(_ relativeEvent: RelativeEvent, startFrom startDate: Date, until endDate: Date, prayerCalculation: PrayerCalculation) {
         let events = findFutureEvents(relativeEvent, startFrom: startDate, until: endDate)
         var today = startDate.tomorrow
-        var prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: today)!
         for event in events {
-            prayerCalculator = PrayerCalculator(location: location, date: today)!
-            event.startDate = relativeEvent.startDate(time: prayerCalculator.time)
-            event.endDate = relativeEvent.endDate(time: prayerCalculator.time)
-            try? ekEventStore.save(event, span: .thisEvent)
-            today = today.tomorrow
+            if let prayerCalculation = prayerCalculatorService.calculate(forDay: today) {
+                event.startDate = relativeEvent.startDate(time: prayerCalculation.time)
+                event.endDate = relativeEvent.endDate(time: prayerCalculation.time)
+                try? ekEventStore.save(event, span: .thisEvent)
+                today = today.tomorrow
+            }
         }
     }
     

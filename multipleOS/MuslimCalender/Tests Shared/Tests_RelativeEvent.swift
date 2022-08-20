@@ -153,28 +153,29 @@ class Test_AllocateEvent: XCTestCase {
 
 class Tests_RelativeEventViewModel: XCTestCase {
     let context = PersistenceController.preview.container.viewContext
-    let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
+    //TODO: Change this to normal struct init
+    let prayerCalculation = PrayerCalculatorService().calculate(forDay: Date(), forLocation: CLLocation(latitude: 40.71910, longitude: 29.78066))!
     
     // Test get
     
     func test_start_allocationType() {
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(30, relativeTo: alloc.startTimeName)
-        let viewModel = EventEditorViewModel(event, availableSlot: alloc, location: location)
+        let viewModel = EventEditorViewModel(event, availableSlot: alloc, prayerCalculation: prayerCalculation)
         XCTAssertEqual(viewModel.allocationType, .begnning)
     }
     
     func test_end_allocationType() {
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.endTimeName).endAt(30, relativeTo: alloc.endTimeName)
-        let viewModel = EventEditorViewModel(event, availableSlot: alloc, location: location)
+        let viewModel = EventEditorViewModel(event, availableSlot: alloc, prayerCalculation: prayerCalculation)
         XCTAssertEqual(viewModel.allocationType, .end)
     }
     
     func test_full_allocationType() {
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(0, relativeTo: alloc.endTimeName)
-        let viewModel = EventEditorViewModel(event, availableSlot: alloc, location: location)
+        let viewModel = EventEditorViewModel(event, availableSlot: alloc, prayerCalculation: prayerCalculation)
         XCTAssertEqual(viewModel.allocationType, .full)
     }
    
@@ -183,7 +184,7 @@ class Tests_RelativeEventViewModel: XCTestCase {
     func test_set_beginning() {
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.endTimeName).endAt(-30, relativeTo: alloc.endTimeName)
-        let viewModel = EventEditorViewModel(event, availableSlot: alloc, location: location)
+        let viewModel = EventEditorViewModel(event, availableSlot: alloc, prayerCalculation: prayerCalculation)
         viewModel.eventDuration = 30
         viewModel.allocationType = .begnning
         XCTAssertEqual(viewModel.event.startTimeName, alloc.startTimeName)
@@ -195,7 +196,7 @@ class Tests_RelativeEventViewModel: XCTestCase {
     func test_set_end() {
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         let event = RelativeEvent.create(context, "event").startAt(0, relativeTo: alloc.startTimeName).endAt(30, relativeTo: alloc.startTimeName)
-        let viewModel = EventEditorViewModel(event, availableSlot: alloc, location: location)
+        let viewModel = EventEditorViewModel(event, availableSlot: alloc, prayerCalculation: prayerCalculation)
         viewModel.eventDuration = 30
         viewModel.allocationType = .end
         XCTAssertEqual(viewModel.event.startTimeName, alloc.endTimeName)
@@ -207,7 +208,7 @@ class Tests_RelativeEventViewModel: XCTestCase {
     func test_set_full() {
         let alloc = RelativeEvent.create(context, "").isAllocatable(true).startAt(0, relativeTo: .fajr).endAt(0, relativeTo: .sunrise)
         let event = RelativeEvent.create(context, "event").startAt(300, relativeTo: alloc.endTimeName).endAt(30, relativeTo: alloc.startTimeName)
-        let viewModel = EventEditorViewModel(event, availableSlot: alloc, location: location)
+        let viewModel = EventEditorViewModel(event, availableSlot: alloc, prayerCalculation: prayerCalculation)
         viewModel.allocationType = .full
         XCTAssertEqual(viewModel.event.startTimeName, alloc.startTimeName)
         XCTAssertEqual(viewModel.event.endTimeName, alloc.endTimeName)

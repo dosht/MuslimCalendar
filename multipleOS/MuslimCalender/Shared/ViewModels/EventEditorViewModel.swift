@@ -23,16 +23,16 @@ class EventEditorViewModel: ObservableObject {
     @Published
     var alloc: RelativeEvent
     
-    private var prayerCalculator: PrayerCalculator
+    private var prayerCalculation: PrayerCalculation
     
-    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, location: CLLocationCoordinate2D) {
+    init(_ event: RelativeEvent?, availableSlot alloc: RelativeEvent, prayerCalculation: PrayerCalculation) {
         self.event = event ?? _relativeEventRepository.wrappedValue.newEvent()
             .startAt(alloc.start, relativeTo: alloc.startTimeName)
             .endAt(alloc.start + 30*60, relativeTo: alloc.startTimeName)
         self.alloc = alloc
-        prayerCalculator = PrayerCalculator(location: location, date: Date())!
+        self.prayerCalculation = prayerCalculation
         if let event = event {
-            self.eventDuration = event.duration(time: prayerCalculator.time)
+            self.eventDuration = event.duration(time: prayerCalculation.time)
         } else {
             self.eventDuration = 30 * 60
         }
@@ -87,13 +87,14 @@ class EventEditorViewModel: ObservableObject {
     
     @Published
     var eventDuration: TimeInterval {
+        //TODO: Test if this works as expected
         didSet {
             event.setDuration(eventDuration, allocatableSlot: alloc, allocationType: allocationType)
         }
     }
     
     func duration(event: RelativeEvent) -> Double {
-        return event.duration(time: prayerCalculator.time)
+        return event.duration(time: prayerCalculation.time)
     }
       
     // MARK: Intent(s)
@@ -105,7 +106,7 @@ class EventEditorViewModel: ObservableObject {
 //            context.delete(alloc)
 //        }
         relativeEventRepository.save()
-        let ekEvent = eventKitRepository.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
+        let ekEvent = eventKitRepository.createOrUpdate(event, prayerCalculation: prayerCalculation, repeats: true)
         if event.ekEventIdentifier == nil {
             event.ekEventIdentifier = ekEvent.eventIdentifier
             relativeEventRepository.save()

@@ -55,7 +55,7 @@ struct ScheduleView: View {
                                 AdhanView(text: event.title!, adhanTime: viewModel.adhanTimeText(event))
                                     .deleteDisabled(true)
                             } else {
-                                CardView(event: event, viewModel: viewModel, location: viewModel.location)
+                                CardView(event: event, viewModel: viewModel)
                             }
                         }
                         .onDelete(perform: viewModel.deleteEvent)
@@ -130,7 +130,6 @@ struct AdhanView: View {
 struct CardView: View {
     @ObservedObject var event: RelativeEvent
     @ObservedObject var viewModel: ScheduleViewModel
-    let location: CLLocationCoordinate2D
     
     var body: some View {
         NavigationLink(destination: DetailedEventView(event: event, viewModel: viewModel)) {

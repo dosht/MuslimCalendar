@@ -15,7 +15,8 @@ class ScheduleViewModel: ObservableObject {
     // MARK: - Dependencies
     @Injected private var relativeEventRepository: RelativeEventRepository
     @Injected private var eventKitRepository: EventKitRepository
-    @Injected private var locationManager: LocationManager
+    @Injected private var locationManager: LocationService
+    @Injected private var prayerCalculationService: PrayerCalculatorService
    
     // MARK: - Publishers
     @Published
@@ -36,29 +37,39 @@ class ScheduleViewModel: ObservableObject {
 //    @Published
 //    var editedEvent: RelativeEvent? = nil
     
+//    @Published
+//    var location: CLLocationCoordinate2D = LocationService.defaultCoordinate
+    
     @Published
-    var location: CLLocationCoordinate2D = LocationManager.defaultCoordinate
+    var prayerCalculation: PrayerCalculation?
     
     init () {
-        locationManager.$lastCoordinate.assign(to: &$location)
+//        locationManager.$lastCoordinate.assign(to: &$location)
+        prayerCalculationService.$prayerCalculation.assign(to: &$prayerCalculation)
         relativeEventRepository.$relativeEvents.assign(to: &$relativeEvents)
     }
     
     func duration(event: RelativeEvent) -> Double {
-        let prayerCalculator: PrayerCalculator? = PrayerCalculator(location: location, date: Date())
-        return event.duration(time: prayerCalculator!.time)
+        if let prayerCalculation = prayerCalculation {
+            return event.duration(time: prayerCalculation.time)
+        } else {
+            return 0
+        }
     }
     
-    func adhanTime(_ event: RelativeEvent) -> Date? {
-        let prayerCalculator: PrayerCalculator? = PrayerCalculator(location: location, date: Date())
-        return prayerCalculator?.time(of: event.startTimeName)
+    func adhanTime(_ event: RelativeEvent) -> Date {
+        if let prayerCalculation = prayerCalculation {
+            return prayerCalculation.time(of: event.startTimeName)
+        } else {
+            return Date()
+        }
     }
     
     func adhanTimeText(_ event: RelativeEvent) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
-        let datetime = adhanTime(event)!
+        let datetime = adhanTime(event)
         return dateFormatter.string(from: datetime)
     }
     
@@ -87,13 +98,17 @@ class ScheduleViewModel: ObservableObject {
 //        editedEvent.endRelativeTo = allcatableSlot.startRelativeTo
 //        let event = RelativeEvent.create(context, "3333333").startAt(-30*60, relativeTo: .fajr).endAt(0, relativeTo: .fajr)
 
-        editEventViewModel = EventEditorViewModel(nil, availableSlot: allcatableSlot, location: location)
-        addingNewEvent = true
+        if let prayerCalculation = prayerCalculation {
+            editEventViewModel = EventEditorViewModel(nil, availableSlot: allcatableSlot, prayerCalculation: prayerCalculation)
+            addingNewEvent = true
+        }
     }
     
     func edit(event: RelativeEvent) {
-        editEventViewModel = EventEditorViewModel(event, availableSlot: expandAllocatableSlot(event), location: location)
-        editingEvent = true
+        if let prayerCalculation = prayerCalculation {
+            editEventViewModel = EventEditorViewModel(event, availableSlot: expandAllocatableSlot(event), prayerCalculation: prayerCalculation)
+            editingEvent = true
+        }
     }
     
     func cancelEditing() {
@@ -139,13 +154,14 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func syncCalendar() {
-        let prayerCalculator: PrayerCalculator = PrayerCalculator(location: location, date: Date())!
-        relativeEvents.filter({ event in !(event.isAdhan || event.isAllocatable) }).forEach { event in
-            eventKitRepository.delete(event)
-            let ekEvent = eventKitRepository.createOrUpdate(event, on: Date().startOfDay, prayerCalculator: prayerCalculator, repeats: true)
-            event.ekEventIdentifier = ekEvent.eventIdentifier
+        if let prayerCalculation = prayerCalculation {
+            relativeEvents.filter({ event in !(event.isAdhan || event.isAllocatable) }).forEach { event in
+                eventKitRepository.delete(event)
+                let ekEvent = eventKitRepository.createOrUpdate(event, prayerCalculation: prayerCalculation, repeats: true)
+                event.ekEventIdentifier = ekEvent.eventIdentifier
+            }
+            relativeEventRepository.save()
         }
-        relativeEventRepository.save()
     }
 }
 
