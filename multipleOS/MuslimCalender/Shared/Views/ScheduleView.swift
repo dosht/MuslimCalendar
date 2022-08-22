@@ -9,6 +9,7 @@ import SwiftUI
 import CoreLocation
 import CoreData
 import Adhan
+import Resolver
 
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -46,7 +47,7 @@ struct ScheduleView: View {
                             DaysView(day: "Sat", geo: geo)
                         }
                     }
-                    
+                    Text("-------- \(viewModel.relativeEvents.count)")
                     List {
                         viewModel.zipEvents.first.map(NewAvailableTimeView.init)
                         ForEach(viewModel.zipEvents.dropFirst()) { zipEvent in
@@ -165,17 +166,6 @@ struct TrailingIconLabelStyle: LabelStyle {
     }
 }
 
-struct NewAvailableTimeView: View {
-    let zip2Event: Zip2Event
-    
-    var body: some View {
-        if let availableTime = zip2Event.availableTime {
-            Text("Available Time: \(availableTime.timeIntervalText)")
-                .deleteDisabled(true)
-        }
-    }
-}
-
 struct AvailableTimeView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -215,16 +205,19 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 }
 
 struct CalendarView_Previews: PreviewProvider {
-    static let viewContext = PersistenceController.preview.container.viewContext
-    static let viewModel = {
+    static var viewModel: ScheduleViewModel = {
+        let repository: RelativeEventRepository = Resolver.resolve()
         let viewModel = ScheduleViewModel()
-        let event1 = RelativeEvent.create(viewContext, "Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
-        let event2 = RelativeEvent.create(viewContext, "Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
+        let event1 = repository.newEvent().setTitle("Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
+        let event2 = repository.newEvent().setTitle("Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
+        repository.save()
         viewModel.relativeEvents = [event1, event2]
         return viewModel
     }()
     static var previews: some View {
-        Group {
+        Resolver.register { PersistenceController.preview }.scope(.container)
+        Resolver.register { RelativeEventRepository() }.scope(.container)
+        return Group {
             ScheduleView()
                 .environmentObject(viewModel)
                 .previewInterfaceOrientation(.portrait)

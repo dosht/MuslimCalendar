@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 struct Zip2Event {
+    let index: Int
     let event: RelativeEvent
     let nextEvent: RelativeEvent
     let prayerCalculation: PrayerCalculation

@@ -17,6 +17,12 @@ extension RelativeEvent {
     }
     
     @discardableResult
+    func setTitle(_ title: String) -> RelativeEvent {
+        self.title = title
+        return self
+    }
+    
+    @discardableResult
     func startAt(_ start: Double, relativeTo startRelativeTo: TimeName) -> RelativeEvent {
         self.start = start
         self.startRelativeTo = startRelativeTo.intValue

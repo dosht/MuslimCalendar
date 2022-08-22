@@ -49,8 +49,10 @@ struct PersistenceController {
     }()
 
     let container: NSPersistentCloudKitContainer
+    let inMemory: Bool
 
     init(inMemory: Bool = false) {
+        self.inMemory = inMemory
         container = NSPersistentCloudKitContainer(name: "MuslimCalender")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")

@@ -10,12 +10,12 @@ import CoreLocation
 
 class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    static let defaultCoordinate = CLLocationCoordinate2D(latitude: 21.4361607, longitude: 39.9164145)
+    static let defaultLocation = CLLocation(latitude: 21.4361607, longitude: 39.9164145)
 
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation?
-    @Published var lastCoordinate: CLLocationCoordinate2D = defaultCoordinate
+    @Published var lastCoordinate: CLLocationCoordinate2D = defaultLocation.coordinate
 
     override init() {
         super.init()

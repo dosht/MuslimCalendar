@@ -24,8 +24,8 @@ class ScheduleViewModel: ObservableObject {
     
     var zipEvents: [Zip2Event] {
         if let prayerCalculation = prayerCalculation {
-            return zip(relativeEvents.dropLast(), relativeEvents.dropFirst()).map {
-                Zip2Event(event: $0.0, nextEvent: $0.1, prayerCalculation: prayerCalculation)
+            return zip(relativeEvents.dropLast(), relativeEvents.dropFirst()).enumerated().map { (i, e) in
+                Zip2Event(index: i, event: e.0, nextEvent: e.1, prayerCalculation: prayerCalculation)
             }
         } else {
             return [Zip2Event]()
@@ -82,7 +82,6 @@ class ScheduleViewModel: ObservableObject {
         let datetime = adhanTime(event)
         return dateFormatter.string(from: datetime)
     }
-    
 
     // MARK: - Intent(s)
     
