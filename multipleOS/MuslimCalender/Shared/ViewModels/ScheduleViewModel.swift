@@ -13,7 +13,7 @@ import Resolver
 
 class ScheduleViewModel: ObservableObject {
     // MARK: - Dependencies
-    @Injected private var relativeEventRepository: RelativeEventRepository
+    @Injected var relativeEventRepository: RelativeEventRepository
     @Injected private var eventKitRepository: EventKitRepository
     @Injected private var locationManager: LocationService
     @Injected private var prayerCalculationService: PrayerCalculatorService
@@ -49,6 +49,9 @@ class ScheduleViewModel: ObservableObject {
     
 //    @Published
 //    var location: CLLocationCoordinate2D = LocationService.defaultCoordinate
+    
+    @Published
+    var focusedEvent: Focusable<RelativeEvent>?
     
     @Published
     var prayerCalculation: PrayerCalculation?
@@ -99,6 +102,28 @@ class ScheduleViewModel: ObservableObject {
         relativeEventRepository.fetch()
     }
     
+    func addNewEventInline(_ zip2Event: Zip2Event) {
+        let newEvent = relativeEventRepository
+            .newEvent()
+            .startAt(zip2Event.event.end, relativeTo: zip2Event.event.endTimeName)
+            .endAt(zip2Event.event.end + 30*60, relativeTo: zip2Event.event.endTimeName)
+        let newIndex = zip2Event.index + 1
+        relativeEvents.insert(newEvent, at: newIndex)
+        focusedEvent = .row(value: newEvent)
+    }
+    
+    func save() {
+        relativeEventRepository.save()
+        if case .row(let event) = focusedEvent {
+            let ekEvent = eventKitRepository.createOrUpdate(event, prayerCalculation: prayerCalculation!, repeats: true)
+            if event.ekEventIdentifier == nil {
+                event.ekEventIdentifier = ekEvent.eventIdentifier
+                relativeEventRepository.save()
+            }
+        }
+        focusedEvent = Focusable.none
+    }
+    
     func chooseAllocatableSlot(allcatableSlot: RelativeEvent) {
         chosenAllocatableSlot = allcatableSlot
 //        editedEvent = RelativeEvent.create(context, "")
@@ -136,18 +161,18 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func deleteEvent(indexSet: IndexSet) {
-        let events = indexSet.map { relativeEvents[$0] }
+        let events = indexSet.map { relativeEvents[$0+1] }
         print(events)
         indexSet.forEach { relativeEvents.remove(at: $0) }
-        events.forEach(deleteEvent)
+        events.map{$0}.forEach(deleteEvent)
     }
     
     func deleteEvent(event: RelativeEvent) {
-        expandAllocatableSlot(event)
+//        expandAllocatableSlot(event)
         eventKitRepository.delete(event)
         relativeEventRepository.deleteEvent(event: event)
+        focusedEvent = nil
     }
-    
     
     func deleteAll() {
         relativeEventRepository.deleteAll()

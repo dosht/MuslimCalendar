@@ -42,7 +42,7 @@ class RelativeEventRepository: ObservableObject {
     
     func deleteEvent(event: RelativeEvent) {
         context.delete(event)
-        try? context.save()
+        try! context.save()
         fetch()
     }
     

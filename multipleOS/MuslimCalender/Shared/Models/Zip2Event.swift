@@ -16,7 +16,7 @@ struct Zip2Event {
     
     var availableTime: TimeInterval? {
         let interval = nextEvent.startDate(time: prayerCalculation.time).timeIntervalSince(event.endDate(time: prayerCalculation.time))
-        if interval == 0 {
+        if interval <= 0 {
             return nil
         }
         return interval

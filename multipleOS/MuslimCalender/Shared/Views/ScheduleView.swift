@@ -15,6 +15,9 @@ struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var viewModel: ScheduleViewModel
     
+    @FocusState
+    var focusedEvent: Focusable<RelativeEvent>?
+    
     @State var showResetConfirmation = false
     
     var body: some View {
@@ -47,19 +50,25 @@ struct ScheduleView: View {
                             DaysView(day: "Sat", geo: geo)
                         }
                     }
-                    Text("-------- \(viewModel.relativeEvents.count)")
                     List {
-                        viewModel.zipEvents.first.map(NewAvailableTimeView.init)
+                        if let firstzip2Event = viewModel.zipEvents.first {
+                            NewAvailableTimeView(zip2Event: firstzip2Event)
+                        }
                         ForEach(viewModel.zipEvents.dropFirst()) { zipEvent in
                             if zipEvent.event.isAdhan {
                                 AdhanView(text: zipEvent.event.title!, adhanTime: viewModel.adhanTimeText(zipEvent.event))
                             } else {
                                 CardView(event: zipEvent.event, viewModel: viewModel)
+                                    .focused($focusedEvent, equals: .row(value: zipEvent.event))
+                                    .onSubmit {
+                                        viewModel.save()
+                                    }
                             }
                             NewAvailableTimeView(zip2Event: zipEvent)
                         }
                         .onDelete(perform: viewModel.deleteEvent)
                     }
+                    .sync($viewModel.focusedEvent, $focusedEvent)
                     .listStyle(.plain)
                 }
             }
@@ -78,6 +87,12 @@ struct ScheduleView: View {
     }
     private func font(from size: CGSize) -> Font{
         Font.system(size: min(size.height, size.width) * 0.04)
+    }
+}
+
+struct ListItem: View {
+    var body: some View {
+        EmptyView()
     }
 }
 
@@ -137,7 +152,7 @@ struct CardView: View {
             HStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
-                    Text(event.title ?? "N/A")
+                    TextField(event.title ?? "", text: $event.title.toUnwrapped(defaultValue: ""))
                         .font(.headline)
                     Spacer()
                     HStack(spacing: 4) {
@@ -145,7 +160,6 @@ struct CardView: View {
                         Spacer()
                         Label(viewModel.duration(event: event).timeIntervalText, systemImage: "clock")
                             .labelStyle(.trailingIcon)
-                            
                     }
                     .font(.caption)
                 }
@@ -205,18 +219,21 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 }
 
 struct CalendarView_Previews: PreviewProvider {
-    static var viewModel: ScheduleViewModel = {
+    static func createViewModel() -> ScheduleViewModel {
         let repository: RelativeEventRepository = Resolver.resolve()
         let viewModel = ScheduleViewModel()
         let event1 = repository.newEvent().setTitle("Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
         let event2 = repository.newEvent().setTitle("Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
-        repository.save()
-        viewModel.relativeEvents = [event1, event2]
+        let event3 = repository.newEvent().setTitle("Study").startAt(30*60, relativeTo: .sunrise).endAt(45*60, relativeTo: .sunrise)
+//        repository.save()
+        viewModel.relativeEvents = [event1, event2, event3]
+        viewModel.prayerCalculation = PrayerCalculation.preview
         return viewModel
-    }()
+    }
     static var previews: some View {
         Resolver.register { PersistenceController.preview }.scope(.container)
         Resolver.register { RelativeEventRepository() }.scope(.container)
+        let viewModel = createViewModel()
         return Group {
             ScheduleView()
                 .environmentObject(viewModel)

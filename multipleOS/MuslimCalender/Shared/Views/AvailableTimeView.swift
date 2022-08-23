@@ -9,21 +9,23 @@ import SwiftUI
 import Resolver
 
 struct NewAvailableTimeView: View {
+    @EnvironmentObject var viewModel: ScheduleViewModel
+    
     let zip2Event: Zip2Event
     
     var body: some View {
         if let availableTime = zip2Event.availableTime {
             HStack {
-                Text("\(availableTime.timeIntervalShortText)")
+                Text("\(availableTime.timeIntervalText)")
                     .opacity(0.5)
                 Spacer()
                 Button {
-                    print("")
+                    viewModel.addNewEventInline(zip2Event)
                 } label: {
                     Label("", systemImage: "calendar.badge.plus")
                 }
-
             }
+            .padding(.vertical)
             .deleteDisabled(true)
         }
     }
