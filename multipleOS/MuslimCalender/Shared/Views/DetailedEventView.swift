@@ -13,25 +13,31 @@ struct DetailedEventView: View {
     @ObservedObject var viewModel: ScheduleViewModel
     
     var body: some View {
-        List {
-            Section {
-                Text("\(event.startText) \(event.startTimeName.rawValue)").padding(.top)
-                Text("Duration: \(viewModel.duration(event: event).timeIntervalText)")
-                Text("Repeats daily")
-            }
-            .listRowSeparator(.hidden)
-            Section {
-                HStack {
-                    Text("Alert")
-                    Spacer()
-                    Text("10 minutes before").frame(alignment: .trailing)
+        VStack {
+            List {
+                Section {
+                    Text("\(event.startText) \(event.startTimeName.rawValue)").padding(.top)
+                    Text("Duration: \(viewModel.duration(event: event).timeIntervalText)")
+                    Text("Repeats daily")
                 }
-                HStack {
-                    Text("Alarm")
-                    Spacer()
-                    Text("On time").frame(alignment: .trailing)
+                .listRowSeparator(.hidden)
+                Section {
+                    HStack {
+                        Text("Alert")
+                        Spacer()
+                        Text("10 minutes before").frame(alignment: .trailing)
+                    }
+                    HStack {
+                        Text("Alarm")
+                        Spacer()
+                        Text("On time").frame(alignment: .trailing)
+                    }
                 }
             }
+            Button(action: {
+                viewModel.deleteEvent(event: event)
+                viewModel.doneEditing()
+            }, label: { Text("Delete") }).padding().foregroundColor(.red)
         }
         .sheet(isPresented: $viewModel.editingEvent) {
 //            EventEditor(relativeEventsViewModel: viewModel, location: location, context: viewContext, editedEvent: event)

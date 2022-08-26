@@ -162,7 +162,6 @@ class ScheduleViewModel: ObservableObject {
     
     func deleteEvent(indexSet: IndexSet) {
         let events = indexSet.map { relativeEvents[$0+1] }
-        print(events)
         indexSet.forEach { relativeEvents.remove(at: $0) }
         events.map{$0}.forEach(deleteEvent)
     }
