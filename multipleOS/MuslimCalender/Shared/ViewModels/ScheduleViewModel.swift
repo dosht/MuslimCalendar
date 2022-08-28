@@ -10,6 +10,7 @@ import SwiftUI
 import CoreData
 import CoreLocation
 import Resolver
+import Combine
 
 class ScheduleViewModel: ObservableObject {
     // MARK: - Dependencies
@@ -32,6 +33,8 @@ class ScheduleViewModel: ObservableObject {
         }
     }
     
+    private var subscribers = Set<AnyCancellable>()
+    
     @Published
     var addingNewEvent: Bool = false
     
@@ -51,7 +54,10 @@ class ScheduleViewModel: ObservableObject {
 //    var location: CLLocationCoordinate2D = LocationService.defaultCoordinate
     
     @Published
-    var focusedEvent: Focusable<RelativeEvent>?
+    var focusedIndex: Focusable<Int>?
+    
+    @Published
+    var focusedZip2Event: Zip2Event?
     
     @Published
     var prayerCalculation: PrayerCalculation?
@@ -60,6 +66,16 @@ class ScheduleViewModel: ObservableObject {
 //        locationManager.$lastCoordinate.assign(to: &$location)
         prayerCalculationService.$prayerCalculation.assign(to: &$prayerCalculation)
         relativeEventRepository.$relativeEvents.assign(to: &$relativeEvents)
+        $focusedIndex
+            .receive(on: DispatchQueue.main)
+            .sink { [self] in
+                if case .row(let index) = $0 {
+                    focusedZip2Event = zipEvents[index]
+                } else {
+                    focusedZip2Event = nil
+                }
+            }
+            .store(in: &subscribers)
     }
     
     func duration(event: RelativeEvent) -> Double {
@@ -109,19 +125,20 @@ class ScheduleViewModel: ObservableObject {
             .endAt(zip2Event.event.end + 30*60, relativeTo: zip2Event.event.endTimeName)
         let newIndex = zip2Event.index + 1
         relativeEvents.insert(newEvent, at: newIndex)
-        focusedEvent = .row(value: newEvent)
+        focusedIndex = .row(value: newIndex)
     }
     
     func save() {
         relativeEventRepository.save()
-        if case .row(let event) = focusedEvent {
+        if case .row(let index) = focusedIndex {
+            let event = relativeEvents[index]
             let ekEvent = eventKitRepository.createOrUpdate(event, prayerCalculation: prayerCalculation!, repeats: true)
             if event.ekEventIdentifier == nil {
                 event.ekEventIdentifier = ekEvent.eventIdentifier
                 relativeEventRepository.save()
             }
         }
-        focusedEvent = Focusable.none
+        focusedIndex = nil
     }
     
     func chooseAllocatableSlot(allcatableSlot: RelativeEvent) {
@@ -170,7 +187,7 @@ class ScheduleViewModel: ObservableObject {
 //        expandAllocatableSlot(event)
         eventKitRepository.delete(event)
         relativeEventRepository.deleteEvent(event: event)
-        focusedEvent = nil
+        focusedIndex = nil
     }
     
     func deleteAll() {

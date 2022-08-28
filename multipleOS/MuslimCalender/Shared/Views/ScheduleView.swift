@@ -16,7 +16,10 @@ struct ScheduleView: View {
     @EnvironmentObject var viewModel: ScheduleViewModel
     
     @FocusState
-    var focusedEvent: Focusable<RelativeEvent>?
+    var focusedIndex: Focusable<Int>?
+    
+//    @Published
+//    var focus
     
     @State var showResetConfirmation = false
     
@@ -25,6 +28,7 @@ struct ScheduleView: View {
             NavigationView {
                 VStack(spacing: 1) {
                     VStack {
+                        Text("Focused: \(f())")
                         HStack {
                             Button(action: {
                                 showResetConfirmation.toggle()
@@ -59,18 +63,22 @@ struct ScheduleView: View {
                                 AdhanView(text: zipEvent.event.title!, adhanTime: viewModel.adhanTimeText(zipEvent.event))
                             } else {
                                 CardView(event: zipEvent.event, viewModel: viewModel)
-                                    .focused($focusedEvent, equals: .row(value: zipEvent.event))
-                                    .onSubmit {
-                                        viewModel.save()
-                                    }
+                                    .focused($focusedIndex, equals: .row(value: zipEvent.index))
+                                    .onSubmit { viewModel.save() }
                             }
                             NewAvailableTimeView(zip2Event: zipEvent)
                         }
                         .onDelete(perform: viewModel.deleteEvent)
                     }
-                    .sync($viewModel.focusedEvent, $focusedEvent)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            EventToolbarView(zip2Event: $viewModel.focusedZip2Event)
+                        }
+                    }
+                    .sync($viewModel.focusedIndex, $focusedIndex)
                     .listStyle(.plain)
                 }
+
             }
             .navigationTitle(Text("Day Schedule"))
             .alert("This will delete every thing. Are you sure?", isPresented: $showResetConfirmation) {
@@ -81,12 +89,20 @@ struct ScheduleView: View {
             }
 //            .navigationViewStyle(.stack)
         }
+        
         .onAppear {
             viewModel.fetch()
         }
     }
     private func font(from size: CGSize) -> Font{
         Font.system(size: min(size.height, size.width) * 0.04)
+    }
+    
+    private func f() -> String {
+        switch focusedIndex {
+        case .some(let index): return "\(index)"
+        case nil: return "Nil"
+        }
     }
 }
 
@@ -168,6 +184,7 @@ struct CardView: View {
         }
         .background(.thinMaterial)
 //        .listRowSeparator(.hidden)
+        
     }
 }
 
@@ -179,40 +196,40 @@ struct TrailingIconLabelStyle: LabelStyle {
         }
     }
 }
-
-struct AvailableTimeView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @ObservedObject var viewModel: ScheduleViewModel
-    var availableSlot: RelativeEvent
-    
-    var body: some View {
-        if viewModel.duration(event: availableSlot) > 0 {
-            GeometryReader { geo in
-                HStack {
-                    Text(viewModel.duration(event: availableSlot).timeIntervalText)
-                }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
-                    .opacity(0.5)
-                Button(action: {
-                    viewModel.chooseAllocatableSlot(allcatableSlot: availableSlot)
-                }, label: {
-                    Label("", systemImage: "calendar.badge.plus")
-                        .foregroundColor(.blue).frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)
-                        .font(.title)
-                })
-            }
-            .padding(30)
-//            .background(.regularMaterial)
-//            .listRowSeparator(.hidden)
-            .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
-            .sheet(isPresented: $viewModel.addingNewEvent) {
-                if let vm = viewModel.editEventViewModel {
-                    EventEditorView(viewModel: vm, relativeEventsViewModel: viewModel)
-                }
-            }
-        }
-    }
-}
+//
+//struct AvailableTimeView: View {
+//    @Environment(\.managedObjectContext) private var viewContext
+//
+//    @ObservedObject var viewModel: ScheduleViewModel
+//    var availableSlot: RelativeEvent
+//
+//    var body: some View {
+//        if viewModel.duration(event: availableSlot) > 0 {
+//            GeometryReader { geo in
+//                HStack {
+//                    Text(viewModel.duration(event: availableSlot).timeIntervalText)
+//                }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+//                    .opacity(0.5)
+//                Button(action: {
+//                    viewModel.chooseAllocatableSlot(allcatableSlot: availableSlot)
+//                }, label: {
+//                    Label("", systemImage: "calendar.badge.plus")
+//                        .foregroundColor(.blue).frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)
+//                        .font(.title)
+//                })
+//            }
+//            .padding(30)
+////            .background(.regularMaterial)
+////            .listRowSeparator(.hidden)
+//            .listRowInsets(.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+//            .sheet(isPresented: $viewModel.addingNewEvent) {
+//                if let vm = viewModel.editEventViewModel {
+//                    EventEditorView(viewModel: vm, relativeEventsViewModel: viewModel)
+//                }
+//            }
+//        }
+//    }
+//}
 
 extension LabelStyle where Self == TrailingIconLabelStyle {
     static var trailingIcon: Self { Self() }
@@ -225,7 +242,6 @@ struct CalendarView_Previews: PreviewProvider {
         let event1 = repository.newEvent().setTitle("Study").startAt(0, relativeTo: .fajr).endAt(30*60, relativeTo: .fajr)
         let event2 = repository.newEvent().setTitle("Workout").startAt(30*60, relativeTo: .fajr).endAt(45*60, relativeTo: .fajr)
         let event3 = repository.newEvent().setTitle("Study").startAt(30*60, relativeTo: .sunrise).endAt(45*60, relativeTo: .sunrise)
-//        repository.save()
         viewModel.relativeEvents = [event1, event2, event3]
         viewModel.prayerCalculation = PrayerCalculation.preview
         return viewModel

@@ -21,7 +21,7 @@ import SwiftUI
 
 /// Used to manage focus in a `List` view
 enum Focusable<A : Hashable>: Hashable {
-  case none
+  case empty
   case row(value: A)
 }
 
