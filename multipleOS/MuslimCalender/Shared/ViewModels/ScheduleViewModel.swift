@@ -60,6 +60,9 @@ class ScheduleViewModel: ObservableObject {
     var focusedZip2Event: Zip2Event?
     
     @Published
+    var showToolbar: Bool = false
+    
+    @Published
     var prayerCalculation: PrayerCalculation?
     
     init () {
@@ -70,9 +73,11 @@ class ScheduleViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [self] in
                 if case .row(let index) = $0 {
+                    showToolbar = true
                     focusedZip2Event = zipEvents[index]
                 } else {
                     focusedZip2Event = nil
+                    showToolbar = false
                 }
             }
             .store(in: &subscribers)

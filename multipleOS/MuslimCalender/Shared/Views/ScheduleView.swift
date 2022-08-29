@@ -18,9 +18,6 @@ struct ScheduleView: View {
     @FocusState
     var focusedIndex: Focusable<Int>?
     
-//    @Published
-//    var focus
-    
     @State var showResetConfirmation = false
     
     var body: some View {
@@ -70,6 +67,7 @@ struct ScheduleView: View {
                         }
                         .onDelete(perform: viewModel.deleteEvent)
                     }
+//                    .keyboardToolbar(show: $viewModel.showToolbar) { EventToolbarView(zip2Event: $viewModel.focusedZip2Event) }
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
                             EventToolbarView(zip2Event: $viewModel.focusedZip2Event)

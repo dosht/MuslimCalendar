@@ -13,6 +13,7 @@
 		8E109A91283BD1FF00F17699 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E109A90283BD1FF00F17699 /* Adhan */; };
 		8E143FEC28B3B25200187E64 /* Views+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E143FEB28B3B25200187E64 /* Views+Focus.swift */; };
 		8E143FED28B3B25200187E64 /* Views+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E143FEB28B3B25200187E64 /* Views+Focus.swift */; };
+		8E259A5A28BB93C100220611 /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E259A5928BB93C100220611 /* KeyboardToolbar.swift */; };
 		8E28411F286C5002004DF53A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28411E286C5002004DF53A /* LocationService.swift */; };
 		8E284120286C5002004DF53A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28411E286C5002004DF53A /* LocationService.swift */; };
 		8E284127287AC2F6004DF53A /* Tests_EventStrore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E284126287AC2F6004DF53A /* Tests_EventStrore.swift */; };
@@ -89,6 +90,7 @@
 /* Begin PBXFileReference section */
 		8E109A89283BA5A400F17699 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		8E143FEB28B3B25200187E64 /* Views+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views+Focus.swift"; sourceTree = "<group>"; };
+		8E259A5928BB93C100220611 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		8E28411E286C5002004DF53A /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		8E284126287AC2F6004DF53A /* Tests_EventStrore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_EventStrore.swift; sourceTree = "<group>"; };
 		8E284128287B21DA004DF53A /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -170,6 +172,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E259A5828BB93A800220611 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				8E259A5928BB93C100220611 /* KeyboardToolbar.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		8E5ECC5B284B511700E9B369 /* Tests Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +211,7 @@
 				8EFDEB9728AA81D40039EF22 /* Repositories */,
 				8EFDEB9628AA4CAB0039EF22 /* Models */,
 				8EFDEB9528AA4CA30039EF22 /* ViewModels */,
+				8E259A5828BB93A800220611 /* ViewModifiers */,
 				8EFDEB9428AA4C8B0039EF22 /* Views */,
 				8E881808283926F8004AA721 /* MuslimCalenderApp.swift */,
 				8EFDEBA128AA94770039EF22 /* MuslimCalendarApp+Injection.swift */,
@@ -524,6 +535,7 @@
 			files = (
 				8E881833283926F8004AA721 /* MuslimCalenderApp.swift in Sources */,
 				8E84D03428539AE70011EAF3 /* EventEditorViewModel.swift in Sources */,
+				8E259A5A28BB93C100220611 /* KeyboardToolbar.swift in Sources */,
 				8E143FEC28B3B25200187E64 /* Views+Focus.swift in Sources */,
 				8E2AA65D28BB2B6F00979AAB /* EventToolbarViewModel.swift in Sources */,
 				8E88184D283955CD004AA721 /* PrayerCalculatorService.swift in Sources */,
