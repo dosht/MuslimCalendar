@@ -11,19 +11,16 @@ struct EventToolbarView: View {
     @ObservedObject
     var viewModel: EventToolbarViewModel
     
-    @State
-    var showExtraOptions: EventToolbarOptions? = nil
-    
-    init(zip2Event: Binding<Zip2Event?>) {
-        viewModel = EventToolbarViewModel(zip2Event: zip2Event)
+    init(zip2Events: Binding<[Zip2Event]>, index: FocusState<Int?>.Binding) {
+        viewModel = EventToolbarViewModel(zip2Events: zip2Events, index: index)
     }
     
     var body: some View {
         HStack {
-            if let showExtraOptions = showExtraOptions {
+            if let showExtraOptions = viewModel.showExtraOptions {
                 switch showExtraOptions {
                 case .position:
-                    EventToolbarPositionView()
+                    EventToolbarPositionView(viewModel: viewModel)
                 case .time:
                     EventToolbarTimeView()
                 case .calendar:
@@ -36,29 +33,38 @@ struct EventToolbarView: View {
 //                    Spacer()
                     Button {
                         print("position")
-                        showExtraOptions.toggle(to: .position)
+                        viewModel.showExtraOptions.toggle(to: .position)
                     } label: {
-                        Label("", systemImage: "rectangle.portrait.lefthalf.inset.filled")
+                        switch viewModel.position {
+                        case .begnning:
+                            Label("", systemImage: "rectangle.portrait.lefthalf.inset.filled")
                             .rotationEffect(.degrees(+90))
+                        case .end:
+                            Label("", systemImage: "rectangle.portrait.righthalf.inset.filled")
+                            .rotationEffect(.degrees(+90))
+                        case .full:
+                            Label("", systemImage: "rectangle.portrait.inset.filled")
+                            .rotationEffect(.degrees(+90))
+                        }
                     }
                     .padding(.horizontal)
                     Button {
                         print("clock")
-                        showExtraOptions.toggle(to: .time)
+                        viewModel.showExtraOptions.toggle(to: .time)
                     } label: {
                         Label("", systemImage: "clock")
                     }
                     .padding(.horizontal)
                     Button {
                         print("calendar")
-                        showExtraOptions.toggle(to: .calendar)
+                        viewModel.showExtraOptions.toggle(to: .calendar)
                     } label: {
                         Label("", systemImage: "calendar")
                     }
                     .padding(.horizontal)
                     Button {
                         print("alarm")
-                        showExtraOptions.toggle(to: .alarm)
+                        viewModel.showExtraOptions.toggle(to: .alarm)
                     } label: {
                         Label("", systemImage: "alarm")
                     }
@@ -92,33 +98,63 @@ extension Optional<EventToolbarOptions> {
 }
 
 struct EventToolbarPositionView: View {
+    @ObservedObject
+    var viewModel: EventToolbarViewModel
+    
     var body: some View {
         HStack {
             Button {
                 print("position")
+                viewModel.position = .begnning
             } label: {
                 Label("", systemImage: "rectangle.portrait.lefthalf.inset.filled")
                     .rotationEffect(.degrees(+90))
+                    .selected(isSelected: viewModel.position == .begnning)
             }
             .padding(.horizontal)
             Button {
                 print("position")
+                viewModel.position = .end
             } label: {
                 Label("", systemImage: "rectangle.portrait.righthalf.inset.filled")
                     .rotationEffect(.degrees(+90))
+                    .selected(isSelected: viewModel.position == .end)
             }
             .padding(.horizontal)
             Button {
                 print("position")
+                viewModel.position = .full
             } label: {
                 Label("", systemImage: "rectangle.portrait.inset.filled")
                     .rotationEffect(.degrees(+90))
+                    .selected(isSelected: viewModel.position == .full)
             }
             .padding(.horizontal)
+            if viewModel.position != .full {
+                DatePicker("", selection: $viewModel.duration, displayedComponents: .hourAndMinute)
+                    .padding(.horizontal)
+            }
         }
     }
 }
 
+struct Selectable: ViewModifier {
+    var isSelected: Bool
+    
+    func body(content: Content) -> some View {
+        if isSelected {
+            content.foregroundColor(.blue)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func selected(isSelected: Bool) -> some View {
+        self.modifier(Selectable(isSelected: isSelected))
+    }
+}
 
 struct EventToolbarTimeView: View {
     var body: some View {

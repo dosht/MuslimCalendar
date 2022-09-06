@@ -24,13 +24,15 @@ class ScheduleViewModel: ObservableObject {
     var relativeEvents: [RelativeEvent] = []
     
     var zipEvents: [Zip2Event] {
-        if let prayerCalculation = prayerCalculation {
-            return zip(relativeEvents.dropLast(), relativeEvents.dropFirst()).enumerated().map { (i, e) in
-                Zip2Event(index: i, event: e.0, nextEvent: e.1, prayerCalculation: prayerCalculation)
+        get {
+            if let prayerCalculation = prayerCalculation {
+                return zip(relativeEvents.dropLast(), relativeEvents.dropFirst()).enumerated().map { (i, e) in
+                    Zip2Event(index: i, event: e.0, nextEvent: e.1, prayerCalculation: prayerCalculation)
+                }
+            } else {
+                return [Zip2Event]()
             }
-        } else {
-            return [Zip2Event]()
-        }
+        } set {}
     }
     
     private var subscribers = Set<AnyCancellable>()
@@ -54,7 +56,7 @@ class ScheduleViewModel: ObservableObject {
 //    var location: CLLocationCoordinate2D = LocationService.defaultCoordinate
     
     @Published
-    var focusedIndex: Focusable<Int>?
+    var focusedIndex: Int?
     
     @Published
     var focusedZip2Event: Zip2Event?
@@ -72,7 +74,7 @@ class ScheduleViewModel: ObservableObject {
         $focusedIndex
             .receive(on: DispatchQueue.main)
             .sink { [self] in
-                if case .row(let index) = $0 {
+                if let index = $0 {
                     showToolbar = true
                     focusedZip2Event = zipEvents[index]
                 } else {
@@ -130,12 +132,12 @@ class ScheduleViewModel: ObservableObject {
             .endAt(zip2Event.event.end + 30*60, relativeTo: zip2Event.event.endTimeName)
         let newIndex = zip2Event.index + 1
         relativeEvents.insert(newEvent, at: newIndex)
-        focusedIndex = .row(value: newIndex)
+        focusedIndex = newIndex
     }
     
     func save() {
         relativeEventRepository.save()
-        if case .row(let index) = focusedIndex {
+        if let index = focusedIndex {
             let event = relativeEvents[index]
             let ekEvent = eventKitRepository.createOrUpdate(event, prayerCalculation: prayerCalculation!, repeats: true)
             if event.ekEventIdentifier == nil {

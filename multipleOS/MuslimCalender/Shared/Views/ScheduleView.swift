@@ -16,31 +16,34 @@ struct ScheduleView: View {
     @EnvironmentObject var viewModel: ScheduleViewModel
     
     @FocusState
-    var focusedIndex: Focusable<Int>?
+    var focusedIndex: Int?
     
     @State var showResetConfirmation = false
     
     var body: some View {
-        GeometryReader { geo in
             NavigationView {
+        GeometryReader { geo in
                 VStack(spacing: 1) {
-                    VStack {
-                        Text("Focused: \(f())")
-                        HStack {
-                            Button(action: {
-                                showResetConfirmation.toggle()
-                            }, label: {
-                                Label("Reset", systemImage: "tornado")
-                                    .foregroundColor(.red)
-                            }).padding(.leading)
-                            Spacer()
-                            Button(action: {
-                                viewModel.syncCalendar()
-                            }, label: {
-                                Label("Sync Calendar", systemImage: "arrow.triangle.2.circlepath")
-                                    .foregroundColor(.blue)
-                            }).padding(.trailing)
-                        }
+//                    HStack {
+//                        Text("Day Schedule").frame(alignment: .topLeading).font(.title).foregroundColor(.blue)
+//                    }
+//                    VStack {
+//                        Text("Focused: \(f())")
+//                        HStack {
+//                            Button(action: {
+//                                showResetConfirmation.toggle()
+//                            }, label: {
+//                                Label("Reset", systemImage: "tornado")
+//                                    .foregroundColor(.red)
+//                            }).padding(.leading)
+//                            Spacer()
+//                            Button(action: {
+//                                viewModel.syncCalendar()
+//                            }, label: {
+//                                Label("Sync Calendar", systemImage: "arrow.triangle.2.circlepath")
+//                                    .foregroundColor(.blue)
+//                            }).padding(.trailing)
+//                        }
                         HStack {
                             DaysView(day: "Sun", geo: geo)
                             DaysView(day: "Mon", geo: geo)
@@ -50,7 +53,7 @@ struct ScheduleView: View {
                             DaysView(day: "Fri", geo: geo)
                             DaysView(day: "Sat", geo: geo)
                         }
-                    }
+//                    }
                     List {
                         if let firstzip2Event = viewModel.zipEvents.first {
                             NewAvailableTimeView(zip2Event: firstzip2Event)
@@ -60,7 +63,7 @@ struct ScheduleView: View {
                                 AdhanView(text: zipEvent.event.title!, adhanTime: viewModel.adhanTimeText(zipEvent.event))
                             } else {
                                 CardView(event: zipEvent.event, viewModel: viewModel)
-                                    .focused($focusedIndex, equals: .row(value: zipEvent.index))
+                                    .focused($focusedIndex, equals: zipEvent.index)
                                     .onSubmit { viewModel.save() }
                             }
                             NewAvailableTimeView(zip2Event: zipEvent)
@@ -70,24 +73,23 @@ struct ScheduleView: View {
 //                    .keyboardToolbar(show: $viewModel.showToolbar) { EventToolbarView(zip2Event: $viewModel.focusedZip2Event) }
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
-                            EventToolbarView(zip2Event: $viewModel.focusedZip2Event)
+                            EventToolbarView(zip2Events: $viewModel.zipEvents, index: $focusedIndex)
                         }
                     }
                     .sync($viewModel.focusedIndex, $focusedIndex)
                     .listStyle(.plain)
                 }
+                .navigationTitle(Text("Day Schedule"))
+//                .navigationViewStyle(.stack)
 
             }
-            .navigationTitle(Text("Day Schedule"))
             .alert("This will delete every thing. Are you sure?", isPresented: $showResetConfirmation) {
                 Button("Delete", role: .destructive) {
                     viewModel.deleteAll()
                     viewModel.deleteCalendar()
                 }
             }
-//            .navigationViewStyle(.stack)
         }
-        
         .onAppear {
             viewModel.fetch()
         }
@@ -162,7 +164,7 @@ struct CardView: View {
     @ObservedObject var viewModel: ScheduleViewModel
     
     var body: some View {
-        NavigationLink(destination: DetailedEventView(event: event, viewModel: viewModel)) {
+//        NavigationLink(destination: DetailedEventView(event: event, viewModel: viewModel)) {
             HStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack(alignment: .leading) {
@@ -179,7 +181,7 @@ struct CardView: View {
                 }
                 .padding()
             }
-        }
+//        }
         .background(.thinMaterial)
 //        .listRowSeparator(.hidden)
         
