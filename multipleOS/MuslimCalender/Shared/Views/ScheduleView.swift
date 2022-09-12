@@ -47,7 +47,7 @@ struct ScheduleView: View {
                         HStack {
                             DaysView(day: "Sun", geo: geo)
                             DaysView(day: "Mon", geo: geo)
-                            DaysView(day: "Tue", geo: geo, selected: true)
+                            DaysView(day: "Tue", geo: geo, selected: false)
                             DaysView(day: "Wed", geo: geo)
                             DaysView(day: "Thu", geo: geo)
                             DaysView(day: "Fri", geo: geo)
@@ -63,8 +63,8 @@ struct ScheduleView: View {
                                 AdhanView(text: zipEvent.event.title!, adhanTime: viewModel.adhanTimeText(zipEvent.event))
                             } else {
                                 CardView(event: zipEvent.event, viewModel: viewModel)
-                                    .focused($focusedIndex, equals: zipEvent.index)
                                     .onSubmit { viewModel.save() }
+                                    .focused($focusedIndex, equals: zipEvent.index)
                             }
                             NewAvailableTimeView(zip2Event: zipEvent)
                         }
@@ -144,7 +144,7 @@ struct AdhanView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.white).opacity(0.1)
+//            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.white).opacity(0.1)
             HStack {
                 Text(text)
                 Text(adhanTime)

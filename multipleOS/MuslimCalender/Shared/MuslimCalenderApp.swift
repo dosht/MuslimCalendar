@@ -12,7 +12,7 @@ import CoreLocation
 struct MuslimCalenderApp: App {
     
     @StateObject
-    private var relativeEventsViewModel = ScheduleViewModel()
+    var relativeEventsViewModel = ScheduleViewModel()
 
     var body: some Scene {
         WindowGroup {

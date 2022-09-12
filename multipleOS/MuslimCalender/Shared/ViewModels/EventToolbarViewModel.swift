@@ -23,7 +23,7 @@ class EventToolbarViewModel: ObservableObject {
     }
     
     var nextEvent: RelativeEvent? {
-        index.map{zip2Events[$0+1]}?.event
+        index.map{zip2Events[$0]}?.nextEvent
     }
     
     @Published
@@ -32,20 +32,37 @@ class EventToolbarViewModel: ObservableObject {
     @Published
     var position: Position = .begnning {
         didSet {
-            if position != oldValue {
-                updatePosition()
+            if position == oldValue {
+                return
             }
+            if oldValue == .full {
+                duration = Date().startOfDay.addingTimeInterval(30*60)
+            }
+            if timeInterval == 0 && position != .full {
+                return
+            }
+            updatePosition(newPosition: position)
         }
     }
     
     @Published
-    var duration: Date = Date().startOfDay.addingTimeInterval(30*60)
+    var duration: Date = Date().startOfDay {
+        didSet {
+            if event != nil {
+                updateDuration(newDuration: duration)
+            }
+        }
+    }
      
+    var timeInterval: TimeInterval { duration.timeIntervalSince(Date().startOfDay) }
+    
     init(zip2Events: Binding<[Zip2Event]>, index: FocusState<Int?>.Binding) {
         self._zip2Events = zip2Events
         self._index = index
-        position = getPosition()
-        duration = getDuration()
+        if index.wrappedValue != nil {
+            position = getPosition()
+            duration = getDuration()
+        }
     }
     
     enum Position: String, CaseIterable, Identifiable {
@@ -70,15 +87,28 @@ class EventToolbarViewModel: ObservableObject {
     }
     
     func getDuration() -> Date {
-        if let start = event?.start, let end = event?.end {
-            print("end: \(end), start: \(start)")
-            return Date().startOfDay.addingTimeInterval(30*60)
-        } else {
-            return Date().startOfDay.addingTimeInterval(30*60)
+        var timeInterval: TimeInterval = 0
+        if let event = event {
+            timeInterval = abs(event.end - event.start)
         }
+        return Date().startOfDay.addingTimeInterval(timeInterval)
     }
     
-    func updatePosition() {
+//    func getDuration() -> Date {
+//        var timeInterval: TimeInterval = 30*60
+//        if let start = event?.start, let end = event?.end {
+//            switch position {
+//            case .begnning:
+//                timeInterval = end
+//            case .end:
+//                timeInterval = -start
+//            case .full: () // Doesn't apply here
+//            }
+//        }
+//        return Date().startOfDay.addingTimeInterval(timeInterval)
+//    }
+    
+    func updatePosition(newPosition position: Position) {
         if let firstEvent = previousEvent, let secondEvent = nextEvent {
             switch position {
             case .begnning:
@@ -91,6 +121,17 @@ class EventToolbarViewModel: ObservableObject {
                 event?.startAt(firstEvent.end, relativeTo: firstEvent.endTimeName)
                 event?.endAt(secondEvent.start, relativeTo: secondEvent.startTimeName)
             }
+        }
+    }
+    
+    func updateDuration(newDuration duration: Date) {
+        print("Updating duration: \(duration)")
+        let t: TimeInterval = duration.timeIntervalSince(Date().startOfDay)
+        if position == .begnning {
+            event?.end = (event?.start ?? 0) + t
+        }
+        if position == .end {
+            event?.start = (event?.end ?? 0) - t
         }
     }
 }
