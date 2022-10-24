@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct DaysView: View {
+    @Binding
+    var selectedDay: WeekDay
+    
     var body: some View {
-        Text("Days View")
+        Text(selectedDay.rawValue)
     }
 }
 
 struct DaysView_Previews: PreviewProvider {
     static var previews: some View {
-        DaysView()
+        DaysView(selectedDay: Binding.constant(.Monday))
     }
 }

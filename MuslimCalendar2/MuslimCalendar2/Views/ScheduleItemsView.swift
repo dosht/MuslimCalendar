@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleItemsView: View {
-    @State
+    @Binding
     var scheduleItems: [ScheduleItem]
     
     var body: some View {
@@ -29,6 +29,6 @@ struct ScheduleItemsView: View {
 
 struct ScheduleItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleItemsView(scheduleItems: ScheduleItem.sample)
+        ScheduleItemsView(scheduleItems: Binding.constant(ScheduleItem.sample))
     }
 }

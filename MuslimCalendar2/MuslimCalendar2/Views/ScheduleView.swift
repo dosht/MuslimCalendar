@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct ScheduleView: View {
-    @State
-    var scheduleItems: [ScheduleItem]
+    @StateObject
+    var viewModel: ScheduleViewModel = .init()
     
     var body: some View {
         VStack {
-            DaysView()
-            ScheduleItemsView(scheduleItems: scheduleItems)
+            DaysView(selectedDay: $viewModel.day)
+                .onAppear {
+                    viewModel.selectDay(day: .Thursday)
+                }
+            ScheduleItemsView(scheduleItems: $viewModel.items)
+                .onReceive(viewModel.$day) { _ in
+                    viewModel.loadItems()
+                }
         }
     }
 }
 
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView(scheduleItems: ScheduleItem.sample)
+        ScheduleView(viewModel: ScheduleViewModel())
     }
 }
