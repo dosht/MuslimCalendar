@@ -18,10 +18,13 @@ class ScheduleViewModel: ObservableObject {
     @Injected private var eventKitRepository: EventKitRepository
     @Injected private var locationManager: LocationService
     @Injected private var prayerCalculationService: PrayerCalculatorService
-   
+    
     // MARK: - Publishers
     @Published
     var relativeEvents: [RelativeEvent] = []
+    
+    @Published
+    var scheduledItems: [ScheduleItem] = []
     
     var zipEvents: [Zip2Event] {
         get {
@@ -71,6 +74,11 @@ class ScheduleViewModel: ObservableObject {
 //        locationManager.$lastCoordinate.assign(to: &$location)
         prayerCalculationService.$prayerCalculation.assign(to: &$prayerCalculation)
         relativeEventRepository.$relativeEvents.assign(to: &$relativeEvents)
+//        relativeEventRepository.$relativeEvents.map { relativeEvents in
+//            relativeEvents.map({ relativeEvent in
+//                ScheduleItem(title: relativeEvent.title ?? "", end: relativeEvent.end, start: 0, endRelativeTo: 0, startRelativeTo: 0, startDate: Date(), duration: 0, type: .event)
+//            })
+//        }.assign(to: &$scheduledItems)
         $focusedIndex
             .receive(on: DispatchQueue.main)
             .sink { [self] in
@@ -83,6 +91,14 @@ class ScheduleViewModel: ObservableObject {
                 }
             }
             .store(in: &subscribers)
+//        $relativeEvents
+//            .receive(on: DispatchQueue.main)
+//            .sink { [self] in
+//                scheduledItems = $0.map({ relativeEvent in
+//                    ScheduleItem(title: relativeEvent.title ?? "", end: relativeEvent.end, start: 0, endRelativeTo: 0, startRelativeTo: 0, startDate: Date(), duration: 0, type: .event)
+//                })
+//            }
+//            .store(in: &subscribers)
     }
     
     func duration(event: RelativeEvent) -> Double {
@@ -123,6 +139,7 @@ class ScheduleViewModel: ObservableObject {
 
     func fetch() {
         relativeEventRepository.fetch()
+        scheduledItems = relativeEvents.scheduledItems
     }
     
     func addNewEventInline(_ zip2Event: Zip2Event) {
@@ -285,5 +302,18 @@ extension RelativeEvent {
             result += isAfter ? " after" : " before"
         }
         return result
+    }
+}
+
+extension Array<RelativeEvent> {
+    var scheduledItems: [ScheduleItem] {
+        get {
+            map({ relativeEvent in
+                ScheduleItem(title: relativeEvent.title ?? "", end: relativeEvent.end, start: 0, endRelativeTo: 0, startRelativeTo: 0, startDate: Date(), duration: 0, type: .event)
+            })
+        }
+        set {
+            
+        }
     }
 }

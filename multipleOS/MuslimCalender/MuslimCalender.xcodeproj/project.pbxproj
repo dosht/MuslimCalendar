@@ -57,6 +57,7 @@
 		8EE7D22F28B21F930025F55A /* AvailableTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7D22D28B21F930025F55A /* AvailableTimeView.swift */; };
 		8EE7D23128B22C190025F55A /* PrayerCalculation+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7D23028B22C190025F55A /* PrayerCalculation+Preview.swift */; };
 		8EE7D23228B22C190025F55A /* PrayerCalculation+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7D23028B22C190025F55A /* PrayerCalculation+Preview.swift */; };
+		8EF67C9A28EB359E001A2C0E /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF67C9928EB359E001A2C0E /* ScheduleItem.swift */; };
 		8EFDEB9928AA820D0039EF22 /* RelativeEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEB9828AA820D0039EF22 /* RelativeEventRepository.swift */; };
 		8EFDEB9D28AA91F60039EF22 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEB9C28AA91F60039EF22 /* Event.swift */; };
 		8EFDEBA028AA93B60039EF22 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 8EFDEB9F28AA93B60039EF22 /* Resolver */; };
@@ -124,6 +125,7 @@
 		8EE7D22B28B125920025F55A /* Zip2Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zip2Event.swift; sourceTree = "<group>"; };
 		8EE7D22D28B21F930025F55A /* AvailableTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeView.swift; sourceTree = "<group>"; };
 		8EE7D23028B22C190025F55A /* PrayerCalculation+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerCalculation+Preview.swift"; sourceTree = "<group>"; };
+		8EF67C9928EB359E001A2C0E /* ScheduleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleItem.swift; sourceTree = "<group>"; };
 		8EFDEB9828AA820D0039EF22 /* RelativeEventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeEventRepository.swift; sourceTree = "<group>"; };
 		8EFDEB9C28AA91F60039EF22 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		8EFDEBA128AA94770039EF22 /* MuslimCalendarApp+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuslimCalendarApp+Injection.swift"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				8EFDEB9C28AA91F60039EF22 /* Event.swift */,
 				8EE7D22B28B125920025F55A /* Zip2Event.swift */,
 				8EC6DC3C28B34B71006D22E6 /* PrayerCalculation.swift */,
+				8EF67C9928EB359E001A2C0E /* ScheduleItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				8E28411F286C5002004DF53A /* LocationService.swift in Sources */,
 				8E7CA01C284A8CFB00C98B01 /* ScheduleViewModel.swift in Sources */,
 				8E6E98E12842053D004A2331 /* DetailedEventView.swift in Sources */,
+				8EF67C9A28EB359E001A2C0E /* ScheduleItem.swift in Sources */,
 				8E84D03728539B9E0011EAF3 /* EventEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

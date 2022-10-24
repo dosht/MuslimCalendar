@@ -1,0 +1,638 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */; };
+		8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0929068AAE00FE1CE2 /* Persistence.swift */; };
+		8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */; };
+		8E456F0F29068AAE00FE1CE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0E29068AAE00FE1CE2 /* ContentView.swift */; };
+		8E456F1129068AB000FE1CE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E456F1029068AB000FE1CE2 /* Assets.xcassets */; };
+		8E456F1529068AB000FE1CE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E456F1429068AB000FE1CE2 /* Preview Assets.xcassets */; };
+		8E456F1F29068AB000FE1CE2 /* MuslimCalendar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F1E29068AB000FE1CE2 /* MuslimCalendar2Tests.swift */; };
+		8E456F2929068AB000FE1CE2 /* MuslimCalendar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F2829068AB000FE1CE2 /* MuslimCalendar2UITests.swift */; };
+		8E456F2B29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F2A29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E456F1B29068AB000FE1CE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E456EFC29068AAE00FE1CE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E456F0329068AAE00FE1CE2;
+			remoteInfo = MuslimCalendar2;
+		};
+		8E456F2529068AB000FE1CE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E456EFC29068AAE00FE1CE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E456F0329068AAE00FE1CE2;
+			remoteInfo = MuslimCalendar2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2App.swift; sourceTree = "<group>"; };
+		8E456F0929068AAE00FE1CE2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8E456F0C29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MuslimCalendar2.xcdatamodel; sourceTree = "<group>"; };
+		8E456F0E29068AAE00FE1CE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8E456F1029068AB000FE1CE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E456F1229068AB000FE1CE2 /* MuslimCalendar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuslimCalendar2.entitlements; sourceTree = "<group>"; };
+		8E456F1429068AB000FE1CE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8E456F1A29068AB000FE1CE2 /* MuslimCalendar2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuslimCalendar2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E456F1E29068AB000FE1CE2 /* MuslimCalendar2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2Tests.swift; sourceTree = "<group>"; };
+		8E456F2429068AB000FE1CE2 /* MuslimCalendar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuslimCalendar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E456F2829068AB000FE1CE2 /* MuslimCalendar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2UITests.swift; sourceTree = "<group>"; };
+		8E456F2A29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E456F0129068AAE00FE1CE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E456F1729068AB000FE1CE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E456F2129068AB000FE1CE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E456EFB29068AAE00FE1CE2 = {
+			isa = PBXGroup;
+			children = (
+				8E456F0629068AAE00FE1CE2 /* MuslimCalendar2 */,
+				8E456F1D29068AB000FE1CE2 /* MuslimCalendar2Tests */,
+				8E456F2729068AB000FE1CE2 /* MuslimCalendar2UITests */,
+				8E456F0529068AAE00FE1CE2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E456F0529068AAE00FE1CE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */,
+				8E456F1A29068AB000FE1CE2 /* MuslimCalendar2Tests.xctest */,
+				8E456F2429068AB000FE1CE2 /* MuslimCalendar2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E456F0629068AAE00FE1CE2 /* MuslimCalendar2 */ = {
+			isa = PBXGroup;
+			children = (
+				8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */,
+				8E456F0929068AAE00FE1CE2 /* Persistence.swift */,
+				8E456F0E29068AAE00FE1CE2 /* ContentView.swift */,
+				8E456F1029068AB000FE1CE2 /* Assets.xcassets */,
+				8E456F1229068AB000FE1CE2 /* MuslimCalendar2.entitlements */,
+				8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */,
+				8E456F1329068AB000FE1CE2 /* Preview Content */,
+			);
+			path = MuslimCalendar2;
+			sourceTree = "<group>";
+		};
+		8E456F1329068AB000FE1CE2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8E456F1429068AB000FE1CE2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8E456F1D29068AB000FE1CE2 /* MuslimCalendar2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8E456F1E29068AB000FE1CE2 /* MuslimCalendar2Tests.swift */,
+			);
+			path = MuslimCalendar2Tests;
+			sourceTree = "<group>";
+		};
+		8E456F2729068AB000FE1CE2 /* MuslimCalendar2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				8E456F2829068AB000FE1CE2 /* MuslimCalendar2UITests.swift */,
+				8E456F2A29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift */,
+			);
+			path = MuslimCalendar2UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E456F0329068AAE00FE1CE2 /* MuslimCalendar2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E456F2E29068AB000FE1CE2 /* Build configuration list for PBXNativeTarget "MuslimCalendar2" */;
+			buildPhases = (
+				8E456F0029068AAE00FE1CE2 /* Sources */,
+				8E456F0129068AAE00FE1CE2 /* Frameworks */,
+				8E456F0229068AAE00FE1CE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MuslimCalendar2;
+			productName = MuslimCalendar2;
+			productReference = 8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8E456F1929068AB000FE1CE2 /* MuslimCalendar2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E456F3129068AB000FE1CE2 /* Build configuration list for PBXNativeTarget "MuslimCalendar2Tests" */;
+			buildPhases = (
+				8E456F1629068AB000FE1CE2 /* Sources */,
+				8E456F1729068AB000FE1CE2 /* Frameworks */,
+				8E456F1829068AB000FE1CE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E456F1C29068AB000FE1CE2 /* PBXTargetDependency */,
+			);
+			name = MuslimCalendar2Tests;
+			productName = MuslimCalendar2Tests;
+			productReference = 8E456F1A29068AB000FE1CE2 /* MuslimCalendar2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8E456F2329068AB000FE1CE2 /* MuslimCalendar2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E456F3429068AB000FE1CE2 /* Build configuration list for PBXNativeTarget "MuslimCalendar2UITests" */;
+			buildPhases = (
+				8E456F2029068AB000FE1CE2 /* Sources */,
+				8E456F2129068AB000FE1CE2 /* Frameworks */,
+				8E456F2229068AB000FE1CE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E456F2629068AB000FE1CE2 /* PBXTargetDependency */,
+			);
+			name = MuslimCalendar2UITests;
+			productName = MuslimCalendar2UITests;
+			productReference = 8E456F2429068AB000FE1CE2 /* MuslimCalendar2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E456EFC29068AAE00FE1CE2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					8E456F0329068AAE00FE1CE2 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					8E456F1929068AB000FE1CE2 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 8E456F0329068AAE00FE1CE2;
+					};
+					8E456F2329068AB000FE1CE2 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 8E456F0329068AAE00FE1CE2;
+					};
+				};
+			};
+			buildConfigurationList = 8E456EFF29068AAE00FE1CE2 /* Build configuration list for PBXProject "MuslimCalendar2" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8E456EFB29068AAE00FE1CE2;
+			productRefGroup = 8E456F0529068AAE00FE1CE2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E456F0329068AAE00FE1CE2 /* MuslimCalendar2 */,
+				8E456F1929068AB000FE1CE2 /* MuslimCalendar2Tests */,
+				8E456F2329068AB000FE1CE2 /* MuslimCalendar2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E456F0229068AAE00FE1CE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E456F1529068AB000FE1CE2 /* Preview Assets.xcassets in Resources */,
+				8E456F1129068AB000FE1CE2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E456F1829068AB000FE1CE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E456F2229068AB000FE1CE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E456F0029068AAE00FE1CE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */,
+				8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */,
+				8E456F0F29068AAE00FE1CE2 /* ContentView.swift in Sources */,
+				8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E456F1629068AB000FE1CE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E456F1F29068AB000FE1CE2 /* MuslimCalendar2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E456F2029068AB000FE1CE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E456F2B29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift in Sources */,
+				8E456F2929068AB000FE1CE2 /* MuslimCalendar2UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E456F1C29068AB000FE1CE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E456F0329068AAE00FE1CE2 /* MuslimCalendar2 */;
+			targetProxy = 8E456F1B29068AB000FE1CE2 /* PBXContainerItemProxy */;
+		};
+		8E456F2629068AB000FE1CE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E456F0329068AAE00FE1CE2 /* MuslimCalendar2 */;
+			targetProxy = 8E456F2529068AB000FE1CE2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8E456F2C29068AB000FE1CE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8E456F2D29068AB000FE1CE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		8E456F2F29068AB000FE1CE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MuslimCalendar2/MuslimCalendar2.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MuslimCalendar2/Preview Content\"";
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8E456F3029068AB000FE1CE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MuslimCalendar2/MuslimCalendar2.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MuslimCalendar2/Preview Content\"";
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8E456F3229068AB000FE1CE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MuslimCalendar2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MuslimCalendar2";
+			};
+			name = Debug;
+		};
+		8E456F3329068AB000FE1CE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MuslimCalendar2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MuslimCalendar2";
+			};
+			name = Release;
+		};
+		8E456F3529068AB000FE1CE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MuslimCalendar2;
+			};
+			name = Debug;
+		};
+		8E456F3629068AB000FE1CE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQ583WNZSB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MuslimCalendar2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E456EFF29068AAE00FE1CE2 /* Build configuration list for PBXProject "MuslimCalendar2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E456F2C29068AB000FE1CE2 /* Debug */,
+				8E456F2D29068AB000FE1CE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E456F2E29068AB000FE1CE2 /* Build configuration list for PBXNativeTarget "MuslimCalendar2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E456F2F29068AB000FE1CE2 /* Debug */,
+				8E456F3029068AB000FE1CE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E456F3129068AB000FE1CE2 /* Build configuration list for PBXNativeTarget "MuslimCalendar2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E456F3229068AB000FE1CE2 /* Debug */,
+				8E456F3329068AB000FE1CE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E456F3429068AB000FE1CE2 /* Build configuration list for PBXNativeTarget "MuslimCalendar2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E456F3529068AB000FE1CE2 /* Debug */,
+				8E456F3629068AB000FE1CE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8E456F0C29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodel */,
+			);
+			currentVersion = 8E456F0C29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodel */;
+			path = MuslimCalendar2.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8E456EFC29068AAE00FE1CE2 /* Project object */;
+}

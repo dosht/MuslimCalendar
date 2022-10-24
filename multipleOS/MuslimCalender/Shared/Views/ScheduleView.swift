@@ -18,6 +18,9 @@ struct ScheduleView: View {
     @FocusState
     var focusedIndex: Int?
     
+    @FocusState
+    var focusedItem: Focusable<String>?
+    
     @State var showResetConfirmation = false
     
     var body: some View {
@@ -54,6 +57,20 @@ struct ScheduleView: View {
                             DaysView(day: "Sat", geo: geo)
                         }
 //                    }
+                    List($viewModel.scheduledItems) { $item in
+                        switch item.type {
+                        case .event:
+                            ScheduledItemView(scheduledItem: $item)
+                                .focused($focusedItem, equals: .row(value: item.title))
+                                .onChange(of: focusedItem) { focusedItem in
+                                    print("focusedItem is: \(focusedItem)")
+                                }
+                        case .prayer: TextField("", text: $item.title)
+                        case .availableTime: TextField("", text: $item.title)
+                        }
+                    }
+                    
+                    
                     List {
                         if let firstzip2Event = viewModel.zipEvents.first {
                             NewAvailableTimeView(zip2Event: firstzip2Event)
@@ -97,18 +114,27 @@ struct ScheduleView: View {
     private func font(from size: CGSize) -> Font{
         Font.system(size: min(size.height, size.width) * 0.04)
     }
+}
+
+class ScheduledItemViewModel: ObservableObject {
+    @Binding
+    var scheduledItem: ScheduleItem
     
-    private func f() -> String {
-        switch focusedIndex {
-        case .some(let index): return "\(index)"
-        case nil: return "Nil"
-        }
+    init(scheduledItem: Binding<ScheduleItem>) {
+        self._scheduledItem = scheduledItem
     }
 }
 
-struct ListItem: View {
+struct ScheduledItemView: View {
+    @ObservedObject
+    var viewModel: ScheduledItemViewModel
+    
+    init(scheduledItem: Binding<ScheduleItem>) {
+        viewModel = ScheduledItemViewModel(scheduledItem: scheduledItem)
+    }
+    
     var body: some View {
-        EmptyView()
+        TextField("", text: $viewModel.scheduledItem.title)
     }
 }
 

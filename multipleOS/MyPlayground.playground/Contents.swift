@@ -52,6 +52,19 @@ extension Date {
 var ekEventStore = requestPermissionAndCreateEventStore()
 
 print("HI")
-let predicate = ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().endOfDay, calendars: [muslimCalender])
-let events = ekEventStore.events(matching: predicate)
+//let predicate = ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().endOfDay, calendars: [muslimCalender])
+//let events = ekEventStore.events(matching: predicate)
 
+protocol LinkedListNode {
+    var value: Int { get }
+    var next: LinkedListNode? { get }
+}
+
+struct Node: LinkedListNode {
+    let value: Int
+    let next: LinkedListNode?
+    let n: Node
+}
+
+let x = Node(value: 2, next: Node(value: 4, next: nil))
+print(x)
