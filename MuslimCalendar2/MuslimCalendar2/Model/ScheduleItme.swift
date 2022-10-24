@@ -8,6 +8,7 @@
 import Foundation
 
 struct ScheduleItem {
+    var id: String = UUID().uuidString
     var title: String
     var startTime: Date
     var duration: TimeInterval
@@ -15,7 +16,7 @@ struct ScheduleItem {
 }
 
 extension ScheduleItem: Identifiable, Equatable, Hashable {
-    var id: Self { self }
+    
 }
 
 enum ScheduleItemType {

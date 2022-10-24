@@ -10,7 +10,7 @@ import SwiftUI
 class ScheduleViewModel: ObservableObject {
     // MARK: - Publisher(s)
     @Published
-    var items: [ScheduleItem] = []
+    var items: [ScheduleItem] = ScheduleItem.eventSample
     
     @Published
     var day: WeekDay = .Monday

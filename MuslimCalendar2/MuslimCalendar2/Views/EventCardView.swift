@@ -13,6 +13,7 @@ struct EventCardView: View {
     
     var body: some View {
         Text(item.title)
+        TextField("", text: $item.title)
     }
 }
 

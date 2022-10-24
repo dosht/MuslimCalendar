@@ -13,6 +13,7 @@ struct MuslimCalendar2App: App {
 
     var body: some Scene {
         WindowGroup {
+            ScheduleView(viewModel: ScheduleViewModel())
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
