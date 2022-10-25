@@ -11,16 +11,16 @@ import Combine
 class ScheduleViewModel: ObservableObject {
     // MARK: - Publisher(s)
     @Published
-    var items: [ScheduleItem] = ScheduleItem.eventSample
+    var items: [ScheduleItem] = []
     
     @Published
-    var prayerItems: [ScheduleItem] = ScheduleItem.prayerRealisticSample
+    var prayerItems: [ScheduleItem] = []
     
     @Published
-    var eventItems: [ScheduleItem] = ScheduleItem.eventSample
+    var eventItems: [ScheduleItem] = []
 
     @Published
-    var day: WeekDay = .Monday
+    var day: WeekDay? = .Monday
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -44,6 +44,9 @@ class ScheduleViewModel: ObservableObject {
         self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
     }
     
+    func updatePrayerItems(prayerCalculation: PrayerCalculation) {
+        self.prayerItems = ScheduleItem.fromPrayerCaclculation(prayerCalculation)
+    }
     // MARK: - Static Helper(s)
     static func combineEvents(prayerItems: [ScheduleItem], eventItems: [ScheduleItem]) -> [ScheduleItem] {
         (prayerItems + eventItems).sorted()

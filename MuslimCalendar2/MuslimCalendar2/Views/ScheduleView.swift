@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ScheduleView: View {
-    @StateObject
-    var viewModel: ScheduleViewModel = .init()
-    
+    @EnvironmentObject
+    var viewModel: ScheduleViewModel
+  
     var body: some View {
         VStack {
             ScheduleViewTitle()
@@ -35,8 +35,18 @@ struct ScheduleViewTitle: View {
     }
 }
 
+#if DEBUG
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView(viewModel: ScheduleViewModel())
+        ScheduleView()
+            .environmentObject(ScheduleViewModel(prayerItems: ScheduleItem.prayerRealisticSample))
     }
 }
+
+extension ScheduleViewModel {
+    convenience init(prayerItems: [ScheduleItem]) {
+        self.init()
+        self.prayerItems = prayerItems
+    }
+}
+#endif

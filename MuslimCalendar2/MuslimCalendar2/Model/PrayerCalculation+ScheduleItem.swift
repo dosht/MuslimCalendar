@@ -8,7 +8,7 @@
 import Foundation
 
 extension ScheduleItem {
-    static func prayerScheduleItems(prayerCalculation: PrayerCalculation) -> [ScheduleItem] {
+    static func fromPrayerCaclculation(_ prayerCalculation: PrayerCalculation) -> [ScheduleItem] {
         TimeName
             .allCases
             .map { timeName in
@@ -16,6 +16,6 @@ extension ScheduleItem {
             }
     }
     static var prayerRealisticSample: [ScheduleItem] {
-        ScheduleItem.prayerScheduleItems(prayerCalculation: PrayerCalculation.preview)
+        ScheduleItem.fromPrayerCaclculation(PrayerCalculation.preview)
     }
 }

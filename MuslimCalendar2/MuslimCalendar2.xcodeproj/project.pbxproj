@@ -31,6 +31,7 @@
 		8E484C91290832100026C90F /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E484C90290832100026C90F /* Adhan */; };
 		8E484C93290832270026C90F /* PrayerCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C92290832270026C90F /* PrayerCalculation.swift */; };
 		8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */; };
+		8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		8E484C8D2907F45E0026C90F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		8E484C92290832270026C90F /* PrayerCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculation.swift; sourceTree = "<group>"; };
 		8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerCalculation+ScheduleItem.swift"; sourceTree = "<group>"; };
+		8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculatorService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			children = (
 				8E456F0929068AAE00FE1CE2 /* Persistence.swift */,
 				8E484C8D2907F45E0026C90F /* LocationService.swift */,
+				8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				8E456F3A29068FC900FE1CE2 /* ScheduleView.swift in Sources */,
 				8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */,
 				8E456F432906A80600FE1CE2 /* ScheduleItme.swift in Sources */,
+				8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */,
 				8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */,
 				8E484C8E2907F45F0026C90F /* LocationService.swift in Sources */,
 				8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */,

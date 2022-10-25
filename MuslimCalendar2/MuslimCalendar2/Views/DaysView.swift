@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DaysView: View {
     @Binding
-    var selectedDay: WeekDay
+    var selectedDay: WeekDay?
     
     let padding: CGFloat = 15
     

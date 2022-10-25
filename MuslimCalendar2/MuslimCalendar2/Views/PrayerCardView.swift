@@ -20,7 +20,7 @@ struct PrayerCardView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.brown).opacity(0.1)
+            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.purple).opacity(0.1)
             HStack {
                 Text(item.title)
                 Text(adhanTimeText)
