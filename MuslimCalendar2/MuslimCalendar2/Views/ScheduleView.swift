@@ -13,6 +13,7 @@ struct ScheduleView: View {
     
     var body: some View {
         VStack {
+            ScheduleViewTitle()
             DaysView(selectedDay: $viewModel.day)
                 .onAppear {
                     viewModel.selectDay(day: .Thursday)
@@ -21,6 +22,15 @@ struct ScheduleView: View {
                 .onReceive(viewModel.$day) { _ in
                     viewModel.loadItems()
                 }
+        }
+    }
+}
+
+struct ScheduleViewTitle: View {
+    var body: some View {
+        HStack {
+            Text("Day Schedule").padding(.leading, 15).font(.title)
+            Spacer()
         }
     }
 }

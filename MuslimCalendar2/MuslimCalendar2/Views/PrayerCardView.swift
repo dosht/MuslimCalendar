@@ -12,7 +12,17 @@ struct PrayerCardView: View {
     var item: ScheduleItem
     
     var body: some View {
-        Text(item.title)
+        ZStack {
+            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.green).opacity(0.1)
+            HStack {
+                Text(item.title)
+                Text("04:30")
+                Spacer()
+            }
+            .font(.headline)
+            .padding(7)
+        }
+        .frame(alignment: .center)
     }
 }
 

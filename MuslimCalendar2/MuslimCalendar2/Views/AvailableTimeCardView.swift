@@ -12,7 +12,16 @@ struct AvailableTimeCardView: View {
     var item: ScheduleItem
     
     var body: some View {
-        Text(item.title)
+        HStack {
+            Text("1h 50m")
+                .opacity(0.5)
+            Spacer()
+            Button {
+            } label: {
+                Label("", systemImage: "calendar.badge.plus")
+            }
+        }
+        .padding(.vertical)
     }
 }
 

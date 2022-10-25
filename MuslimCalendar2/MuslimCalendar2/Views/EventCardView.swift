@@ -12,9 +12,37 @@ struct EventCardView: View {
     var item: ScheduleItem
     
     var body: some View {
-        Text(item.title)
-        TextField("", text: $item.title)
+        HStack {
+            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
+            VStack(alignment: .leading) {
+                TextField("", text: $item.title)
+                    .font(.headline)
+                Spacer()
+                HStack(spacing: 4) {
+                    Label("starts after fajr", systemImage: "calendar").foregroundColor(.primary)
+                    Spacer()
+                    Label("30 m", systemImage: "clock")
+                        .labelStyle(.trailingIcon)
+                }
+                .font(.caption)
+            }
+            .padding()
+        }
     }
+}
+
+struct TrailingIconLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.title
+            configuration.icon
+        }
+    }
+}
+
+
+extension LabelStyle where Self == TrailingIconLabelStyle {
+    static var trailingIcon: Self { Self() }
 }
 
 struct EventCardView_Previews: PreviewProvider {

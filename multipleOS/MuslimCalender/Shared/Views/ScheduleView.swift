@@ -50,7 +50,7 @@ struct ScheduleView: View {
                         HStack {
                             DaysView(day: "Sun", geo: geo)
                             DaysView(day: "Mon", geo: geo)
-                            DaysView(day: "Tue", geo: geo, selected: false)
+                            DaysView(day: "Tue", geo: geo, selected: true)
                             DaysView(day: "Wed", geo: geo)
                             DaysView(day: "Thu", geo: geo)
                             DaysView(day: "Fri", geo: geo)

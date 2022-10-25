@@ -24,6 +24,7 @@ struct ScheduleItemsView: View {
                 }
             }
         }
+        .listStyle(.plain)
     }
 }
 
