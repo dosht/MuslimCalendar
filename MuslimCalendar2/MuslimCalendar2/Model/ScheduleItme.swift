@@ -13,6 +13,10 @@ struct ScheduleItem {
     var startTime: Date
     var duration: TimeInterval
     var type: ScheduleItemType
+    
+    var endTime: Date {
+        startTime.addingTimeInterval(duration)
+    }
 }
 
 extension ScheduleItem: Identifiable, Equatable, Hashable {
@@ -40,4 +44,10 @@ extension ScheduleItem {
     static var prayerSample: [ScheduleItem] { sample.filter { $0.type == .prayer } }
     static var eventSample: [ScheduleItem] { sample.filter { $0.type == .event } }
     static var availableTimeSample: [ScheduleItem] { sample.filter { $0.type == .availableTime } }
+}
+
+extension ScheduleItem: Comparable {
+    static func < (lhs: ScheduleItem, rhs: ScheduleItem) -> Bool {
+        (lhs.startTime, lhs.duration) < (rhs.startTime, rhs.duration)
+    }
 }

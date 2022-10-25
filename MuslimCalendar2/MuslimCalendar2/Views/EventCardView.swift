@@ -45,6 +45,7 @@ struct EventCardView: View {
                 }
                 .padding()
             }
+            .background(.thinMaterial)
         }
     }
 }

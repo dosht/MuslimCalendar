@@ -27,6 +27,10 @@
 		8E456F4D2906CD9000FE1CE2 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F4C2906CD9000FE1CE2 /* ScheduleViewModel.swift */; };
 		8E456F4F2906CDFD00FE1CE2 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F4E2906CDFD00FE1CE2 /* WeekDay.swift */; };
 		8E484C8C2907E6470026C90F /* TimeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C8B2907E6470026C90F /* TimeInterval+.swift */; };
+		8E484C8E2907F45F0026C90F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C8D2907F45E0026C90F /* LocationService.swift */; };
+		8E484C91290832100026C90F /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 8E484C90290832100026C90F /* Adhan */; };
+		8E484C93290832270026C90F /* PrayerCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C92290832270026C90F /* PrayerCalculation.swift */; };
+		8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,9 @@
 		8E456F4C2906CD9000FE1CE2 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		8E456F4E2906CDFD00FE1CE2 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		8E484C8B2907E6470026C90F /* TimeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+.swift"; sourceTree = "<group>"; };
+		8E484C8D2907F45E0026C90F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		8E484C92290832270026C90F /* PrayerCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculation.swift; sourceTree = "<group>"; };
+		8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerCalculation+ScheduleItem.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E484C91290832100026C90F /* Adhan in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,13 +171,13 @@
 		8E456F3729068F6300FE1CE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8E456F0E29068AAE00FE1CE2 /* ContentView.swift */,
 				8E456F3929068FC900FE1CE2 /* ScheduleView.swift */,
 				8E456F462906A91700FE1CE2 /* DaysView.swift */,
 				8E456F442906A85B00FE1CE2 /* ScheduleItemsView.swift */,
 				8E456F3B2906A17800FE1CE2 /* PrayerCardView.swift */,
 				8E456F3D2906A61200FE1CE2 /* EventCardView.swift */,
 				8E456F3F2906A67300FE1CE2 /* AvailableTimeCardView.swift */,
+				8E456F0E29068AAE00FE1CE2 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				8E456F0929068AAE00FE1CE2 /* Persistence.swift */,
+				8E484C8D2907F45E0026C90F /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -187,6 +196,8 @@
 			children = (
 				8E456F422906A80600FE1CE2 /* ScheduleItme.swift */,
 				8E456F4E2906CDFD00FE1CE2 /* WeekDay.swift */,
+				8E484C92290832270026C90F /* PrayerCalculation.swift */,
+				8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +235,9 @@
 			dependencies = (
 			);
 			name = MuslimCalendar2;
+			packageProductDependencies = (
+				8E484C90290832100026C90F /* Adhan */,
+			);
 			productName = MuslimCalendar2;
 			productReference = 8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */;
 			productType = "com.apple.product-type.application";
@@ -296,6 +310,9 @@
 				Base,
 			);
 			mainGroup = 8E456EFB29068AAE00FE1CE2;
+			packageReferences = (
+				8E484C8F290832100026C90F /* XCRemoteSwiftPackageReference "adhan-swift" */,
+			);
 			productRefGroup = 8E456F0529068AAE00FE1CE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -348,10 +365,13 @@
 				8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */,
 				8E456F432906A80600FE1CE2 /* ScheduleItme.swift in Sources */,
 				8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */,
+				8E484C8E2907F45F0026C90F /* LocationService.swift in Sources */,
+				8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */,
 				8E456F472906A91700FE1CE2 /* DaysView.swift in Sources */,
 				8E456F0F29068AAE00FE1CE2 /* ContentView.swift in Sources */,
 				8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */,
 				8E456F4D2906CD9000FE1CE2 /* ScheduleViewModel.swift in Sources */,
+				8E484C93290832270026C90F /* PrayerCalculation.swift in Sources */,
 				8E456F3C2906A17800FE1CE2 /* PrayerCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,6 +726,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E484C8F290832100026C90F /* XCRemoteSwiftPackageReference "adhan-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/batoulapps/adhan-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E484C90290832100026C90F /* Adhan */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E484C8F290832100026C90F /* XCRemoteSwiftPackageReference "adhan-swift" */;
+			productName = Adhan;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */ = {
