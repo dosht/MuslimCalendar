@@ -27,11 +27,12 @@ extension ScheduleItem {
     static func createSample(day: WeekDay? = nil) -> [ScheduleItem] {
         let dayString = day?.rawValue.appending(" ") ?? ""
         return [
-            ScheduleItem(title: "\(dayString)event 1", startTime: Date(timeString: "04:00"), duration: 60*30, type: .event),
+            ScheduleItem(title: "\(dayString)event 1", startTime: Date(timeString: "04:00"), duration: 60*15, type: .event),
             ScheduleItem(title: "fajr",  startTime: Date(timeString: "04:30"), duration: 0, type: .prayer),
             ScheduleItem(title: "\(dayString)event 2", startTime: Date(timeString: "04:30"), duration: 60*30, type: .event),
             ScheduleItem(title: "", startTime: Date(timeString: "05:00"), duration: 7*60*60, type: .availableTime),
-            ScheduleItem(title: "duhr", startTime: Date(timeString: "12:00"), duration: 0, type: .prayer)
+            ScheduleItem(title: "duhr", startTime: Date(timeString: "12:00"), duration: 0, type: .prayer),
+            ScheduleItem(title: "\(dayString)event 3", startTime: Date(timeString: "12:00"), duration: 60*80, type: .event),
         ]
     }
     

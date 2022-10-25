@@ -11,22 +11,40 @@ struct EventCardView: View {
     @Binding
     var item: ScheduleItem
     
+    var durationText: String {
+        let hour = item.duration.hour
+        let minute = item.duration.minute
+        var result = ""
+        if let hour = hour, let minute = minute {
+            result = "\(abs(hour))h, \(abs(minute))m"
+        }
+        else if let hour = hour {
+            result = "\(abs(hour))h"
+        }
+        else if let minute = minute {
+            result = "\(abs(minute))m"
+        }
+        return result
+    }
+    
     var body: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
-            VStack(alignment: .leading) {
-                TextField("", text: $item.title)
-                    .font(.headline)
-                Spacer()
-                HStack(spacing: 4) {
-                    Label("starts after fajr", systemImage: "calendar").foregroundColor(.primary)
+        ScrollView {
+            HStack {
+                RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
+                VStack {
+                    TextField("", text: $item.title)
+                        .font(.headline)
                     Spacer()
-                    Label("30 m", systemImage: "clock")
-                        .labelStyle(.trailingIcon)
+                    HStack {
+                        Label("starts after fajr", systemImage: "calendar").foregroundColor(.primary)
+                        Spacer()
+                        Label(durationText, systemImage: "clock")
+                            .labelStyle(.trailingIcon)
+                    }
+                    .font(.caption)
                 }
-                .font(.caption)
+                .padding()
             }
-            .padding()
         }
     }
 }

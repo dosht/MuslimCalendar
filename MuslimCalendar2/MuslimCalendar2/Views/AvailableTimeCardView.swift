@@ -11,9 +11,26 @@ struct AvailableTimeCardView: View {
     @Binding
     var item: ScheduleItem
     
+    //TODO: Localize and ploralize
+    var durationText: String {
+        let hour = item.duration.hour
+        let minute = item.duration.minute
+        var result = ""
+        if let hour = hour, let minute = minute {
+            result = "\(abs(hour)) hour, \(abs(minute)) minute"
+        }
+        else if let hour = hour {
+            result = "\(abs(hour)) hour"
+        }
+        else if let minute = minute {
+            result = "\(abs(minute)) minute"
+        }
+        return result
+    }
+    
     var body: some View {
         HStack {
-            Text("1h 50m")
+            Text(durationText)
                 .opacity(0.5)
             Spacer()
             Button {

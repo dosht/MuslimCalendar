@@ -11,12 +11,19 @@ struct PrayerCardView: View {
     @Binding
     var item: ScheduleItem
     
+    var adhanTimeText: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: item.startTime)
+    }
+    
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.green).opacity(0.1)
+            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.brown).opacity(0.1)
             HStack {
                 Text(item.title)
-                Text("04:30")
+                Text(adhanTimeText)
                 Spacer()
             }
             .font(.headline)
