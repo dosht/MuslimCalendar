@@ -16,6 +16,7 @@ extension Date {
         self.init(timeInterval: 0, since: date)
     }
     
+    //TODO: Use Calendar.current.startOfDay(for: self)
     var startOfDay: Date {
         return Calendar(identifier: .gregorian).date(bySettingHour: 0, minute: 0, second: 0, of: self)!
     }

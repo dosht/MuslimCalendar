@@ -8,8 +8,18 @@
 import SwiftUI
 
 class ScheduleItemsViewModel: ObservableObject {
+    // MARK: - Publisher(s)
     @Published
     var focusedItem: ScheduleItem?
+    
+    // MARK: - Intent(s)
+    func focus(item: ScheduleItem?) {
+        focusedItem = item
+    }    
+}
+
+class ScheduleItemEditViewModel: ObservableObject {
+    
 }
 
 struct ScheduleItemsView: View {
@@ -21,7 +31,7 @@ struct ScheduleItemsView: View {
     
     @ObservedObject
     var vm = ScheduleItemsViewModel()
-    
+        
     var body: some View {
         List {
             ForEach($scheduleItems) { $item in
@@ -36,9 +46,7 @@ struct ScheduleItemsView: View {
                 }
             }
         }
-        .onChange(of: focusedItem, perform: { _ in
-            vm.focusedItem = focusedItem
-        })
+        .onChange(of: focusedItem, perform: vm.focus)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 ScheduleItemToolbarView(item: $vm.focusedItem)

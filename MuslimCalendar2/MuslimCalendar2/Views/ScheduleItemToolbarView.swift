@@ -12,7 +12,7 @@ struct ScheduleItemToolbarView: View {
     var item: ScheduleItem?
     
     @State
-    var duration: Date = Date().startOfDay.advanced(by: 60*30)
+    var duration: TimeInterval = 30*60
     
     var body: some View {
         HStack {
@@ -20,9 +20,7 @@ struct ScheduleItemToolbarView: View {
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.righthalf.inset.filled", scheduleRule: .end)
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.inset.filled", scheduleRule: .full)
             if item?.scheduleRule != .full {
-                DatePicker("", selection: $duration, displayedComponents: .hourAndMinute)
-
-                    .padding(.horizontal)
+                DurationPicker(duration: $duration)
             }
         }
     }
@@ -67,8 +65,7 @@ extension View {
 #if DEBUG
 struct ScheduleItemToolbarView_Previews: PreviewProvider {
     struct Preview: View {
-        @State var item =
-        Optional.some(
+        @State var item: ScheduleItem? =
             ScheduleItem(
                 title: "event",
                 startTime: Date(timeString: "04:00"),
@@ -76,10 +73,9 @@ struct ScheduleItemToolbarView_Previews: PreviewProvider {
                 type: .event,
                 scheduleRule: .beginning
             )
-        )
+
         var body: some View {
             ScheduleItemToolbarView(item: $item)
-                .environment(\.locale, Locale(identifier: "en_GB"))  // Work around to use DatePicker for Duration
         }
     }
     

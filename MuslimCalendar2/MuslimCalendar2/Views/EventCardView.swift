@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct EventCardView: View {
+class EventViewModel: ObservableObject {
     @Binding
     var item: ScheduleItem
+    
+    init(_ item: Binding<ScheduleItem>) {
+        self._item = item
+    }
     
     var durationText: String {
         let hour = item.duration.hour
@@ -27,18 +31,28 @@ struct EventCardView: View {
         return result
     }
     
+}
+
+struct EventCardView: View {
+    @ObservedObject
+    var vm: EventViewModel
+    
+    init(item: Binding<ScheduleItem>) {
+        self.vm = EventViewModel(item)
+    }
+    
     var body: some View {
         ScrollView {
             HStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack {
-                    TextField("", text: $item.title)
+                    TextField("", text: $vm.item.title)
                         .font(.headline)
                     Spacer()
                     HStack {
                         Label("starts after fajr", systemImage: "calendar").foregroundColor(.primary)
                         Spacer()
-                        Label(durationText, systemImage: "clock")
+                        Label(vm.durationText, systemImage: "clock")
                             .labelStyle(.trailingIcon)
                     }
                     .font(.caption)
