@@ -7,9 +7,20 @@
 
 import SwiftUI
 
+class ScheduleItemsViewModel: ObservableObject {
+    @Published
+    var focusedItem: ScheduleItem?
+}
+
 struct ScheduleItemsView: View {
     @Binding
     var scheduleItems: [ScheduleItem]
+    
+    @FocusState
+    var focusedItem: ScheduleItem?
+    
+    @ObservedObject
+    var vm = ScheduleItemsViewModel()
     
     var body: some View {
         List {
@@ -19,17 +30,28 @@ struct ScheduleItemsView: View {
                     PrayerCardView(item: $item)
                 case .event:
                     EventCardView(item: $item)
+                        .focused($focusedItem, equals: item)
                 case .availableTime:
                     AvailableTimeCardView(item: $item)
                 }
+            }
+        }
+        .onChange(of: focusedItem, perform: { _ in
+            vm.focusedItem = focusedItem
+        })
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                ScheduleItemToolbarView(item: $vm.focusedItem)
             }
         }
         .listStyle(.plain)
     }
 }
 
+#if DEBUG
 struct ScheduleItemsView_Previews: PreviewProvider {
     static var previews: some View {
         ScheduleItemsView(scheduleItems: Binding.constant(ScheduleItem.sample))
     }
 }
+#endif

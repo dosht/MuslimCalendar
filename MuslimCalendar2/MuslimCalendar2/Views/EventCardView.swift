@@ -64,6 +64,7 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
     static var trailingIcon: Self { Self() }
 }
 
+#if DEBUG
 struct EventCardView_Previews: PreviewProvider {
     struct Preview: View {
         @State
@@ -79,3 +80,4 @@ struct EventCardView_Previews: PreviewProvider {
         Preview()
     }
 }
+#endif

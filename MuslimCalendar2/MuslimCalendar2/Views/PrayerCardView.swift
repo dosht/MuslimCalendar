@@ -33,6 +33,7 @@ struct PrayerCardView: View {
     }
 }
 
+#if DEBUG
 struct PrayerCardView_Previews: PreviewProvider {
     struct Preview: View {
         @State
@@ -48,3 +49,4 @@ struct PrayerCardView_Previews: PreviewProvider {
         Preview()
     }
 }
+#endif

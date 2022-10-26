@@ -32,6 +32,7 @@
 		8E484C93290832270026C90F /* PrayerCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C92290832270026C90F /* PrayerCalculation.swift */; };
 		8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */; };
 		8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */; };
+		8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		8E484C92290832270026C90F /* PrayerCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculation.swift; sourceTree = "<group>"; };
 		8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerCalculation+ScheduleItem.swift"; sourceTree = "<group>"; };
 		8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculatorService.swift; sourceTree = "<group>"; };
+		8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleItemToolbarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				8E456F3B2906A17800FE1CE2 /* PrayerCardView.swift */,
 				8E456F3D2906A61200FE1CE2 /* EventCardView.swift */,
 				8E456F3F2906A67300FE1CE2 /* AvailableTimeCardView.swift */,
+				8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */,
 				8E456F0E29068AAE00FE1CE2 /* ContentView.swift */,
 			);
 			path = Views;
@@ -360,6 +363,7 @@
 			files = (
 				8E456F4F2906CDFD00FE1CE2 /* WeekDay.swift in Sources */,
 				8E484C8C2907E6470026C90F /* TimeInterval+.swift in Sources */,
+				8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */,
 				8E456F402906A67300FE1CE2 /* AvailableTimeCardView.swift in Sources */,
 				8E456F3E2906A61200FE1CE2 /* EventCardView.swift in Sources */,
 				8E456F452906A85B00FE1CE2 /* ScheduleItemsView.swift in Sources */,

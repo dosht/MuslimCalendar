@@ -58,8 +58,10 @@ struct SelectableCircle: View {
     }
 }
 
+#if DEBUG
 struct DaysView_Previews: PreviewProvider {
     static var previews: some View {
         DaysView(selectedDay: Binding.constant(.Monday))
     }
 }
+#endif

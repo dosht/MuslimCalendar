@@ -13,7 +13,19 @@ struct ScheduleItem {
     var startTime: Date
     var duration: TimeInterval
     var type: ScheduleItemType
+    var scheduleRule: ScheduleRule?
+    var startRelativeTo: Int?
+    var endRelativeTo: Int?
+    var start: TimeInterval?
+    var end: TimeInterval?
+    var fixedDuration: TimeInterval?
     
+    enum ScheduleRule: Equatable, Hashable {
+        case beginning, end, full
+    }
+}
+
+extension ScheduleItem {
     var endTime: Date {
         startTime.addingTimeInterval(duration)
     }

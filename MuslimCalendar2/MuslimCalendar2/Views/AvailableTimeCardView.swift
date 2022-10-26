@@ -42,6 +42,7 @@ struct AvailableTimeCardView: View {
     }
 }
 
+#if DEBUG
 struct AvailableTimeCardView_Previews: PreviewProvider {
     struct Preview: View {
         @State
@@ -57,3 +58,4 @@ struct AvailableTimeCardView_Previews: PreviewProvider {
         Preview()
     }
 }
+#endif

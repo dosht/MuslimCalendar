@@ -30,6 +30,7 @@ struct MuslimCalendar2App: App {
                 .onReceive(prayerCalculator.$prayerCalculation) { prayerCalculation in
                     scheduleViewModel.updatePrayerItems(prayerCalculation: prayerCalculation)
                 }
+                .environment(\.locale, Locale(identifier: "en_GB"))  // Work around to use DatePicker for Duration
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
