@@ -31,6 +31,14 @@ class EventViewModel: ObservableObject {
         return result
     }
     
+    //MARK: - Intent(s)
+    func updateScheduleRule(newRule: ScheduleItem.ScheduleRule) {
+        
+    }
+    
+    func updateDuration(newDuration: Date) {
+        
+    }
 }
 
 struct EventCardView: View {

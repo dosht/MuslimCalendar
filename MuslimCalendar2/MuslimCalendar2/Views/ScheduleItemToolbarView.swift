@@ -9,18 +9,16 @@ import SwiftUI
 
 struct ScheduleItemToolbarView: View {
     @Binding
-    var item: ScheduleItem?
-    
-    @State
-    var duration: TimeInterval = 30*60
+    var item: ScheduleItem
     
     var body: some View {
         HStack {
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.lefthalf.inset.filled", scheduleRule: .beginning)
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.righthalf.inset.filled", scheduleRule: .end)
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.inset.filled", scheduleRule: .full)
-            if item?.scheduleRule != .full {
-                DurationPicker(duration: $duration)
+            if item.scheduleRule != .full {
+                //FIXME: Refresh is too quick when updating duration
+                DurationPicker(duration: $item.duration)
             }
         }
     }
@@ -28,17 +26,17 @@ struct ScheduleItemToolbarView: View {
 
 struct ScheduleRuleToggleView: View {
     @Binding
-    var item: ScheduleItem?
+    var item: ScheduleItem
     var image: String
     var scheduleRule: ScheduleItem.ScheduleRule
     
     var body: some View {
         Button {
-            item?.scheduleRule = scheduleRule
+            item.scheduleRule = scheduleRule
         } label: {
             Label("", systemImage: image)
                 .rotationEffect(.degrees(+90))
-                .selected(isSelected: item?.scheduleRule == scheduleRule)
+                .selected(isSelected: item.scheduleRule == scheduleRule)
         }
         .padding(.horizontal)
     }
@@ -65,7 +63,7 @@ extension View {
 #if DEBUG
 struct ScheduleItemToolbarView_Previews: PreviewProvider {
     struct Preview: View {
-        @State var item: ScheduleItem? =
+        @State var item: ScheduleItem =
             ScheduleItem(
                 title: "event",
                 startTime: Date(timeString: "04:00"),

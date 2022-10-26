@@ -41,17 +41,21 @@ struct ScheduleItemsView: View {
                 case .event:
                     EventCardView(item: $item)
                         .focused($focusedItem, equals: item)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                if item == focusedItem {
+                                    ScheduleItemToolbarView(item: $item)
+                                } else {
+                                    EmptyView()
+                                }
+                            }
+                        }
                 case .availableTime:
                     AvailableTimeCardView(item: $item)
                 }
             }
         }
         .onChange(of: focusedItem, perform: vm.focus)
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                ScheduleItemToolbarView(item: $vm.focusedItem)
-            }
-        }
         .listStyle(.plain)
     }
 }
