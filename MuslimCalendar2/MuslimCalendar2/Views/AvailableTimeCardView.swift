@@ -11,6 +11,9 @@ struct AvailableTimeCardView: View {
     @Binding
     var item: ScheduleItem
     
+    @EnvironmentObject
+    var svm: ScheduleViewModel
+    
     //TODO: Localize and ploralize
     var durationText: String {
         let hour = item.duration.hour
@@ -34,6 +37,7 @@ struct AvailableTimeCardView: View {
                 .opacity(0.5)
             Spacer()
             Button {
+                svm.addItem(item: item.createNewEvent())
             } label: {
                 Label("", systemImage: "calendar.badge.plus")
             }

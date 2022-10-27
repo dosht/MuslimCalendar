@@ -41,11 +41,15 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func loadItems() {
-        if self.eventItems.isEmpty {
+//        if self.eventItems.isEmpty {
             self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
-        }
+//        }
     }
 
+    func addItem(item: ScheduleItem) {
+        eventItems.append(item)
+    }
+    
     func refresh(item: ScheduleItem) {
         eventItems = eventItems.filter { $0.id != item.id } + [item]
     }

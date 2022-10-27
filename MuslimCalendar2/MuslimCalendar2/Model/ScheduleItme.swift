@@ -102,3 +102,16 @@ extension Array<ScheduleItem> {
 }
 //MARK: - END DON'T TOUCH
 
+extension ScheduleItem {
+    func createNewEvent() -> ScheduleItem {
+        var newItem = self
+        newItem.type = .event
+        if duration <= 30*60 {
+            newItem.scheduleRule = .full
+        } else {
+            newItem.duration = 30*60
+            newItem.scheduleRule = .beginning
+        }
+        return newItem
+    }
+}
