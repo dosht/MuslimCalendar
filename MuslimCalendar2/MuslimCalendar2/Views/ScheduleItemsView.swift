@@ -31,6 +31,9 @@ struct ScheduleItemsView: View {
     
     @ObservedObject
     var vm = ScheduleItemsViewModel()
+    
+    @EnvironmentObject
+    var svm: ScheduleViewModel
         
     var body: some View {
         List {
@@ -39,6 +42,7 @@ struct ScheduleItemsView: View {
                 switch item.type {
                 case .prayer:
                     PrayerCardView(item: $item)
+                        .deleteDisabled(true)
                 case .event:
                     EventCardView(item: $item)
                         .focused($focusedItem, equals: item)
@@ -53,7 +57,11 @@ struct ScheduleItemsView: View {
                         }
                 case .availableTime:
                     AvailableTimeCardView(item: $item)
+                        .deleteDisabled(true)
                 }
+            }
+            .onDelete { indexSet in
+                svm.remove(items: indexSet.map { scheduleItems[$0] })
             }
         }
         .onChange(of: focusedItem, perform: vm.focus)

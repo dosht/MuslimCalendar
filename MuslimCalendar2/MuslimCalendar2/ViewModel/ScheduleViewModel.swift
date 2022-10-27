@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class ScheduleViewModel: ObservableObject {
     // MARK: - Publisher(s)
     @Published
@@ -25,7 +26,9 @@ class ScheduleViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        $prayerItems.combineLatest($eventItems)
+        $prayerItems
+            .combineLatest($eventItems)
+            .receive(on: DispatchQueue.main)
             .map(ScheduleViewModel.combineEvents)
             .map(ScheduleViewModel.addAvailableItems)
             .sink { [weak self] items in
@@ -41,13 +44,16 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func loadItems() {
-//        if self.eventItems.isEmpty {
-            self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
-//        }
+        self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
     }
 
     func addItem(item: ScheduleItem) {
         eventItems.append(item)
+    }
+
+    func remove(items: [ScheduleItem]) {
+        let itemsSet = Set(items.map { $0.id })
+        eventItems = eventItems.filter { item in !itemsSet.contains(item.id) }
     }
     
     func refresh(item: ScheduleItem) {

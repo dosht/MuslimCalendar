@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScheduleItemToolbarView: View {
     @EnvironmentObject
-    var vvm: ScheduleViewModel
+    var svm: ScheduleViewModel
     
     @Binding
     var item: ScheduleItem
@@ -28,13 +28,13 @@ struct ScheduleItemToolbarView: View {
             //TODO: Move to ViewModel
             if let allocation = allocation {
                 item.reschedule(allocation: allocation)
-                vvm.refresh(item: item)
+                svm.refresh(item: item)
             }
         }
         .onChange(of: item.scheduleRule) { newValue in
             if let allocation = allocation {
                 item.reschedule(allocation: allocation)
-                vvm.refresh(item: item)
+                svm.refresh(item: item)
             }
         }
     }

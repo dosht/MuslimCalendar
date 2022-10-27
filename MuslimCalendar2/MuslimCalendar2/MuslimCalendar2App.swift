@@ -26,6 +26,7 @@ struct MuslimCalendar2App: App {
                 .onAppear {
                     locationService.$lastLocation.assign(to: &prayerCalculator.$location)
                     scheduleViewModel.$day.assign(to: &prayerCalculator.$day)
+//                    scheduleViewModel.wire()
                 }
                 .onReceive(prayerCalculator.$prayerCalculation) { prayerCalculation in
                     scheduleViewModel.updatePrayerItems(prayerCalculation: prayerCalculation)

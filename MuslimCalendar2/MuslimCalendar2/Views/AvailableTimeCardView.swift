@@ -60,6 +60,7 @@ struct AvailableTimeCardView_Previews: PreviewProvider {
     }
     static var previews: some View {
         Preview()
+            .environmentObject(ScheduleViewModel())
     }
 }
 #endif
