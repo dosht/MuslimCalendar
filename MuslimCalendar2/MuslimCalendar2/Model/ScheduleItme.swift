@@ -13,12 +13,11 @@ struct ScheduleItem {
     var startTime: Date
     var duration: TimeInterval
     var type: ScheduleItemType
-    var scheduleRule: ScheduleRule?
-    var startRelativeTo: Int?
-    var endRelativeTo: Int?
-    var start: TimeInterval?
-    var end: TimeInterval?
-    var fixedDuration: TimeInterval?
+    var scheduleRule: ScheduleRule = .beginning
+    var startRelativeTo: Int = 0
+    var endRelativeTo: Int = 0
+    var start: TimeInterval = 0
+    var end: TimeInterval = 0
     
     enum ScheduleRule: Equatable, Hashable {
         case beginning, end, full
@@ -63,3 +62,43 @@ extension ScheduleItem: Comparable {
         (lhs.startTime, lhs.duration) < (rhs.startTime, rhs.duration)
     }
 }
+
+struct Allocation {
+    var startTime: Date
+    var endTime: Date
+    var startRelativeTo: Int
+    var start: TimeInterval
+    var endRelativeTo: Int
+    var end: TimeInterval
+    
+    var duration: TimeInterval { endTime.timeIntervalSince(startTime) }
+}
+
+//MARK: - DO NOT TOUCH
+extension ScheduleItem {
+    mutating func reschedule(allocation: Allocation) {
+        switch scheduleRule {
+        case .beginning: startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;            endRelativeTo = allocation.startRelativeTo; end = allocation.start + duration
+        case .end:       startTime = allocation.endTime.addingTimeInterval(-duration);  startRelativeTo = allocation.endRelativeTo;   start = allocation.start + duration; endRelativeTo = allocation.endRelativeTo;   end = allocation.end
+        case .full:      startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;            endRelativeTo = allocation.endRelativeTo;   end = allocation.end             ; duration = allocation.duration
+        }
+    }
+}
+
+extension Array<ScheduleItem> {
+    func allocation(of item: ScheduleItem) -> Allocation? {
+        guard let itemIndex = firstIndex(where: { $0.id == item.id }) else { return nil }
+        let itemAfter = self[index(after: itemIndex)]
+        let itemBefore = self[index(before: itemIndex)]
+        return Allocation(
+            startTime: (itemBefore.type == .availableTime) ? itemBefore.startTime : itemBefore.endTime,
+            endTime: (itemAfter.type == .availableTime) ? itemAfter.endTime : itemAfter.startTime,
+            startRelativeTo: (itemBefore.type == .availableTime) ? itemBefore.startRelativeTo : itemBefore.endRelativeTo,
+            start: (itemAfter.type == .availableTime) ? itemAfter.end : itemAfter.start,
+            endRelativeTo: (itemAfter.type == .availableTime) ? itemAfter.endRelativeTo : itemAfter.startRelativeTo,
+            end: (itemAfter.type == .availableTime) ? itemAfter.end : itemAfter.start
+        )
+    }
+}
+//MARK: - END DON'T TOUCH
+

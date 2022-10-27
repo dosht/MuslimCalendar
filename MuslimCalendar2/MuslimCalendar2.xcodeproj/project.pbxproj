@@ -34,6 +34,7 @@
 		8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */; };
 		8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */; };
 		8E484C9D29097E860026C90F /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9C29097E860026C90F /* DurationPicker.swift */; };
+		8E484C9F290A782A0026C90F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9E290A782A0026C90F /* EventViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCalculatorService.swift; sourceTree = "<group>"; };
 		8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleItemToolbarView.swift; sourceTree = "<group>"; };
 		8E484C9C29097E860026C90F /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
+		8E484C9E290A782A0026C90F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				8E456F4C2906CD9000FE1CE2 /* ScheduleViewModel.swift */,
+				8E484C9E290A782A0026C90F /* EventViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				8E456F4F2906CDFD00FE1CE2 /* WeekDay.swift in Sources */,
 				8E484C8C2907E6470026C90F /* TimeInterval+.swift in Sources */,
 				8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */,
+				8E484C9F290A782A0026C90F /* EventViewModel.swift in Sources */,
 				8E456F402906A67300FE1CE2 /* AvailableTimeCardView.swift in Sources */,
 				8E456F3E2906A61200FE1CE2 /* EventCardView.swift in Sources */,
 				8E456F452906A85B00FE1CE2 /* ScheduleItemsView.swift in Sources */,

@@ -34,6 +34,7 @@ struct ScheduleItemsView: View {
         
     var body: some View {
         List {
+//            ForEach(Array($scheduleItems.enumerated()), id: \.0) { index, $item in
             ForEach($scheduleItems) { $item in
                 switch item.type {
                 case .prayer:
@@ -44,7 +45,7 @@ struct ScheduleItemsView: View {
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
                                 if item == focusedItem {
-                                    ScheduleItemToolbarView(item: $item)
+                                    ScheduleItemToolbarView(item: $item, allocation: scheduleItems.allocation(of: item))
                                 } else {
                                     EmptyView()
                                 }

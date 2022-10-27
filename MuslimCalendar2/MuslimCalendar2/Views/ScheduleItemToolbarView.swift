@@ -8,17 +8,33 @@
 import SwiftUI
 
 struct ScheduleItemToolbarView: View {
+    @EnvironmentObject
+    var vvm: ScheduleViewModel
+    
     @Binding
     var item: ScheduleItem
+    
+    var allocation: Allocation?
     
     var body: some View {
         HStack {
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.lefthalf.inset.filled", scheduleRule: .beginning)
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.righthalf.inset.filled", scheduleRule: .end)
             ScheduleRuleToggleView(item: $item, image: "rectangle.portrait.inset.filled", scheduleRule: .full)
-            if item.scheduleRule != .full {
-                //FIXME: Refresh is too quick when updating duration
-                DurationPicker(duration: $item.duration)
+            DurationPicker(duration: $item.duration)
+                .disabled(item.scheduleRule == .full)
+        }
+        .onChange(of: item.duration) { newValue in
+            //TODO: Move to ViewModel
+            if let allocation = allocation {
+                item.reschedule(allocation: allocation)
+                vvm.refresh(item: item)
+            }
+        }
+        .onChange(of: item.scheduleRule) { newValue in
+            if let allocation = allocation {
+                item.reschedule(allocation: allocation)
+                vvm.refresh(item: item)
             }
         }
     }

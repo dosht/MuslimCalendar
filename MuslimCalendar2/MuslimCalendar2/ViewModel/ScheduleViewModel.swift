@@ -41,7 +41,13 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func loadItems() {
-        self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
+        if self.eventItems.isEmpty {
+            self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
+        }
+    }
+
+    func refresh(item: ScheduleItem) {
+        eventItems = eventItems.filter { $0.id != item.id } + [item]
     }
     
     func updatePrayerItems(prayerCalculation: PrayerCalculation) {
