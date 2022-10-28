@@ -18,11 +18,9 @@ class ScheduleItemsViewModel: ObservableObject {
     }    
 }
 
-class ScheduleItemEditViewModel: ObservableObject {
-    
-}
-
 struct ScheduleItemsView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @Binding
     var scheduleItems: [ScheduleItem]
     
@@ -45,6 +43,9 @@ struct ScheduleItemsView: View {
                         .deleteDisabled(true)
                 case .event:
                     EventCardView(item: $item)
+                        .onSubmit {
+                            item.syncWrappedObject(viewContext)
+                        }
                         .focused($focusedItem, equals: item)
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
@@ -61,7 +62,14 @@ struct ScheduleItemsView: View {
                 }
             }
             .onDelete { indexSet in
-                svm.remove(items: indexSet.map { scheduleItems[$0] })
+                let items = indexSet.map { scheduleItems[$0] }
+                svm.remove(items: items)
+                items.forEach { item in
+                    if let object = item.wrappedObject {
+                        viewContext.delete(object)
+                        try! viewContext.save()
+                    }
+                }
             }
         }
         .onChange(of: focusedItem, perform: vm.focus)

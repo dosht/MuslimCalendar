@@ -18,6 +18,7 @@ struct ScheduleItem {
     var endRelativeTo: Int = 0
     var start: TimeInterval = 0
     var end: TimeInterval = 0
+    var wrappedObject: RelativeEvent?
     
     enum ScheduleRule: Equatable, Hashable {
         case beginning, end, full
@@ -78,9 +79,10 @@ struct Allocation {
 extension ScheduleItem {
     mutating func reschedule(allocation: Allocation) {
         switch scheduleRule {
-        case .beginning: startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;            endRelativeTo = allocation.startRelativeTo; end = allocation.start + duration
-        case .end:       startTime = allocation.endTime.addingTimeInterval(-duration);  startRelativeTo = allocation.endRelativeTo;   start = allocation.start + duration; endRelativeTo = allocation.endRelativeTo;   end = allocation.end
-        case .full:      startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;            endRelativeTo = allocation.endRelativeTo;   end = allocation.end             ; duration = allocation.duration
+        case .beginning: startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;               endRelativeTo = allocation.startRelativeTo; end = allocation.start + duration
+        case .end:       startTime = allocation.endTime.addingTimeInterval(-duration);  startRelativeTo = allocation.endRelativeTo;   start = -(allocation.start + duration); endRelativeTo = allocation.endRelativeTo;   end = -(allocation.end)
+        case .full:      startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;               endRelativeTo = allocation.endRelativeTo;   end = allocation.end
+            duration = allocation.duration
         }
     }
 }
@@ -103,15 +105,18 @@ extension Array<ScheduleItem> {
 //MARK: - END DON'T TOUCH
 
 extension ScheduleItem {
+    static let DefaultDuration: TimeInterval = 30*60
     func createNewEvent() -> ScheduleItem {
         var newItem = self
         newItem.type = .event
-        if duration <= 30*60 {
+        if duration <= ScheduleItem.DefaultDuration {
             newItem.scheduleRule = .full
         } else {
-            newItem.duration = 30*60
+            newItem.duration = ScheduleItem.DefaultDuration
             newItem.scheduleRule = .beginning
         }
+        newItem.endRelativeTo = startRelativeTo
+        newItem.end = newItem.duration
         return newItem
     }
 }

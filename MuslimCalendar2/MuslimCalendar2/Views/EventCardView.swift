@@ -30,6 +30,7 @@ struct EventCardView: View {
                             .labelStyle(.trailingIcon)
                     }
                     .font(.caption)
+                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
                 }
                 .padding()
             }

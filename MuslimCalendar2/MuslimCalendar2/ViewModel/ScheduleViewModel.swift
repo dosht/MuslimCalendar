@@ -23,6 +23,11 @@ class ScheduleViewModel: ObservableObject {
     @Published
     var day: WeekDay? = .Monday
     
+    @Published
+    var prayerCalculation: PrayerCalculation = PrayerCalculation.preview
+    
+    private var eventsUpdateTask: AnyCancellable?
+    
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -38,13 +43,20 @@ class ScheduleViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func subscribe(items: Publishers.Sequence<[ScheduleItem], Never>) {
+        eventsUpdateTask = items.sink { [weak self] item in
+            guard let self = self else { return }
+            self.eventItems = self.eventItems + [item]
+        }
+    }
+    
     // MARK: - Intent(s)
     func selectDay(day: WeekDay) {
         self.day = day
     }
     
-    func loadItems() {
-        self.eventItems = ScheduleItem.createSample(day: day).filter { $0.type == .event }
+    func loadEvents(_ events: [RelativeEvent]) {
+        eventItems = events.map { $0.scheuledItem.updateTime(with: prayerCalculation) }
     }
 
     func addItem(item: ScheduleItem) {
@@ -75,7 +87,7 @@ class ScheduleViewModel: ObservableObject {
                     .flatMap { (a, b) -> [ScheduleItem] in
                         let availableTime = b.startTime.timeIntervalSince(a.endTime)
                         if availableTime > 0 {
-                            let availableItem = ScheduleItem(title: "", startTime: a.endTime, duration: availableTime, type: .availableTime)
+                            let availableItem = ScheduleItem(title: "", startTime: a.endTime, duration: availableTime, type: .availableTime, startRelativeTo: a.endRelativeTo, endRelativeTo: b.startRelativeTo, start: a.end, end: b.start)
                             return [a, availableItem, b]
                         } else {
                             return [a, b]

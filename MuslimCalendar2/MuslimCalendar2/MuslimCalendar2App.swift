@@ -9,7 +9,8 @@ import SwiftUI
 
 @main
 struct MuslimCalendar2App: App {
-//    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.shared
+    
     @StateObject
     var prayerCalculator = PrayerCalculatorService()
     
@@ -26,13 +27,13 @@ struct MuslimCalendar2App: App {
                 .onAppear {
                     locationService.$lastLocation.assign(to: &prayerCalculator.$location)
                     scheduleViewModel.$day.assign(to: &prayerCalculator.$day)
-//                    scheduleViewModel.wire()
+                    prayerCalculator.$prayerCalculation.assign(to: &scheduleViewModel.$prayerCalculation)
                 }
                 .onReceive(prayerCalculator.$prayerCalculation) { prayerCalculation in
                     scheduleViewModel.updatePrayerItems(prayerCalculation: prayerCalculation)
                 }
 //            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

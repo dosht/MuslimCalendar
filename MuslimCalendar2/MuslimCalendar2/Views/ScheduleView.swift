@@ -10,6 +10,9 @@ import SwiftUI
 struct ScheduleView: View {
     @EnvironmentObject
     var viewModel: ScheduleViewModel
+    
+    @FetchRequest(sortDescriptors: [])
+    var relativeEvents: FetchedResults<RelativeEvent>
   
     var body: some View {
         VStack {
@@ -17,11 +20,9 @@ struct ScheduleView: View {
             DaysView(selectedDay: $viewModel.day)
                 .onAppear {
                     viewModel.selectDay(day: .Thursday)
+                    viewModel.loadEvents(Array(relativeEvents))
                 }
             ScheduleItemsView(scheduleItems: $viewModel.items)
-                .onReceive(viewModel.$day) { _ in
-                    viewModel.loadItems()
-                }
         }
     }
 }

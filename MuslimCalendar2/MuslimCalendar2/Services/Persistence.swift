@@ -54,3 +54,14 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+
+extension NSManagedObjectContext {
+    func isEmpty(of entityName: String) -> Bool {
+        if let count = try? self.count(for: NSFetchRequest(entityName: entityName)) {
+            if count == 0 {
+                return true
+            }
+        }
+        return false
+    }
+}
