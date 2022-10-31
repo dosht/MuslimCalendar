@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EventCardView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     @ObservedObject
     var vm: EventViewModel
     
@@ -35,6 +37,9 @@ struct EventCardView: View {
                 .padding()
             }
             .background(.thinMaterial)
+        }
+        .onSubmit {
+            vm.item.syncWrappedObject(viewContext)
         }
     }
 }

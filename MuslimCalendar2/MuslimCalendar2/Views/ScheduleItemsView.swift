@@ -43,9 +43,6 @@ struct ScheduleItemsView: View {
                         .deleteDisabled(true)
                 case .event:
                     EventCardView(item: $item)
-                        .onSubmit {
-                            item.syncWrappedObject(viewContext)
-                        }
                         .focused($focusedItem, equals: item)
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {

@@ -80,7 +80,7 @@ extension ScheduleItem {
     mutating func reschedule(allocation: Allocation) {
         switch scheduleRule {
         case .beginning: startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;               endRelativeTo = allocation.startRelativeTo; end = allocation.start + duration
-        case .end:       startTime = allocation.endTime.addingTimeInterval(-duration);  startRelativeTo = allocation.endRelativeTo;   start = -(allocation.start + duration); endRelativeTo = allocation.endRelativeTo;   end = -(allocation.end)
+        case .end:       startTime = allocation.endTime.addingTimeInterval(-duration);  startRelativeTo = allocation.endRelativeTo;   start = allocation.end - duration; endRelativeTo = allocation.endRelativeTo;   end = allocation.end
         case .full:      startTime = allocation.startTime;                              startRelativeTo = allocation.startRelativeTo; start = allocation.start;               endRelativeTo = allocation.endRelativeTo;   end = allocation.end
             duration = allocation.duration
         }
@@ -96,7 +96,7 @@ extension Array<ScheduleItem> {
             startTime: (itemBefore.type == .availableTime) ? itemBefore.startTime : itemBefore.endTime,
             endTime: (itemAfter.type == .availableTime) ? itemAfter.endTime : itemAfter.startTime,
             startRelativeTo: (itemBefore.type == .availableTime) ? itemBefore.startRelativeTo : itemBefore.endRelativeTo,
-            start: (itemAfter.type == .availableTime) ? itemAfter.end : itemAfter.start,
+            start: (itemAfter.type == .availableTime) ? itemBefore.end : itemBefore.start,
             endRelativeTo: (itemAfter.type == .availableTime) ? itemAfter.endRelativeTo : itemAfter.startRelativeTo,
             end: (itemAfter.type == .availableTime) ? itemAfter.end : itemAfter.start
         )
@@ -107,16 +107,22 @@ extension Array<ScheduleItem> {
 extension ScheduleItem {
     static let DefaultDuration: TimeInterval = 30*60
     func createNewEvent() -> ScheduleItem {
-        var newItem = self
-        newItem.type = .event
+        var newItem = ScheduleItem(
+            title: "",
+            startTime: startTime,
+            duration: ScheduleItem.DefaultDuration,
+            type: .event,
+            startRelativeTo: startRelativeTo,
+            endRelativeTo: startRelativeTo,
+            start: start,
+            end: ScheduleItem.DefaultDuration + start
+        )
+
         if duration <= ScheduleItem.DefaultDuration {
             newItem.scheduleRule = .full
-        } else {
-            newItem.duration = ScheduleItem.DefaultDuration
-            newItem.scheduleRule = .beginning
+            newItem.duration = duration
+            newItem.end = newItem.duration + start
         }
-        newItem.endRelativeTo = startRelativeTo
-        newItem.end = newItem.duration
         return newItem
     }
 }
