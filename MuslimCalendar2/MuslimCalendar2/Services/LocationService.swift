@@ -20,8 +20,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+
     }
 
     var statusString: String {
@@ -50,5 +49,11 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
             if location.distance(from: lastLocation) < 3000 { return }
         }
         lastLocation = location
+    }
+    
+    // MARK: - Intents
+    func start() {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 }

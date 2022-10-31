@@ -7,6 +7,8 @@
 
 import SwiftUI
 import CoreLocation
+import Combine
+import Adhan
 
 class PrayerCalculatorService: ObservableObject {
     @Published
@@ -17,6 +19,33 @@ class PrayerCalculatorService: ObservableObject {
     
     @Published
     var prayerCalculation: PrayerCalculation = PrayerCalculation.preview
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        $location.sink { [weak self] location in
+            guard let location = location else { return }
+            if let calculation = self?.calculate(forDay: Date(), forLocation: location) {
+                self?.prayerCalculation = calculation
+            }
+        }.store(in: &cancellables)
+    }
+
+    func calculate(forDay day: Date, forLocation location: CLLocation) -> PrayerCalculation? {
+        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        let date = cal.dateComponents([.year, .month, .day], from: day)
+        let coordinates = Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+
+        //TODO: add this to user defaults
+        var params = CalculationMethod.turkey.params
+        params.method = .turkey
+
+        if let prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params) {
+            return PrayerCalculation.createFromPrayerTimes(prayerTimes, location: location, day: day, params: params)
+        } else {
+            return nil
+        }
+    }
     
     // MARK: - Intent(s)
     func updateLocation(_ location: CLLocation) {

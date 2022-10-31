@@ -25,6 +25,7 @@ struct MuslimCalendar2App: App {
             ScheduleView()
                 .environmentObject(scheduleViewModel)
                 .onAppear {
+                    locationService.start()
                     locationService.$lastLocation.assign(to: &prayerCalculator.$location)
                     scheduleViewModel.$day.assign(to: &prayerCalculator.$day)
                     prayerCalculator.$prayerCalculation.assign(to: &scheduleViewModel.$prayerCalculation)

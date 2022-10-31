@@ -88,6 +88,7 @@
 		8E484C9C29097E860026C90F /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
 		8E484C9E290A782A0026C90F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		8E484CA0290AF7410026C90F /* CoreData+ScheduledItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+ScheduledItem.swift"; sourceTree = "<group>"; };
+		8E484CA529102D550026C90F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +140,7 @@
 		8E456F0629068AAE00FE1CE2 /* MuslimCalendar2 */ = {
 			isa = PBXGroup;
 			children = (
+				8E484CA529102D550026C90F /* Info.plist */,
 				8E456F482906C7D200FE1CE2 /* Extentions */,
 				8E456F3829068F7600FE1CE2 /* Services */,
 				8E456F412906A7DA00FE1CE2 /* Model */,
@@ -552,6 +554,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuslimCalendar2/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location is used to calculate prayer times";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -591,6 +595,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuslimCalendar2/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location is used to calculate prayer times";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
