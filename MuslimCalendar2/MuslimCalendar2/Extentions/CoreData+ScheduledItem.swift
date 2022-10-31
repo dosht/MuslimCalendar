@@ -33,12 +33,12 @@ extension RelativeEvent {
 
 extension ScheduleItem {
     func syncWrappedObject(_ context: NSManagedObjectContext) {
-        let obj = wrappedObject ?? RelativeEvent.init(context: context)
-        obj.title = title
-        obj.startRelativeTo = Int32(startRelativeTo)
-        obj.endRelativeTo = Int32(endRelativeTo)
-        obj.start = start
-        obj.end = end
+        let wrappedObject = wrappedObject ?? RelativeEvent.init(context: context)
+        wrappedObject.title = title
+        wrappedObject.startRelativeTo = Int32(startRelativeTo)
+        wrappedObject.endRelativeTo = Int32(endRelativeTo)
+        wrappedObject.start = start
+        wrappedObject.end = end
         try! context.save()
     }
 }

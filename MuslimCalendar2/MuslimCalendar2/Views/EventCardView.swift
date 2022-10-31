@@ -13,6 +13,9 @@ struct EventCardView: View {
     @ObservedObject
     var vm: EventViewModel
     
+    @EnvironmentObject
+    var svm: ScheduleViewModel
+    
     init(item: Binding<ScheduleItem>) {
         self.vm = EventViewModel(item)
     }
@@ -40,6 +43,7 @@ struct EventCardView: View {
         }
         .onSubmit {
             vm.item.syncWrappedObject(viewContext)
+            svm.refresh(item: vm.item)
         }
     }
 }
