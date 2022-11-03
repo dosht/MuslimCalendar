@@ -27,7 +27,7 @@ extension RelativeEvent {
 
 extension RelativeEvent {
     var scheduleRule: ScheduleItem.ScheduleRule {
-        (startRelativeTo < endRelativeTo) ? .full : (end - start > 0) ? .beginning : .end
+        (startRelativeTo < endRelativeTo) ? .full : start > 0 ? .beginning : .end
     }
 }
 

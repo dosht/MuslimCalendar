@@ -30,6 +30,7 @@ struct PrayerCardView: View {
             .padding(7)
         }
         .frame(alignment: .center)
+        .listRowSeparator(.hidden)
     }
 }
 

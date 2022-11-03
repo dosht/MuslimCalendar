@@ -42,6 +42,7 @@ struct AvailableTimeCardView: View {
                 Label("", systemImage: "calendar.badge.plus")
             }
         }
+        .listRowSeparator(.hidden)
         .padding(.vertical)
     }
 }
@@ -54,6 +55,7 @@ struct AvailableTimeCardView_Previews: PreviewProvider {
         
         var body: some View {
             List($items) { $item in
+                AvailableTimeCardView(item: $item)
                 AvailableTimeCardView(item: $item)
             }
         }

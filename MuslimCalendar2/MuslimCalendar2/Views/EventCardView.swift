@@ -41,6 +41,7 @@ struct EventCardView: View {
             }
             .background(.thinMaterial)
         }
+        .listRowSeparator(.hidden)
         .onSubmit {
             vm.item.syncWrappedObject(viewContext)
             svm.refresh(item: vm.item)
