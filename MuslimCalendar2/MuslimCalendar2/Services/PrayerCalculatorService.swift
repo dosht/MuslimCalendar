@@ -23,9 +23,12 @@ class PrayerCalculatorService: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        $location.sink { [weak self] location in
+        $location
+            .combineLatest($day)
+            .sink { [weak self] location, day in
             guard let location = location else { return }
-            if let calculation = self?.calculate(forDay: Date(), forLocation: location) {
+            let date = day.map(Date().this) ?? Date()
+            if let calculation = self?.calculate(forDay: date, forLocation: location) {
                 self?.prayerCalculation = calculation
             }
         }.store(in: &cancellables)

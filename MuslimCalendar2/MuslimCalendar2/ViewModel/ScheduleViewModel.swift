@@ -75,6 +75,10 @@ class ScheduleViewModel: ObservableObject {
     func updatePrayerItems(prayerCalculation: PrayerCalculation) {
         self.prayerItems = ScheduleItem.fromPrayerCaclculation(prayerCalculation)
     }
+    
+    func updateEventItems(prayerCalculation: PrayerCalculation) {
+        self.eventItems = eventItems.map { $0.updateTime(with: prayerCalculation) }
+    }
     // MARK: - Static Helper(s)
     static func combineEvents(prayerItems: [ScheduleItem], eventItems: [ScheduleItem]) -> [ScheduleItem] {
         (prayerItems + eventItems).sorted()

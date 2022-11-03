@@ -32,6 +32,7 @@ struct MuslimCalendar2App: App {
                 }
                 .onReceive(prayerCalculator.$prayerCalculation) { prayerCalculation in
                     scheduleViewModel.updatePrayerItems(prayerCalculation: prayerCalculation)
+                    scheduleViewModel.updateEventItems(prayerCalculation: prayerCalculation)
                 }
 //            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)

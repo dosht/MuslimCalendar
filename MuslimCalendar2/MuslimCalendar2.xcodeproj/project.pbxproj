@@ -36,6 +36,8 @@
 		8E484C9D29097E860026C90F /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9C29097E860026C90F /* DurationPicker.swift */; };
 		8E484C9F290A782A0026C90F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484C9E290A782A0026C90F /* EventViewModel.swift */; };
 		8E484CA1290AF7410026C90F /* CoreData+ScheduledItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484CA0290AF7410026C90F /* CoreData+ScheduledItem.swift */; };
+		8E484CA72910DD970026C90F /* Date+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484CA62910DD970026C90F /* Date+Tests.swift */; };
+		8E5D3F5B29143CF200914FC1 /* Date+WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		8E484C9E290A782A0026C90F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		8E484CA0290AF7410026C90F /* CoreData+ScheduledItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+ScheduledItem.swift"; sourceTree = "<group>"; };
 		8E484CA529102D550026C90F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8E484CA62910DD970026C90F /* Date+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Tests.swift"; sourceTree = "<group>"; };
+		8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+WeekDay.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				8E456F1E29068AB000FE1CE2 /* MuslimCalendar2Tests.swift */,
+				8E484CA62910DD970026C90F /* Date+Tests.swift */,
 			);
 			path = MuslimCalendar2Tests;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				8E484C8B2907E6470026C90F /* TimeInterval+.swift */,
 				8E484CA0290AF7410026C90F /* CoreData+ScheduledItem.swift */,
 				8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */,
+				8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -385,6 +391,7 @@
 				8E456F432906A80600FE1CE2 /* ScheduleItme.swift in Sources */,
 				8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */,
 				8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */,
+				8E5D3F5B29143CF200914FC1 /* Date+WeekDay.swift in Sources */,
 				8E484C8E2907F45F0026C90F /* LocationService.swift in Sources */,
 				8E484CA1290AF7410026C90F /* CoreData+ScheduledItem.swift in Sources */,
 				8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */,
@@ -403,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E456F1F29068AB000FE1CE2 /* MuslimCalendar2Tests.swift in Sources */,
+				8E484CA72910DD970026C90F /* Date+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +563,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MuslimCalendar2/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location is used to calculate prayer times";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -596,6 +605,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MuslimCalendar2/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location is used to calculate prayer times";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
