@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import EventKit
 
 struct ScheduleItem {
     var id: String = UUID().uuidString
@@ -19,6 +20,7 @@ struct ScheduleItem {
     var start: TimeInterval = 0
     var end: TimeInterval = 0
     var wrappedObject: RelativeEvent?
+    var wrappedEkEvent: EKEvent?
     
     enum ScheduleRule: Equatable, Hashable {
         case beginning, end, full

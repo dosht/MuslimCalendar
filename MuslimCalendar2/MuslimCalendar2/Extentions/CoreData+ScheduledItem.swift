@@ -39,6 +39,9 @@ extension ScheduleItem {
         wrappedObject.endRelativeTo = Int32(endRelativeTo)
         wrappedObject.start = start
         wrappedObject.end = end
+        if let eventIdentifier = wrappedEkEvent?.eventIdentifier {
+            wrappedObject.ekEventIdentifier = eventIdentifier
+        }
         try! context.save()
     }
 }

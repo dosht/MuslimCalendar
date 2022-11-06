@@ -10,11 +10,9 @@ import SwiftUI
 struct EventCardView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @ObservedObject
-    var vm: EventViewModel
-    
-    @EnvironmentObject
-    var svm: ScheduleViewModel
+    @ObservedObject var vm: EventViewModel
+    @EnvironmentObject var svm: ScheduleViewModel
+    @EnvironmentObject var ekEventService: EventKitService
     
     init(item: Binding<ScheduleItem>) {
         self.vm = EventViewModel(item)
@@ -43,6 +41,9 @@ struct EventCardView: View {
         }
         .listRowSeparator(.hidden)
         .onSubmit {
+            //TODO: Move this to the view model
+            let ekEvent = ekEventService.createOrUpdate(eventOf: vm.item)
+            vm.item.wrappedEkEvent = ekEvent
             vm.item.syncWrappedObject(viewContext)
             svm.refresh(item: vm.item)
         }

@@ -11,7 +11,7 @@ extension Date {
     init(timeString: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.timeZone = .gmt
+        dateFormatter.timeZone = .init(secondsFromGMT: 0)
         let date = dateFormatter.date(from: timeString)!
         self.init(timeInterval: 0, since: date)
     }

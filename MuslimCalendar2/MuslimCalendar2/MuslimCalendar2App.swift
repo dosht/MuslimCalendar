@@ -11,14 +11,10 @@ import SwiftUI
 struct MuslimCalendar2App: App {
     let persistenceController = PersistenceController.shared
     
-    @StateObject
-    var prayerCalculator = PrayerCalculatorService()
-    
-    @StateObject
-    var locationService = LocationService()
-    
-    @StateObject
-    var scheduleViewModel = ScheduleViewModel()
+    @StateObject var prayerCalculator = PrayerCalculatorService()
+    @StateObject var locationService = LocationService()
+    @StateObject var eventKitService = EventKitService()
+    @StateObject var scheduleViewModel = ScheduleViewModel()
 
     var body: some Scene {
         WindowGroup {
@@ -36,6 +32,7 @@ struct MuslimCalendar2App: App {
                 }
 //            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(eventKitService)
         }
     }
 }

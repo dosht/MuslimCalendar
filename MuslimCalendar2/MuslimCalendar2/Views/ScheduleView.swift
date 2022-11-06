@@ -19,7 +19,7 @@ struct ScheduleView: View {
             ScheduleViewTitle()
             DaysView(selectedDay: $viewModel.day)
                 .onAppear {
-                    viewModel.selectDay(day: .Thursday)
+                    viewModel.selectDay(day: Date().weekDay)
                     viewModel.loadEvents(Array(relativeEvents))
                 }
             ScheduleItemsView(scheduleItems: $viewModel.items)

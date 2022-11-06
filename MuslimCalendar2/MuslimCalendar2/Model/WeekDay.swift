@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeekDay: String {
-    case Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    case Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 }
 
 extension WeekDay: CaseIterable, Identifiable, Equatable {

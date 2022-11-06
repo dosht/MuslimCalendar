@@ -38,6 +38,8 @@
 		8E484CA1290AF7410026C90F /* CoreData+ScheduledItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484CA0290AF7410026C90F /* CoreData+ScheduledItem.swift */; };
 		8E484CA72910DD970026C90F /* Date+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E484CA62910DD970026C90F /* Date+Tests.swift */; };
 		8E5D3F5B29143CF200914FC1 /* Date+WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */; };
+		8E5D3F5D2914D02D00914FC1 /* EventKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */; };
+		8E5D3F5F2914DBFD00914FC1 /* EkEventKitServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5E2914DBFD00914FC1 /* EkEventKitServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		8E484CA529102D550026C90F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E484CA62910DD970026C90F /* Date+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Tests.swift"; sourceTree = "<group>"; };
 		8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+WeekDay.swift"; sourceTree = "<group>"; };
+		8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitService.swift; sourceTree = "<group>"; };
+		8E5D3F5E2914DBFD00914FC1 /* EkEventKitServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkEventKitServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 			children = (
 				8E456F1E29068AB000FE1CE2 /* MuslimCalendar2Tests.swift */,
 				8E484CA62910DD970026C90F /* Date+Tests.swift */,
+				8E5D3F5E2914DBFD00914FC1 /* EkEventKitServiceTests.swift */,
 			);
 			path = MuslimCalendar2Tests;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				8E456F0929068AAE00FE1CE2 /* Persistence.swift */,
 				8E484C8D2907F45E0026C90F /* LocationService.swift */,
 				8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */,
+				8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E456F4F2906CDFD00FE1CE2 /* WeekDay.swift in Sources */,
+				8E5D3F5D2914D02D00914FC1 /* EventKitService.swift in Sources */,
 				8E484C8C2907E6470026C90F /* TimeInterval+.swift in Sources */,
 				8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */,
 				8E484C9F290A782A0026C90F /* EventViewModel.swift in Sources */,
@@ -409,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E5D3F5F2914DBFD00914FC1 /* EkEventKitServiceTests.swift in Sources */,
 				8E456F1F29068AB000FE1CE2 /* MuslimCalendar2Tests.swift in Sources */,
 				8E484CA72910DD970026C90F /* Date+Tests.swift in Sources */,
 			);
@@ -575,7 +583,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
@@ -617,7 +625,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;

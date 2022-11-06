@@ -21,17 +21,14 @@ class ScheduleItemsViewModel: ObservableObject {
 struct ScheduleItemsView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @Binding
-    var scheduleItems: [ScheduleItem]
+    @Binding var scheduleItems: [ScheduleItem]
     
-    @FocusState
-    var focusedItem: ScheduleItem?
+    @FocusState var focusedItem: ScheduleItem?
     
-    @ObservedObject
-    var vm = ScheduleItemsViewModel()
+    @ObservedObject var vm = ScheduleItemsViewModel()
     
-    @EnvironmentObject
-    var svm: ScheduleViewModel
+    @EnvironmentObject var svm: ScheduleViewModel
+    @EnvironmentObject var ekEventService: EventKitService
         
     var body: some View {
         List {
@@ -65,6 +62,7 @@ struct ScheduleItemsView: View {
                     if let object = item.wrappedObject {
                         viewContext.delete(object)
                         try! viewContext.save()
+                        ekEventService.delete(eventOf: item)
                     }
                 }
             }
