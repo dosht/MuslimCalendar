@@ -63,23 +63,14 @@ class Tests_EventStrore: XCTestCase {
         }
     }
 
-//    func test_repeating_create_events() {
-//        let viewContext = PersistenceController.preview.container.viewContext
-//        let event = RelativeEvent.create(viewContext, "Test title")
-//            .startAt(0, relativeTo: .fajr)
-//            .endAt(30, relativeTo: .fajr)
+    func test_repeating_create_events() {
+        let date = Date()
+        let item = ScheduleItem(title: "test event", startTime: date, duration: 30*60, type: .event)
+        eventService.createOrUpdate(eventOf: item)
+        let events = ekEventStore.events(matching: ekEventStore.predicateForEvents(withStart: date.this(.Sunday).startOfDay, end: date.nextWeek.endOfWeek.endOfDay, calendars: [eventService.calendar!]))
+        
+        XCTAssertEqual(events.count, 14)
 //
-//        let eventStore = EventKitRepository()
-//        let ekEventStore = eventStore.ekEventStore
-//
-//        let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-//        var prayerCalculator = PrayerCalculator(location: location, date: Date())!
-//
-//        let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator, repeats: true)
-//
-//        let events = ekEventStore.events(matching: ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().nextMonth.endOfMonth, calendars: [eventStore.muslimCalender]))
-//
-//        XCTAssertGreaterThan(events.count, 30)
 //        var today = Date()
 //        for event in events {
 //            prayerCalculator = PrayerCalculator(location: location, date: today)!
@@ -87,22 +78,15 @@ class Tests_EventStrore: XCTestCase {
 //            XCTAssertEqual(event.endDate, prayerCalculator.time(of: .fajr).addingTimeInterval(30))
 //            today = today.tomorrow
 //        }
-//    }
+    }
 //
 //    func test_findFutureEvents() {
-//        let viewContext = PersistenceController.preview.container.viewContext
-//        let eventStore = EventKitRepository()
-//        let ekEventStore = eventStore.ekEventStore
-//
-//        let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-//        let prayerCalculator = PrayerCalculator(location: location, date: Date())!
-//
 //        let date = Date().startOfDay
 //
-//        let event1 = RelativeEvent.create(viewContext, "Test1")
-//            .startAt(0, relativeTo: .fajr)
-//            .endAt(30, relativeTo: .fajr)
+//        var item = ScheduleItem(title: "test event", startTime: date, duration: 30*60, type: .event)
+//
 //        let ekEvent1 = event1.transform(eventStore, time: prayerCalculator.time)
+//
 //        let rule1 = EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: date.tomorrow.endOfDay))
 //        ekEvent1.addRecurrenceRule(rule1)
 //        ekEvent1.calendar = eventStore.muslimCalender

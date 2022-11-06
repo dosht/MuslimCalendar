@@ -44,7 +44,9 @@ class EventKitService: ObservableObject {
         case .notDetermined:
             ekEventStore.requestAccess(to: .event, completion: { [weak self] (success, error) in
                 if success {
-                    self?.authorizationStatus = EKEventStore.authorizationStatus(for: .event)
+                    DispatchQueue.main.async {
+                        self?.authorizationStatus = EKEventStore.authorizationStatus(for: .event)
+                    }
                     print("success")
                 } else {
                     print("error while requesting permession \(String(describing: error?.localizedDescription))")

@@ -18,12 +18,20 @@ extension Date {
     
     //TODO: Use Calendar.current.startOfDay(for: self)
     var startOfDay: Date {
-        return Calendar(identifier: .gregorian).date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+        Calendar(identifier: .gregorian).date(bySettingHour: 0, minute: 0, second: 0, of: self)!
     }
     var endOfDay: Date {
-        return Calendar(identifier: .gregorian).date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+        Calendar(identifier: .gregorian).date(bySettingHour: 23, minute: 59, second: 59, of: self)!
     }
     var tomorrow: Date {
-        return Date(timeInterval: 1, since: endOfDay)
+        Date(timeInterval: 1, since: endOfDay)
+    }
+    
+    var endOfWeek: Date {
+        this(.Saturday)
+    }
+    
+    var nextWeek: Date {
+        Calendar.current.date(byAdding: .day, value: 7, to: self)!
     }
 }
