@@ -62,33 +62,7 @@ class Tests_EventStrore: XCTestCase {
             XCTAssertEqual(event.endDate.ISO8601Format(), item.endTime.ISO8601Format())
         }
     }
-//    func test_update_event() {
-//        let viewContext = PersistenceController.preview.container.viewContext
-//        let event = RelativeEvent.create(viewContext, "Test title")
-//
-//        let eventStore = EventKitRepository()
-//        let ekEventStore = eventStore.ekEventStore
-//
-//        let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-//        let prayerCalculator = PrayerCalculator(location: location, date: Date())!
-//
-//        let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator)
-//        event.ekEventIdentifier = ekEvent.eventIdentifier
-//        try! viewContext.save()
-//
-//        eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator)
-//
-//        let predicate = ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().endOfDay, calendars: [eventStore.muslimCalender])
-//        let events = ekEventStore.events(matching: predicate)
-//
-//        XCTAssertEqual(events.count, 1)
-//
-////        let predicateAll = ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().addingTimeInterval(7*24*60*60).endOfDay, calendars: [eventStore.muslimCalender])
-////        let allEvents = ekEventStore.events(matching: predicate)
-////
-////        XCTAssertEqual(events.count, 7)
-//    }
-//
+
 //    func test_repeating_create_events() {
 //        let viewContext = PersistenceController.preview.container.viewContext
 //        let event = RelativeEvent.create(viewContext, "Test title")
@@ -154,55 +128,18 @@ class Tests_EventStrore: XCTestCase {
 //        XCTAssertEqual(events1.count, 2)
 //        XCTAssertEqual(events2.count, 2)
 //    }
-//
-//    func test_endOfNextMonth() {
-//        var dateComponents = DateComponents()
-//        dateComponents.year = 1999
-//        dateComponents.month = 1
-//        let date: Date = Calendar(identifier: .gregorian).date(from: dateComponents)!
-//        dateComponents.day = 31
-//        dateComponents.hour = 23
-//        dateComponents.minute = 59
-//        dateComponents.second = 59
-//        let expectedDate = Calendar(identifier: .gregorian).date(from: dateComponents)!
-//        XCTAssertEqual(date.endOfMonth, expectedDate)
-//    }
-//
-//    func test_nextMonth() {
-//        var dateComponents = DateComponents()
-//        dateComponents.month = 11
-//        var date = Calendar(identifier: .gregorian).date(from: dateComponents)!
-//        dateComponents.month = 12
-//        var expectedDate = Calendar(identifier: .gregorian).date(from: dateComponents)!
-//        XCTAssertEqual(date.nextMonth, expectedDate)
-//
-//        dateComponents.year = 1
-//        date = Calendar(identifier: .gregorian).date(from: dateComponents)!
-//        dateComponents.year = 2
-//        dateComponents.month = 1
-//        expectedDate = Calendar(identifier: .gregorian).date(from: dateComponents)!
-//        XCTAssertEqual(date.nextMonth, expectedDate)
-//    }
-//
-//    func test_delete_event() {
-//        let viewContext = PersistenceController.preview.container.viewContext
-//        let event = RelativeEvent.create(viewContext, "Test title")
-//
-//        let eventStore = EventKitRepository()
-//        let ekEventStore = eventStore.ekEventStore
-//
-//        let location = CLLocationCoordinate2D(latitude: 40.71910, longitude: 29.78066)
-//        let prayerCalculator = PrayerCalculator(location: location, date: Date())!
-//
-//        let ekEvent = eventStore.createOrUpdate(event, on: Date(), prayerCalculator: prayerCalculator)
-//        event.ekEventIdentifier = ekEvent.eventIdentifier
-//        try! viewContext.save()
-//
-//        eventStore.delete(event)
-//
-//        let predicate = ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().endOfDay, calendars: [eventStore.muslimCalender])
-//        let events = ekEventStore.events(matching: predicate)
-//
-//        XCTAssertEqual(events.count, 0)
-//    }
+
+    func test_delete_event() {
+        let date = Date()
+        var item = ScheduleItem(title: "test event", startTime: date, duration: 30*60, type: .event)
+        let ekEvent = eventService.createOrUpdate(eventOf: item)
+        item.wrappedEkEvent = ekEvent
+
+        eventService.delete(eventOf: item)
+
+        let predicate = ekEventStore.predicateForEvents(withStart: Date().startOfDay, end: Date().endOfDay, calendars: [eventService.calendar!])
+        let events = ekEventStore.events(matching: predicate)
+
+        XCTAssertEqual(events.count, 0)
+    }
 }

@@ -9,16 +9,16 @@ import Foundation
 import EventKit
 
 class EventKitService: ObservableObject {
-    
+
     @Published var ekEventStore: EKEventStore
     @Published var authorizationStatus: EKAuthorizationStatus = .notDetermined
     
     init() {
         self.ekEventStore = EKEventStore()
     }
-    
+
     var defaultCalendarName = "Muslim Calendar"
-    
+
     var calendar: EKCalendar? {
         let calendars = ekEventStore.calendars(for: .event)
         if let calendar = calendars.first(where: { cal in cal.title == defaultCalendarName }) {
@@ -32,12 +32,12 @@ class EventKitService: ObservableObject {
             return calendar
         }
     }
-    
+
     func findEvent(of item: ScheduleItem) -> EKEvent? {
         guard let ekEventIdentifier = item.wrappedObject?.ekEventIdentifier else { return nil }
         return ekEventStore.event(withIdentifier: ekEventIdentifier)
     }
-    
+
     // MARK: - Intent(s)
     func requestPermissionAndCreateEventStore() {
         switch authorizationStatus {
@@ -60,11 +60,15 @@ class EventKitService: ObservableObject {
             print("unkown")
         }
     }
-    
+
     //TODO: Make it async
     @discardableResult
     func createOrUpdate(eventOf item: ScheduleItem) -> EKEvent? {
-        requestPermissionAndCreateEventStore()
+        if authorizationStatus == .notDetermined {
+            requestPermissionAndCreateEventStore()
+        }
+        if authorizationStatus != .authorized { return nil }
+
         let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) ?? EKEvent(eventStore: ekEventStore)
         ekEvent.title = item.title
         ekEvent.startDate = item.startTime
@@ -74,8 +78,15 @@ class EventKitService: ObservableObject {
         try! ekEventStore.save(ekEvent, span: .thisEvent)
         return ekEvent
     }
-    
+
     func delete(eventOf item: ScheduleItem) {
-        requestPermissionAndCreateEventStore()
+        if authorizationStatus == .notDetermined {
+            requestPermissionAndCreateEventStore()
+        }
+        if authorizationStatus != .authorized { return }
+
+        if let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) {
+            try? ekEventStore.remove(ekEvent, span: .futureEvents)
+        }
     }
 }
