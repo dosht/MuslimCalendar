@@ -13,9 +13,11 @@ struct EventCardView: View {
     @ObservedObject var vm: EventViewModel
     @EnvironmentObject var svm: ScheduleViewModel
     @EnvironmentObject var ekEventService: EventKitService
+    var dateFormatter = DateFormatter()
     
     init(item: Binding<ScheduleItem>) {
         self.vm = EventViewModel(item)
+        dateFormatter.timeStyle = .short
     }
     
     var body: some View {
@@ -27,13 +29,17 @@ struct EventCardView: View {
                         .font(.headline)
                     Spacer()
                     HStack {
-                        Label("starts after fajr", systemImage: "calendar").foregroundColor(.primary)
+                        HStack {
+                            Label(dateFormatter.string(from: vm.item.startTime), systemImage: "calendar").foregroundColor(.primary)
+                            Text(dateFormatter.string(from: vm.item.endTime)).opacity(0.5)
+                        }
                         Spacer()
                         Label(vm.durationText, systemImage: "clock")
                             .labelStyle(.trailingIcon)
                     }
                     .font(.caption)
-                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
+                    // TODO: Revmove debug text after testing
+//                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
                 }
                 .padding()
             }
