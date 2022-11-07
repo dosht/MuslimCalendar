@@ -26,28 +26,12 @@ class PrayerCalculatorService: ObservableObject {
         $location
             .combineLatest($day)
             .sink { [weak self] location, day in
-            guard let location = location else { return }
-            let date = day.map(Date().this) ?? Date()
-            if let calculation = self?.calculate(forDay: date, forLocation: location) {
-                self?.prayerCalculation = calculation
-            }
-        }.store(in: &cancellables)
-    }
-
-    func calculate(forDay day: Date, forLocation location: CLLocation) -> PrayerCalculation? {
-        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
-        let date = cal.dateComponents([.year, .month, .day], from: day)
-        let coordinates = Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-
-        //TODO: add this to user defaults
-        var params = CalculationMethod.turkey.params
-        params.method = .turkey
-
-        if let prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params) {
-            return PrayerCalculation.createFromPrayerTimes(prayerTimes, location: location, day: day, params: params)
-        } else {
-            return nil
-        }
+                guard let location = location else { return }
+                let date = day.map(Date().this) ?? Date()
+                if let calculation = calculatePrayerTimes(forDay: date, forLocation: location) {
+                    self?.prayerCalculation = calculation
+                }
+            }.store(in: &cancellables)
     }
     
     // MARK: - Intent(s)

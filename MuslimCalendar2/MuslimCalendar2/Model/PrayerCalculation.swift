@@ -87,6 +87,29 @@ extension TimeName: Identifiable {
     }
 }
 
+func calculatePrayerTimes(forDay day: Date, forLocation location: CLLocation) -> PrayerCalculation? {
+    let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+    let date = cal.dateComponents([.year, .month, .day], from: day)
+    let coordinates = Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+
+    //TODO: add this to user defaults
+    var params = CalculationMethod.turkey.params
+    params.method = .turkey
+
+    if let prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params) {
+        return PrayerCalculation.createFromPrayerTimes(prayerTimes, location: location, day: day, params: params)
+    } else {
+        return nil
+    }
+}
+
+extension PrayerCalculation {
+    func calculate(for day: Date) -> PrayerCalculation? {
+        calculatePrayerTimes(forDay: day, forLocation: location)
+    }
+}
+
+#if DEBUG
 extension PrayerCalculation {
     static var preview: PrayerCalculation = PrayerCalculation(
         location: PrayerCalculation.previewLocation,
@@ -104,3 +127,4 @@ extension PrayerCalculation {
     
     static var previewLocation: CLLocation = CLLocation(latitude: 21.4361607, longitude: 39.9164145)
 }
+#endif

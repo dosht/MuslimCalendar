@@ -24,7 +24,7 @@ extension Date {
         Calendar(identifier: .gregorian).date(bySettingHour: 23, minute: 59, second: 59, of: self)!
     }
     var tomorrow: Date {
-        Date(timeInterval: 1, since: endOfDay)
+        Calendar.current.date(byAdding: .day, value: 1, to: self)!
     }
     
     var endOfWeek: Date {

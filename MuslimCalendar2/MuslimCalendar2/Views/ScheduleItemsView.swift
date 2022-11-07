@@ -60,12 +60,15 @@ struct ScheduleItemsView: View {
                 svm.remove(items: items)
                 items.forEach { item in
                     if let object = item.wrappedObject {
+                        ekEventService.delete(eventOf: item)
                         viewContext.delete(object)
                         try! viewContext.save()
-                        ekEventService.delete(eventOf: item)
                     }
                 }
             }
+        }
+        .onAppear {
+            ekEventService.requestPermissionAndCreateEventStore()
         }
         .onChange(of: focusedItem, perform: vm.focus)
         .listStyle(.plain)

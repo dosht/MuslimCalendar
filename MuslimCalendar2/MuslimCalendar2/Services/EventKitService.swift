@@ -10,8 +10,8 @@ import EventKit
 
 class EventKitService: ObservableObject {
 
-    @Published var ekEventStore: EKEventStore
-    @Published var authorizationStatus: EKAuthorizationStatus = .notDetermined
+    var ekEventStore: EKEventStore
+    var authorizationStatus: EKAuthorizationStatus = .notDetermined
     
     init() {
         self.ekEventStore = EKEventStore()
@@ -44,9 +44,7 @@ class EventKitService: ObservableObject {
         case .notDetermined:
             ekEventStore.requestAccess(to: .event, completion: { [weak self] (success, error) in
                 if success {
-                    DispatchQueue.main.async {
-                        self?.authorizationStatus = EKEventStore.authorizationStatus(for: .event)
-                    }
+                    self?.authorizationStatus = EKEventStore.authorizationStatus(for: .event)
                     print("success")
                 } else {
                     print("error while requesting permession \(String(describing: error?.localizedDescription))")
@@ -65,7 +63,7 @@ class EventKitService: ObservableObject {
 
     //TODO: Make it async
     @discardableResult
-    func createOrUpdate(eventOf item: ScheduleItem) -> EKEvent? {
+    func createOrUpdate(eventOf item: ScheduleItem, prayerCacluation: PrayerCalculation) -> EKEvent? {
         if authorizationStatus == .notDetermined {
             requestPermissionAndCreateEventStore()
         }
@@ -77,7 +75,17 @@ class EventKitService: ObservableObject {
         ekEvent.endDate = item.endTime
         ekEvent.isAllDay = false
         ekEvent.calendar = calendar
-        try! ekEventStore.save(ekEvent, span: .thisEvent)
+        ekEvent.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: item.startTime.nextWeek.endOfWeek)))
+        try! ekEventStore.save(ekEvent, span: .futureEvents)
+        var date = item.startTime
+        futureEvents(of: ekEvent).forEach { ekEvent in
+            date = date.tomorrow
+            guard let calculation = prayerCacluation.calculate(for: date) else { return }
+            let item = item.updateTime(with: calculation)
+            ekEvent.startDate = item.startTime
+            ekEvent.endDate = item.endTime
+            try! ekEventStore.save(ekEvent, span: .thisEvent)
+        }
         return ekEvent
     }
 
@@ -88,7 +96,18 @@ class EventKitService: ObservableObject {
         if authorizationStatus != .authorized { return }
 
         if let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) {
-            try? ekEventStore.remove(ekEvent, span: .futureEvents)
+            try! ekEventStore.remove(ekEvent, span: .futureEvents)
         }
+    }
+    
+    func futureEvents(of ekEvent: EKEvent) -> [EKEvent] {
+        guard let calendar = calendar else { return [] }
+        guard let recurrenceRules = ekEvent.recurrenceRules else { return [] }
+        let startDate = ekEvent.startDate.tomorrow.startOfDay
+        let endDate = ekEvent.startDate.nextWeek.endOfWeek.endOfDay
+        let events = ekEventStore
+            .events(matching: ekEventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar]))
+            .filter { $0.recurrenceRules?.first == recurrenceRules.first && $0.title == ekEvent.title }
+        return events
     }
 }
