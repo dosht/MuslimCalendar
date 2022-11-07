@@ -33,7 +33,7 @@ struct ScheduleItemsView: View {
     var body: some View {
         List {
 //            ForEach(Array($scheduleItems.enumerated()), id: \.0) { index, $item in
-            ForEach($scheduleItems) { $item in
+            ForEach(Array($scheduleItems).dropFirst().dropLast()) { $item in
                 switch item.type {
                 case .prayer:
                     PrayerCardView(item: $item)
@@ -56,7 +56,7 @@ struct ScheduleItemsView: View {
                 }
             }
             .onDelete { indexSet in
-                let items = indexSet.map { scheduleItems[$0] }
+                let items = indexSet.map { scheduleItems[$0 + 1] /* Adding one because we drop the first element */ }
                 svm.remove(items: items)
                 items.forEach { item in
                     if let object = item.wrappedObject {
