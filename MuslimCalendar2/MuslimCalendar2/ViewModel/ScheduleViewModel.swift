@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 
-@MainActor
 class ScheduleViewModel: ObservableObject {
     // MARK: - Publisher(s)
     @Published

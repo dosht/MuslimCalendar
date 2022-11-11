@@ -44,4 +44,11 @@ extension ScheduleItem {
         }
         try! context.save()
     }
+    
+    mutating func deleteWrappedObect(_ context: NSManagedObjectContext) {
+        guard let wrappedObject = self.wrappedObject else { return }
+        context.delete(wrappedObject)
+        try! context.save()
+        self.wrappedObject = nil
+    }
 }

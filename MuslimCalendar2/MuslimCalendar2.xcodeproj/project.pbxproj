@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E3E7865291E45A600D23EF9 /* XCUIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */; };
 		8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */; };
 		8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0929068AAE00FE1CE2 /* Persistence.swift */; };
 		8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+.swift"; sourceTree = "<group>"; };
 		8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2App.swift; sourceTree = "<group>"; };
 		8E456F0929068AAE00FE1CE2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				8E456F2829068AB000FE1CE2 /* MuslimCalendar2UITests.swift */,
 				8E456F2A29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift */,
+				8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */,
 			);
 			path = MuslimCalendar2UITests;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E456F2B29068AB000FE1CE2 /* MuslimCalendar2UITestsLaunchTests.swift in Sources */,
+				8E3E7865291E45A600D23EF9 /* XCUIApplication+.swift in Sources */,
 				8E456F2929068AB000FE1CE2 /* MuslimCalendar2UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
