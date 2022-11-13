@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E3E7865291E45A600D23EF9 /* XCUIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */; };
+		8E3E8C7229214A31007A77D6 /* BackGroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */; };
 		8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */; };
 		8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0929068AAE00FE1CE2 /* Persistence.swift */; };
 		8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+.swift"; sourceTree = "<group>"; };
+		8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundTask.swift; sourceTree = "<group>"; };
 		8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2App.swift; sourceTree = "<group>"; };
 		8E456F0929068AAE00FE1CE2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				8E484C8D2907F45E0026C90F /* LocationService.swift */,
 				8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */,
 				8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */,
+				8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3E8C7229214A31007A77D6 /* BackGroundTask.swift in Sources */,
 				8E456F4F2906CDFD00FE1CE2 /* WeekDay.swift in Sources */,
 				8E5D3F5D2914D02D00914FC1 /* EventKitService.swift in Sources */,
 				8E484C8C2907E6470026C90F /* TimeInterval+.swift in Sources */,

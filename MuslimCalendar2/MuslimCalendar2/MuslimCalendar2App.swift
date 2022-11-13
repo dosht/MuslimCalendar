@@ -15,6 +15,11 @@ struct MuslimCalendar2App: App {
     @StateObject var locationService = LocationService()
     @StateObject var eventKitService = EventKitService()
     @StateObject var scheduleViewModel = ScheduleViewModel()
+    
+    init() {
+        registerUpdateCalendarBGT()
+        scheduleUpdateCalendarBGT()
+    }
 
     var body: some Scene {
         WindowGroup {
