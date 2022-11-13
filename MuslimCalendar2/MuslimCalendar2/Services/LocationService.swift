@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
@@ -20,7 +21,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-
+        
     }
 
     var statusString: String {

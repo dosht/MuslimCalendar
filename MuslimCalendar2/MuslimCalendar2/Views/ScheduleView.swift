@@ -15,14 +15,68 @@ struct ScheduleView: View {
     var relativeEvents: FetchedResults<RelativeEvent>
   
     var body: some View {
-        VStack {
-            ScheduleViewTitle()
-            DaysView(selectedDay: $viewModel.day)
-                .onAppear {
-                    viewModel.selectDay(day: Date().weekDay)
-                    viewModel.loadEvents(Array(relativeEvents))
+        NavigationView {
+            VStack {
+                ScheduleViewToolbar()
+                ScheduleViewTitle()
+                DaysView(selectedDay: $viewModel.day)
+                    .onAppear {
+                        viewModel.selectDay(day: Date().weekDay)
+                        viewModel.loadEvents(Array(relativeEvents))
+                    }
+                ScheduleItemsView(scheduleItems: $viewModel.items)
+            }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        Button {
+                            
+                        } label: {
+                            HStack {
+                                Label("", systemImage: "plus.circle.fill")
+                                Text("Add Event").bold()
+                            }
+                        }
+                        Spacer()
+                    }
                 }
-            ScheduleItemsView(scheduleItems: $viewModel.items)
+            }
+        }
+    }
+}
+
+struct ScheduleViewToolbar: View {
+    @State
+    var showCity = false
+    
+    @State
+    var showSettings = false
+    
+    var body: some View {
+        HStack {
+            Button {
+                showCity.toggle()
+            } label: {
+                Label("Golcuk", systemImage: "mappin.and.ellipse")
+                    .padding()
+                    .foregroundColor(.blue)
+            }
+            .popover(isPresented: $showCity, attachmentAnchor: .point(.top), arrowEdge: .top) {
+                CityView(isPresented: $showCity)
+            }
+
+            Spacer()
+            Button {
+                showSettings.toggle()
+            } label: {
+                Label("", systemImage: "ellipsis.circle")
+                    .font(.title2)
+                    .padding()
+                    .foregroundColor(.blue)
+            }
+            .popover(isPresented: $showSettings, attachmentAnchor: .point(.top), arrowEdge: .top) {
+                SettingsView(isPresented: $showSettings)
+            }
         }
     }
 }
@@ -41,6 +95,7 @@ struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         ScheduleView()
             .environmentObject(ScheduleViewModel(prayerItems: ScheduleItem.prayerRealisticSample))
+            .environmentObject(EventKitService())
     }
 }
 

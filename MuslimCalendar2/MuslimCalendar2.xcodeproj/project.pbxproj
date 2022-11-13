@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8E3E7865291E45A600D23EF9 /* XCUIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */; };
 		8E3E8C7229214A31007A77D6 /* BackGroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */; };
+		8E3E8C7429216D11007A77D6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7329216D11007A77D6 /* Settings.swift */; };
+		8E3E8C76292187BA007A77D6 /* CityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C75292187BA007A77D6 /* CityView.swift */; };
+		8E3E8C78292187C9007A77D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C77292187C9007A77D6 /* SettingsView.swift */; };
 		8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */; };
 		8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0929068AAE00FE1CE2 /* Persistence.swift */; };
 		8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */; };
@@ -64,6 +67,9 @@
 /* Begin PBXFileReference section */
 		8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+.swift"; sourceTree = "<group>"; };
 		8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundTask.swift; sourceTree = "<group>"; };
+		8E3E8C7329216D11007A77D6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8E3E8C75292187BA007A77D6 /* CityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityView.swift; sourceTree = "<group>"; };
+		8E3E8C77292187C9007A77D6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2App.swift; sourceTree = "<group>"; };
 		8E456F0929068AAE00FE1CE2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -207,6 +213,8 @@
 				8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */,
 				8E484C9C29097E860026C90F /* DurationPicker.swift */,
 				8E456F0E29068AAE00FE1CE2 /* ContentView.swift */,
+				8E3E8C75292187BA007A77D6 /* CityView.swift */,
+				8E3E8C77292187C9007A77D6 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,6 +237,7 @@
 				8E456F422906A80600FE1CE2 /* ScheduleItme.swift */,
 				8E456F4E2906CDFD00FE1CE2 /* WeekDay.swift */,
 				8E484C92290832270026C90F /* PrayerCalculation.swift */,
+				8E3E8C7329216D11007A77D6 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -392,8 +401,10 @@
 			files = (
 				8E3E8C7229214A31007A77D6 /* BackGroundTask.swift in Sources */,
 				8E456F4F2906CDFD00FE1CE2 /* WeekDay.swift in Sources */,
+				8E3E8C7429216D11007A77D6 /* Settings.swift in Sources */,
 				8E5D3F5D2914D02D00914FC1 /* EventKitService.swift in Sources */,
 				8E484C8C2907E6470026C90F /* TimeInterval+.swift in Sources */,
+				8E3E8C76292187BA007A77D6 /* CityView.swift in Sources */,
 				8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */,
 				8E484C9F290A782A0026C90F /* EventViewModel.swift in Sources */,
 				8E456F402906A67300FE1CE2 /* AvailableTimeCardView.swift in Sources */,
@@ -406,6 +417,7 @@
 				8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */,
 				8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */,
 				8E5D3F5B29143CF200914FC1 /* Date+WeekDay.swift in Sources */,
+				8E3E8C78292187C9007A77D6 /* SettingsView.swift in Sources */,
 				8E484C8E2907F45F0026C90F /* LocationService.swift in Sources */,
 				8E484CA1290AF7410026C90F /* CoreData+ScheduledItem.swift in Sources */,
 				8E484C9729083CA40026C90F /* PrayerCalculation+ScheduleItem.swift in Sources */,

@@ -94,7 +94,6 @@ func calculatePrayerTimes(forDay day: Date, forLocation location: CLLocation) ->
 
     //TODO: add this to user defaults
     var params = CalculationMethod.turkey.params
-    params.method = .turkey
 
     if let prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params) {
         return PrayerCalculation.createFromPrayerTimes(prayerTimes, location: location, day: day, params: params)

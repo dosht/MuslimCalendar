@@ -63,8 +63,13 @@ class ScheduleViewModel: ObservableObject {
     }
 
     func remove(items: [ScheduleItem]) {
-        let itemsSet = Set(items.map { $0.id })
-        eventItems = eventItems.filter { item in !itemsSet.contains(item.id) }
+        Just(items).delay(for: 0, scheduler: RunLoop.main)
+            .sink { [weak self] items in
+                guard let self = self else { return }
+                let itemsSet = Set(items.map { $0.id })
+                self.eventItems = self.eventItems.filter { item in !itemsSet.contains(item.id) }
+            }
+            .store(in: &cancellables)
     }
     
     func refresh(item: ScheduleItem) {
