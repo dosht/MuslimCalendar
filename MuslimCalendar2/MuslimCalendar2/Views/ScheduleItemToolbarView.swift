@@ -43,7 +43,7 @@ struct ScheduleItemToolbarView: View {
                     }
                 }
             }
-            DurationPicker(duration: $item.duration, minMinute: 1)
+            DurationPicker(duration: $item.duration, minMinute: 1, maxHour: maxHour, maxMinute: maxMinute)
                 .disabled(item.scheduleRule == .full)
         }
         .onChange(of: item.duration) { newValue in
@@ -59,6 +59,22 @@ struct ScheduleItemToolbarView: View {
                 svm.refresh(item: item)
             }
         }
+    }
+    
+    private var maxHour: Int {
+        var result: Int? = nil
+        if let allocation = allocation {
+            result = allocation.startTime.hourDiff(allocation.endTime)
+        }
+        return result ?? 23
+    }
+    
+    private var maxMinute: Int {
+        var result: Int? = nil
+        if let allocation = allocation {
+            result = allocation.startTime.minuteDiff(allocation.endTime)
+        }
+        return result ?? 59
     }
     
     private func icon(of scheduleRule: ScheduleItem.ScheduleRule) -> String {

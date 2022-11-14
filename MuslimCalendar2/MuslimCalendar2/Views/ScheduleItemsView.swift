@@ -59,7 +59,7 @@ struct ScheduleItemsView: View {
             .onDelete { indexSet in
                 let items = indexSet.map { scheduleItems[$0 + 1] /* Adding one because we drop the first element */ }
                 vm.remove(items: items)
-                for var item in scheduleItems {
+                for var item in items {
                     ekEventService.delete(eventOf: item)
                     item.deleteWrappedObect(viewContext)
                 }

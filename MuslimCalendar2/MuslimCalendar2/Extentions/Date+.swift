@@ -34,4 +34,16 @@ extension Date {
     var nextWeek: Date {
         Calendar.current.date(byAdding: .day, value: 7, to: self)!
     }
+    
+    func hourDiff(_ other: Date) -> Int? {
+        let diffComponents = Calendar.current.dateComponents([.hour], from: self, to: other)
+        let hours = diffComponents.hour
+        return hours
+    }
+    
+    func minuteDiff(_ other: Date) -> Int? {
+        let diffComponents = Calendar.current.dateComponents([.minute], from: self, to: other)
+        let minutes = diffComponents.hour
+        return minutes
+    }
 }
