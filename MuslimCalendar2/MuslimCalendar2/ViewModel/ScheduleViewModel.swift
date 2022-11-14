@@ -9,6 +9,8 @@ import SwiftUI
 import Combine
 
 class ScheduleViewModel: ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Publisher(s)
     @Published
     var items: [ScheduleItem] = []
@@ -25,9 +27,16 @@ class ScheduleViewModel: ObservableObject {
     @Published
     var prayerCalculation: PrayerCalculation = PrayerCalculation.preview
     
-    private var eventsUpdateTask: AnyCancellable?
+    @Published
+    var focusedItem: ScheduleItem?
     
-    private var cancellables = Set<AnyCancellable>()
+    var showKeyboardToolBar: Bool {
+        get { focusedItem != nil }
+        set { if !newValue { focusedItem = nil } }
+    }
+    
+    @Published
+    var editItem: ScheduleItem?
     
     init() {
         $prayerItems
@@ -43,10 +52,13 @@ class ScheduleViewModel: ObservableObject {
     }
     
     func subscribe(items: Publishers.Sequence<[ScheduleItem], Never>) {
-        eventsUpdateTask = items.sink { [weak self] item in
-            guard let self = self else { return }
-            self.eventItems = self.eventItems + [item]
-        }
+        items
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] item in
+                guard let self = self else { return }
+                self.eventItems = self.eventItems + [item]
+            }
+            .store(in: &cancellables)
     }
     
     // MARK: - Intent(s)
@@ -60,6 +72,7 @@ class ScheduleViewModel: ObservableObject {
 
     func addItem(item: ScheduleItem) {
         eventItems.append(item)
+        focusedItem = item
     }
 
     func remove(items: [ScheduleItem]) {
@@ -70,6 +83,18 @@ class ScheduleViewModel: ObservableObject {
                 self.eventItems = self.eventItems.filter { item in !itemsSet.contains(item.id) }
             }
             .store(in: &cancellables)
+    }
+    
+    func new() {
+        editItem = ScheduleItem(title: "", startTime: Date().endOfDay, duration: 30*60, type: .event)
+    }
+    
+    func edit(_ item: ScheduleItem) {
+        editItem = item
+    }
+    
+    func dismissEdit() {
+        editItem = nil
     }
     
     func refresh(item: ScheduleItem) {

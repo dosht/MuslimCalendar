@@ -14,7 +14,7 @@ struct CityView: View {
     var body: some View {
         NavigationView {
             Text("Search")
-            .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationBarTitle("City", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

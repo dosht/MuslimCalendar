@@ -12,6 +12,8 @@
 		8E3E8C7429216D11007A77D6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7329216D11007A77D6 /* Settings.swift */; };
 		8E3E8C76292187BA007A77D6 /* CityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C75292187BA007A77D6 /* CityView.swift */; };
 		8E3E8C78292187C9007A77D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C77292187C9007A77D6 /* SettingsView.swift */; };
+		8E3E8C7A29229613007A77D6 /* View+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7929229613007A77D6 /* View+Focus.swift */; };
+		8E3E8C7C2922BCBE007A77D6 /* EventKit+ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7B2922BCBE007A77D6 /* EventKit+ScheduleItem.swift */; };
 		8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */; };
 		8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0929068AAE00FE1CE2 /* Persistence.swift */; };
 		8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E456F0B29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld */; };
@@ -45,6 +47,8 @@
 		8E5D3F5B29143CF200914FC1 /* Date+WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */; };
 		8E5D3F5D2914D02D00914FC1 /* EventKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */; };
 		8E5D3F5F2914DBFD00914FC1 /* EkEventKitServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D3F5E2914DBFD00914FC1 /* EkEventKitServiceTests.swift */; };
+		8EC89948291EB7180061C992 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC89947291EB7170061C992 /* EventDetailView.swift */; };
+		8EC8994F291ED9A30061C992 /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8994E291ED9A30061C992 /* KeyboardToolbar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +74,8 @@
 		8E3E8C7329216D11007A77D6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8E3E8C75292187BA007A77D6 /* CityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityView.swift; sourceTree = "<group>"; };
 		8E3E8C77292187C9007A77D6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8E3E8C7929229613007A77D6 /* View+Focus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Focus.swift"; sourceTree = "<group>"; };
+		8E3E8C7B2922BCBE007A77D6 /* EventKit+ScheduleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+ScheduleItem.swift"; sourceTree = "<group>"; };
 		8E456F0429068AAE00FE1CE2 /* MuslimCalendar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuslimCalendar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuslimCalendar2App.swift; sourceTree = "<group>"; };
 		8E456F0929068AAE00FE1CE2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -107,6 +113,8 @@
 		8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+WeekDay.swift"; sourceTree = "<group>"; };
 		8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitService.swift; sourceTree = "<group>"; };
 		8E5D3F5E2914DBFD00914FC1 /* EkEventKitServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkEventKitServiceTests.swift; sourceTree = "<group>"; };
+		8EC89947291EB7170061C992 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		8EC8994E291ED9A30061C992 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyboardToolbar.swift; path = ../../../multipleOS/MuslimCalender/Shared/ViewModifiers/KeyboardToolbar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +171,7 @@
 				8E456F3829068F7600FE1CE2 /* Services */,
 				8E456F412906A7DA00FE1CE2 /* Model */,
 				8E456F4B2906CD4C00FE1CE2 /* ViewModel */,
+				8EC8994B291ED9420061C992 /* ViewModifiers */,
 				8E456F3729068F6300FE1CE2 /* Views */,
 				8E456F0729068AAE00FE1CE2 /* MuslimCalendar2App.swift */,
 				8E456F1029068AB000FE1CE2 /* Assets.xcassets */,
@@ -209,6 +218,7 @@
 				8E456F442906A85B00FE1CE2 /* ScheduleItemsView.swift */,
 				8E456F3B2906A17800FE1CE2 /* PrayerCardView.swift */,
 				8E456F3D2906A61200FE1CE2 /* EventCardView.swift */,
+				8EC89947291EB7170061C992 /* EventDetailView.swift */,
 				8E456F3F2906A67300FE1CE2 /* AvailableTimeCardView.swift */,
 				8E484C9A290882310026C90F /* ScheduleItemToolbarView.swift */,
 				8E484C9C29097E860026C90F /* DurationPicker.swift */,
@@ -245,9 +255,11 @@
 		8E456F482906C7D200FE1CE2 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				8E3E8C7929229613007A77D6 /* View+Focus.swift */,
 				8E456F492906C7EC00FE1CE2 /* Date+.swift */,
 				8E484C8B2907E6470026C90F /* TimeInterval+.swift */,
 				8E484CA0290AF7410026C90F /* CoreData+ScheduledItem.swift */,
+				8E3E8C7B2922BCBE007A77D6 /* EventKit+ScheduleItem.swift */,
 				8E484C9629083CA40026C90F /* PrayerCalculation+ScheduleItem.swift */,
 				8E5D3F5A29143CF200914FC1 /* Date+WeekDay.swift */,
 			);
@@ -261,6 +273,14 @@
 				8E484C9E290A782A0026C90F /* EventViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8EC8994B291ED9420061C992 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				8EC8994E291ED9A30061C992 /* KeyboardToolbar.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,10 +432,13 @@
 				8E456F452906A85B00FE1CE2 /* ScheduleItemsView.swift in Sources */,
 				8E456F4A2906C7EC00FE1CE2 /* Date+.swift in Sources */,
 				8E456F3A29068FC900FE1CE2 /* ScheduleView.swift in Sources */,
+				8E3E8C7C2922BCBE007A77D6 /* EventKit+ScheduleItem.swift in Sources */,
 				8E456F0829068AAE00FE1CE2 /* MuslimCalendar2App.swift in Sources */,
 				8E456F432906A80600FE1CE2 /* ScheduleItme.swift in Sources */,
 				8E484C9929086D7D0026C90F /* PrayerCalculatorService.swift in Sources */,
 				8E456F0A29068AAE00FE1CE2 /* Persistence.swift in Sources */,
+				8E3E8C7A29229613007A77D6 /* View+Focus.swift in Sources */,
+				8EC89948291EB7180061C992 /* EventDetailView.swift in Sources */,
 				8E5D3F5B29143CF200914FC1 /* Date+WeekDay.swift in Sources */,
 				8E3E8C78292187C9007A77D6 /* SettingsView.swift in Sources */,
 				8E484C8E2907F45F0026C90F /* LocationService.swift in Sources */,
@@ -424,6 +447,7 @@
 				8E456F472906A91700FE1CE2 /* DaysView.swift in Sources */,
 				8E456F0F29068AAE00FE1CE2 /* ContentView.swift in Sources */,
 				8E456F0D29068AAE00FE1CE2 /* MuslimCalendar2.xcdatamodeld in Sources */,
+				8EC8994F291ED9A30061C992 /* KeyboardToolbar.swift in Sources */,
 				8E484C9D29097E860026C90F /* DurationPicker.swift in Sources */,
 				8E456F4D2906CD9000FE1CE2 /* ScheduleViewModel.swift in Sources */,
 				8E484C93290832270026C90F /* PrayerCalculation.swift in Sources */,

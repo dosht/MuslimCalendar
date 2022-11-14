@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-class ScheduleItemsViewModel: ObservableObject {
-    // MARK: - Publisher(s)
-    @Published
-    var focusedItem: ScheduleItem?
-    
-    // MARK: - Intent(s)
-    func focus(item: ScheduleItem?) {
-        focusedItem = item
-    }    
-}
-
 struct ScheduleItemsView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -25,9 +14,7 @@ struct ScheduleItemsView: View {
     
     @FocusState var focusedItem: ScheduleItem?
     
-    @ObservedObject var vm = ScheduleItemsViewModel()
-    
-    @EnvironmentObject var svm: ScheduleViewModel
+    @EnvironmentObject var vm: ScheduleViewModel
     @EnvironmentObject var ekEventService: EventKitService
         
     var body: some View {
@@ -41,6 +28,20 @@ struct ScheduleItemsView: View {
                 case .event:
                     EventCardView(item: $item)
                         .focused($focusedItem, equals: item)
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                vm.edit(item)
+                            } label: {
+                                Label("Complete", systemImage: "checkmark")
+                            }
+                            .tint(Color(UIColor.systemGreen))
+                            Button {
+                                vm.edit(item)
+                            } label: {
+                                Label("Details", systemImage: "ellipsis")
+                            }
+                            .tint(Color(UIColor.systemGray))
+                        }
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
                                 if item == focusedItem {
@@ -57,20 +58,24 @@ struct ScheduleItemsView: View {
             }
             .onDelete { indexSet in
                 let items = indexSet.map { scheduleItems[$0 + 1] /* Adding one because we drop the first element */ }
-                svm.remove(items: items)
-                items.forEach { item in
-                    if let object = item.wrappedObject {
-                        ekEventService.delete(eventOf: item)
-                        viewContext.delete(object)
-                        try! viewContext.save()
-                    }
+                vm.remove(items: items)
+                for var item in scheduleItems {
+                    ekEventService.delete(eventOf: item)
+                    item.deleteWrappedObect(viewContext)
                 }
             }
         }
+//
+        .sync($vm.focusedItem, $focusedItem)
+        .sheet(item: $vm.editItem, onDismiss: {
+            print("\(vm.editItem)")
+        } , content: { item in
+            EventDetailView(item: item)
+        })
         .onAppear {
             ekEventService.requestPermissionAndCreateEventStore()
         }
-        .onChange(of: focusedItem, perform: vm.focus)
+//        .onChange(of: focusedItem, perform: vm.focus)
         .listStyle(.plain)
     }
 }

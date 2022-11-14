@@ -73,6 +73,12 @@ class EventKitService: ObservableObject {
         ekEvent.title = item.title
         ekEvent.startDate = item.startTime
         ekEvent.endDate = item.endTime
+        if let alertOffset = item.alertOffset {
+            if let alarm = ekEvent.alarms?.first {
+                ekEvent.removeAlarm(alarm)
+            }
+            ekEvent.addAlarm(EKAlarm(relativeOffset: alertOffset))
+        }
         ekEvent.isAllDay = false
         ekEvent.calendar = calendar
         ekEvent.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: item.startTime.nextWeek.endOfWeek)))

@@ -20,16 +20,9 @@ struct DurationPicker: View {
         }
     }()
     
-    let dateRange: ClosedRange<Date> = {
-        let calendar = Calendar.current
-        let startComponents = DateComponents(timeZone: gmt, year: 1970, hour: 0, minute: 1)
-        let endComponents = DateComponents(timeZone: gmt, year: 1970, hour: 23, minute: 59)
-        return calendar.date(from:startComponents)!
-            ...
-            calendar.date(from:endComponents)!
-    }()
+    let dateRange: ClosedRange<Date>
     
-    init(duration: Binding<TimeInterval>) {
+    init(duration: Binding<TimeInterval>, minHour: Int = 0, minMinute: Int = 0, maxHour: Int = 23, maxMinute: Int = 59) {
         self._duration = duration
         self._date = Binding(get: {
             let formatter = DateFormatter()
@@ -40,6 +33,14 @@ struct DurationPicker: View {
         }, set: { value in
             duration.wrappedValue = value.timeIntervalSince1970
         })
+        self.dateRange = {
+           let calendar = Calendar.current
+            let startComponents = DateComponents(timeZone: DurationPicker.gmt, year: 1970, hour: minHour, minute: minMinute)
+            let endComponents = DateComponents(timeZone: DurationPicker.gmt, year: 1970, hour: maxHour, minute: maxMinute)
+           return calendar.date(from:startComponents)!
+               ...
+               calendar.date(from:endComponents)!
+       }()
     }
 
     var body: some View {

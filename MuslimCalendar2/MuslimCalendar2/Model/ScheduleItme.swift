@@ -21,6 +21,7 @@ struct ScheduleItem {
     var end: TimeInterval = 0
     var wrappedObject: RelativeEvent?
     var wrappedEkEvent: EKEvent?
+    var alertOffset: TimeInterval?
     
     enum ScheduleRule: Equatable, Hashable {
         case beginning, end, full

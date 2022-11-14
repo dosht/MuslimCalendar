@@ -25,8 +25,14 @@ struct EventCardView: View {
             HStack {
                 RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
                 VStack {
-                    TextField("", text: $vm.item.title)
-                        .font(.headline)
+                    HStack {
+                        TextField("", text: $vm.item.title)
+                            .font(.headline)
+                            .submitLabel(.done)
+                        Label(vm.item.selectedAlert.shortText, systemImage: "alarm")
+                            .labelStyle(.trailingIcon)
+                            .font(.caption)
+                    }
                     Spacer()
                     HStack {
                         HStack {

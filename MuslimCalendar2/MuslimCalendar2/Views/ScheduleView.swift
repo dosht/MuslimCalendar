@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ScheduleView: View {
-    @EnvironmentObject
-    var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var eventKitService: EventKitService
     
     @FetchRequest(sortDescriptors: [])
     var relativeEvents: FetchedResults<RelativeEvent>
@@ -23,24 +23,32 @@ struct ScheduleView: View {
                     .onAppear {
                         viewModel.selectDay(day: Date().weekDay)
                         viewModel.loadEvents(Array(relativeEvents))
+                        // TODO: Improve this and move it to the view model
+                        for var item in viewModel.eventItems {
+                            if let ekEvent = eventKitService.findEvent(of: item) {
+                                item.loadEkEvent(ekEvent: ekEvent)
+                                viewModel.refresh(item: item)
+                                
+                            }
+                        }
                     }
                 ScheduleItemsView(scheduleItems: $viewModel.items)
             }
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    HStack {
-                        Button {
-                            
-                        } label: {
-                            HStack {
-                                Label("", systemImage: "plus.circle.fill")
-                                Text("Add Event").bold()
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .bottomBar) {
+//                    HStack {
+//                        Button {
+//                            viewModel.new()
+//                        } label: {
+//                            HStack {
+//                                Label("", systemImage: "plus.circle.fill")
+//                                Text("Add Event").bold()
+//                            }
+//                        }
+//                        Spacer()
+//                    }
+//                }
+//            }
         }
     }
 }
