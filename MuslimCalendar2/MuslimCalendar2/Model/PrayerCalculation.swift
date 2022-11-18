@@ -108,7 +108,6 @@ extension PrayerCalculation {
     }
 }
 
-#if DEBUG
 extension PrayerCalculation {
     static var preview: PrayerCalculation = PrayerCalculation(
         location: PrayerCalculation.previewLocation,
@@ -126,4 +125,3 @@ extension PrayerCalculation {
     
     static var previewLocation: CLLocation = CLLocation(latitude: 21.4361607, longitude: 39.9164145)
 }
-#endif

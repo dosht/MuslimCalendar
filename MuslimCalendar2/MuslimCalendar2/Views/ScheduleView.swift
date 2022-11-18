@@ -54,18 +54,17 @@ struct ScheduleView: View {
 }
 
 struct ScheduleViewToolbar: View {
-    @State
-    var showCity = false
+    @EnvironmentObject var placemarkService: PlacemarkService
     
-    @State
-    var showSettings = false
+    @State var showCity = false
+    @State var showSettings = false
     
     var body: some View {
         HStack {
             Button {
                 showCity.toggle()
             } label: {
-                Label("Golcuk", systemImage: "mappin.and.ellipse")
+                Label(cityTitle, systemImage: "mappin.and.ellipse")
                     .padding()
                     .foregroundColor(.blue)
             }
@@ -87,6 +86,14 @@ struct ScheduleViewToolbar: View {
             }
         }
     }
+    
+    var cityTitle: String {
+        if let city = placemarkService.placemark?.locality, let state = placemarkService.placemark?.administrativeArea {
+            return "\(state), \(city)"
+        } else {
+            return ""
+        }
+    }
 }
 
 struct ScheduleViewTitle: View {
@@ -104,6 +111,7 @@ struct ScheduleView_Previews: PreviewProvider {
         ScheduleView()
             .environmentObject(ScheduleViewModel(prayerItems: ScheduleItem.prayerRealisticSample))
             .environmentObject(EventKitService())
+            .environmentObject(PlacemarkService())
     }
 }
 

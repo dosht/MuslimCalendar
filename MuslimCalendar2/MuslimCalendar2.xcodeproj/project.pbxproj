@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0AE9E22927DEA7009394D5 /* PlacemarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AE9E12927DEA7009394D5 /* PlacemarkService.swift */; };
 		8E3E7865291E45A600D23EF9 /* XCUIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */; };
 		8E3E8C7229214A31007A77D6 /* BackGroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */; };
 		8E3E8C7429216D11007A77D6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E8C7329216D11007A77D6 /* Settings.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E0AE9E12927DEA7009394D5 /* PlacemarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkService.swift; sourceTree = "<group>"; };
 		8E3E7864291E45A600D23EF9 /* XCUIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+.swift"; sourceTree = "<group>"; };
 		8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundTask.swift; sourceTree = "<group>"; };
 		8E3E8C7329216D11007A77D6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				8E484C9829086D7D0026C90F /* PrayerCalculatorService.swift */,
 				8E5D3F5C2914D02D00914FC1 /* EventKitService.swift */,
 				8E3E8C7129214A31007A77D6 /* BackGroundTask.swift */,
+				8E0AE9E12927DEA7009394D5 /* PlacemarkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				8E3E8C76292187BA007A77D6 /* CityView.swift in Sources */,
 				8E484C9B290882310026C90F /* ScheduleItemToolbarView.swift in Sources */,
 				8E484C9F290A782A0026C90F /* EventViewModel.swift in Sources */,
+				8E0AE9E22927DEA7009394D5 /* PlacemarkService.swift in Sources */,
 				8E456F402906A67300FE1CE2 /* AvailableTimeCardView.swift in Sources */,
 				8E456F3E2906A61200FE1CE2 /* EventCardView.swift in Sources */,
 				8E456F452906A85B00FE1CE2 /* ScheduleItemsView.swift in Sources */,
@@ -633,14 +637,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -677,14 +683,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = team.aiops.MuslimCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

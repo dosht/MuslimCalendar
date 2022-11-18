@@ -13,6 +13,7 @@ struct MuslimCalendar2App: App {
     
     @StateObject var prayerCalculator = PrayerCalculatorService()
     @StateObject var locationService = LocationService()
+    @StateObject var placemarkService = PlacemarkService()
     @StateObject var eventKitService = EventKitService()
     @StateObject var scheduleViewModel = ScheduleViewModel()
     
@@ -29,7 +30,9 @@ struct MuslimCalendar2App: App {
                     locationService.start()
                     locationService.$lastLocation.assign(to: &prayerCalculator.$location)
                     scheduleViewModel.$day.assign(to: &prayerCalculator.$day)
-                    prayerCalculator.$prayerCalculation.assign(to: &scheduleViewModel.$prayerCalculation)
+                }
+                .onReceive(locationService.$lastLocation) { location in
+                    placemarkService.updatePlacemark(location: location)
                 }
                 .onReceive(prayerCalculator.$prayerCalculation) { prayerCalculation in
                     scheduleViewModel.updatePrayerItems(prayerCalculation: prayerCalculation)
@@ -38,6 +41,8 @@ struct MuslimCalendar2App: App {
 //            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(eventKitService)
+                .environmentObject(locationService)
+                .environmentObject(placemarkService)
         }
     }
 }

@@ -6,10 +6,34 @@
 //
 
 import SwiftUI
+import CoreLocation
+import Combine
+
+class CityViewModel: ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Binding(s)
+    @Binding var isPresented: Bool
+    
+    // MARK: - Publisher(s)
+    @Published var cityName: String = ""
+    
+    init(_ isPresented: Binding<Bool>) {
+        _isPresented = isPresented
+    }
+    
+    // MARK: - Intent(s)
+    func done() {
+        isPresented = false
+    }
+}
 
 struct CityView: View {
-    @Binding
-    var isPresented: Bool
+    @ObservedObject var vm: CityViewModel
+    
+    init(isPresented: Binding<Bool>) {
+        vm = CityViewModel(isPresented)
+    }
     
     var body: some View {
         NavigationView {
@@ -18,7 +42,7 @@ struct CityView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        isPresented.toggle()
+                        vm.done()
                     } label: {
                         Text("Done").bold()
                     }
