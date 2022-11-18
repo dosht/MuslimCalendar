@@ -18,50 +18,61 @@ struct ScheduleItemsView: View {
     @EnvironmentObject var ekEventService: EventKitService
         
     var body: some View {
-        List {
-//            ForEach(Array($scheduleItems.enumerated()), id: \.0) { index, $item in
-            ForEach(Array($scheduleItems).dropFirst().dropLast()) { $item in
-                switch item.type {
-                case .prayer:
-                    PrayerCardView(item: $item)
-                        .deleteDisabled(true)
-                case .event:
-                    EventCardView(item: $item)
-                        .focused($focusedItem, equals: item)
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                vm.edit(item)
-                            } label: {
-                                Label("Complete", systemImage: "checkmark")
+        ScrollViewReader { scrollProxy in
+            List {
+                //            ForEach(Array($scheduleItems.enumerated()), id: \.0) { index, $item in
+                ForEach(Array($scheduleItems).dropFirst().dropLast()) { $item in
+                    switch item.type {
+                    case .prayer:
+                        PrayerCardView(item: $item)
+                            .deleteDisabled(true)
+                    case .event:
+                        EventCardView(item: $item)
+                            .id(item.id)
+                            .focused($focusedItem, equals: item)
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    vm.edit(item)
+                                } label: {
+                                    Label("Complete", systemImage: "checkmark")
+                                }
+                                .tint(Color(UIColor.systemGreen))
+                                Button {
+                                    vm.edit(item)
+                                } label: {
+                                    Label("Details", systemImage: "ellipsis")
+                                }
+                                .tint(Color(UIColor.systemGray))
                             }
-                            .tint(Color(UIColor.systemGreen))
-                            Button {
-                                vm.edit(item)
-                            } label: {
-                                Label("Details", systemImage: "ellipsis")
-                            }
-                            .tint(Color(UIColor.systemGray))
-                        }
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                if item == focusedItem {
-                                    ScheduleItemToolbarView(item: $item, allocation: scheduleItems.allocation(of: item))
-                                } else {
-                                    EmptyView()
+                            .toolbar {
+                                ToolbarItemGroup(placement: .keyboard) {
+                                    if item == focusedItem {
+                                        ScheduleItemToolbarView(item: $item, allocation: scheduleItems.allocation(of: item))
+                                    } else {
+                                        EmptyView()
+                                    }
                                 }
                             }
-                        }
-                case .availableTime:
-                    AvailableTimeCardView(item: $item)
-                        .deleteDisabled(true)
+                    case .availableTime:
+                        AvailableTimeCardView(item: $item)
+                            .deleteDisabled(true)
+                    }
                 }
-            }
-            .onDelete { indexSet in
-                let items = indexSet.map { scheduleItems[$0 + 1] /* Adding one because we drop the first element */ }
-                vm.remove(items: items)
-                for var item in items {
-                    ekEventService.delete(eventOf: item)
-                    item.deleteWrappedObect(viewContext)
+                .onDelete { indexSet in
+                    let items = indexSet.map { scheduleItems[$0 + 1] /* Adding one because we drop the first element */ }
+                    vm.remove(items: items)
+                    for var item in items {
+                        ekEventService.delete(eventOf: item)
+                        item.deleteWrappedObect(viewContext)
+                    }
+                }
+                .onReceive(vm.$focusedItem) { item in
+                    guard let item = item else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+                        withAnimation {
+                            scrollProxy.scrollTo(item.id)
+                        }
+                    }
                 }
             }
         }
@@ -84,6 +95,8 @@ struct ScheduleItemsView: View {
 struct ScheduleItemsView_Previews: PreviewProvider {
     static var previews: some View {
         ScheduleItemsView(scheduleItems: Binding.constant(ScheduleItem.sample))
+            .environmentObject(ScheduleViewModel())
+            .environmentObject(EventKitService())
     }
 }
 #endif
