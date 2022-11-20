@@ -9,6 +9,12 @@ import SwiftUI
 
 struct EventCardView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    var itemColors: [Int:Color] = [
+        -1: .gray,
+         0: .green,
+         1: .yellow
+    ]
 
     @ObservedObject var vm: EventViewModel
     @EnvironmentObject var svm: ScheduleViewModel
@@ -23,7 +29,7 @@ struct EventCardView: View {
     var body: some View {
         ScrollView {
             HStack {
-                RoundedRectangle(cornerRadius: 5, style: .continuous).fill(.yellow).frame(width: 5, alignment: .leading)
+                RoundedRectangle(cornerRadius: 5, style: .continuous).fill(itemColors[vm.dueState]!).frame(width: 5, alignment: .leading)
                 VStack {
                     HStack {
                         TextField("", text: $vm.item.title)
@@ -47,7 +53,7 @@ struct EventCardView: View {
                     // TODO: Revmove debug text after testing
 //                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
                 }
-                .padding()
+            .padding()
             }
             .background(.thinMaterial)
         }

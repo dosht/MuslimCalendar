@@ -67,16 +67,13 @@ struct ScheduleItemsView: View {
                     }
                 }
                 .onReceive(vm.$focusedItem) { item in
-                    guard let item = item else { return }
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                        withAnimation {
-                            scrollProxy.scrollTo(item.id)
-                        }
-                    }
+                    scrollTo(item, scrollProxy)
+                }
+                .onAppear {
+                    scrollTo(vm.scrollToItem, scrollProxy)
                 }
             }
         }
-//
         .sync($vm.focusedItem, $focusedItem)
         .sheet(item: $vm.editItem, onDismiss: {
             print("\(vm.editItem)")
@@ -88,6 +85,15 @@ struct ScheduleItemsView: View {
         }
 //        .onChange(of: focusedItem, perform: vm.focus)
         .listStyle(.plain)
+    }
+    
+    private func scrollTo(_ item: ScheduleItem?, _ scrollProxy: ScrollViewProxy) {
+        guard let item = item else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+            withAnimation {
+                scrollProxy.scrollTo(item.id)
+            }
+        }
     }
 }
 

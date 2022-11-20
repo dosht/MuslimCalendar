@@ -32,6 +32,17 @@ class EventViewModel: ObservableObject {
         return result
     }
     
+    var dueState: Int {
+        let now = Date()
+        if item.endTime < now {
+            return -1
+        } else if item.startTime > now {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
     //MARK: - Intent(s)
     func reschedule(allocation: Allocation) {
         item.reschedule(allocation: allocation)

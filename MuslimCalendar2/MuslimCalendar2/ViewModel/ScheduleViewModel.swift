@@ -30,6 +30,17 @@ class ScheduleViewModel: ObservableObject {
     @Published
     var focusedItem: ScheduleItem?
     
+    var scrollToItem: ScheduleItem? {
+        let now = Date()
+        let index = items.firstIndex { item in
+            item.startTime <= now && item.endTime >= now
+        }
+        guard var index = index else { return nil }
+        if index < items.count - 3 { index += 3 }
+        let scrollToItem = items[index]
+        return scrollToItem
+    }
+    
     var showKeyboardToolBar: Bool {
         get { focusedItem != nil }
         set { if !newValue { focusedItem = nil } }
