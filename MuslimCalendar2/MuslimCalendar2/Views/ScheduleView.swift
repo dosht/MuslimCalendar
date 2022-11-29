@@ -15,40 +15,42 @@ struct ScheduleView: View {
     var relativeEvents: FetchedResults<RelativeEvent>
   
     var body: some View {
-        NavigationView {
-            VStack {
-                ScheduleViewToolbar()
-                ScheduleViewTitle()
-                DaysView(selectedDay: $viewModel.day)
-                    .onAppear {
-                        viewModel.selectDay(day: Date().weekDay)
-                        viewModel.loadEvents(Array(relativeEvents))
-                        // TODO: Improve this and move it to the view model
-                        for var item in viewModel.eventItems {
-                            if let ekEvent = eventKitService.findEvent(of: item) {
-                                item.loadEkEvent(ekEvent: ekEvent)
-                                viewModel.refresh(item: item)
-                                
+        GeometryReader { geo in
+            NavigationView {
+                VStack {
+                    ScheduleViewToolbar()
+                    ScheduleViewTitle()
+                        DaysView(selectedDay: $viewModel.day, geo: geo)
+                        .onAppear {
+                            viewModel.selectDay(day: Date().weekDay)
+                            viewModel.loadEvents(Array(relativeEvents))
+                            // TODO: Improve this and move it to the view model
+                            for var item in viewModel.eventItems {
+                                if let ekEvent = eventKitService.findEvent(of: item) {
+                                    item.loadEkEvent(ekEvent: ekEvent)
+                                    viewModel.refresh(item: item)
+                                    
+                                }
                             }
                         }
-                    }
-                ScheduleItemsView(scheduleItems: $viewModel.items)
+                    ScheduleItemsView(scheduleItems: $viewModel.items)
+                }
+                //            .toolbar {
+                //                ToolbarItem(placement: .bottomBar) {
+                //                    HStack {
+                //                        Button {
+                //                            viewModel.new()
+                //                        } label: {
+                //                            HStack {
+                //                                Label("", systemImage: "plus.circle.fill")
+                //                                Text("Add Event").bold()
+                //                            }
+                //                        }
+                //                        Spacer()
+                //                    }
+                //                }
+                //            }
             }
-//            .toolbar {
-//                ToolbarItem(placement: .bottomBar) {
-//                    HStack {
-//                        Button {
-//                            viewModel.new()
-//                        } label: {
-//                            HStack {
-//                                Label("", systemImage: "plus.circle.fill")
-//                                Text("Add Event").bold()
-//                            }
-//                        }
-//                        Spacer()
-//                    }
-//                }
-//            }
         }
     }
 }
@@ -64,9 +66,14 @@ struct ScheduleViewToolbar: View {
             Button {
                 showCity.toggle()
             } label: {
-                Label(cityTitle, systemImage: "mappin.and.ellipse")
-                    .padding()
-                    .foregroundColor(.blue)
+                if cityTitle == nil {
+                    ProgressView()
+                        .padding()
+                } else {
+                    Label(cityTitle!, systemImage: "mappin.and.ellipse")
+                        .padding()
+                        .foregroundColor(.blue)
+                }
             }
             .popover(isPresented: $showCity, attachmentAnchor: .point(.top), arrowEdge: .top) {
                 CityView(isPresented: $showCity)
@@ -87,11 +94,11 @@ struct ScheduleViewToolbar: View {
         }
     }
     
-    var cityTitle: String {
+    var cityTitle: String? {
         if let city = placemarkService.placemark?.locality, let state = placemarkService.placemark?.administrativeArea {
             return "\(state), \(city)"
         } else {
-            return ""
+            return nil
         }
     }
 }

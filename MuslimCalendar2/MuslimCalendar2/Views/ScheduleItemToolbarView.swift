@@ -46,6 +46,9 @@ struct ScheduleItemToolbarView: View {
             DurationPicker(duration: $item.duration, minMinute: 1, maxHour: maxHour, maxMinute: maxMinute)
                 .disabled(item.scheduleRule == .full)
         }
+        .onAppear {
+            print(item.title)
+        }
         .onChange(of: item.duration) { newValue in
             //TODO: Move to ViewModel
             if let allocation = allocation {

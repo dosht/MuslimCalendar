@@ -46,4 +46,10 @@ extension Date {
         let minutes = diffComponents.hour
         return minutes
     }
+    
+    var local: Date {
+        let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: self))
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: self) else { return self }
+        return localDate
+    }
 }

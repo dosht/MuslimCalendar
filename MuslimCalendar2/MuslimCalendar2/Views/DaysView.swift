@@ -10,7 +10,7 @@ import SwiftUI
 struct DaysView: View {
     @Binding
     var selectedDay: WeekDay?
-    
+    let geo: GeometryProxy
     let padding: CGFloat = 15
     
     var body: some View {
@@ -24,6 +24,7 @@ struct DaysView: View {
         }
         .padding(.leading, padding)
         .padding(.trailing, padding)
+        .frame(height: CGFloat(geo.size.width/7))
     }
 }
 
@@ -61,7 +62,13 @@ struct SelectableCircle: View {
 #if DEBUG
 struct DaysView_Previews: PreviewProvider {
     static var previews: some View {
-        DaysView(selectedDay: Binding.constant(.Monday))
+        GeometryReader { geo in
+            VStack {
+                DaysView(selectedDay: Binding.constant(.Monday), geo: geo)
+                    .background(.gray)
+                Text("HI")
+            }
+        }
     }
 }
 #endif

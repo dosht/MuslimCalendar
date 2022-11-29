@@ -30,6 +30,7 @@ struct MuslimCalendar2App: App {
                     locationService.start()
                     locationService.$lastLocation.assign(to: &prayerCalculator.$location)
                     scheduleViewModel.$day.assign(to: &prayerCalculator.$day)
+                    prayerCalculator.$prayerCalculation.assign(to: &scheduleViewModel.$prayerCalculation)
                 }
                 .onReceive(locationService.$lastLocation) { location in
                     placemarkService.updatePlacemark(location: location)
