@@ -13,9 +13,17 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Text("Calendar")
-                Text("Calculation Method")
+            VStack {
+                Form {
+                    Text("Calendar")
+                    Text("Calculation Method")
+                }
+                Spacer()
+                Button {
+                    updateCalendar()
+                } label: {
+                    Label("Re-Sync Calender", systemImage: "arrow.triangle.2.circlepath")
+                }
             }
             .navigationBarTitle("Settings", displayMode: .inline)
             .toolbar {

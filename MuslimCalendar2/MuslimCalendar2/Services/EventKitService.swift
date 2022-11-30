@@ -64,10 +64,10 @@ class EventKitService: ObservableObject {
     //TODO: Make it async
     @discardableResult
     func createOrUpdate(eventOf item: ScheduleItem, prayerCacluation: PrayerCalculation) -> EKEvent? {
-        if authorizationStatus == .notDetermined {
-            requestPermissionAndCreateEventStore()
-        }
-        if authorizationStatus != .authorized { return nil }
+//        if authorizationStatus == .notDetermined {
+//            requestPermissionAndCreateEventStore()
+//        }
+//        if authorizationStatus != .authorized { return nil }
 
         let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) ?? EKEvent(eventStore: ekEventStore)
         ekEvent.title = item.title
@@ -81,32 +81,33 @@ class EventKitService: ObservableObject {
         }
         ekEvent.isAllDay = false
         ekEvent.calendar = calendar
-        ekEvent.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: item.startTime.nextWeek.endOfWeek)))
+        ekEvent.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: item.startTime.endOfWeek)))
         try! ekEventStore.save(ekEvent, span: .futureEvents)
         var date = item.startTime
-        futureEvents(of: ekEvent).forEach { ekEvent in
+        findFutureEvents(of: ekEvent).forEach { ekEvent in
             date = date.tomorrow
             guard let calculation = prayerCacluation.calculate(for: date) else { return }
             let item = item.updateTime(with: calculation)
             ekEvent.startDate = item.startTime
             ekEvent.endDate = item.endTime
-            try! ekEventStore.save(ekEvent, span: .thisEvent)
+            try! ekEventStore.save(ekEvent, span: .thisEvent, commit: false)
         }
+        try! ekEventStore.commit()
         return ekEvent
     }
 
     func delete(eventOf item: ScheduleItem) {
-        if authorizationStatus == .notDetermined {
-            requestPermissionAndCreateEventStore()
-        }
-        if authorizationStatus != .authorized { return }
+//        if authorizationStatus == .notDetermined {
+//            requestPermissionAndCreateEventStore()
+//        }
+//        if authorizationStatus != .authorized { return }
 
         if let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) {
             try! ekEventStore.remove(ekEvent, span: .futureEvents)
         }
     }
     
-    func futureEvents(of ekEvent: EKEvent) -> [EKEvent] {
+    func findFutureEvents(of ekEvent: EKEvent) -> [EKEvent] {
         guard let calendar = calendar else { return [] }
         guard let recurrenceRules = ekEvent.recurrenceRules else { return [] }
         let startDate = ekEvent.startDate.tomorrow.startOfDay

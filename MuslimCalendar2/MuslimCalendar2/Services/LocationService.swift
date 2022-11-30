@@ -23,6 +23,11 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
     }
+    
+    var allowsBackgroundLocationUpdates: Bool {
+        set { locationManager.allowsBackgroundLocationUpdates = newValue }
+        get { locationManager.allowsBackgroundLocationUpdates }
+    }
 
     var statusString: String {
         guard let status = locationStatus else {
@@ -50,6 +55,15 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
             if location.distance(from: lastLocation) < 3000 { return }
         }
         lastLocation = location
+    }
+    
+    var currentLocation: CLLocation? {
+        if let lastLocation = lastLocation {
+            return lastLocation
+        }
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        return locationManager.location
     }
     
     // MARK: - Intents

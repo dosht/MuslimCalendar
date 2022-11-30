@@ -50,8 +50,9 @@ struct EventCardView: View {
                             .labelStyle(.trailingIcon)
                     }
                     .font(.caption)
-                    // TODO: Revmove debug text after testing
-                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
+                    #if DEBUG
+//                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
+                    #endif
                 }
             .padding()
             }

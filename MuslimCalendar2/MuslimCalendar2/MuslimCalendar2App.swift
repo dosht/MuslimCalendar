@@ -20,6 +20,7 @@ struct MuslimCalendar2App: App {
     init() {
         registerUpdateCalendarBGT()
         scheduleUpdateCalendarBGT()
+//        updateCalendar()
     }
 
     var body: some Scene {
