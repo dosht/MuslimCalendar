@@ -11,8 +11,7 @@ struct ScheduleItemToolbarView: View {
     @EnvironmentObject var svm: ScheduleViewModel
     @Binding var item: ScheduleItem
     @State var expand: Bool = false
-    
-    var allocation: Allocation?
+    @State var allocation: Allocation?
     
     var body: some View {
         HStack {
@@ -47,7 +46,7 @@ struct ScheduleItemToolbarView: View {
                 .disabled(item.scheduleRule == .full)
         }
         .onAppear {
-            print(item.title)
+            allocation = svm.items.allocation(of: item)
         }
         .onChange(of: item.duration) { newValue in
             //TODO: Move to ViewModel

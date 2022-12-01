@@ -12,12 +12,7 @@ struct ScheduleItemsView: View {
     
     @Binding var scheduleItems: [ScheduleItem]
     
-    @FocusState var focusedItem: ScheduleItem? {
-        didSet {
-            print(oldValue)
-        }
-    }
-
+    @FocusState var focusedItem: ScheduleItem?
     
     @EnvironmentObject var vm: ScheduleViewModel
     @EnvironmentObject var ekEventService: EventKitService
@@ -52,7 +47,11 @@ struct ScheduleItemsView: View {
                             .toolbar {
                                 ToolbarItemGroup(placement: .keyboard) {
                                     if item == focusedItem {
-                                        ScheduleItemToolbarView(item: $item, allocation: scheduleItems.allocation(of: item))
+                                        if #available(iOS 16.0, *) {
+                                            ScheduleItemToolbarView(item: $item, allocation: scheduleItems.allocation(of: item))
+                                        } else {
+                                            EmptyView()
+                                        }
                                     } else {
                                         EmptyView()
                                     }
@@ -73,12 +72,22 @@ struct ScheduleItemsView: View {
                 }
                 .onReceive(vm.$focusedItem) { item in
                     scrollTo(item, scrollProxy)
+                    if #unavailable(iOS 16.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.25) {
+                            scrollTo(item, scrollProxy)
+                        }
+                    }
                 }
                 .onAppear {
                     scrollTo(vm.scrollToItem, scrollProxy)
                 }
             }
         }
+//        .toolbar {
+//            ToolbarItemGroup(placement: .keyboard) {
+//                ScheduleItemToolbarView(item: $vm.focusedItem)
+//            }
+//        }
         .sync($vm.focusedItem, $focusedItem)
         .sheet(item: $vm.editItem, onDismiss: {
             print("\(vm.editItem)")
@@ -94,7 +103,7 @@ struct ScheduleItemsView: View {
     
     private func scrollTo(_ item: ScheduleItem?, _ scrollProxy: ScrollViewProxy) {
         guard let item = item else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.25) {
             withAnimation {
                 scrollProxy.scrollTo(item.id)
             }

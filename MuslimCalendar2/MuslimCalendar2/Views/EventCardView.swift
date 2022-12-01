@@ -10,6 +10,8 @@ import SwiftUI
 struct EventCardView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State var showToolbar = false
+    
     var itemColors: [Int:Color] = [
         -1: .gray,
          0: .green,
@@ -53,12 +55,24 @@ struct EventCardView: View {
                     #if DEBUG
 //                    Text("start: \(vm.item.start), sr: \(vm.item.startRelativeTo), end: \(vm.item.end), er: \(vm.item.endRelativeTo)")
                     #endif
+                    if #unavailable(iOS 16.0) {
+                        if showToolbar {
+                            ScheduleItemToolbarView(item: $vm.item)
+                        }
+                    }
                 }
             .padding()
             }
             .background(.thinMaterial)
         }
         .listRowSeparator(.hidden)
+        .onChange(of: svm.focusedItem, perform: { focusedItem in
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.25) {
+                withAnimation {
+                    showToolbar = focusedItem == vm.item
+                }
+            }
+        })
         .onSubmit {
             //TODO: Move this to the view model
             if let oldEkEvent = ekEventService.findEvent(of: vm.item) {

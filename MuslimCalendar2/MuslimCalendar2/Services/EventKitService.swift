@@ -92,7 +92,7 @@ class EventKitService: ObservableObject {
             ekEvent.endDate = item.endTime
             try! ekEventStore.save(ekEvent, span: .thisEvent, commit: false)
         }
-        try! ekEventStore.commit()
+        try? ekEventStore.commit()
         return ekEvent
     }
 
