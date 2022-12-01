@@ -35,6 +35,12 @@ extension Date {
         Calendar.current.date(byAdding: .day, value: 7, to: self)!
     }
     
+    func dayDiff(_ other: Date) -> Int? {
+        let diffComponents = Calendar.current.dateComponents([.day], from: self, to: other)
+        let day = diffComponents.day
+        return day
+    }
+    
     func hourDiff(_ other: Date) -> Int? {
         let diffComponents = Calendar.current.dateComponents([.hour], from: self, to: other)
         let hours = diffComponents.hour

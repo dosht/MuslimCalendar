@@ -61,6 +61,10 @@ struct EventCardView: View {
         .listRowSeparator(.hidden)
         .onSubmit {
             //TODO: Move this to the view model
+            if let oldEkEvent = ekEventService.findEvent(of: vm.item) {
+                vm.item.loadEkEvent(ekEvent: oldEkEvent)
+            }
+            ekEventService.delete(eventOf: vm.item)
             let ekEvent = ekEventService.createOrUpdate(eventOf: vm.item, prayerCacluation: svm.prayerCalculation)
             vm.item.wrappedEkEvent = ekEvent
             vm.item.syncWrappedObject(viewContext)

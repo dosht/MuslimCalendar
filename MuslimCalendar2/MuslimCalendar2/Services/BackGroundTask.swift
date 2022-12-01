@@ -29,7 +29,10 @@ func updateCalendar() {
     guard let relativeEvents = try? context.fetch(reuqest) else { return }
     let eventKitService = EventKitService()
     let events = relativeEvents.map { $0.scheuledItem.updateTime(with: prayerCalculation) }
-    events.forEach { item in
+    for var item in events {
+        if let oldEkEvent = eventKitService.findEvent(of: item) {
+            item.loadEkEvent(ekEvent: oldEkEvent)
+        }
         eventKitService.delete(eventOf: item)
         let ekEvent = eventKitService.createOrUpdate(eventOf: item, prayerCacluation: prayerCalculation)
         item.wrappedObject?.ekEventIdentifier = ekEvent?.eventIdentifier
@@ -39,7 +42,7 @@ func updateCalendar() {
 
 func scheduleUpdateCalendarBGT() {
     let task = BGProcessingTaskRequest(identifier: "team.aiops.updateCalendar")
-    task.earliestBeginDate = Date().addingTimeInterval(10) // Date().tomorrow.startOfDay
+    task.earliestBeginDate = Date().tomorrow.startOfDay
         do {
           try BGTaskScheduler.shared.submit(task)
         } catch {

@@ -64,10 +64,10 @@ class EventKitService: ObservableObject {
     //TODO: Make it async
     @discardableResult
     func createOrUpdate(eventOf item: ScheduleItem, prayerCacluation: PrayerCalculation) -> EKEvent? {
-//        if authorizationStatus == .notDetermined {
-//            requestPermissionAndCreateEventStore()
-//        }
-//        if authorizationStatus != .authorized { return nil }
+        if authorizationStatus == .notDetermined {
+            requestPermissionAndCreateEventStore()
+        }
+        if authorizationStatus != .authorized { return nil }
 
         let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) ?? EKEvent(eventStore: ekEventStore)
         ekEvent.title = item.title
@@ -97,13 +97,13 @@ class EventKitService: ObservableObject {
     }
 
     func delete(eventOf item: ScheduleItem) {
-//        if authorizationStatus == .notDetermined {
-//            requestPermissionAndCreateEventStore()
-//        }
-//        if authorizationStatus != .authorized { return }
+        if authorizationStatus == .notDetermined {
+            requestPermissionAndCreateEventStore()
+        }
+        if authorizationStatus != .authorized { return }
 
         if let ekEvent = item.wrappedEkEvent ?? findEvent(of: item) {
-            try! ekEventStore.remove(ekEvent, span: .futureEvents)
+            try? ekEventStore.remove(ekEvent, span: .futureEvents)
         }
     }
     
