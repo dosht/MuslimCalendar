@@ -16,7 +16,7 @@ struct ScheduleView: View {
   
     var body: some View {
         GeometryReader { geo in
-            NavigationView {
+//            NavigationView {
                 VStack {
                     ScheduleViewToolbar()
                     ScheduleViewTitle()
@@ -50,7 +50,7 @@ struct ScheduleView: View {
                 //                    }
                 //                }
                 //            }
-            }
+//            }
         }
     }
 }

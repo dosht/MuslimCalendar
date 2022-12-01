@@ -82,7 +82,7 @@ class EventKitService: ObservableObject {
         ekEvent.isAllDay = false
         ekEvent.calendar = calendar
         ekEvent.addRecurrenceRule(EKRecurrenceRule(recurrenceWith: .daily, interval: 1, end: EKRecurrenceEnd(end: item.startTime.endOfWeek)))
-        try! ekEventStore.save(ekEvent, span: .futureEvents)
+        try? ekEventStore.save(ekEvent, span: .futureEvents)
         var date = item.startTime
         findFutureEvents(of: ekEvent).forEach { ekEvent in
             date = date.tomorrow

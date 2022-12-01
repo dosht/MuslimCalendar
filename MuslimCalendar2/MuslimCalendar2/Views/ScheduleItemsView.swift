@@ -12,7 +12,12 @@ struct ScheduleItemsView: View {
     
     @Binding var scheduleItems: [ScheduleItem]
     
-    @FocusState var focusedItem: ScheduleItem?
+    @FocusState var focusedItem: ScheduleItem? {
+        didSet {
+            print(oldValue)
+        }
+    }
+
     
     @EnvironmentObject var vm: ScheduleViewModel
     @EnvironmentObject var ekEventService: EventKitService
@@ -30,20 +35,20 @@ struct ScheduleItemsView: View {
                         EventCardView(item: $item)
                             .id(item.id)
                             .focused($focusedItem, equals: item)
-                            .swipeActions(edge: .leading) {
-                                Button {
-                                    vm.edit(item)
-                                } label: {
-                                    Label("Complete", systemImage: "checkmark")
-                                }
-                                .tint(Color(UIColor.systemGreen))
-                                Button {
-                                    vm.edit(item)
-                                } label: {
-                                    Label("Details", systemImage: "ellipsis")
-                                }
-                                .tint(Color(UIColor.systemGray))
-                            }
+//                            .swipeActions(edge: .leading) {
+//                                Button {
+//                                    vm.edit(item)
+//                                } label: {
+//                                    Label("Complete", systemImage: "checkmark")
+//                                }
+//                                .tint(Color(UIColor.systemGreen))
+//                                Button {
+//                                    vm.edit(item)
+//                                } label: {
+//                                    Label("Details", systemImage: "ellipsis")
+//                                }
+//                                .tint(Color(UIColor.systemGray))
+//                            }
                             .toolbar {
                                 ToolbarItemGroup(placement: .keyboard) {
                                     if item == focusedItem {

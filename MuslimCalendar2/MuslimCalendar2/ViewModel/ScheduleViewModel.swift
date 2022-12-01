@@ -83,7 +83,11 @@ class ScheduleViewModel: ObservableObject {
 
     func addItem(item: ScheduleItem) {
         eventItems.append(item)
-        focusedItem = item
+        Just(item).delay(for: 0.25, scheduler: RunLoop.main)
+            .sink { [weak self] item in
+                self?.focusedItem = item
+            }
+            .store(in: &cancellables)
     }
 
     func remove(items: [ScheduleItem]) {
